@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Complete schematic - sheet 5</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Complete schematic - sheet 5</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every component terminal is shown. Equal net labels are connected; use connection IDs in the CSV for physical routing.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="42" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R25 | ECHO upper resistor</text>
+<text x="52" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2.2k 1%, &gt;=1/8 W</text>
+<text x="54" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="250,232 290,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R25.1" data-net="EL_RAW" x="300" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_RAW</text>
+<text x="54" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="250,252 290,252" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R25.2" data-net="EL_SAFE" x="300" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_SAFE</text>
+<polyline points="250,232 246,235 254,238 246,242 254,246 250,252" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R26 | ECHO lower resistor</text>
+<text x="586" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">3.3k 1%, &gt;=1/8 W</text>
+<text x="588" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,232 824,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R26.1" data-net="EL_SAFE" x="834" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_SAFE</text>
+<text x="588" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,252 824,252" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R26.2" data-net="GND" x="834" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,232 780,235 788,238 780,242 788,246 784,252" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R27 | ECHO upper resistor</text>
+<text x="1120" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2.2k 1%, &gt;=1/8 W</text>
+<text x="1122" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,232 1358,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R27.1" data-net="ER_RAW" x="1368" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_RAW</text>
+<text x="1122" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,252 1358,252" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R27.2" data-net="ER_SAFE" x="1368" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_SAFE</text>
+<polyline points="1318,232 1314,235 1322,238 1314,242 1322,246 1318,252" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="42" y="291" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R28 | ECHO lower resistor</text>
+<text x="52" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">3.3k 1%, &gt;=1/8 W</text>
+<text x="54" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="250,375 290,375" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R28.1" data-net="ER_SAFE" x="300" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_SAFE</text>
+<text x="54" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="250,395 290,395" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R28.2" data-net="GND" x="300" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,375 246,378 254,381 246,385 254,389 250,395" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="291" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R1 | L_FWD input pull-down</text>
+<text x="586" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="588" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,375 824,375" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R1.1" data-net="L_FWD_3V3" x="834" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_FWD_3V3</text>
+<text x="588" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,395 824,395" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R1.2" data-net="GND" x="834" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,375 780,378 788,381 780,385 788,389 784,395" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="291" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R2 | L_REV input pull-down</text>
+<text x="1120" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="1122" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,375 1358,375" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R2.1" data-net="L_REV_3V3" x="1368" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_REV_3V3</text>
+<text x="1122" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,395 1358,395" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R2.2" data-net="GND" x="1368" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,375 1314,378 1322,381 1314,385 1322,389 1318,395" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="42" y="434" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="458" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R3 | R_FWD input pull-down</text>
+<text x="52" y="479" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="499" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="54" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="250,518 290,518" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R3.1" data-net="R_FWD_3V3" x="300" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_FWD_3V3</text>
+<text x="54" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="250,538 290,538" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R3.2" data-net="GND" x="300" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,518 246,521 254,524 246,528 254,532 250,538" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="434" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="458" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R4 | R_REV input pull-down</text>
+<text x="586" y="479" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="499" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="588" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,518 824,518" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R4.1" data-net="R_REV_3V3" x="834" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_REV_3V3</text>
+<text x="588" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,538 824,538" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R4.2" data-net="GND" x="834" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,518 780,521 788,524 780,528 788,532 784,538" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="434" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="458" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R5 | ENABLE input pull-down</text>
+<text x="1120" y="479" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="499" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2.2k 1%, &gt;=1/8 W</text>
+<text x="1122" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,518 1358,518" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R5.1" data-net="ENABLE_3V3" x="1368" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ENABLE_3V3</text>
+<text x="1122" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,538 1358,538" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R5.2" data-net="GND" x="1368" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,518 1314,521 1322,524 1314,528 1322,532 1318,538" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="42" y="577" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="601" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R6 | TF input pull-down</text>
+<text x="52" y="622" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="642" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="54" y="666" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="250,661 290,661" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R6.1" data-net="TF_3V3" x="300" y="666" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TF_3V3</text>
+<text x="54" y="686" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="250,681 290,681" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R6.2" data-net="GND" x="300" y="686" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,661 246,664 254,667 246,671 254,675 250,681" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="577" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="601" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R7 | TL input pull-down</text>
+<text x="586" y="622" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="642" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="588" y="666" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,661 824,661" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R7.1" data-net="TL_3V3" x="834" y="666" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TL_3V3</text>
+<text x="588" y="686" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,681 824,681" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R7.2" data-net="GND" x="834" y="686" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,661 780,664 788,667 780,671 788,675 784,681" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="577" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="601" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R8 | TR input pull-down</text>
+<text x="1120" y="622" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="642" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="1122" y="666" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,661 1358,661" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R8.1" data-net="TR_3V3" x="1368" y="666" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TR_3V3</text>
+<text x="1122" y="686" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,681 1358,681" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R8.2" data-net="GND" x="1368" y="686" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,661 1314,664 1322,667 1314,671 1322,675 1318,681" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="42" y="720" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="744" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R9 | BRUSH_IN1 pull-down</text>
+<text x="52" y="765" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="785" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="54" y="809" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="250,804 290,804" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="R9.1" data-net="BRUSH_IN1" x="300" y="809" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">BRUSH_IN1</text>
+<text x="54" y="829" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="250,824 290,824" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R9.2" data-net="GND" x="300" y="829" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,804 246,807 254,810 246,814 254,818 250,824" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="720" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="744" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R10 | BRUSH_IN2 pull-down</text>
+<text x="586" y="765" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="785" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="588" y="809" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,804 824,804" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="R10.1" data-net="BRUSH_IN2" x="834" y="809" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">BRUSH_IN2</text>
+<text x="588" y="829" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,824 824,824" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R10.2" data-net="GND" x="834" y="829" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,804 780,807 788,810 780,814 788,818 784,824" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="720" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="744" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R11 | CONVEYOR_IN3 pull-down</text>
+<text x="1120" y="765" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="785" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="1122" y="809" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,804 1358,804" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="R11.1" data-net="CONVEYOR_IN3" x="1368" y="809" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">CONVEYOR_IN3</text>
+<text x="1122" y="829" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,824 1358,824" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R11.2" data-net="GND" x="1368" y="829" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,804 1314,807 1322,810 1314,814 1322,818 1318,824" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="42" y="863" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="887" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R12 | CONVEYOR_IN4 pull-down</text>
+<text x="52" y="908" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="928" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="54" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="250,947 290,947" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="R12.1" data-net="CONVEYOR_IN4" x="300" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">CONVEYOR_IN4</text>
+<text x="54" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="250,967 290,967" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R12.2" data-net="GND" x="300" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,947 246,950 254,953 246,957 254,961 250,967" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="863" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="887" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R13 | DRV_L.R_EN local EN pull-down</text>
+<text x="586" y="908" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="928" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="588" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,947 824,947" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R13.1" data-net="EN_DRIVER_5V" x="834" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="588" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,967 824,967" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R13.2" data-net="GND" x="834" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,947 780,950 788,953 780,957 788,961 784,967" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="863" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="887" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R14 | DRV_L.L_EN local EN pull-down</text>
+<text x="1120" y="908" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="928" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10k 1%, &gt;=1/8 W</text>
+<text x="1122" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,947 1358,947" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R14.1" data-net="EN_DRIVER_5V" x="1368" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="1122" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,967 1358,967" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R14.2" data-net="GND" x="1368" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,947 1314,950 1322,953 1314,957 1322,961 1318,967" fill="none" stroke="#576572" stroke-width="1.5"/>
+</svg>

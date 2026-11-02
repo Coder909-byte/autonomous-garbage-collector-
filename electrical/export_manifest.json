@@ -1,0 +1,20 @@
+{
+  "revision": "E1 - provisional electrical design",
+  "schematic_sheets": 6,
+  "diagrams": [
+    "physical_wiring",
+    "esp32_pinout",
+    "motor_drivers",
+    "power_distribution",
+    "sensor_wiring",
+    "emergency_stop"
+  ],
+  "wire_rows": 188,
+  "terminal_rows": 276,
+  "components": 82,
+  "nets": 69,
+  "physical_release": "HOLD",
+  "kicad_available": false,
+  "footprints": "NONE ASSIGNED",
+  "pdf_pages": 21
+}

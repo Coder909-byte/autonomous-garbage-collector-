@@ -1,0 +1,3 @@
+# Optional vector/PDF/preview generation and PDF validation dependencies.
+reportlab==4.4.4
+pypdf==6.1.3

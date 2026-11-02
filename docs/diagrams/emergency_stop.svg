@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Independent emergency cutoff and manual power-arm</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Independent emergency cutoff and manual power-arm</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Functional contact roles only; actual contactor/supervisor/contact-block parts and terminal numbers must be selected and verified.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<text x="55" y="166" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#17232c">1. Coil seal-in: independent of ESP32; S3 must be released for normal no-auto-restart behavior.</text>
+<rect x="45" y="250" width="170" height="105" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="57" y="275" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">FK coil fuse</text>
+<text x="57" y="299" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Protected pack</text>
+<text x="57" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Coil voltage TBD</text>
+<rect x="280" y="250" width="190" height="105" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="292" y="275" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">OV1 PG NO</text>
+<text x="292" y="299" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">MCU rail healthy</text>
+<text x="292" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Isolated contact</text>
+<rect x="535" y="250" width="190" height="105" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="547" y="275" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">OV2 PG NO</text>
+<text x="547" y="299" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Logic rail healthy</text>
+<text x="547" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Isolated contact</text>
+<rect x="790" y="250" width="190" height="105" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="802" y="275" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">S2 COIL NC</text>
+<text x="802" y="299" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Latching E-stop</text>
+<text x="802" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Separate contact</text>
+<polyline points="215,302 280,302" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="470,302 535,302" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="725,302 790,302" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<rect x="1060" y="215" width="220" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1072" y="240" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">S3 power-ARM NO</text>
+<text x="1072" y="264" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Momentary; not serial ARM</text>
+<rect x="1060" y="430" width="220" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1072" y="455" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">K1 AUX_HOLD NO</text>
+<text x="1072" y="479" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Separate seal-in contact</text>
+<polyline points="980,302 1020,302 1020,255 1060,255" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="1020,302 1020,470 1060,470" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="1280,255 1320,255 1320,470 1280,470" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="1320,302 1400,302" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<rect x="1400" y="250" width="220" height="105" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1412" y="275" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">K1 coil A1/A2</text>
+<text x="1412" y="299" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Coil range/current TBD</text>
+<text x="1412" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Z_COIL across A1/A2</text>
+<text x="1400" y="392" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">A2 -&gt; TB_GND</text>
+<text x="55" y="550" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">K1 MAIN_NO powers FL/FR/FA only. Stop opens coil + EN; K1 drops its seal-in and isolated feedback. Release alone does not restore power with S3</text>
+<text x="55" y="574" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">released. Held S3 / welded contacts are not covered by this functional single-channel circuit.</text>
+<text x="55" y="680" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#17232c">2. Firmware healthy input: HIGH only when E-stop released AND K1 closed.</text>
+<rect x="55" y="720" width="250" height="85" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 3V3</text>
+<text x="67" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Never 5V / coil voltage</text>
+<rect x="400" y="720" width="280" height="85" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="412" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">S2 SENSE NC</text>
+<text x="412" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Isolated low-current contact</text>
+<rect x="775" y="720" width="315" height="85" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="787" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">K1 AUX_SENSE NO</text>
+<text x="787" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Separate from coil seal-in</text>
+<rect x="1195" y="720" width="430" height="85" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1207" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO27 / ESTOP_OK</text>
+<text x="1207" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R29 10k -&gt; GND + internal pull-down</text>
+<polyline points="305,762 400,762" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="680,762 775,762" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="1090,762 1195,762" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="55" y="862" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">K1-open boot intentionally latches ESTOP. Later: EN measured LOW -&gt; deliberate power-ARM -&gt; GPIO27 HIGH -&gt; RESET -&gt; ARM.</text>
+<text x="55" y="927" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#17232c">3. Shared enable: physical S2 contact opens every driver EN, independently of software.</text>
+<rect x="55" y="957" width="275" height="90" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="982" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO14 -&gt; U1.11</text>
+<text x="67" y="1006" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R5 2.2k -&gt; GND</text>
+<rect x="425" y="957" width="270" height="90" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="437" y="982" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1.9 EN 0/5V</text>
+<text x="437" y="1006" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Non-inverting AHCT</text>
+<rect x="790" y="957" width="280" height="90" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="802" y="982" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">S2 EN NC</text>
+<text x="802" y="1006" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Separate isolated contact</text>
+<rect x="1165" y="957" width="460" height="90" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1177" y="982" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">EN_DRIVER_5V</text>
+<text x="1177" y="1006" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">4 BTS enables + L298 ENA/ENB</text>
+<text x="1177" y="1027" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Six local 10k pull-downs</text>
+<polyline points="330,1002 425,1002" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="695,1002 790,1002" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="1070,1002 1165,1002" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Motor-driver connections: seven motors</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Motor-driver connections: seven motors</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Each orange bundle represents two separate motor conductors. Exact per-terminal nets/fuses are shown in the complete schematic and CSV.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="55" y="180" width="650" height="205" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="205" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_L | BTS7960 / IBT-2 left</text>
+<text x="67" y="229" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">LEFT_SUPPLY -&gt; B+; GND -&gt; power return</text>
+<text x="67" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; qualified V5_LOGIC</text>
+<text x="67" y="271" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RPWM &lt;- U1.18 / LPWM &lt;- U1.16</text>
+<text x="67" y="292" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R_EN and L_EN &lt;- EN_DRIVER_5V</text>
+<text x="67" y="313" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+<rect x="1130" y="180" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="205" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M1 | left front wheel motor</text>
+<polyline points="705,222 810,222 810,212 1130,212" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">M+ / M-; A via FM1</text>
+<text x="1142" y="230" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<rect x="1130" y="280" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="305" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M2 | left rear wheel motor</text>
+<polyline points="705,287 810,287 810,312 1130,312" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">M+ / M-; A via FM2</text>
+<text x="1142" y="330" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<rect x="55" y="455" width="650" height="205" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="480" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_R | BTS7960 / IBT-2 right</text>
+<text x="67" y="504" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RIGHT_SUPPLY -&gt; B+; GND -&gt; power return</text>
+<text x="67" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; qualified V5_LOGIC</text>
+<text x="67" y="546" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RPWM &lt;- U1.14 / LPWM &lt;- U1.12</text>
+<text x="67" y="567" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R_EN and L_EN &lt;- EN_DRIVER_5V</text>
+<text x="67" y="588" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+<rect x="1130" y="455" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="480" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M3 | right front wheel motor</text>
+<polyline points="705,497 810,497 810,487 1130,487" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="475" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">M+ / M-; A via FM3</text>
+<text x="1142" y="505" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<rect x="1130" y="555" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="580" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M4 | right rear wheel motor</text>
+<polyline points="705,562 810,562 810,587 1130,587" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">M+ / M-; A via FM4</text>
+<text x="1142" y="605" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<rect x="55" y="730" width="650" height="205" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="755" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_A | ONE L298N: A brushes / B conveyor</text>
+<text x="67" y="779" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">AUX_SUPPLY -&gt; Vs; GND -&gt; power return</text>
+<text x="67" y="800" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">5V_LOGIC external input -&gt; V5_LOGIC</text>
+<text x="67" y="821" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">IN1/2 GPIO21/22; IN3/4 GPIO23/25</text>
+<text x="67" y="842" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ENA/ENB &lt;- EN_DRIVER_5V</text>
+<text x="67" y="863" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+<rect x="1130" y="730" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="755" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M5 | brush 1 motor</text>
+<polyline points="705,772 810,772 810,762 1130,762" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="750" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">OUT1 / OUT2; A via FM5</text>
+<text x="1142" y="780" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<rect x="1130" y="802" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="827" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M6 | brush 2 motor</text>
+<polyline points="705,837 810,837 810,834 1130,834" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="822" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">OUT1 / OUT2; A via FM6</text>
+<text x="1142" y="852" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<rect x="1130" y="874" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="899" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M7 | conveyor motor</text>
+<polyline points="705,902 810,902 810,906 1130,906" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="835" y="894" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">OUT3 / OUT4; A via FM7</text>
+<text x="1142" y="924" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<text x="55" y="1042" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">M1/M2 and M3/M4 are parallel wheel pairs. M5/M6 are parallel on channel A; M7 is channel B. No motor lead to GND/chassis. Conveyor voltage and</text>
+<text x="55" y="1066" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">all motor running/start/stall currents remain unverified.</text>
+</svg>

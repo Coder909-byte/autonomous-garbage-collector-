@@ -1,0 +1,83 @@
+reference,name,value,inventory,footprint,notes
+ESP1,ESP32-WROOM-32 DevKit,,EXISTING / UNVERIFIED,UNASSIGNED,Header positions and USB power path unknown. GPIO labels only; verify actual board silkscreen. Functional unused headers are explicit NC; GPIO6-11 flash connections are never part of this harness. Duplicate physical power/GND header positions are not inferred.
+DRV_L,BTS7960 / IBT-2 left,,EXISTING / UNVERIFIED,UNASSIGNED,"Exact board buffer, supply and continuous/stall rating unverified."
+DRV_R,BTS7960 / IBT-2 right,,EXISTING / UNVERIFIED,UNASSIGNED,"Exact board buffer, supply and continuous/stall rating unverified."
+DRV_A,ONE L298N: A brushes / B conveyor,,EXISTING / UNVERIFIED,UNASSIGNED,"Remove ENA/ENB links. Disable onboard regulator before external 5V input, if exact module supports it. Verify flyback diodes."
+M1,left front wheel motor,12 V / 30 RPM,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+M2,left rear wheel motor,12 V / 30 RPM,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+M3,right front wheel motor,12 V / 30 RPM,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+M4,right rear wheel motor,12 V / 30 RPM,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+M5,brush 1 motor,12 V,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+M6,brush 2 motor,12 V,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+M7,conveyor motor,Voltage TBD,EXISTING / UNVERIFIED,UNASSIGNED,Terminals A/B are functional lead identifiers; physical rotation and currents are unverified.
+US_F,HC-SR04 front,,EXISTING / UNVERIFIED,UNASSIGNED,Exact variant unknown. Real ECHO connection blocked until conditioning fitted and measured.
+US_L,HC-SR04 left,,EXISTING / UNVERIFIED,UNASSIGNED,Exact variant unknown. Real ECHO connection blocked until conditioning fitted and measured.
+US_R,HC-SR04 right,,EXISTING / UNVERIFIED,UNASSIGNED,Exact variant unknown. Real ECHO connection blocked until conditioning fitted and measured.
+BUCK1,LM2596 #1,5.0 V target,EXISTING / UNVERIFIED,UNASSIGNED,Module current/thermal rating unverified; never parallel OUT+ rails.
+BUCK2,LM2596 #2,5.0 V target,EXISTING / UNVERIFIED,UNASSIGNED,Module current/thermal rating unverified; never parallel OUT+ rails.
+BT1,3S LiPo / connector,11.1 V nominal / 3300 mAh,EXISTING / UNVERIFIED,UNASSIGNED,"12.6 V full only for conventional 4.2 V/cell chemistry. Balance names are potentials, NOT connector positions."
+CAM1,ESP32-CAM - later phase,,EXISTING / UNVERIFIED,UNASSIGNED,Reserved; all pins isolated. No supply/current budget or GPIO assignments approved.
+P1,3S high-side protection assembly,SELECT PART,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Functional port contract, NOT vendor pinout. Required cell-level UV/OV/overcurrent protection; high-side topology avoids USB ground bypass. Balance lead protection per selected manufacturer."
+S0,Master load isolator,DC rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,Functional terminal names; isolate positive load feed. Balance leads stay live until unplugged.
+S2,Latching E-stop / 3 isolated NC contacts,SELECT PART,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Select actual NC contact blocks: coil, 3.3 V dry feedback, 5 V enable. Verify low-current wetting and isolation; not a certified safety circuit."
+S3,Momentary motor-power ARM,NO; rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Deliberate hardware power-arm, not the software ARM command. Press only after verifying EN low."
+K1,DC motor contactor,CONTACT / COIL TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,A1/A2 coil function; other names are logical contact roles. Map actual manufacturer terminals; DC main rating and coil operating range pending. Two separate NO auxiliary contact sets required: seal-in and isolated GPIO feedback.
+Z_COIL,Coil suppression network,SELECT FOR K1,ADDITIONAL / SELECT OR BUY,UNASSIGNED,Manufacturer-specified clamp; release time and voltage must be qualified. Do not assume an arbitrary flyback diode is suitable.
+F0,main pack fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FL,left driver fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FR,right driver fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FA,auxiliary driver fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+F1,MCU buck input fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+F2,logic buck input fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FK,contactor coil fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM1,motor 1 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM2,motor 2 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM3,motor 3 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM4,motor 4 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM5,motor 5 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM6,motor 6 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+FM7,motor 7 fuse / holder,DC A / interrupt rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+U1,SN74AHCT244N 3.3-to-5 V buffer,SN74AHCT244N,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Exact 20-pin pinout per TI. No PCB footprint assigned; package must match procured part. This is AHCT, not HC."
+R23,ECHO upper resistor,"2.2k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Not in inventory. Sensor-to-node series element; not MCU series-only protection.
+R24,ECHO lower resistor,"3.3k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Node to GND; three separate divider pairs required.
+R25,ECHO upper resistor,"2.2k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Not in inventory. Sensor-to-node series element; not MCU series-only protection.
+R26,ECHO lower resistor,"3.3k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Node to GND; three separate divider pairs required.
+R27,ECHO upper resistor,"2.2k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Not in inventory. Sensor-to-node series element; not MCU series-only protection.
+R28,ECHO lower resistor,"3.3k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Node to GND; three separate divider pairs required.
+R1,L_FWD input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R2,L_REV input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R3,R_FWD input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R4,R_REV input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R5,ENABLE input pull-down,"2.2k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R6,TF input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R7,TL input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R8,TR input pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R9,BRUSH_IN1 pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R10,BRUSH_IN2 pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R11,CONVEYOR_IN3 pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R12,CONVEYOR_IN4 pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R13,DRV_L.R_EN local EN pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit at the receiver terminal so unplugging EN leaves it LOW.
+R14,DRV_L.L_EN local EN pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit at the receiver terminal so unplugging EN leaves it LOW.
+R15,DRV_R.R_EN local EN pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit at the receiver terminal so unplugging EN leaves it LOW.
+R16,DRV_R.L_EN local EN pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit at the receiver terminal so unplugging EN leaves it LOW.
+R17,DRV_A.ENA local EN pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit at the receiver terminal so unplugging EN leaves it LOW.
+R18,DRV_A.ENB local EN pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit at the receiver terminal so unplugging EN leaves it LOW.
+R19,L_FWD receiver pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R20,L_REV receiver pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R21,R_FWD receiver pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R22,R_REV receiver pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+R29,E-stop feedback pull-down,"10k 1%, >=1/8 W",ADDITIONAL / SELECT OR BUY,UNASSIGNED,
+C_U1,local ceramic bypass,"100nF, >=10V",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit close to supply/GND of the named receiver.
+C_F,local ceramic bypass,"100nF, >=10V",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit close to supply/GND of the named receiver.
+C_L,local ceramic bypass,"100nF, >=10V",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit close to supply/GND of the named receiver.
+C_R,local ceramic bypass,"100nF, >=10V",ADDITIONAL / SELECT OR BUY,UNASSIGNED,Fit close to supply/GND of the named receiver.
+C_BL,local motor-bus reservoir,C / ESR / voltage TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Select from measured ripple, wire inductance and coordinated clamp; do not assume buck absorbs regenerative energy."
+C_BR,local motor-bus reservoir,C / ESR / voltage TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Select from measured ripple, wire inductance and coordinated clamp; do not assume buck absorbs regenerative energy."
+C_BA,local motor-bus reservoir,C / ESR / voltage TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Select from measured ripple, wire inductance and coordinated clamp; do not assume buck absorbs regenerative energy."
+OV1,5V rail 1 OVP/OCP and supervision assembly,SELECT / VERIFY,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Functional ports, NOT vendor pins. Required output fault protection and fail-open isolated power-good contact. Select thresholds/tolerances/response to keep qualified 5V envelope; contact must handle K1 coil. May require separate protection + supervisor/interface parts."
+OV2,5V rail 2 OVP/OCP and supervision assembly,SELECT / VERIFY,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Functional ports, NOT vendor pins. Required output fault protection and fail-open isolated power-good contact. Select thresholds/tolerances/response to keep qualified 5V envelope; contact must handle K1 coil. May require separate protection + supervisor/interface parts."
+TB_GND,Common ground distribution,Conductor / terminal rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Functional bus connection, not a connector position. Secure insulated current-rated distribution; no solderless breadboard."
+TB_POS,Protected positive distribution,Conductor / terminal rating TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Functional bus connection, not a connector position. Secure insulated current-rated distribution; no solderless breadboard."
+Z_L,Local driver-bus transient clamp,Standoff / clamp / energy TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Load side of branch fuse so opening a fuse cannot isolate the driver from its clamp. Select from motor regeneration, 12.6V pack, wire/diode/capacitor and module limits; no arbitrary TVS rating."
+Z_R,Local driver-bus transient clamp,Standoff / clamp / energy TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Load side of branch fuse so opening a fuse cannot isolate the driver from its clamp. Select from motor regeneration, 12.6V pack, wire/diode/capacitor and module limits; no arbitrary TVS rating."
+Z_A,Local driver-bus transient clamp,Standoff / clamp / energy TBD,ADDITIONAL / SELECT OR BUY,UNASSIGNED,"Load side of branch fuse so opening a fuse cannot isolate the driver from its clamp. Select from motor regeneration, 12.6V pack, wire/diode/capacitor and module limits; no arbitrary TVS rating."

@@ -1,0 +1,2 @@
+Wokwi sketch matches canonical sources
+PASS: 16 unique supported GPIOs; one L298N; shared brushes; independent conveyor; no resistors; E-stop and analyzer match

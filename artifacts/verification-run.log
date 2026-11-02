@@ -1,0 +1,212 @@
+Running: /usr/local/bin/python3 <project>/scripts/check_project.py
+Wokwi sketch matches canonical sources
+PASS: 16 unique supported GPIOs; one L298N; shared brushes; independent conveyor; no resistors; E-stop and analyzer match
+Running: /usr/local/bin/python3 <project>/scripts/check_electrical.py
+{
+  "components": 82,
+  "nets": 69,
+  "connected_pins": 257,
+  "no_connect_pins": 19,
+  "gpio_assignments": 16,
+  "divider_assumed_high_bounds_V": [
+    2.827,
+    3.175
+  ],
+  "enable_pulldown_load_mA": 3.0,
+  "result": "PASS - structural only; all physical connections remain unapproved"
+}
+Running: <project>/.venv/bin/pio test -e native
+Verbosity level can be increased via `-v, -vv, or -vvv` option
+Collected 3 tests
+
+Processing test_navigation in native environment
+--------------------------------------------------------------------------------
+Building...
+Testing...
+test/test_navigation/test_main.cpp:75: independent_aux_requests	[PASSED]
+test/test_navigation/test_main.cpp:75: aux_require_arm	[PASSED]
+test/test_navigation/test_main.cpp:75: aux_requests_do_not_refresh_deadman	[PASSED]
+test/test_navigation/test_main.cpp:76: stop_alias_latches_and_clears_aux	[PASSED]
+test/test_navigation/test_main.cpp:76: sensor_fault_clears_independent_aux	[PASSED]
+test/test_navigation/test_main.cpp:76: cleaning_aliases_control_both	[PASSED]
+test/test_navigation/test_main.cpp:77: boot_safe	[PASSED]
+test/test_navigation/test_main.cpp:77: arm_stays_stopped	[PASSED]
+test/test_navigation/test_main.cpp:77: auto_requires_arm_and_ranges	[PASSED]
+test/test_navigation/test_main.cpp:78: clear_forward	[PASSED]
+test/test_navigation/test_main.cpp:78: obstacle_settles_then_left	[PASSED]
+test/test_navigation/test_main.cpp:78: clearer_right	[PASSED]
+test/test_navigation/test_main.cpp:78: ties_left	[PASSED]
+test/test_navigation/test_main.cpp:79: all_blocked	[PASSED]
+test/test_navigation/test_main.cpp:79: side_too_close	[PASSED]
+test/test_navigation/test_main.cpp:79: turn_stops_on_side_obstacle	[PASSED]
+test/test_navigation/test_main.cpp:79: turn_time_bounded	[PASSED]
+test/test_navigation/test_main.cpp:80: missing_disarms_no_restart	[PASSED]
+test/test_navigation/test_main.cpp:80: out_of_range	[PASSED]
+test/test_navigation/test_main.cpp:80: stale_individual_sensor	[PASSED]
+test/test_navigation/test_main.cpp:80: freshness_boundary	[PASSED]
+test/test_navigation/test_main.cpp:81: manual_deadman	[PASSED]
+test/test_navigation/test_main.cpp:81: unknown_does_not_refresh	[PASSED]
+test/test_navigation/test_main.cpp:81: repeat_manual_refreshes	[PASSED]
+test/test_navigation/test_main.cpp:81: manual_rollover	[PASSED]
+test/test_navigation/test_main.cpp:82: turn_rollover	[PASSED]
+test/test_navigation/test_main.cpp:82: estop_latches	[PASSED]
+test/test_navigation/test_main.cpp:82: switch_open_cannot_reset	[PASSED]
+test/test_navigation/test_main.cpp:82: hardware_stop_from_manual	[PASSED]
+test/test_navigation/test_main.cpp:83: s_exits_auto	[PASSED]
+test/test_navigation/test_main.cpp:83: mode_clears_turn	[PASSED]
+test/test_navigation/test_main.cpp:83: arm_clears_modes	[PASSED]
+test/test_navigation/test_main.cpp:83: cleaning_forward_only	[PASSED]
+test/test_navigation/test_main.cpp:84: clean_off_and_disarm	[PASSED]
+test/test_navigation/test_main.cpp:84: parser_normalization	[PASSED]
+test/test_navigation/test_main.cpp:84: parser_overflow_discards	[PASSED]
+test/test_navigation/test_main.cpp:85: gate_neutral_and_reverse	[PASSED]
+test/test_navigation/test_main.cpp:85: gate_rollover	[PASSED]
+-------------- native:test_navigation [PASSED] Took 4.26 seconds --------------
+
+Processing test_io in native environment
+--------------------------------------------------------------------------------
+Building...
+Testing...
+test/test_io/test_main.cpp:80: adapter_times_turn_from_enable	[PASSED]
+test/test_io/test_main.cpp:80: physical_estop_interrupts_auto_turn	[PASSED]
+test/test_io/test_main.cpp:81: reassessment_sensor_failure_keeps_adapter_disabled	[PASSED]
+test/test_io/test_main.cpp:82: one_l298n_independent_outputs	[PASSED]
+test/test_io/test_main.cpp:82: aux_suppressed_during_neutral_and_turns	[PASSED]
+test/test_io/test_main.cpp:83: right_turn_wheel_outputs	[PASSED]
+test/test_io/test_main.cpp:83: estop_input_has_internal_pulldown	[PASSED]
+test/test_io/test_main.cpp:84: stop_disables_both_aux_channels	[PASSED]
+test/test_io/test_main.cpp:84: aux_channel_topology	[PASSED]
+test/test_io/test_main.cpp:84: boot_outputs_disabled	[PASSED]
+test/test_io/test_main.cpp:84: open_loop_at_boot_latches	[PASSED]
+test/test_io/test_main.cpp:85: arm_no_pulse	[PASSED]
+test/test_io/test_main.cpp:85: forward_after_neutral	[PASSED]
+test/test_io/test_main.cpp:85: reverse_break_before_make	[PASSED]
+test/test_io/test_main.cpp:86: physical_isr_immediately_cuts_enable	[PASSED]
+test/test_io/test_main.cpp:86: release_requires_reset_and_rearm	[PASSED]
+test/test_io/test_main.cpp:87: serial_estop_all_outputs	[PASSED]
+test/test_io/test_main.cpp:87: deadman_cuts_actual_enable	[PASSED]
+test/test_io/test_main.cpp:88: overflow_disarms_actual_outputs	[PASSED]
+test/test_io/test_main.cpp:88: pwm_failure_blocks_arming	[PASSED]
+test/test_io/test_main.cpp:88: timeout_disarms_auto_outputs	[PASSED]
+------------------ native:test_io [PASSED] Took 1.94 seconds ------------------
+
+Processing test_turning in native environment
+--------------------------------------------------------------------------------
+Building...
+Testing...
+test/test_turning/test_main.cpp:148: left_turn_is_continuous	[PASSED]
+test/test_turning/test_main.cpp:148: right_turn_is_continuous	[PASSED]
+test/test_turning/test_main.cpp:149: dead_time_does_not_consume_turn_duration	[PASSED]
+test/test_turning/test_main.cpp:149: repeated_applied_feedback_does_not_extend_turn	[PASSED]
+test/test_turning/test_main.cpp:150: reassessment_requires_every_new_sensor	[PASSED]
+test/test_turning/test_main.cpp:150: reassessment_minimum_settle_time	[PASSED]
+test/test_turning/test_main.cpp:151: fresh_clear_path_exits_avoidance	[PASSED]
+test/test_turning/test_main.cpp:151: hysteresis_prevents_front_threshold_chatter	[PASSED]
+test/test_turning/test_main.cpp:152: persistent_left_obstacle_is_bounded	[PASSED]
+test/test_turning/test_main.cpp:152: persistent_right_obstacle_is_bounded	[PASSED]
+test/test_turning/test_main.cpp:153: reassessment_selects_updated_direction	[PASSED]
+test/test_turning/test_main.cpp:153: estop_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:154: invalid_sensor_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:154: stale_sensor_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:155: timer_and_reassessment_survive_rollover	[PASSED]
+test/test_turning/test_main.cpp:155: side_clearance_loss_stops_without_immediate_retry	[PASSED]
+test/test_turning/test_main.cpp:156: final_attempt_may_recover_with_fresh_clear_path	[PASSED]
+test/test_turning/test_main.cpp:156: obstacle_cleared_during_initial_settle_needs_no_turn	[PASSED]
+test/test_turning/test_main.cpp:157: pending_turn_safety_clearance_is_checked	[PASSED]
+test/test_turning/test_main.cpp:157: stop_command_cancels_reassessment_and_future_turns	[PASSED]
+---------------- native:test_turning [PASSED] Took 1.64 seconds ----------------
+
+=================================== SUMMARY ===================================
+Environment    Test             Status    Duration
+-------------  ---------------  --------  ------------
+native         test_navigation  PASSED    00:00:04.257
+native         test_io          PASSED    00:00:01.936
+native         test_turning     PASSED    00:00:01.641
+================= 79 test cases: 79 succeeded in 00:00:07.834 =================
+Running: /usr/local/bin/python3 -m unittest discover -s test -p test_*.py -v
+test_complete_model_is_structural_only (test_electrical.ElectricalChecks.test_complete_model_is_structural_only) ... ok
+test_conflicting_gpio_rejected (test_electrical.ElectricalChecks.test_conflicting_gpio_rejected) ... ok
+test_contactor_feedback_bypass_rejected (test_electrical.ElectricalChecks.test_contactor_feedback_bypass_rejected) ... ok
+test_direct_5v_echo_rejected (test_electrical.ElectricalChecks.test_direct_5v_echo_rejected) ... ok
+test_invented_board_footprint_rejected (test_electrical.ElectricalChecks.test_invented_board_footprint_rejected) ... ok
+test_invented_fuse_rating_rejected (test_electrical.ElectricalChecks.test_invented_fuse_rating_rejected) ... ok
+test_missing_echo_ground_rejected (test_electrical.ElectricalChecks.test_missing_echo_ground_rejected) ... ok
+test_missing_enable_pull_rejected (test_electrical.ElectricalChecks.test_missing_enable_pull_rejected) ... ok
+test_motor_cutoff_bypass_rejected (test_electrical.ElectricalChecks.test_motor_cutoff_bypass_rejected) ... ok
+test_parallel_buck_outputs_rejected (test_electrical.ElectricalChecks.test_parallel_buck_outputs_rejected) ... ok
+test_weak_gpio14_pull_rejected (test_electrical.ElectricalChecks.test_weak_gpio14_pull_rejected) ... ok
+test_blocked_remains_disabled (test_vcd.TraceChecks.test_blocked_remains_disabled) ... ok
+test_brush_independence (test_vcd.TraceChecks.test_brush_independence) ... ok
+test_conveyor_independence (test_vcd.TraceChecks.test_conveyor_independence) ... ok
+test_forward_pwm (test_vcd.TraceChecks.test_forward_pwm) ... ok
+test_left_pwm (test_vcd.TraceChecks.test_left_pwm) ... ok
+test_missing_channel_rejected (test_vcd.TraceChecks.test_missing_channel_rejected) ... ok
+test_opposing_channels_rejected (test_vcd.TraceChecks.test_opposing_channels_rejected) ... ok
+test_stuck_high_is_not_pwm (test_vcd.TraceChecks.test_stuck_high_is_not_pwm) ... ok
+test_unknown_enabled_signal_rejected (test_vcd.TraceChecks.test_unknown_enabled_signal_rejected) ... ok
+test_wrong_auxiliary_rejected (test_vcd.TraceChecks.test_wrong_auxiliary_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.078s
+
+OK
+Running: <project>/.venv/bin/pio run -e esp32dev -e wokwi_compile
+Processing esp32dev (platform: espressif32@6.12.0; board: esp32dev; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32dev.html
+PLATFORM: Espressif 32 (6.12.0) > Espressif ESP32 Dev Module
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES:
+ - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b
+ - tool-esptoolpy @ 2.40900.250804 (4.9.0)
+ - toolchain-xtensa-esp32 @ 8.4.0+2021r2-patch5
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 33 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Retrieving maximum program size .pio/build/esp32dev/firmware.elf
+Checking size .pio/build/esp32dev/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]   6.8% (used 22232 bytes from 327680 bytes)
+Flash: [==        ]  21.5% (used 281345 bytes from 1310720 bytes)
+========================= [SUCCESS] Took 4.02 seconds =========================
+
+Processing wokwi_compile (platform: espressif32@6.12.0; board: esp32dev; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32dev.html
+PLATFORM: Espressif 32 (6.12.0) > Espressif ESP32 Dev Module
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES:
+ - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b
+ - tool-esptoolpy @ 2.40900.250804 (4.9.0)
+ - toolchain-xtensa-esp32 @ 8.4.0+2021r2-patch5
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 33 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Retrieving maximum program size .pio/build/wokwi_compile/firmware.elf
+Checking size .pio/build/wokwi_compile/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]   6.8% (used 22232 bytes from 327680 bytes)
+Flash: [==        ]  21.5% (used 281345 bytes from 1310720 bytes)
+========================= [SUCCESS] Took 2.48 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+esp32dev       SUCCESS   00:00:04.015
+wokwi_compile  SUCCESS   00:00:02.482
+========================= 2 succeeded in 00:00:06.498 =========================
+Running: <project>/.tools/wokwi-cli lint wokwi
+Wokwi CLI v0.29.1 (0aa185144b92)
+ℹ [unsupported-part] Part "esp" uses undocumented type "wokwi-esp32-devkit-v1". This part may change or be removed in future versions. (esp)
+
+Found 1 info
+Software checks passed. Wokwi runtime and physical hardware are not verified by this script.

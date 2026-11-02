@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Physical harness layout - placement suggestion</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Physical harness layout - placement suggestion</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Not to scale or connector orientation. Bundles are separate labeled conductors; use the full terminal/connection tables before fitting any wire.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="55" y="160" width="440" height="95" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="185" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_F HC-SR04</text>
+<text x="67" y="209" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Front: GPIO32 / GPIO34</text>
+<text x="67" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC/GND plus protected TRIG/ECHO</text>
+<rect x="620" y="160" width="440" height="95" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="632" y="185" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_L HC-SR04</text>
+<text x="632" y="209" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Left: GPIO33 / GPIO35</text>
+<text x="632" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC/GND plus protected TRIG/ECHO</text>
+<rect x="1185" y="160" width="440" height="95" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1197" y="185" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_R HC-SR04</text>
+<text x="1197" y="209" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Right: GPIO13 / GPIO36</text>
+<text x="1197" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC/GND plus protected TRIG/ECHO</text>
+<rect x="560" y="300" width="570" height="100" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="572" y="325" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Sensor conditioning / logic harness</text>
+<text x="572" y="349" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">3 ECHO dividers + U1 trigger channels</text>
+<text x="572" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO parts missing: do not bypass</text>
+<polyline points="275,255 275,330 560,330" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="840,255 840,300" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="1405,255 1405,330 1130,330" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="290" y="315" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">H-SF: four separate wires</text>
+<text x="850" y="280" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">H-SL: four separate wires</text>
+<text x="1165" y="315" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">H-SR: four separate wires</text>
+<rect x="620" y="470" width="450" height="135" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="632" y="495" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 + U1 logic area</text>
+<text x="632" y="519" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Existing 16 GPIO assignments preserved</text>
+<text x="632" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Non-inverting buffer / local pull-downs</text>
+<text x="632" y="561" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No motor-current return in this area</text>
+<polyline points="840,400 840,470" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="55" y="440" width="245" height="155" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="465" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_L</text>
+<text x="67" y="489" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">5V logic / common GND</text>
+<text x="67" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Fused switched motor supply</text>
+<text x="67" y="531" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Two PWM + two EN terminals</text>
+<rect x="355" y="420" width="240" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="367" y="445" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M1 left front</text>
+<text x="367" y="469" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<rect x="355" y="540" width="240" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="367" y="565" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M2 left rear</text>
+<text x="367" y="589" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<polyline points="300,475 355,460" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="300,545 355,580" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="620,520 300,520" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="355" y="535" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">H-L: 16/17 + EN</text>
+<rect x="55" y="720" width="245" height="155" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_R</text>
+<text x="67" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">5V logic / common GND</text>
+<text x="67" y="790" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Fused switched motor supply</text>
+<text x="67" y="811" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Two PWM + two EN terminals</text>
+<rect x="355" y="700" width="240" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="367" y="725" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M3 right front</text>
+<text x="367" y="749" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<rect x="355" y="820" width="240" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="367" y="845" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M4 right rear</text>
+<text x="367" y="869" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<polyline points="300,755 355,740" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="300,825 355,860" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="620,570 605,570 605,800 300,800" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="355" y="815" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">H-R: 18/19 + EN</text>
+<rect x="1130" y="475" width="250" height="170" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1142" y="500" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_A / one L298N</text>
+<text x="1142" y="524" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A: both brushes</text>
+<text x="1142" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">B: conveyor</text>
+<text x="1142" y="566" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO21/22/23/25</text>
+<text x="1142" y="587" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ENA/ENB shared</text>
+<rect x="1435" y="460" width="190" height="75" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1447" y="485" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M5 brush 1</text>
+<text x="1447" y="509" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<polyline points="1380,515 1395,515 1395,495 1435,495" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="1445" y="558" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#d87800">A / B via FM5</text>
+<rect x="1435" y="580" width="190" height="75" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1447" y="605" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M6 brush 2</text>
+<text x="1447" y="629" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<polyline points="1380,565 1410,565 1410,615 1435,615" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="1445" y="678" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#d87800">A / B via FM6</text>
+<rect x="1435" y="730" width="190" height="75" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1447" y="755" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M7 conveyor</text>
+<text x="1447" y="779" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A fuse / B return</text>
+<polyline points="1380,635 1395,635 1395,765 1435,765" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="1445" y="828" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#d87800">A / B via FM7</text>
+<polyline points="1070,535 1130,535" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="620" y="705" width="450" height="135" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="632" y="730" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Protected power + E-stop panel</text>
+<text x="632" y="754" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">S2 / S3 / K1 + coil clamp</text>
+<text x="632" y="775" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Fuses, P1 and OV1/OV2: select parts</text>
+<text x="632" y="796" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">BUCK1 5V MCU / BUCK2 5V logic</text>
+<polyline points="845,705 845,605" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="1070,770 1100,770 1100,610 1130,610" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="620,790 310,790 310,590 300,590" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="620,820 300,820" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<rect x="55" y="940" width="410" height="100" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="965" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BT1 + adjacent F0</text>
+<text x="67" y="989" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Insulated restrained LiPo</text>
+<text x="67" y="1010" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Main + balance unplugged for wiring</text>
+<rect x="620" y="940" width="450" height="100" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="632" y="965" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">TB_GND power-return star</text>
+<text x="632" y="989" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Heavy driver returns / coil return</text>
+<text x="632" y="1010" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Logic grounds via buck negative paths</text>
+<rect x="1215" y="940" width="410" height="100" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1227" y="965" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Reserved ESP32-CAM</text>
+<text x="1227" y="989" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">All pins disconnected</text>
+<text x="1227" y="1010" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No supply/current budget allocated</text>
+<polyline points="260,940 260,900 760,900 760,840" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="465,1010 620,1010" fill="none" stroke="#17232c" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="845,940 845,840" fill="none" stroke="#17232c" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="855" y="892" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">H-GND: dedicated power returns</text>
+<text x="55" y="1080" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Keep high-current orange/red/black wiring separate from blue/green signal harnesses. Use insulated rated terminals; no breadboard motor paths. Exact wire</text>
+<text x="55" y="1100" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">gauge, length, connectors, routing and suppression remain release items.</text>
+</svg>

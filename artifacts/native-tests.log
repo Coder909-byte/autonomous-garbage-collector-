@@ -1,0 +1,107 @@
+Verbosity level can be increased via `-v, -vv, or -vvv` option
+Collected 3 tests
+
+Processing test_navigation in native environment
+--------------------------------------------------------------------------------
+Building...
+Testing...
+test/test_navigation/test_main.cpp:75: independent_aux_requests	[PASSED]
+test/test_navigation/test_main.cpp:75: aux_require_arm	[PASSED]
+test/test_navigation/test_main.cpp:75: aux_requests_do_not_refresh_deadman	[PASSED]
+test/test_navigation/test_main.cpp:76: stop_alias_latches_and_clears_aux	[PASSED]
+test/test_navigation/test_main.cpp:76: sensor_fault_clears_independent_aux	[PASSED]
+test/test_navigation/test_main.cpp:76: cleaning_aliases_control_both	[PASSED]
+test/test_navigation/test_main.cpp:77: boot_safe	[PASSED]
+test/test_navigation/test_main.cpp:77: arm_stays_stopped	[PASSED]
+test/test_navigation/test_main.cpp:77: auto_requires_arm_and_ranges	[PASSED]
+test/test_navigation/test_main.cpp:78: clear_forward	[PASSED]
+test/test_navigation/test_main.cpp:78: obstacle_settles_then_left	[PASSED]
+test/test_navigation/test_main.cpp:78: clearer_right	[PASSED]
+test/test_navigation/test_main.cpp:78: ties_left	[PASSED]
+test/test_navigation/test_main.cpp:79: all_blocked	[PASSED]
+test/test_navigation/test_main.cpp:79: side_too_close	[PASSED]
+test/test_navigation/test_main.cpp:79: turn_stops_on_side_obstacle	[PASSED]
+test/test_navigation/test_main.cpp:79: turn_time_bounded	[PASSED]
+test/test_navigation/test_main.cpp:80: missing_disarms_no_restart	[PASSED]
+test/test_navigation/test_main.cpp:80: out_of_range	[PASSED]
+test/test_navigation/test_main.cpp:80: stale_individual_sensor	[PASSED]
+test/test_navigation/test_main.cpp:80: freshness_boundary	[PASSED]
+test/test_navigation/test_main.cpp:81: manual_deadman	[PASSED]
+test/test_navigation/test_main.cpp:81: unknown_does_not_refresh	[PASSED]
+test/test_navigation/test_main.cpp:81: repeat_manual_refreshes	[PASSED]
+test/test_navigation/test_main.cpp:81: manual_rollover	[PASSED]
+test/test_navigation/test_main.cpp:82: turn_rollover	[PASSED]
+test/test_navigation/test_main.cpp:82: estop_latches	[PASSED]
+test/test_navigation/test_main.cpp:82: switch_open_cannot_reset	[PASSED]
+test/test_navigation/test_main.cpp:82: hardware_stop_from_manual	[PASSED]
+test/test_navigation/test_main.cpp:83: s_exits_auto	[PASSED]
+test/test_navigation/test_main.cpp:83: mode_clears_turn	[PASSED]
+test/test_navigation/test_main.cpp:83: arm_clears_modes	[PASSED]
+test/test_navigation/test_main.cpp:83: cleaning_forward_only	[PASSED]
+test/test_navigation/test_main.cpp:84: clean_off_and_disarm	[PASSED]
+test/test_navigation/test_main.cpp:84: parser_normalization	[PASSED]
+test/test_navigation/test_main.cpp:84: parser_overflow_discards	[PASSED]
+test/test_navigation/test_main.cpp:85: gate_neutral_and_reverse	[PASSED]
+test/test_navigation/test_main.cpp:85: gate_rollover	[PASSED]
+-------------- native:test_navigation [PASSED] Took 4.26 seconds --------------
+
+Processing test_io in native environment
+--------------------------------------------------------------------------------
+Building...
+Testing...
+test/test_io/test_main.cpp:80: adapter_times_turn_from_enable	[PASSED]
+test/test_io/test_main.cpp:80: physical_estop_interrupts_auto_turn	[PASSED]
+test/test_io/test_main.cpp:81: reassessment_sensor_failure_keeps_adapter_disabled	[PASSED]
+test/test_io/test_main.cpp:82: one_l298n_independent_outputs	[PASSED]
+test/test_io/test_main.cpp:82: aux_suppressed_during_neutral_and_turns	[PASSED]
+test/test_io/test_main.cpp:83: right_turn_wheel_outputs	[PASSED]
+test/test_io/test_main.cpp:83: estop_input_has_internal_pulldown	[PASSED]
+test/test_io/test_main.cpp:84: stop_disables_both_aux_channels	[PASSED]
+test/test_io/test_main.cpp:84: aux_channel_topology	[PASSED]
+test/test_io/test_main.cpp:84: boot_outputs_disabled	[PASSED]
+test/test_io/test_main.cpp:84: open_loop_at_boot_latches	[PASSED]
+test/test_io/test_main.cpp:85: arm_no_pulse	[PASSED]
+test/test_io/test_main.cpp:85: forward_after_neutral	[PASSED]
+test/test_io/test_main.cpp:85: reverse_break_before_make	[PASSED]
+test/test_io/test_main.cpp:86: physical_isr_immediately_cuts_enable	[PASSED]
+test/test_io/test_main.cpp:86: release_requires_reset_and_rearm	[PASSED]
+test/test_io/test_main.cpp:87: serial_estop_all_outputs	[PASSED]
+test/test_io/test_main.cpp:87: deadman_cuts_actual_enable	[PASSED]
+test/test_io/test_main.cpp:88: overflow_disarms_actual_outputs	[PASSED]
+test/test_io/test_main.cpp:88: pwm_failure_blocks_arming	[PASSED]
+test/test_io/test_main.cpp:88: timeout_disarms_auto_outputs	[PASSED]
+------------------ native:test_io [PASSED] Took 1.94 seconds ------------------
+
+Processing test_turning in native environment
+--------------------------------------------------------------------------------
+Building...
+Testing...
+test/test_turning/test_main.cpp:148: left_turn_is_continuous	[PASSED]
+test/test_turning/test_main.cpp:148: right_turn_is_continuous	[PASSED]
+test/test_turning/test_main.cpp:149: dead_time_does_not_consume_turn_duration	[PASSED]
+test/test_turning/test_main.cpp:149: repeated_applied_feedback_does_not_extend_turn	[PASSED]
+test/test_turning/test_main.cpp:150: reassessment_requires_every_new_sensor	[PASSED]
+test/test_turning/test_main.cpp:150: reassessment_minimum_settle_time	[PASSED]
+test/test_turning/test_main.cpp:151: fresh_clear_path_exits_avoidance	[PASSED]
+test/test_turning/test_main.cpp:151: hysteresis_prevents_front_threshold_chatter	[PASSED]
+test/test_turning/test_main.cpp:152: persistent_left_obstacle_is_bounded	[PASSED]
+test/test_turning/test_main.cpp:152: persistent_right_obstacle_is_bounded	[PASSED]
+test/test_turning/test_main.cpp:153: reassessment_selects_updated_direction	[PASSED]
+test/test_turning/test_main.cpp:153: estop_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:154: invalid_sensor_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:154: stale_sensor_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:155: timer_and_reassessment_survive_rollover	[PASSED]
+test/test_turning/test_main.cpp:155: side_clearance_loss_stops_without_immediate_retry	[PASSED]
+test/test_turning/test_main.cpp:156: final_attempt_may_recover_with_fresh_clear_path	[PASSED]
+test/test_turning/test_main.cpp:156: obstacle_cleared_during_initial_settle_needs_no_turn	[PASSED]
+test/test_turning/test_main.cpp:157: pending_turn_safety_clearance_is_checked	[PASSED]
+test/test_turning/test_main.cpp:157: stop_command_cancels_reassessment_and_future_turns	[PASSED]
+---------------- native:test_turning [PASSED] Took 1.64 seconds ----------------
+
+=================================== SUMMARY ===================================
+Environment    Test             Status    Duration
+-------------  ---------------  --------  ------------
+native         test_navigation  PASSED    00:00:04.257
+native         test_io          PASSED    00:00:01.936
+native         test_turning     PASSED    00:00:01.641
+================= 79 test cases: 79 succeeded in 00:00:07.834 =================

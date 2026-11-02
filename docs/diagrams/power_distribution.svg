@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Battery and power distribution</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Battery and power distribution</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">High-current paths are thick red/black. All fuse, wire, coil, protection and motor-current ratings are TBD; no battery operation is approved.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="55" y="175" width="240" height="100" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="200" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BT1 3S LiPo</text>
+<text x="67" y="224" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">11.1V nominal / 3300mAh</text>
+<text x="67" y="245" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Up to 12.6V: verify label</text>
+<rect x="345" y="175" width="160" height="100" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="357" y="200" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">F0 main fuse</text>
+<text x="357" y="224" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A / DC interrupt TBD</text>
+<rect x="555" y="175" width="160" height="100" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="567" y="200" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">S0 master</text>
+<text x="567" y="224" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">DC-rated isolator</text>
+<rect x="765" y="175" width="300" height="100" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="777" y="200" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">P1 protection</text>
+<text x="777" y="224" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">High-side cell UV/OV/OCP</text>
+<text x="777" y="245" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">CELL0..3 mapping BLOCKED</text>
+<rect x="1155" y="175" width="400" height="100" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1167" y="200" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">TB_POS</text>
+<text x="1167" y="224" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">PACK_PROTECTED distribution</text>
+<polyline points="295,225 345,225" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="295" y="305" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#c62828">PACK_RAW</text>
+<polyline points="505,225 555,225" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="505" y="305" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#c62828">PACK_FUSED</text>
+<polyline points="715,225 765,225" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="715" y="305" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#c62828">PACK_ISOLATED</text>
+<polyline points="1065,225 1155,225" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="1065" y="305" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#c62828">PACK_PROTECTED</text>
+<polyline points="1555,225 1600,225 1600,1015" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<rect x="1190" y="355" width="330" height="85" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1202" y="380" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">K1 main NO</text>
+<text x="1202" y="404" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Independent motor disconnect</text>
+<polyline points="1600,397 1520,397" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="1190,397 1110,397 1110,745" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<text x="950" y="375" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#c62828">MOTOR_SWITCHED</text>
+<rect x="790" y="435" width="260" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="802" y="460" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">FL branch fuse</text>
+<text x="802" y="484" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Rating/coordination TBD</text>
+<rect x="370" y="435" width="340" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="382" y="460" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_L</text>
+<text x="382" y="484" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">LEFT_SUPPLY -&gt; B+</text>
+<rect x="55" y="435" width="250" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="460" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Motor loads</text>
+<text x="67" y="484" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">M1/M2 left wheels</text>
+<polyline points="1110,475 1050,475" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="790,475 710,475" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="370,475 305,475" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<rect x="790" y="555" width="260" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="802" y="580" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">FR branch fuse</text>
+<text x="802" y="604" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Rating/coordination TBD</text>
+<rect x="370" y="555" width="340" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="382" y="580" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_R</text>
+<text x="382" y="604" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RIGHT_SUPPLY -&gt; B+</text>
+<rect x="55" y="555" width="250" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="580" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Motor loads</text>
+<text x="67" y="604" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">M3/M4 right wheels</text>
+<polyline points="1110,595 1050,595" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="790,595 710,595" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="370,595 305,595" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<rect x="790" y="675" width="260" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="802" y="700" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">FA branch fuse</text>
+<text x="802" y="724" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Rating/coordination TBD</text>
+<rect x="370" y="675" width="340" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="382" y="700" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_A</text>
+<text x="382" y="724" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">AUX_SUPPLY -&gt; Vs / +12V</text>
+<rect x="55" y="675" width="250" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="700" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Motor loads</text>
+<text x="67" y="724" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">M5/M6 brushes + M7 conveyor</text>
+<polyline points="1110,715 1050,715" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="790,715 710,715" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="8 5"/>
+<polyline points="370,715 305,715" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
+<rect x="1235" y="830" width="285" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1247" y="855" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">F1 input fuse</text>
+<text x="1247" y="879" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A / DC rating TBD</text>
+<rect x="895" y="830" width="275" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="907" y="855" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BUCK1 LM2596</text>
+<text x="907" y="879" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Adjust 5.00V before load</text>
+<rect x="540" y="830" width="290" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="552" y="855" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">OV1 rail protection</text>
+<text x="552" y="879" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">OVP/OCP + power-good</text>
+<rect x="55" y="830" width="420" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="855" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">V5_MCU</text>
+<text x="67" y="879" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ESP1 5V/VIN only</text>
+<polyline points="1600,870 1520,870" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="1235,870 1170,870" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="895,870 830,870" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="540,870 475,870" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<rect x="1235" y="965" width="285" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1247" y="990" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">F2 input fuse</text>
+<text x="1247" y="1014" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">A / DC rating TBD</text>
+<rect x="895" y="965" width="275" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="907" y="990" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BUCK2 LM2596</text>
+<text x="907" y="1014" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Adjust 5.00V before load</text>
+<rect x="540" y="965" width="290" height="80" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="552" y="990" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">OV2 rail protection</text>
+<text x="552" y="1014" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">OVP/OCP + power-good</text>
+<rect x="55" y="965" width="420" height="80" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="67" y="990" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">V5_LOGIC</text>
+<text x="67" y="1014" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Sensors / U1 / driver logic</text>
+<polyline points="1600,1005 1520,1005" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="1235,1005 1170,1005" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="895,1005 830,1005" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<polyline points="540,1005 475,1005" fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="55" y="1095" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">All returns -&gt; TB_GND. Heavy driver returns; logic returns via buck OUT-. FK/coil chain: emergency_stop sheet. Do not parallel +5V outputs.</text>
+</svg>

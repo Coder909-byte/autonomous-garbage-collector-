@@ -1,0 +1,17 @@
+{
+  "components": 82,
+  "nets": 69,
+  "connected_pins": 257,
+  "no_connect_pins": 19,
+  "gpio_assignments": 16,
+  "divider_assumed_high_bounds_V": [
+    2.827,
+    3.175
+  ],
+  "enable_pulldown_load_mA": 3.0,
+  "result": "PASS - structural only; all physical connections remain unapproved",
+  "wire_rows": 188,
+  "all_svg_terminals": 276,
+  "pdf_pages": 21,
+  "export_check": "PASS; structural/readability only"
+}

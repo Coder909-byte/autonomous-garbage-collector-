@@ -1,0 +1,26 @@
+test_complete_model_is_structural_only (test_electrical.ElectricalChecks.test_complete_model_is_structural_only) ... ok
+test_conflicting_gpio_rejected (test_electrical.ElectricalChecks.test_conflicting_gpio_rejected) ... ok
+test_contactor_feedback_bypass_rejected (test_electrical.ElectricalChecks.test_contactor_feedback_bypass_rejected) ... ok
+test_direct_5v_echo_rejected (test_electrical.ElectricalChecks.test_direct_5v_echo_rejected) ... ok
+test_invented_board_footprint_rejected (test_electrical.ElectricalChecks.test_invented_board_footprint_rejected) ... ok
+test_invented_fuse_rating_rejected (test_electrical.ElectricalChecks.test_invented_fuse_rating_rejected) ... ok
+test_missing_echo_ground_rejected (test_electrical.ElectricalChecks.test_missing_echo_ground_rejected) ... ok
+test_missing_enable_pull_rejected (test_electrical.ElectricalChecks.test_missing_enable_pull_rejected) ... ok
+test_motor_cutoff_bypass_rejected (test_electrical.ElectricalChecks.test_motor_cutoff_bypass_rejected) ... ok
+test_parallel_buck_outputs_rejected (test_electrical.ElectricalChecks.test_parallel_buck_outputs_rejected) ... ok
+test_weak_gpio14_pull_rejected (test_electrical.ElectricalChecks.test_weak_gpio14_pull_rejected) ... ok
+test_blocked_remains_disabled (test_vcd.TraceChecks.test_blocked_remains_disabled) ... ok
+test_brush_independence (test_vcd.TraceChecks.test_brush_independence) ... ok
+test_conveyor_independence (test_vcd.TraceChecks.test_conveyor_independence) ... ok
+test_forward_pwm (test_vcd.TraceChecks.test_forward_pwm) ... ok
+test_left_pwm (test_vcd.TraceChecks.test_left_pwm) ... ok
+test_missing_channel_rejected (test_vcd.TraceChecks.test_missing_channel_rejected) ... ok
+test_opposing_channels_rejected (test_vcd.TraceChecks.test_opposing_channels_rejected) ... ok
+test_stuck_high_is_not_pwm (test_vcd.TraceChecks.test_stuck_high_is_not_pwm) ... ok
+test_unknown_enabled_signal_rejected (test_vcd.TraceChecks.test_unknown_enabled_signal_rejected) ... ok
+test_wrong_auxiliary_rejected (test_vcd.TraceChecks.test_wrong_auxiliary_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.078s
+
+OK

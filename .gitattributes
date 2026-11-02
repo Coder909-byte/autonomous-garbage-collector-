@@ -1,0 +1,14 @@
+# Keep text portable and prevent generated diagrams from being treated as text.
+* text=auto
+*.md text eol=lf
+*.py text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.ino text eol=lf
+*.ini text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.svg text eol=lf
+*.csv text eol=lf
+*.pdf binary
+*.png binary

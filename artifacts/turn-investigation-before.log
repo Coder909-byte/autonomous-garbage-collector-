@@ -1,0 +1,9 @@
+Baseline: constant front=20, left=100, right=100 cm; 10 ms host steps
+280 ms: LEFT
+720 ms: STOPPED
+1010 ms: LEFT
+1450 ms: STOPPED
+1740 ms: LEFT
+2180 ms: STOPPED
+2470 ms: LEFT
+2910 ms: STOPPED

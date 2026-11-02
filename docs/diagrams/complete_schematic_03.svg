@@ -1,0 +1,308 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Complete schematic - sheet 3</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Complete schematic - sheet 3</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every component terminal is shown. Equal net labels are connected; use connection IDs in the CSV for physical routing.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="42" y="148" width="500" height="687" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="52" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">ESP1 | ESP32-WROOM-32 DevKit</text>
+<text x="52" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="52" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">module terminal symbol</text>
+<text x="54" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">5V_VIN</text>
+<polyline points="250,232 290,232" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.5V_VIN" data-net="V5_MCU" x="300" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_MCU</text>
+<text x="54" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">3V3</text>
+<polyline points="250,252 290,252" fill="none" stroke="#c62828" stroke-width="2"/>
+<text data-terminal="ESP1.3V3" data-net="V3V3" x="300" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V3V3</text>
+<text x="54" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,272 290,272" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="ESP1.GND" data-net="GND" x="300" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="54" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO16</text>
+<polyline points="250,292 290,292" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO16" data-net="L_FWD_3V3" x="300" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_FWD_3V3</text>
+<text x="54" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO17</text>
+<polyline points="250,312 290,312" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO17" data-net="L_REV_3V3" x="300" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_REV_3V3</text>
+<text x="54" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO18</text>
+<polyline points="250,332 290,332" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO18" data-net="R_FWD_3V3" x="300" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_FWD_3V3</text>
+<text x="54" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO19</text>
+<polyline points="250,352 290,352" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO19" data-net="R_REV_3V3" x="300" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_REV_3V3</text>
+<text x="54" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO14</text>
+<polyline points="250,372 290,372" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO14" data-net="ENABLE_3V3" x="300" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ENABLE_3V3</text>
+<text x="54" y="397" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO21</text>
+<polyline points="250,392 290,392" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="ESP1.GPIO21" data-net="BRUSH_IN1" x="300" y="397" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">BRUSH_IN1</text>
+<text x="54" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO22</text>
+<polyline points="250,412 290,412" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="ESP1.GPIO22" data-net="BRUSH_IN2" x="300" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">BRUSH_IN2</text>
+<text x="54" y="437" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO23</text>
+<polyline points="250,432 290,432" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="ESP1.GPIO23" data-net="CONVEYOR_IN3" x="300" y="437" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">CONVEYOR_IN3</text>
+<text x="54" y="457" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO25</text>
+<polyline points="250,452 290,452" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="ESP1.GPIO25" data-net="CONVEYOR_IN4" x="300" y="457" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">CONVEYOR_IN4</text>
+<text x="54" y="477" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO32</text>
+<polyline points="250,472 290,472" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO32" data-net="TF_3V3" x="300" y="477" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TF_3V3</text>
+<text x="54" y="497" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO34</text>
+<polyline points="250,492 290,492" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO34" data-net="EF_SAFE" x="300" y="497" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_SAFE</text>
+<text x="54" y="517" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO33</text>
+<polyline points="250,512 290,512" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO33" data-net="TL_3V3" x="300" y="517" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TL_3V3</text>
+<text x="54" y="537" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO35</text>
+<polyline points="250,532 290,532" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO35" data-net="EL_SAFE" x="300" y="537" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_SAFE</text>
+<text x="54" y="557" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO13</text>
+<polyline points="250,552 290,552" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO13" data-net="TR_3V3" x="300" y="557" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TR_3V3</text>
+<text x="54" y="577" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO36</text>
+<polyline points="250,572 290,572" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO36" data-net="ER_SAFE" x="300" y="577" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_SAFE</text>
+<text x="54" y="597" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO27</text>
+<polyline points="250,592 290,592" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="ESP1.GPIO27" data-net="ESTOP_OK" x="300" y="597" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ESTOP_OK</text>
+<text x="54" y="617" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO0</text>
+<text data-terminal="ESP1.GPIO0" data-net="NO_CONNECT" x="300" y="617" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="637" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO2</text>
+<text data-terminal="ESP1.GPIO2" data-net="NO_CONNECT" x="300" y="637" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="657" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO4</text>
+<text data-terminal="ESP1.GPIO4" data-net="NO_CONNECT" x="300" y="657" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="677" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO5</text>
+<text data-terminal="ESP1.GPIO5" data-net="NO_CONNECT" x="300" y="677" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="697" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO12</text>
+<text data-terminal="ESP1.GPIO12" data-net="NO_CONNECT" x="300" y="697" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="717" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO15</text>
+<text data-terminal="ESP1.GPIO15" data-net="NO_CONNECT" x="300" y="717" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="737" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO26</text>
+<text data-terminal="ESP1.GPIO26" data-net="NO_CONNECT" x="300" y="737" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="757" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GPIO39</text>
+<text data-terminal="ESP1.GPIO39" data-net="NO_CONNECT" x="300" y="757" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="777" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">UART0_TX_GPIO1</text>
+<text data-terminal="ESP1.UART0_TX_GPIO1" data-net="NO_CONNECT" x="300" y="777" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="797" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">UART0_RX_GPIO3</text>
+<text data-terminal="ESP1.UART0_RX_GPIO3" data-net="NO_CONNECT" x="300" y="797" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="54" y="817" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">EN_RESET</text>
+<text data-terminal="ESP1.EN_RESET" data-net="NO_CONNECT" x="300" y="817" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<rect x="576" y="148" width="500" height="487" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">U1 | SN74AHCT244N 3.3-to-5 V buffer</text>
+<text x="586" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SN74AHCT244N</text>
+<text x="588" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1 / 1OE_N</text>
+<polyline points="784,232 824,232" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="U1.1" data-net="GND" x="834" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="588" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2 / 1A1</text>
+<polyline points="784,252 824,252" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.2" data-net="L_FWD_3V3" x="834" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_FWD_3V3</text>
+<text x="588" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">3 / 2Y4</text>
+<polyline points="784,272 824,272" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.3" data-net="TR_5V" x="834" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TR_5V</text>
+<text x="588" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">4 / 1A2</text>
+<polyline points="784,292 824,292" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.4" data-net="L_REV_3V3" x="834" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_REV_3V3</text>
+<text x="588" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">5 / 2Y3</text>
+<polyline points="784,312 824,312" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.5" data-net="TL_5V" x="834" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TL_5V</text>
+<text x="588" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">6 / 1A3</text>
+<polyline points="784,332 824,332" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.6" data-net="R_FWD_3V3" x="834" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_FWD_3V3</text>
+<text x="588" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">7 / 2Y2</text>
+<polyline points="784,352 824,352" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.7" data-net="TF_5V" x="834" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TF_5V</text>
+<text x="588" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">8 / 1A4</text>
+<polyline points="784,372 824,372" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.8" data-net="R_REV_3V3" x="834" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_REV_3V3</text>
+<text x="588" y="397" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">9 / 2Y1</text>
+<polyline points="784,392 824,392" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.9" data-net="ENABLE_5V" x="834" y="397" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ENABLE_5V</text>
+<text x="588" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">10 / GND</text>
+<polyline points="784,412 824,412" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="U1.10" data-net="GND" x="834" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="588" y="437" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">11 / 2A1</text>
+<polyline points="784,432 824,432" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.11" data-net="ENABLE_3V3" x="834" y="437" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ENABLE_3V3</text>
+<text x="588" y="457" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 / 1Y4</text>
+<polyline points="784,452 824,452" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.12" data-net="R_REV_5V" x="834" y="457" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_REV_5V</text>
+<text x="588" y="477" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">13 / 2A2</text>
+<polyline points="784,472 824,472" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.13" data-net="TF_3V3" x="834" y="477" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TF_3V3</text>
+<text x="588" y="497" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">14 / 1Y3</text>
+<polyline points="784,492 824,492" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.14" data-net="R_FWD_5V" x="834" y="497" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_FWD_5V</text>
+<text x="588" y="517" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">15 / 2A3</text>
+<polyline points="784,512 824,512" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.15" data-net="TL_3V3" x="834" y="517" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TL_3V3</text>
+<text x="588" y="537" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">16 / 1Y2</text>
+<polyline points="784,532 824,532" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.16" data-net="L_REV_5V" x="834" y="537" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_REV_5V</text>
+<text x="588" y="557" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">17 / 2A4</text>
+<polyline points="784,552 824,552" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.17" data-net="TR_3V3" x="834" y="557" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TR_3V3</text>
+<text x="588" y="577" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">18 / 1Y1</text>
+<polyline points="784,572 824,572" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.18" data-net="L_FWD_5V" x="834" y="577" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_FWD_5V</text>
+<text x="588" y="597" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">19 / 2OE_N</text>
+<polyline points="784,592 824,592" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="U1.19" data-net="GND" x="834" y="597" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="588" y="617" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">20 / VCC</text>
+<polyline points="784,612 824,612" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U1.20" data-net="V5_LOGIC" x="834" y="617" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<rect x="1110" y="148" width="500" height="327" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="1120" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">DRV_L | BTS7960 / IBT-2 left</text>
+<text x="1120" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="1120" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">module terminal symbol</text>
+<text x="1122" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B+</text>
+<polyline points="1318,232 1358,232" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.B+" data-net="LEFT_SUPPLY" x="1368" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">LEFT_SUPPLY</text>
+<text x="1122" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B-</text>
+<polyline points="1318,252 1358,252" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="DRV_L.B-" data-net="GND" x="1368" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="1122" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">M+</text>
+<polyline points="1318,272 1358,272" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.M+" data-net="DRV_L_MP" x="1368" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_L_MP</text>
+<text x="1122" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">M-</text>
+<polyline points="1318,292 1358,292" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.M-" data-net="DRV_L_MN" x="1368" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_L_MN</text>
+<text x="1122" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">VCC</text>
+<polyline points="1318,312 1358,312" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.VCC" data-net="V5_LOGIC" x="1368" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<text x="1122" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,332 1358,332" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="DRV_L.GND" data-net="GND" x="1368" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="1122" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">RPWM</text>
+<polyline points="1318,352 1358,352" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.RPWM" data-net="L_FWD_5V" x="1368" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_FWD_5V</text>
+<text x="1122" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">LPWM</text>
+<polyline points="1318,372 1358,372" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.LPWM" data-net="L_REV_5V" x="1368" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">L_REV_5V</text>
+<text x="1122" y="397" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R_EN</text>
+<polyline points="1318,392 1358,392" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.R_EN" data-net="EN_DRIVER_5V" x="1368" y="397" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="1122" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">L_EN</text>
+<polyline points="1318,412 1358,412" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_L.L_EN" data-net="EN_DRIVER_5V" x="1368" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="1122" y="437" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R_IS</text>
+<text data-terminal="DRV_L.R_IS" data-net="NO_CONNECT" x="1368" y="437" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="1122" y="457" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">L_IS</text>
+<text data-terminal="DRV_L.L_IS" data-net="NO_CONNECT" x="1368" y="457" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<rect x="1110" y="491" width="500" height="327" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="1120" y="515" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">DRV_R | BTS7960 / IBT-2 right</text>
+<text x="1120" y="536" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="1120" y="556" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">module terminal symbol</text>
+<text x="1122" y="580" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B+</text>
+<polyline points="1318,575 1358,575" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.B+" data-net="RIGHT_SUPPLY" x="1368" y="580" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">RIGHT_SUPPLY</text>
+<text x="1122" y="600" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B-</text>
+<polyline points="1318,595 1358,595" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="DRV_R.B-" data-net="GND" x="1368" y="600" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="1122" y="620" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">M+</text>
+<polyline points="1318,615 1358,615" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.M+" data-net="DRV_R_MP" x="1368" y="620" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_R_MP</text>
+<text x="1122" y="640" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">M-</text>
+<polyline points="1318,635 1358,635" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.M-" data-net="DRV_R_MN" x="1368" y="640" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_R_MN</text>
+<text x="1122" y="660" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">VCC</text>
+<polyline points="1318,655 1358,655" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.VCC" data-net="V5_LOGIC" x="1368" y="660" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<text x="1122" y="680" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,675 1358,675" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="DRV_R.GND" data-net="GND" x="1368" y="680" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="1122" y="700" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">RPWM</text>
+<polyline points="1318,695 1358,695" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.RPWM" data-net="R_FWD_5V" x="1368" y="700" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_FWD_5V</text>
+<text x="1122" y="720" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">LPWM</text>
+<polyline points="1318,715 1358,715" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.LPWM" data-net="R_REV_5V" x="1368" y="720" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">R_REV_5V</text>
+<text x="1122" y="740" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R_EN</text>
+<polyline points="1318,735 1358,735" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.R_EN" data-net="EN_DRIVER_5V" x="1368" y="740" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="1122" y="760" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">L_EN</text>
+<polyline points="1318,755 1358,755" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_R.L_EN" data-net="EN_DRIVER_5V" x="1368" y="760" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="1122" y="780" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R_IS</text>
+<text data-terminal="DRV_R.R_IS" data-net="NO_CONNECT" x="1368" y="780" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<text x="1122" y="800" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">L_IS</text>
+<text data-terminal="DRV_R.L_IS" data-net="NO_CONNECT" x="1368" y="800" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">NC - INSULATE</text>
+<rect x="576" y="651" width="500" height="347" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="586" y="675" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">DRV_A | ONE L298N: A brushes / B conveyor</text>
+<text x="586" y="696" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="586" y="716" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">module terminal symbol</text>
+<text x="588" y="740" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Vs_12V</text>
+<polyline points="784,735 824,735" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.Vs_12V" data-net="AUX_SUPPLY" x="834" y="740" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">AUX_SUPPLY</text>
+<text x="588" y="760" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">5V_LOGIC</text>
+<polyline points="784,755 824,755" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.5V_LOGIC" data-net="V5_LOGIC" x="834" y="760" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<text x="588" y="780" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,775 824,775" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="DRV_A.GND" data-net="GND" x="834" y="780" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="588" y="800" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN1</text>
+<polyline points="784,795 824,795" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="DRV_A.IN1" data-net="BRUSH_IN1" x="834" y="800" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">BRUSH_IN1</text>
+<text x="588" y="820" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN2</text>
+<polyline points="784,815 824,815" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="DRV_A.IN2" data-net="BRUSH_IN2" x="834" y="820" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">BRUSH_IN2</text>
+<text x="588" y="840" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN3</text>
+<polyline points="784,835 824,835" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="DRV_A.IN3" data-net="CONVEYOR_IN3" x="834" y="840" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">CONVEYOR_IN3</text>
+<text x="588" y="860" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN4</text>
+<polyline points="784,855 824,855" fill="none" stroke="#1565c0" stroke-width="2"/>
+<text data-terminal="DRV_A.IN4" data-net="CONVEYOR_IN4" x="834" y="860" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">CONVEYOR_IN4</text>
+<text x="588" y="880" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">ENA</text>
+<polyline points="784,875 824,875" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.ENA" data-net="EN_DRIVER_5V" x="834" y="880" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="588" y="900" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">ENB</text>
+<polyline points="784,895 824,895" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.ENB" data-net="EN_DRIVER_5V" x="834" y="900" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<text x="588" y="920" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT1</text>
+<polyline points="784,915 824,915" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.OUT1" data-net="DRV_A_OUT1" x="834" y="920" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT1</text>
+<text x="588" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT2</text>
+<polyline points="784,935 824,935" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.OUT2" data-net="DRV_A_OUT2" x="834" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT2</text>
+<text x="588" y="960" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT3</text>
+<polyline points="784,955 824,955" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.OUT3" data-net="DRV_A_OUT3" x="834" y="960" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT3</text>
+<text x="588" y="980" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT4</text>
+<polyline points="784,975 824,975" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="DRV_A.OUT4" data-net="DRV_A_OUT4" x="834" y="980" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT4</text>
+<rect x="1110" y="834" width="500" height="167" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="1120" y="858" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">US_F | HC-SR04 front</text>
+<text x="1120" y="879" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="1120" y="899" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">module terminal symbol</text>
+<text x="1122" y="923" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">VCC</text>
+<polyline points="1318,918 1358,918" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="US_F.VCC" data-net="V5_LOGIC" x="1368" y="923" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<text x="1122" y="943" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">TRIG</text>
+<polyline points="1318,938 1358,938" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="US_F.TRIG" data-net="TF_5V" x="1368" y="943" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TF_5V</text>
+<text x="1122" y="963" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">ECHO</text>
+<polyline points="1318,958 1358,958" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="US_F.ECHO" data-net="EF_RAW" x="1368" y="963" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_RAW</text>
+<text x="1122" y="983" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,978 1358,978" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="US_F.GND" data-net="GND" x="1368" y="983" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<rect x="42" y="851" width="500" height="167" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="52" y="875" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">US_L | HC-SR04 left</text>
+<text x="52" y="896" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="52" y="916" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">module terminal symbol</text>
+<text x="54" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">VCC</text>
+<polyline points="250,935 290,935" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="US_L.VCC" data-net="V5_LOGIC" x="300" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<text x="54" y="960" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">TRIG</text>
+<polyline points="250,955 290,955" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="US_L.TRIG" data-net="TL_5V" x="300" y="960" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">TL_5V</text>
+<text x="54" y="980" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">ECHO</text>
+<polyline points="250,975 290,975" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="US_L.ECHO" data-net="EL_RAW" x="300" y="980" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_RAW</text>
+<text x="54" y="1000" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="250,995 290,995" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="US_L.GND" data-net="GND" x="300" y="1000" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+</svg>

@@ -1,0 +1,94 @@
+{
+  "revision": "electrical E1 provisional package; working one-L298N firmware preserved",
+  "recorded_date": "2026-11-02",
+  "firmware_builds": {
+    "esp32dev": "PASS",
+    "wokwi_compile": "PASS"
+  },
+  "ram_bytes": 22232,
+  "flash_bytes": 281345,
+  "host_cpp_tests": 79,
+  "host_cpp_result": "PASS",
+  "host_vcd_checker_tests": 10,
+  "host_vcd_checker_result": "PASS",
+  "new_turn_regressions": 20,
+  "new_adapter_regressions": 3,
+  "wokwi_lint": "PASS; one informational legacy-board notice",
+  "wokwi_resistors": 0,
+  "manual_wokwi_before_turn_update": {
+    "source": "owner report",
+    "status": "PASS",
+    "checks": [
+      "ESP32 startup",
+      "three ultrasonic readings",
+      "ARM",
+      "AUTO",
+      "forward command",
+      "left obstacle avoidance",
+      "right obstacle avoidance",
+      "brush activation",
+      "conveyor activation",
+      "ESTOP",
+      "ESTOP prevents automatic restart"
+    ]
+  },
+  "wokwi_after_turn_update": {
+    "source": "owner statement in latest electrical-design request",
+    "functional_result": "Owner reports autonomous movement, obstacle avoidance, cleaning controls and emergency-stop latching passed",
+    "local_runtime": "NOT EXECUTED; no CLI token",
+    "quantitative_waveform_timing": "NOT INDEPENDENTLY VERIFIED"
+  },
+  "physical_hardware": "UNTESTED; no upload or energizing performed",
+  "real_echo_connections": "UNVERIFIED / DISCONNECTED",
+  "turn_policy": {
+    "neutral_ms": 100,
+    "enabled_turn_target_ms": 540,
+    "minimum_reassessment_ms": 180,
+    "new_post_stop_sensor_readings_required": 3,
+    "maximum_unsuccessful_attempts": 3,
+    "front_entry_cm": 35,
+    "front_release_above_cm": 45
+  },
+  "physical_blockers": [
+    "ECHO voltage compatibility",
+    "BTS module logic and reset-safe enables",
+    "motor continuous/start/stall currents and shared L298N thermal capacity",
+    "independent power cutoff, fusing, buck verification and LiPo protection"
+  ],
+  "host_electrical_tests": 11,
+  "host_electrical_result": "PASS; structural mutation tests only",
+  "host_python_tests": 21,
+  "host_tests_total": 100,
+  "firmware_source_changes": "NONE; four source hashes match previous verified revision",
+  "electrical_package": {
+    "revision": "E1 - provisional electrical design",
+    "schematic_sheets": 6,
+    "diagrams": [
+      "physical_wiring",
+      "esp32_pinout",
+      "motor_drivers",
+      "power_distribution",
+      "sensor_wiring",
+      "emergency_stop"
+    ],
+    "wire_rows": 188,
+    "terminal_rows": 276,
+    "components": 82,
+    "nets": 69,
+    "physical_release": "HOLD",
+    "kicad_available": false,
+    "footprints": "NONE ASSIGNED",
+    "pdf_pages": 21
+  },
+  "electrical_export_checks": "PASS; terminal coverage, CSV connectivity, SVG/PDF contents; not ERC or electrical approval",
+  "physical_release": "HOLD; every proposed physical connection remains provisional or blocked",
+  "additional_hardware": "Explicitly listed in electrical/bom.csv and docs/ELECTRICAL_BLOCKERS.md; generic protection assemblies are requirements pending actual selection",
+  "evidence_logs": [
+    "artifacts/verification-run.log",
+    "artifacts/native-tests.log",
+    "artifacts/python-tests.log",
+    "artifacts/design-export-checks.log",
+    "artifacts/firmware-preservation.json"
+  ],
+  "publication_validation": "Both firmware environments and all 100 host tests rerun successfully before initial Git commit; source hashes preserved"
+}

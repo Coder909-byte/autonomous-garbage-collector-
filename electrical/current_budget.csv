@@ -1,0 +1,14 @@
+load,rated_voltage,run_current_A,start_current_A_duration,stall_current_A_duration,source_part_number,evidence,driver_channel,status
+M1,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,left pair,HOLD
+M2,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,left pair,HOLD
+M3,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,right pair,HOLD
+M4,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,right pair,HOLD
+M5,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,L298 A,HOLD
+M6,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,L298 A,HOLD
+M7,TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,L298 B,HOLD
+ESP1 + board regulator peak,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
+3 HC-SR04 + U1 + driver logic,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
+K1 coil across pack range,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
+BUCK1 input/output thermal budget,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
+BUCK2 input/output thermal budget,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
+Battery continuous C rating / fault current,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD

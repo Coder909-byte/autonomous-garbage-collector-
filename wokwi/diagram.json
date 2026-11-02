@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "author": "Rover logic simulation; physical wiring: docs/WIRING.md",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "front",
+      "top": -170,
+      "left": -270,
+      "attrs": {
+        "distance": "100"
+      }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "left",
+      "top": -20,
+      "left": -270,
+      "attrs": {
+        "distance": "100"
+      }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "right",
+      "top": 130,
+      "left": -270,
+      "attrs": {
+        "distance": "100"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out0",
+      "top": -195,
+      "left": 275,
+      "attrs": {
+        "color": "green",
+        "label": "L FWD"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out1",
+      "top": -147,
+      "left": 275,
+      "attrs": {
+        "color": "red",
+        "label": "L REV"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out2",
+      "top": -99,
+      "left": 275,
+      "attrs": {
+        "color": "green",
+        "label": "R FWD"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out3",
+      "top": -51,
+      "left": 275,
+      "attrs": {
+        "color": "red",
+        "label": "R REV"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out4",
+      "top": -3,
+      "left": 275,
+      "attrs": {
+        "color": "green",
+        "label": "BRUSH 1 (channel A)"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out5",
+      "top": 45,
+      "left": 275,
+      "attrs": {
+        "color": "green",
+        "label": "BRUSH 2 (channel A)"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "out6",
+      "top": 93,
+      "left": 275,
+      "attrs": {
+        "color": "green",
+        "label": "CONVEYOR (channel B)"
+      }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "estop",
+      "top": 220,
+      "left": 40,
+      "attrs": {
+        "bounce": "0"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "enable_led",
+      "top": 165,
+      "left": 275,
+      "attrs": {
+        "color": "yellow",
+        "label": "ALL DRIVER EN"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "warning",
+      "top": -260,
+      "left": -300,
+      "attrs": {
+        "text": "SIMULATION ONLY \u2014 no resistor components.\nReal ECHO: UNVERIFIED, KEEP DISCONNECTED.\nLEFT switch = healthy; RIGHT = E-stop.\nLEDs are virtual signal indicators, not physical wiring.\nOne L298N: A = both brushes; B = conveyor."
+      }
+    },
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic",
+      "top": 330,
+      "left": 180,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "front:VCC",
+      "esp:VIN",
+      "red",
+      []
+    ],
+    [
+      "front:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "front:TRIG",
+      "esp:D32",
+      "green",
+      []
+    ],
+    [
+      "front:ECHO",
+      "esp:D34",
+      "purple",
+      []
+    ],
+    [
+      "left:VCC",
+      "esp:VIN",
+      "red",
+      []
+    ],
+    [
+      "left:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "left:TRIG",
+      "esp:D33",
+      "green",
+      []
+    ],
+    [
+      "left:ECHO",
+      "esp:D35",
+      "purple",
+      []
+    ],
+    [
+      "right:VCC",
+      "esp:VIN",
+      "red",
+      []
+    ],
+    [
+      "right:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "right:TRIG",
+      "esp:D13",
+      "green",
+      []
+    ],
+    [
+      "right:ECHO",
+      "esp:VP",
+      "purple",
+      []
+    ],
+    [
+      "out0:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "out1:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "out2:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "out3:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "out4:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "out5:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "out6:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:3V3",
+      "estop:1",
+      "red",
+      []
+    ],
+    [
+      "estop:2",
+      "esp:D27",
+      "orange",
+      []
+    ],
+    [
+      "enable_led:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:RX2",
+      "out0:A",
+      "green",
+      []
+    ],
+    [
+      "esp:TX2",
+      "out1:A",
+      "green",
+      []
+    ],
+    [
+      "esp:D18",
+      "out2:A",
+      "green",
+      []
+    ],
+    [
+      "esp:D19",
+      "out3:A",
+      "green",
+      []
+    ],
+    [
+      "esp:D21",
+      "out4:A",
+      "green",
+      []
+    ],
+    [
+      "esp:D21",
+      "out5:A",
+      "green",
+      []
+    ],
+    [
+      "esp:D23",
+      "out6:A",
+      "green",
+      []
+    ],
+    [
+      "esp:D14",
+      "enable_led:A",
+      "yellow",
+      []
+    ],
+    [
+      "estop:3",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:RX2",
+      "logic:D0",
+      "blue",
+      []
+    ],
+    [
+      "esp:TX2",
+      "logic:D1",
+      "blue",
+      []
+    ],
+    [
+      "esp:D18",
+      "logic:D2",
+      "blue",
+      []
+    ],
+    [
+      "esp:D19",
+      "logic:D3",
+      "blue",
+      []
+    ],
+    [
+      "esp:D14",
+      "logic:D4",
+      "blue",
+      []
+    ],
+    [
+      "esp:D21",
+      "logic:D5",
+      "blue",
+      []
+    ],
+    [
+      "esp:D23",
+      "logic:D6",
+      "blue",
+      []
+    ],
+    [
+      "esp:D27",
+      "logic:D7",
+      "blue",
+      []
+    ],
+    [
+      "logic:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {},
+  "serialMonitor": {
+    "display": "always",
+    "newline": "lf"
+  }
+}

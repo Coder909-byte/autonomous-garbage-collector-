@@ -1,0 +1,18 @@
+{
+  "firmware/rover.ino": {
+    "sha256": "786f20d2adba9875d5f11847c31569d400f8ee4936225e2678ef0ac78c5d2311",
+    "unchanged": true
+  },
+  "include/rover_pins.h": {
+    "sha256": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d",
+    "unchanged": true
+  },
+  "include/rover_control.h": {
+    "sha256": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77",
+    "unchanged": true
+  },
+  "wokwi/sketch.ino": {
+    "sha256": "58f3a13e382cba217c75a1c2d0e8d082c4b36465574d77483d359bda03388a69",
+    "unchanged": true
+  }
+}

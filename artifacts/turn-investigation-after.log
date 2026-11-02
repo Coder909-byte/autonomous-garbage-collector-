@@ -1,0 +1,12 @@
+Updated HOST MODEL: constant front=20, left=100, right=100; one sensor every 70 ms; 10 ms steps
+0 ms: motion=STOPPED en=0 nav=SETTLE armed=1
+180 ms: motion=STOPPED en=0 nav=TURN_DEAD_TIME armed=1
+280 ms: motion=LEFT en=1 nav=TURNING armed=1
+820 ms: motion=STOPPED en=0 nav=REASSESS armed=1
+1000 ms: motion=STOPPED en=0 nav=TURN_DEAD_TIME armed=1
+1100 ms: motion=LEFT en=1 nav=TURNING armed=1
+1640 ms: motion=STOPPED en=0 nav=REASSESS armed=1
+1820 ms: motion=STOPPED en=0 nav=TURN_DEAD_TIME armed=1
+1920 ms: motion=LEFT en=1 nav=TURNING armed=1
+2460 ms: motion=STOPPED en=0 nav=REASSESS armed=1
+2660 ms: motion=STOPPED en=0 nav=TURN_LIMIT armed=0

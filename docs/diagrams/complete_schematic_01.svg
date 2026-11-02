@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Complete schematic - sheet 1</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Complete schematic - sheet 1</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every component terminal is shown. Equal net labels are connected; use connection IDs in the CSV for physical routing.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="42" y="148" width="500" height="207" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="52" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">BT1 | 3S LiPo / connector</text>
+<text x="52" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="52" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">11.1 V nominal / 3300 mAh</text>
+<text x="54" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PACK+</text>
+<polyline points="250,232 290,232" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="BT1.PACK+" data-net="PACK_RAW" x="300" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_RAW</text>
+<text x="54" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PACK-</text>
+<polyline points="250,252 290,252" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="BT1.PACK-" data-net="GND" x="300" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="54" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">BAL_CELL0</text>
+<polyline points="250,272 290,272" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="BT1.BAL_CELL0" data-net="CELL0" x="300" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL0</text>
+<text x="54" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">BAL_CELL1</text>
+<polyline points="250,292 290,292" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="BT1.BAL_CELL1" data-net="CELL1" x="300" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL1</text>
+<text x="54" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">BAL_CELL2</text>
+<polyline points="250,312 290,312" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="BT1.BAL_CELL2" data-net="CELL2" x="300" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL2</text>
+<text x="54" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">BAL_CELL3</text>
+<polyline points="250,332 290,332" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="BT1.BAL_CELL3" data-net="CELL3" x="300" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL3</text>
+<rect x="576" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">F0 | main pack fuse / holder</text>
+<text x="586" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">DC A / interrupt rating TBD</text>
+<text x="588" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN</text>
+<polyline points="784,232 824,232" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="F0.IN" data-net="PACK_RAW" x="834" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_RAW</text>
+<text x="588" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT</text>
+<polyline points="784,252 824,252" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="F0.OUT" data-net="PACK_FUSED" x="834" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_FUSED</text>
+<rect x="780" y="235" width="8" height="14" fill="white" stroke="#576572" stroke-width="1.4"/>
+<rect x="1110" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">S0 | Master load isolator</text>
+<text x="1120" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">DC rating TBD</text>
+<text x="1122" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">COM</text>
+<polyline points="1318,232 1358,232" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="S0.COM" data-net="PACK_FUSED" x="1368" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_FUSED</text>
+<text x="1122" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT</text>
+<polyline points="1318,252 1358,252" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="S0.OUT" data-net="PACK_ISOLATED" x="1368" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_ISOLATED</text>
+<rect x="576" y="291" width="500" height="227" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">P1 | 3S high-side protection assembly</text>
+<text x="586" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SELECT PART</text>
+<text x="588" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN+</text>
+<polyline points="784,375 824,375" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="P1.IN+" data-net="PACK_ISOLATED" x="834" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_ISOLATED</text>
+<text x="588" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT+</text>
+<polyline points="784,395 824,395" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="P1.OUT+" data-net="PACK_PROTECTED" x="834" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_PROTECTED</text>
+<text x="588" y="420" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,415 824,415" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="P1.GND" data-net="GND" x="834" y="420" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="588" y="440" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">CELL0</text>
+<polyline points="784,435 824,435" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="P1.CELL0" data-net="CELL0" x="834" y="440" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL0</text>
+<text x="588" y="460" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">CELL1</text>
+<polyline points="784,455 824,455" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="P1.CELL1" data-net="CELL1" x="834" y="460" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL1</text>
+<text x="588" y="480" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">CELL2</text>
+<polyline points="784,475 824,475" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="P1.CELL2" data-net="CELL2" x="834" y="480" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL2</text>
+<text x="588" y="500" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">CELL3</text>
+<polyline points="784,495 824,495" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="P1.CELL3" data-net="CELL3" x="834" y="500" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">CELL3</text>
+<rect x="1110" y="291" width="500" height="107" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">TB_POS | Protected positive distribution</text>
+<text x="1120" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Conductor / terminal rating TBD</text>
+<text x="1122" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">BUS</text>
+<polyline points="1318,375 1358,375" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="TB_POS.BUS" data-net="PACK_PROTECTED" x="1368" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_PROTECTED</text>
+<rect x="42" y="371" width="500" height="107" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="395" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">TB_GND | Common ground distribution</text>
+<text x="52" y="416" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="436" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Conductor / terminal rating TBD</text>
+<text x="54" y="460" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">BUS</text>
+<polyline points="250,455 290,455" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="TB_GND.BUS" data-net="GND" x="300" y="460" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<rect x="1110" y="414" width="500" height="247" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="438" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">K1 | DC motor contactor</text>
+<text x="1120" y="459" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="479" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">CONTACT / COIL TBD</text>
+<text x="1122" y="503" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">MAIN_COM</text>
+<polyline points="1318,498 1358,498" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="K1.MAIN_COM" data-net="PACK_PROTECTED" x="1368" y="503" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">PACK_PROTECTED</text>
+<text x="1122" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">MAIN_NO</text>
+<polyline points="1318,518 1358,518" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="K1.MAIN_NO" data-net="MOTOR_SWITCHED" x="1368" y="523" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">MOTOR_SWITCHED</text>
+<text x="1122" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A1</text>
+<polyline points="1318,538 1358,538" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="K1.A1" data-net="COIL_HOLD" x="1368" y="543" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_HOLD</text>
+<text x="1122" y="563" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A2</text>
+<polyline points="1318,558 1358,558" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="K1.A2" data-net="GND" x="1368" y="563" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="1122" y="583" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">AUX_HOLD_COM</text>
+<polyline points="1318,578 1358,578" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="K1.AUX_HOLD_COM" data-net="COIL_STOP_CHAIN" x="1368" y="583" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_STOP_CHAIN</text>
+<text x="1122" y="603" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">AUX_HOLD_NO</text>
+<polyline points="1318,598 1358,598" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="K1.AUX_HOLD_NO" data-net="COIL_HOLD" x="1368" y="603" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_HOLD</text>
+<text x="1122" y="623" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">AUX_SENSE_COM</text>
+<polyline points="1318,618 1358,618" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="K1.AUX_SENSE_COM" data-net="SENSE_STOP_OK" x="1368" y="623" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">SENSE_STOP_OK</text>
+<text x="1122" y="643" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">AUX_SENSE_NO</text>
+<polyline points="1318,638 1358,638" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="K1.AUX_SENSE_NO" data-net="ESTOP_OK" x="1368" y="643" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ESTOP_OK</text>
+<rect x="42" y="494" width="500" height="207" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="518" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">S2 | Latching E-stop / 3 isolated NC contacts</text>
+<text x="52" y="539" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="559" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SELECT PART</text>
+<text x="54" y="583" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">COIL_COM</text>
+<polyline points="250,578 290,578" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S2.COIL_COM" data-net="COIL_PG2" x="300" y="583" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_PG2</text>
+<text x="54" y="603" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">COIL_NC</text>
+<polyline points="250,598 290,598" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S2.COIL_NC" data-net="COIL_STOP_CHAIN" x="300" y="603" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_STOP_CHAIN</text>
+<text x="54" y="623" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SENSE_COM</text>
+<polyline points="250,618 290,618" fill="none" stroke="#c62828" stroke-width="2"/>
+<text data-terminal="S2.SENSE_COM" data-net="V3V3" x="300" y="623" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V3V3</text>
+<text x="54" y="643" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SENSE_NC</text>
+<polyline points="250,638 290,638" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S2.SENSE_NC" data-net="SENSE_STOP_OK" x="300" y="643" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">SENSE_STOP_OK</text>
+<text x="54" y="663" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">EN_COM</text>
+<polyline points="250,658 290,658" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S2.EN_COM" data-net="ENABLE_5V" x="300" y="663" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">ENABLE_5V</text>
+<text x="54" y="683" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">EN_NC</text>
+<polyline points="250,678 290,678" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S2.EN_NC" data-net="EN_DRIVER_5V" x="300" y="683" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#1565c0">EN_DRIVER_5V</text>
+<rect x="576" y="534" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="558" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">S3 | Momentary motor-power ARM</text>
+<text x="586" y="579" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="599" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">NO; rating TBD</text>
+<text x="588" y="623" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">COM</text>
+<polyline points="784,618 824,618" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S3.COM" data-net="COIL_STOP_CHAIN" x="834" y="623" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_STOP_CHAIN</text>
+<text x="588" y="643" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">NO</text>
+<polyline points="784,638 824,638" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="S3.NO" data-net="COIL_HOLD" x="834" y="643" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_HOLD</text>
+<rect x="576" y="677" width="500" height="187" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="701" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">OV1 | 5V rail 1 OVP/OCP and supervision assembly</text>
+<text x="586" y="722" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SELECT / VERIFY</text>
+<text x="588" y="766" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN+</text>
+<polyline points="784,761 824,761" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV1.IN+" data-net="V5_MCU_RAW" x="834" y="766" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_MCU_RAW</text>
+<text x="588" y="786" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT+</text>
+<polyline points="784,781 824,781" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV1.OUT+" data-net="V5_MCU" x="834" y="786" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_MCU</text>
+<text x="588" y="806" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,801 824,801" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="OV1.GND" data-net="GND" x="834" y="806" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="588" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PG_COM</text>
+<polyline points="784,821 824,821" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV1.PG_COM" data-net="COIL_FUSED" x="834" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_FUSED</text>
+<text x="588" y="846" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PG_NO</text>
+<polyline points="784,841 824,841" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV1.PG_NO" data-net="COIL_PG1" x="834" y="846" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_PG1</text>
+<rect x="1110" y="677" width="500" height="187" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="701" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">OV2 | 5V rail 2 OVP/OCP and supervision assembly</text>
+<text x="1120" y="722" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SELECT / VERIFY</text>
+<text x="1122" y="766" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">IN+</text>
+<polyline points="1318,761 1358,761" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV2.IN+" data-net="V5_LOGIC_RAW" x="1368" y="766" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC_RAW</text>
+<text x="1122" y="786" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">OUT+</text>
+<polyline points="1318,781 1358,781" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV2.OUT+" data-net="V5_LOGIC" x="1368" y="786" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V5_LOGIC</text>
+<text x="1122" y="806" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,801 1358,801" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="OV2.GND" data-net="GND" x="1368" y="806" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="1122" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PG_COM</text>
+<polyline points="1318,821 1358,821" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV2.PG_COM" data-net="COIL_PG1" x="1368" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_PG1</text>
+<text x="1122" y="846" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PG_NO</text>
+<polyline points="1318,841 1358,841" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="OV2.PG_NO" data-net="COIL_PG2" x="1368" y="846" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_PG2</text>
+<rect x="42" y="717" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="741" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">Z_COIL | Coil suppression network</text>
+<text x="52" y="762" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="782" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SELECT FOR K1</text>
+<text x="54" y="806" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A1</text>
+<polyline points="250,801 290,801" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="Z_COIL.A1" data-net="COIL_HOLD" x="300" y="806" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">COIL_HOLD</text>
+<text x="54" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A2</text>
+<polyline points="250,821 290,821" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="Z_COIL.A2" data-net="GND" x="300" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<rect x="42" y="860" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="884" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">Z_L | Local driver-bus transient clamp</text>
+<text x="52" y="905" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="925" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Standoff / clamp / energy TBD</text>
+<text x="54" y="949" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">+</text>
+<polyline points="250,944 290,944" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="Z_L.+" data-net="LEFT_SUPPLY" x="300" y="949" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">LEFT_SUPPLY</text>
+<text x="54" y="969" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">-</text>
+<polyline points="250,964 290,964" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="Z_L.-" data-net="GND" x="300" y="969" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<rect x="576" y="880" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="904" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">Z_R | Local driver-bus transient clamp</text>
+<text x="586" y="925" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="945" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Standoff / clamp / energy TBD</text>
+<text x="588" y="969" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">+</text>
+<polyline points="784,964 824,964" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="Z_R.+" data-net="RIGHT_SUPPLY" x="834" y="969" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">RIGHT_SUPPLY</text>
+<text x="588" y="989" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">-</text>
+<polyline points="784,984 824,984" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="Z_R.-" data-net="GND" x="834" y="989" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<rect x="1110" y="880" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="904" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">Z_A | Local driver-bus transient clamp</text>
+<text x="1120" y="925" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="945" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Standoff / clamp / energy TBD</text>
+<text x="1122" y="969" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">+</text>
+<polyline points="1318,964 1358,964" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="8 5"/>
+<text data-terminal="Z_A.+" data-net="AUX_SUPPLY" x="1368" y="969" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">AUX_SUPPLY</text>
+<text x="1122" y="989" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">-</text>
+<polyline points="1318,984 1358,984" fill="none" stroke="#17232c" stroke-width="5"/>
+<text data-terminal="Z_A.-" data-net="GND" x="1368" y="989" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+</svg>
