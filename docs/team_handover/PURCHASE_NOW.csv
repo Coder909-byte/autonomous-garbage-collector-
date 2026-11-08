@@ -1,0 +1,8 @@
+item,quantity,references,required
+SN74AHCT244N,1,U1,"Exact 20-pin pinout per TI. No PCB footprint assigned; package must match procured part. This is AHCT, not HC."
+SN74LVC3G34DCU,1,U2,TI SCES366L 8-pin VSSOP pin map. 5.5V tolerant inputs and Ioff; supply ONLY from ESP1 3V3. Fit verified adapter. Input edges must meet <=10ns/V at VCC=3.3+/-0.3V; locate beside dividers and qualify waveform. Not a generic bidirectional MOSFET shifter.
+"2.2k 1%, >=1/8 W resistor",4,"R23, R25, R27, R5","1% tolerance, at least 1/8W, documented actual value/package."
+"3.3k 1%, >=1/8 W resistor",3,"R24, R26, R28","1% tolerance, at least 1/8W, documented actual value/package."
+"10k 1%, >=1/8 W resistor",22,"R1, R2, R3, R4, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15, R16, R17, R18, R19, R20, R21, R22, R29","1% tolerance, at least 1/8W, documented actual value/package."
+"100nF, >=10V ceramic capacitor",5,"C_U1, C_F, C_L, C_R, C_U2",Fit actual package/mounting; effective capacitance at bias must meet E2.
+"100k 1%, >=1/8 W resistor",3,"R30, R31, R32","1% tolerance, at least 1/8W, documented actual value/package."

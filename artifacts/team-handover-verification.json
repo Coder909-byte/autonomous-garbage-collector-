@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-08",
+  "baseline": "d6cd4790fc6066ee6c5d9d0f6e0c8d0936a571cb",
+  "scope": "Focused team handover; no repeated master review",
+  "pdf": "artifacts/TEAM_ASSEMBLY_HANDOVER.pdf",
+  "pdf_sha256": "6c6fa3f6e9891ced077a8d637ecd45cb68356c16f6425bfd45fccde3e5a1fc37",
+  "host_tests": {
+    "cpp": 82,
+    "python": 44,
+    "total": 126,
+    "e2_baseline_tests": 119,
+    "new_handover_contract_tests": 7,
+    "result": "PASS"
+  },
+  "consistency_checks": {
+    "check_project.py": "PASS",
+    "check_electrical.py": "PASS - structural only",
+    "check_design_exports.py": "PASS - original 31 PDFs and E2 model",
+    "check_completion.py": "PASS - original 201 E2 records",
+    "check_team_handover.py": "PASS - all 201 detailed records, source fields and purchase requirements in PDF"
+  },
+  "pdf_validation": {
+    "strict_parse_offsets_text": "PASS",
+    "render_engine": "macOS PDFKit",
+    "pages_rendered": 74,
+    "result": "PASS - all pages rendered",
+    "visual_review": "Two contact sheets reviewed; full-size cover, top-down, detailed connection, purchase-now, measurement worksheet, checkpoint A and internal-bond pages inspected. Layout update pages inspected after final rendering."
+  },
+  "unchanged_e2_inputs": 11,
+  "firmware_changes": "NONE",
+  "new_esp32_builds": "Not repeated; E2 sources unchanged, both baseline targets compiled at d6cd479",
+  "wokwi_runtime": "Not executed by this handover task; no new runtime claim",
+  "hardware_photos": 0,
+  "physical_tests": "NONE",
+  "physical_power_up": "HOLD retained",
+  "energized_stages": "F-J NOT RELEASED",
+  "publication_review": {
+    "staged_files": 21,
+    "text_files_scanned": 20,
+    "credential_pattern_findings": 0,
+    "local_markdown_links": "PASS",
+    "compiled_outputs_caches_unrelated_image": "EXCLUDED",
+    "scope": "Known credential/key patterns; not an exhaustive secret audit"
+  }
+}

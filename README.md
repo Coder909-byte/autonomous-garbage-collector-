@@ -1,5 +1,7 @@
 # Autonomous Garbage Collector
 
+**University team handover:** [assembly PDF](artifacts/TEAM_ASSEMBLY_HANDOVER.pdf), [start-here instructions and evidence forms](docs/TEAM_HANDOVER.md), [exact hardware photos needed](docs/hardware_photos/README.md). Unpowered mounting/labeling and identified detached interface work can proceed through the checkpoints; physical power-up HOLD remains. Seven handover regression tests supplement the unchanged 119-test E2 baseline.
+
 An ESP32-based autonomous waste collection rover with four wheel motors, two brushes controlled together, a separately controlled conveyor, and three ultrasonic sensors for obstacle avoidance. This repository contains the firmware, PlatformIO configuration, Wokwi control-signal simulation, automated tests, and the provisional E2 electrical design package.
 
 **Physical hardware has not been electrically verified. Electrical assembly release remains on HOLD.** Real HC-SR04 ECHO connections must remain disconnected until suitable signal conditioning and measured voltage compatibility are established. Wokwi wiring is a simulation abstraction and must not be copied directly into physical hardware.

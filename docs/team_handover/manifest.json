@@ -1,0 +1,657 @@
+{
+  "baseline_commit": "d6cd4790fc6066ee6c5d9d0f6e0c8d0936a571cb",
+  "handover_date": "2026-11-08",
+  "scope": "Practical handover of E2; no new master engineering review, firmware change or physical release.",
+  "pdf": "artifacts/TEAM_ASSEMBLY_HANDOVER.pdf",
+  "pdf_sha256": "6c6fa3f6e9891ced077a8d637ecd45cb68356c16f6425bfd45fccde3e5a1fc37",
+  "pdf_pages": 74,
+  "section_starts": {
+    "1": 2,
+    "2": 4,
+    "3": 7,
+    "4": 15,
+    "5": 20,
+    "6": 25,
+    "7": 31,
+    "8": 37,
+    "9": 43,
+    "10": 47,
+    "11": 51,
+    "12": 58,
+    "13": 63
+  },
+  "section_lengths": {
+    "1": 2,
+    "2": 3,
+    "3": 8,
+    "4": 5,
+    "5": 5,
+    "6": 6,
+    "7": 6,
+    "8": 6,
+    "9": 4,
+    "10": 4,
+    "11": 7,
+    "12": 5,
+    "13": 12
+  },
+  "page_roles": [
+    {
+      "page": 1,
+      "role": "cover",
+      "source": "generated"
+    },
+    {
+      "page": 2,
+      "section": 1,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_01_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 3,
+      "section": 1,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_01_narrative.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 4,
+      "section": 2,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_02_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 5,
+      "section": 2,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/physical_wiring.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 6,
+      "section": 2,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/seven_motors.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 7,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 8,
+      "section": 3,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/esp32_pinout.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 9,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 10,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 11,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 12,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_connections.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 13,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_connections.pdf",
+      "source_page": 5
+    },
+    {
+      "page": 14,
+      "section": 3,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_03_connections.pdf",
+      "source_page": 6
+    },
+    {
+      "page": 15,
+      "section": 4,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_04_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 16,
+      "section": 4,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/left_bts7960.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 17,
+      "section": 4,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_04_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 18,
+      "section": 4,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_04_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 19,
+      "section": 4,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_04_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 20,
+      "section": 5,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_05_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 21,
+      "section": 5,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/right_bts7960.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 22,
+      "section": 5,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_05_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 23,
+      "section": 5,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_05_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 24,
+      "section": 5,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_05_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 25,
+      "section": 6,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_06_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 26,
+      "section": 6,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/cleaning_driver.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 27,
+      "section": 6,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_06_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 28,
+      "section": 6,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_06_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 29,
+      "section": 6,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_06_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 30,
+      "section": 6,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_06_connections.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 31,
+      "section": 7,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_07_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 32,
+      "section": 7,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/sensor_wiring.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 33,
+      "section": 7,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_07_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 34,
+      "section": 7,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_07_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 35,
+      "section": 7,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_07_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 36,
+      "section": 7,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_07_connections.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 37,
+      "section": 8,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_08_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 38,
+      "section": 8,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/logic_enable.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 39,
+      "section": 8,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_08_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 40,
+      "section": 8,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_08_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 41,
+      "section": 8,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_08_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 42,
+      "section": 8,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_08_connections.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 43,
+      "section": 9,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_09_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 44,
+      "section": 9,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/power_distribution.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 45,
+      "section": 9,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_09_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 46,
+      "section": 9,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_09_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 47,
+      "section": 10,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_10_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 48,
+      "section": 10,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/power_distribution.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 49,
+      "section": 10,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_10_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 50,
+      "section": 10,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_10_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 51,
+      "section": 11,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_11_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 52,
+      "section": 11,
+      "role": "E2 diagram",
+      "source": "docs/diagrams/emergency_stop.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 53,
+      "section": 11,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_11_connections.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 54,
+      "section": 11,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_11_connections.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 55,
+      "section": 11,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_11_connections.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 56,
+      "section": 11,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_11_connections.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 57,
+      "section": 11,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_11_connections.pdf",
+      "source_page": 5
+    },
+    {
+      "page": 58,
+      "section": 12,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_12_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 59,
+      "section": 12,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_12_narrative.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 60,
+      "section": 12,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_12_narrative.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 61,
+      "section": 12,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_12_narrative.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 62,
+      "section": 12,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_12_narrative.pdf",
+      "source_page": 5
+    },
+    {
+      "page": 63,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 1
+    },
+    {
+      "page": 64,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 2
+    },
+    {
+      "page": 65,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 3
+    },
+    {
+      "page": 66,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 4
+    },
+    {
+      "page": 67,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 5
+    },
+    {
+      "page": 68,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 6
+    },
+    {
+      "page": 69,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 7
+    },
+    {
+      "page": 70,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 8
+    },
+    {
+      "page": 71,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 9
+    },
+    {
+      "page": 72,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 10
+    },
+    {
+      "page": 73,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_narrative.pdf",
+      "source_page": 11
+    },
+    {
+      "page": 74,
+      "section": 13,
+      "role": "generated",
+      "source": "artifacts/team_handover_work/section_13_connections.pdf",
+      "source_page": 1
+    }
+  ],
+  "included_e2_diagrams": [
+    "docs/diagrams/physical_wiring.pdf",
+    "docs/diagrams/seven_motors.pdf",
+    "docs/diagrams/esp32_pinout.pdf",
+    "docs/diagrams/left_bts7960.pdf",
+    "docs/diagrams/right_bts7960.pdf",
+    "docs/diagrams/cleaning_driver.pdf",
+    "docs/diagrams/sensor_wiring.pdf",
+    "docs/diagrams/logic_enable.pdf",
+    "docs/diagrams/power_distribution.pdf",
+    "docs/diagrams/power_distribution.pdf",
+    "docs/diagrams/emergency_stop.pdf"
+  ],
+  "source_sha256": {
+    "electrical/design.json": "aa62e3bc70ee252fdf5d81107d25bc7ed33b66774fff005dbc83a3abb9b6b9fb",
+    "electrical/connections.csv": "9de56df802e3a39dc9ba37ce7fe3f0d5246bd07974d9ecc08f01db4c182d9ce3",
+    "firmware/rover.ino": "786f20d2adba9875d5f11847c31569d400f8ee4936225e2678ef0ac78c5d2311",
+    "include/rover_pins.h": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d",
+    "docs/READY_TO_WIRE.md": "fe599e164d76151fb80ae44617d00c2ba6efb8c9d4c1384fbf5b596fe73793b5",
+    "docs/FINAL_PURCHASE_LIST.md": "5106c6f47e63d4da6a96f2a7e9206a01d9ee8802a8ede9cb9b2731f0695dfb0f",
+    "docs/FINAL_GO_NO_GO.md": "85a79ef6e6beab10494732fb0524f0962651b1be3f9807d70649152abb837afb",
+    "include/rover_control.h": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77",
+    "platformio.ini": "ece3e5922685864fe2d8d89badbc179e500bdc36e51e514a95313e80932077dd",
+    "wokwi/sketch.ino": "58f3a13e382cba217c75a1c2d0e8d082c4b36465574d77483d359bda03388a69",
+    "wokwi/diagram.json": "2f84fbd432915806e9118a549e5f6abe7b0a0773493a3171a5ccae5319293024",
+    "docs/team_handover/plan.json": "f4f9f6c91f3a345bb66178ccdf3974e478835e1f578d5c851afafad8cc511992",
+    "scripts/generate_team_handover.py": "c5598ae618a10f294eb1b75819f4e5ea04e494ee0086fb2d877920c0e326e47e",
+    "docs/diagrams/physical_wiring.pdf": "6bb8bb285a2e58ffae8c8ea516f805d37f748b1d4a6dd1662b970e7b01f752b1",
+    "docs/diagrams/seven_motors.pdf": "ac305910177bbe8c3f77678435282228502bc02aa21ea3981c4e6e2589573668",
+    "docs/diagrams/esp32_pinout.pdf": "e30a5c7b65b027a63a41f22c562966647793f6b1e9b2a230a17ddbca566a9a9b",
+    "docs/diagrams/left_bts7960.pdf": "da06f8580996e75d09390df6f8c56cfd1e728ef8099c8955b36f0f861a75991a",
+    "docs/diagrams/right_bts7960.pdf": "3cc243eba34f971c79bd21bace4d4b22e9b70c0344bc2a3775130690d9e547b3",
+    "docs/diagrams/cleaning_driver.pdf": "c50fde71de4a79be6a60f787e2a82bc259d9d0aaad49a88169c0686b9c674e60",
+    "docs/diagrams/sensor_wiring.pdf": "4d6aed5d2e909587ffc60b1cd20308be79a4295f64c2d200075e9046cf02d6da",
+    "docs/diagrams/logic_enable.pdf": "80270ca861a8d1f3d1be720a9ea60d804870ff206ac1071493f1120b857f0b47",
+    "docs/diagrams/power_distribution.pdf": "77922c3ecc3af48b64cfe4520078ddcbc3f73c694088215b36ea2bbf7f8b01cb",
+    "docs/diagrams/emergency_stop.pdf": "8ebe3caeb6d5e8db7803693a3995a60bcdf60207a4950b6acb3abfa7f8321e63"
+  },
+  "connection_records": 201,
+  "external_connections": 197,
+  "internal_bond_ids": [
+    "W042",
+    "W044",
+    "W046",
+    "W048"
+  ],
+  "photo_inventory": {
+    "files": [],
+    "count": 0,
+    "status": "NOT SUPPLIED",
+    "visible_terminal_observations": [],
+    "actual_terminal_matches": [],
+    "limit": "No actual marking, hidden terminal or rating is inferred by this generator."
+  },
+  "purchase_now": [
+    {
+      "item": "SN74AHCT244N",
+      "quantity": 1,
+      "references": "U1",
+      "required": "Exact 20-pin pinout per TI. No PCB footprint assigned; package must match procured part. This is AHCT, not HC."
+    },
+    {
+      "item": "SN74LVC3G34DCU",
+      "quantity": 1,
+      "references": "U2",
+      "required": "TI SCES366L 8-pin VSSOP pin map. 5.5V tolerant inputs and Ioff; supply ONLY from ESP1 3V3. Fit verified adapter. Input edges must meet <=10ns/V at VCC=3.3+/-0.3V; locate beside dividers and qualify waveform. Not a generic bidirectional MOSFET shifter."
+    },
+    {
+      "item": "2.2k 1%, >=1/8 W resistor",
+      "quantity": 4,
+      "references": "R23, R25, R27, R5",
+      "required": "1% tolerance, at least 1/8W, documented actual value/package."
+    },
+    {
+      "item": "3.3k 1%, >=1/8 W resistor",
+      "quantity": 3,
+      "references": "R24, R26, R28",
+      "required": "1% tolerance, at least 1/8W, documented actual value/package."
+    },
+    {
+      "item": "10k 1%, >=1/8 W resistor",
+      "quantity": 22,
+      "references": "R1, R2, R3, R4, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15, R16, R17, R18, R19, R20, R21, R22, R29",
+      "required": "1% tolerance, at least 1/8W, documented actual value/package."
+    },
+    {
+      "item": "100nF, >=10V ceramic capacitor",
+      "quantity": 5,
+      "references": "C_U1, C_F, C_L, C_R, C_U2",
+      "required": "Fit actual package/mounting; effective capacitance at bias must meet E2."
+    },
+    {
+      "item": "100k 1%, >=1/8 W resistor",
+      "quantity": 3,
+      "references": "R30, R31, R32",
+      "required": "1% tolerance, at least 1/8W, documented actual value/package."
+    }
+  ],
+  "all_physical_checkpoint_results": "PENDING / NOT EXECUTED",
+  "physical_power_up": "HOLD retained",
+  "firmware_changes": "NONE"
+}

@@ -1,0 +1,12 @@
+checkpoint,title,current_permission,result,motor_free_or_loaded_I,evidence_batch,accepted_scope,reviewer,date,outstanding_items
+A,Unpowered mounting and labeling,"AVAILABLE: dry-fit and label, no electrical power",PENDING,,,,,,
+B,Protected signal-interface assembly,UNPOWERED ONLY: after fixed parts and carrier map verified,PENDING,,,,,,
+C,Unpowered wiring and continuity checks,AVAILABLE FOR IDENTIFIED SEGMENTS; unresolved routes stay open,PENDING,,,,,,
+D,Physical component identification and measurements,LABELS/DATASHEETS AND UNPOWERED METHODS ONLY NOW,PENDING,,,,,,
+E,Component-dependent electrical completion,HOLD: actual selection and mappings required; completion remains unpowered,PENDING,,,,,,
+F,USB-only firmware installation,NOT RELEASED: future isolated DevKit procedure,PENDING,,,,,,
+G,Regulated power testing,NOT RELEASED: staged current-limited bench tests only after evidence,PENDING,,,,,,
+H,Individual motor testing,NOT RELEASED: approved low-energy tests; cutoff first for driver tests,PENDING,,,,,,
+I,Emergency-stop testing,NOT RELEASED: motor-free preflight before H; loaded confirmation afterward,PENDING,MOTOR-FREE PREFLIGHT - required before H,,,,,
+I,Emergency-stop testing,NOT RELEASED: motor-free preflight before H; loaded confirmation afterward,PENDING,LOADED CONFIRMATION - after H,,,,,
+J,Complete autonomous operation,NOT RELEASED: all earlier physical gates and supervised trial plan required,PENDING,,,,,,

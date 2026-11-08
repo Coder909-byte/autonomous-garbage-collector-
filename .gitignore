@@ -78,5 +78,10 @@ wokwi-cli-token*
 !/artifacts/turn-investigation-after.log
 !/artifacts/vcd-checker-tests.log
 !/artifacts/publication-checks.json
+!/artifacts/TEAM_ASSEMBLY_HANDOVER.pdf
+!/artifacts/team-handover-validation.json
+!/artifacts/team-handover-verification.json
+!/artifacts/team-handover-native-tests.log
+!/artifacts/team-handover-python-tests.log
 
 # Publish all designed PDF/SVG/PNG documentation under docs/diagrams/.

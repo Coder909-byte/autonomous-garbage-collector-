@@ -1,0 +1,25 @@
+{
+  "result": "PASS - handover consistency only; physical compatibility NOT VERIFIED",
+  "baseline_commit": "d6cd4790fc6066ee6c5d9d0f6e0c8d0936a571cb",
+  "e2_authorities_unchanged": 11,
+  "baseline_comparison": "Git LF-normalized text; original working-file hashes also recorded",
+  "pdf_pages": 74,
+  "sections": 13,
+  "records": 201,
+  "external_connections": 197,
+  "internal_bond_inspections": [
+    "W042",
+    "W044",
+    "W046",
+    "W048"
+  ],
+  "detailed_pdf_record_fields": "All 201 complete, exactly once",
+  "reused_e2_diagram_pages": 11,
+  "photo_files_reviewable": 0,
+  "actual_photo_terminal_matches": 0,
+  "checkpoint_count": 10,
+  "physical_measurements": "PENDING - no results invented",
+  "firmware_changes": "NONE",
+  "physical_power_up": "HOLD retained",
+  "energized_stages": "F-J NOT RELEASED"
+}
