@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>All seven motor terminals</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">All seven motor terminals</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Equal net names join. Exact connections and protection: assembly_connections sheets / READY_TO_WIRE.md. Ratings remain HOLD.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="42" y="148" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="52" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M1 | left front wheel motor</text>
+<text x="52" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="52" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 V / 30 RPM</text>
+<text x="54" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="250,232 290,232" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M1.A" data-net="M1_A" x="300" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M1_A</text>
+<text x="54" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="250,252 290,252" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M1.B" data-net="DRV_L_MN" x="300" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_L_MN</text>
+<text x="235" y="249" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+<rect x="576" y="148" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="586" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M2 | left rear wheel motor</text>
+<text x="586" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="586" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 V / 30 RPM</text>
+<text x="588" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="784,232 824,232" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M2.A" data-net="M2_A" x="834" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M2_A</text>
+<text x="588" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="784,252 824,252" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M2.B" data-net="DRV_L_MN" x="834" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_L_MN</text>
+<text x="769" y="249" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+<rect x="1110" y="148" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="1120" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M3 | right front wheel motor</text>
+<text x="1120" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="1120" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 V / 30 RPM</text>
+<text x="1122" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="1318,232 1358,232" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M3.A" data-net="M3_A" x="1368" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M3_A</text>
+<text x="1122" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="1318,252 1358,252" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M3.B" data-net="DRV_R_MN" x="1368" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_R_MN</text>
+<text x="1303" y="249" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+<rect x="42" y="289" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="52" y="313" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M4 | right rear wheel motor</text>
+<text x="52" y="334" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="52" y="354" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 V / 30 RPM</text>
+<text x="54" y="378" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="250,373 290,373" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M4.A" data-net="M4_A" x="300" y="378" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M4_A</text>
+<text x="54" y="398" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="250,393 290,393" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M4.B" data-net="DRV_R_MN" x="300" y="398" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_R_MN</text>
+<text x="235" y="390" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+<rect x="576" y="289" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="586" y="313" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M5 | brush 1 motor</text>
+<text x="586" y="334" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="586" y="354" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 V</text>
+<text x="588" y="378" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="784,373 824,373" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M5.A" data-net="M5_A" x="834" y="378" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M5_A</text>
+<text x="588" y="398" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="784,393 824,393" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M5.B" data-net="DRV_A_OUT2" x="834" y="398" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT2</text>
+<text x="769" y="390" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+<rect x="1110" y="289" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="1120" y="313" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M6 | brush 2 motor</text>
+<text x="1120" y="334" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="1120" y="354" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">12 V</text>
+<text x="1122" y="378" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="1318,373 1358,373" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M6.A" data-net="M6_A" x="1368" y="378" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M6_A</text>
+<text x="1122" y="398" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="1318,393 1358,393" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M6.B" data-net="DRV_A_OUT2" x="1368" y="398" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT2</text>
+<text x="1303" y="390" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+<rect x="42" y="430" width="500" height="127" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
+<text x="52" y="454" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">M7 | conveyor motor</text>
+<text x="52" y="475" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">INVENTORY / VERIFY</text>
+<text x="52" y="495" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">Voltage TBD</text>
+<text x="54" y="519" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A</text>
+<polyline points="250,514 290,514" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M7.A" data-net="M7_A" x="300" y="519" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">M7_A</text>
+<text x="54" y="539" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">B</text>
+<polyline points="250,534 290,534" fill="none" stroke="#d87800" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="M7.B" data-net="DRV_A_OUT4" x="300" y="539" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#d87800">DRV_A_OUT4</text>
+<text x="235" y="531" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#17232c">M</text>
+</svg>

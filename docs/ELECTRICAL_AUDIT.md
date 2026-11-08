@@ -1,3 +1,5 @@
+Historical E1 analysis: current E2 design/release authority is [ENGINEERING_REVIEW_E2.md](ENGINEERING_REVIEW_E2.md), [READY_TO_WIRE.md](READY_TO_WIRE.md) and [FINAL_GO_NO_GO.md](FINAL_GO_NO_GO.md). E2 adds MCU-powered ECHO isolation; direct divider-to-GPIO references below are superseded.
+
 # Actual-project electrical audit — 2 November 2026
 
 Read/reviewed: `firmware/rover.ino`, `include/rover_pins.h`, `include/rover_control.h`, generated `wokwi/sketch.ino`, `wokwi/diagram.json`, `wokwi/wokwi.toml`, `platformio.ini`, `src/main.cpp`, current wiring/turn/test documents, relevant generator/checker and host-test sources. The sketch synchronization check confirms the standalone file exactly derives from the canonical firmware. No firmware or GPIO reassignment is needed for E1.

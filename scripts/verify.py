@@ -23,6 +23,8 @@ run([sys.executable,root/'scripts/check_electrical.py'],'electrical-checks.log')
 # Keep every invocation sequential; finish with deployable build artifacts.
 run([pio,'test','-e','native'],'native-tests.log')
 run([sys.executable,'-m','unittest','discover','-s','test','-p','test_*.py','-v'],'python-tests.log')
+run([sys.executable,root/'scripts/check_design_exports.py'],'design-export-checks.log')
+run([sys.executable,root/'scripts/check_completion.py'],'completion-checks.log')
 run([pio,'run','-e','esp32dev','-e','wokwi_compile'],'build.log')
 wokwi = shutil.which('wokwi-cli')
 if not wokwi and (root/'.tools/wokwi-cli').exists():

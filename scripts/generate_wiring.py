@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate E1 diagrams/tables from design.json. Does not generate PCB footprints."""
+"""Generate E2 diagrams/tables from design.json. Does not generate PCB footprints."""
 from pathlib import Path
 import csv,html,json,math,textwrap
 from collections import defaultdict
@@ -12,6 +12,7 @@ from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
 from pypdf import PdfReader,PdfWriter
 from PIL import Image,ImageDraw,ImageFont
 from check_electrical import check
+from electrical_export_contracts import gpio_route_status, check_classic_pdf_xref
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs/diagrams'
 D=json.loads((ROOT/'electrical/design.json').read_text()); check(D)
@@ -21,6 +22,16 @@ COL={'power_hc':'#c62828','power_lc':'#c62828','ground':'#17232c','control':'#15
 W,H=1680,1188
 FONT='/System/Library/Fonts/Supplemental/Arial.ttf'
 BOLD='/System/Library/Fonts/Supplemental/Arial Bold.ttf'
+def write_validated_pdf(writer,path):
+    candidate=path.with_name('.'+path.name+'.tmp')
+    try:
+        with candidate.open('wb') as f:writer.write(f)
+        check_classic_pdf_xref(candidate.read_bytes())
+        reader=PdfReader(candidate,strict=True)
+        assert all(p.extract_text().strip() for p in reader.pages), 'Blank PDF candidate page'
+        candidate.replace(path)
+    finally:
+        candidate.unlink(missing_ok=True)
 def label(node):
     ref,pin=node.split('.',1); name=C[ref]['pins'][pin]
     return ref+'.'+pin+(' ('+name+')' if name!=pin else '')
@@ -29,11 +40,11 @@ class Drawing:
     def __init__(self,title,subtitle):
         self.svg=[f'<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 {W} {H}">',f'<title>{html.escape(title)}</title>','<rect width="1680" height="1188" fill="white"/>']
         self.pdf=canvas.Canvas(str(OUT/'_current.pdf'),pagesize=landscape(A3));self.pdf.scale(landscape(A3)[0]/W,landscape(A3)[1]/H)
-        self.pdf.setTitle(title+' - E1 PROVISIONAL')
+        self.pdf.setTitle(title+' - E2 PROVISIONAL')
         self.image=Image.new('RGB',(W,H),'white');self.im=ImageDraw.Draw(self.image)
         self.text(42,46,title,27,bold=True);self.text(42,76,subtitle,15)
         self.rect(42,90,1596,34,fill='#fff2d8',stroke='#ad6a00')
-        self.text(53,113,'E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026',16,bold=True)
+        self.text(53,113,'E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026',16,bold=True)
         self.text(42,1141,'Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked',14)
         self.text(42,1166,'Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.',14)
     def rect(self,x,y,w,h,fill='white',stroke='#576572',dash=False):
@@ -117,40 +128,49 @@ def schematics():
     if d:d.save('complete_schematic_'+str(page).zfill(2));pages.append('complete_schematic_'+str(page).zfill(2))
     writer=PdfWriter()
     for name in pages:writer.append(OUT/(name+'.pdf'))
-    with (OUT/'complete_schematic.pdf').open('wb') as f:writer.write(f)
+    write_validated_pdf(writer,OUT/'complete_schematic.pdf')
     return pages
 
 def pinout():
     d=Drawing('ESP32 pinout connection chart','Functional GPIO labels only. Exact DevKit header positions/USB power path remain unverified; no wiring orientation implied.')
-    rows=[]
-    destinations={'L_FWD':'U1.2 -> U1.18 -> DRV_L.RPWM','L_REV':'U1.4 -> U1.16 -> DRV_L.LPWM','R_FWD':'U1.6 -> U1.14 -> DRV_R.RPWM','R_REV':'U1.8 -> U1.12 -> DRV_R.LPWM','ENABLE':'U1.11 -> U1.9 -> S2 EN NC -> six enables','TF':'U1.13 -> U1.7 -> US_F.TRIG','TL':'U1.15 -> U1.5 -> US_L.TRIG','TR':'U1.17 -> U1.3 -> US_R.TRIG','BRUSH_IN1':'DRV_A.IN1 / both brushes','BRUSH_IN2':'DRV_A.IN2 / held LOW','CONVEYOR_IN3':'DRV_A.IN3 / conveyor','CONVEYOR_IN4':'DRV_A.IN4 / held LOW','EF':'US_F.ECHO -> R23/R24 -> GPIO34','EL':'US_L.ECHO -> R25/R26 -> GPIO35','ER':'US_R.ECHO -> R27/R28 -> GPIO36 / VP','ESTOP_OK':'3V3 -> S2 NC -> K1 sense NO -> GPIO27'}
-    d.text(55,162,'GPIO / terminal',17,bold=True);d.text(275,162,'Firmware signal',17,bold=True);d.text(535,162,'Exact proposed endpoint chain',17,bold=True);d.text(1330,162,'Electrical status',17,bold=True)
+    destinations={'L_FWD':'U1.2 -> U1.18 -> DRV_L.RPWM','L_REV':'U1.4 -> U1.16 -> DRV_L.LPWM','R_FWD':'U1.6 -> U1.14 -> DRV_R.RPWM','R_REV':'U1.8 -> U1.12 -> DRV_R.LPWM','ENABLE':'U1.11 -> U1.9 -> S2 EN NC -> six enables','TF':'U1.13 -> U1.7 -> US_F.TRIG','TL':'U1.15 -> U1.5 -> US_L.TRIG','TR':'U1.17 -> U1.3 -> US_R.TRIG','BRUSH_IN1':'DRV_A.IN1 / both brushes','BRUSH_IN2':'DRV_A.IN2 / held LOW','CONVEYOR_IN3':'DRV_A.IN3 / conveyor','CONVEYOR_IN4':'DRV_A.IN4 / held LOW','EF':'ECHO -> R23/R24 -> U2.1/7 -> GPIO34','EL':'ECHO -> R25/R26 -> U2.3/5 -> GPIO35','ER':'ECHO -> R27/R28 -> U2.6/2 -> GPIO36 / VP','ESTOP_OK':'3V3 -> S2 NC -> K1 sense NO -> GPIO27'}
+    notes={'ENABLE':'U1 + bias + cutoff missing','ESTOP_OK':'Cutoff/feedback parts missing',
+           'EF':'ECHO disconnected; parts missing','EL':'ECHO disconnected; parts missing','ER':'ECHO disconnected; parts missing'}
+    d.text(55,162,'GPIO / terminal',17,bold=True);d.text(275,162,'Firmware signal',17,bold=True);d.text(535,162,'Exact proposed endpoint chain',17,bold=True);d.text(1260,162,'Electrical status / requirement',17,bold=True)
     for i,(name,b) in enumerate(D['gpio_bindings'].items()):
-        y=196+i*42;n=N[b['net']];d.line([(50,y+15),(1630,y+15)],'#dce2e8',1)
+        d.svg.append(f'<g data-gpio="{b["gpio"]}" data-signal="{name}">')
+        y=196+i*42;n=N[b['net']];d.line([(50,y+22),(1630,y+22)],'#dce2e8',1)
         d.text(55,y,'GPIO'+str(b['gpio']),17,bold=True);d.text(275,y,name,16,COL[n['kind']]);d.text(535,y,destinations[name],16)
-        d.text(1330,y,'ECHO BLOCKED' if name in ('EF','EL','ER') else 'PROVISIONAL',15,color='#995b00')
-    d.lines(55,910,'5V/VIN: only V5_MCU after OV1 and actual-board qualification. 3V3: E-stop dry feedback only. GND: logic return to BUCK1 OUT-. Never feed 5V into a GPIO or 3V3 pin.',width=135,size=16,leading=25)
+        d.text(1260,y,gpio_route_status(D,name),13,color='#995b00',bold=True)
+        d.svg[-1]=d.svg[-1].replace('<text ','<text data-role="route-status" ',1)
+        note=notes.get(name,'U1 + bias parts missing' if 'buffer_in' in b else 'Carrier/pulls unverified; HOLD')
+        d.text(1260,y+14,note,11,color='#995b00')
+        d.svg[-1]=d.svg[-1].replace('<text ','<text data-role="route-note" ',1)
+        d.svg.append('</g>')
+    d.lines(55,910,'5V/VIN: only V5_MCU after OV1 and actual-board qualification. 3V3: E-stop dry feedback + U2 only. GND: logic return to BUCK1 OUT-. Never feed 5V into a GPIO or 3V3 pin.',width=135,size=16,leading=25)
     d.lines(55,985,'Unused: GPIO26, GPIO39/VN, GPIO4. Reserve GPIO1/3 for serial, GPIO0/2/5/12/15 boot straps, GPIO6-11 flash. Keep EN/reset under onboard control; no JTAG on GPIO13/14. ESP32-CAM remains disconnected.',width=135,size=16,leading=25)
     d.save('esp32_pinout')
 
 def sensors():
-    d=Drawing('HC-SR04 sensor wiring and voltage protection','Three independent dividers are REQUIRED and currently missing. Real ECHO remains disconnected until measured compatibility is established.')
-    for idx,(ref,trig,echo,inp,out,rt,rb) in enumerate([('US_F',32,34,13,7,23,24),('US_L',33,35,15,5,25,26),('US_R',13,36,17,3,27,28)]):
-        y=190+idx*275
-        d.card(45,y,370,180,'ESP1 / '+ref,[f'GPIO{trig} TRIG 0/3.3V',f'GPIO{echo} ECHO input ONLY','No raw 5V input permitted','GND = common logic return'])
-        d.card(540,y,330,65,f'U1 input{inp} -> output{out}',[],True)
-        d.card(1200,y,425,180,ref+' HC-SR04',['VCC -> V5_LOGIC (qualified 5V)','GND -> BUCK2 OUT- / GND','TRIG <- U1 5V output','ECHO -> divider (NOT direct)'])
-        d.line([(415,y+42),(540,y+42)],COL['sensor'],2,True);d.line([(870,y+42),(1200,y+42)],COL['sensor'],2,True)
+    d=Drawing('HC-SR04: dividers plus powered-off ECHO isolation','U2 = SN74LVC3G34DCU; supply from MCU 3V3, not sensor 5V. Same GPIOs. Verify actual pulse levels/edges before connection.')
+    for idx,(ref,trig,echo,inp,out,rt,rb,ui,uo,rp) in enumerate([('US_F',32,34,13,7,23,24,1,7,30),('US_L',33,35,15,5,25,26,3,5,31),('US_R',13,36,17,3,27,28,6,2,32)]):
+        y=170+idx*275
+        d.card(45,y,360,200,'ESP1 / '+ref,[f'GPIO{trig} TRIG 0/3.3V',f'GPIO{echo} <- U2.{uo} output',f'R{rp} 100k GPIO-to-GND','U2.8 -> ESP1.3V3','U2.4 -> ESP1.GND'])
+        d.card(540,y,330,65,f'U1.{inp} -> U1.{out}',[],True)
+        d.card(1200,y,425,200,ref+' HC-SR04',['VCC -> protected V5_LOGIC','GND -> BUCK2 OUT- / GND',f'TRIG <- U1.{out}',f'ECHO -> R{rt}.1','No direct ECHO-to-GPIO'])
+        d.line([(405,y+42),(540,y+42)],COL['sensor'],2,True)
+        d.line([(870,y+42),(1200,y+42)],COL['sensor'],2,True)
         d.text(925,y+29,'TRIG 0/5V',14,COL['sensor'])
         d.line([(1200,y+120),(1055,y+120)],COL['sensor'],2,True)
         d.rect(905,y+105,150,30,fill='#fff2d8');d.text(916,y+125,f'R{rt}: 2.2k 1%',14)
-        d.line([(905,y+120),(650,y+120),(415,y+120)],COL['sensor'],2,True);d.dot(650,y+120,COL['sensor'])
-        d.text(715,y+101,f'{ref} ECHO divider',14,COL['sensor']);d.text(425,y+102,'Nominal 3.0V',14,COL['sensor'])
-        d.line([(650,y+120),(650,y+159)],'#17232c',2,True)
-        d.rect(585,y+159,130,28,fill='#fff2d8');d.text(594,y+179,f'R{rb}: 3.3k 1%',13)
-        d.line([(650,y+187),(650,y+217)],'#17232c',2,True);d.line([(620,y+217),(680,y+217)],'#17232c',3)
-        d.text(690,y+222,'GND',14)
-    d.lines(50,1060,'Calculated 2.827-3.175V assumes ECHO high follows a qualified 4.75-5.25V rail. Actual module VOH/VOL/overshoot must be measured. OV2 is also required for supply-fault protection; a divider is not a buck converter.',width=150,size=14,leading=20)
+        d.line([(905,y+120),(805,y+120),(735,y+120)],COL['sensor'],2,True);d.dot(805,y+120,COL['sensor'])
+        d.card(465,y+90,270,65,f'U2.{ui} A -> U2.{uo} Y',[],True)
+        d.line([(465,y+120),(405,y+120)],COL['sensor'],2,True)
+        d.line([(805,y+120),(805,y+165)],COL['ground'],2,True)
+        d.rect(740,y+165,130,28,fill='#fff2d8');d.text(749,y+185,f'R{rb}: 3.3k 1%',13)
+        d.line([(805,y+193),(805,y+220)],COL['ground'],2,True)
+        d.text(825,y+224,'GND; divider nominal 3.0V',14)
+    d.lines(50,1020,'C_U2: 100nF U2.8-to-U2.4. U2 inputs: HIGH >=2.0V, LOW <=0.8V; edge rate <=10ns/V at 3.3V +/-0.3V. Keep divider-to-U2 traces short. Scope actual sensor cable and pulse shape. U2 outputs follow MCU supply; power-off Ioff limits backfeed.',width=150,size=14,leading=20)
     d.save('sensor_wiring')
 
 def power():
@@ -215,7 +235,13 @@ def drivers():
     rows=[(180,'DRV_L','LEFT_SUPPLY','RPWM <- U1.18 / LPWM <- U1.16',[(1,'M+ / M-'),(2,'M+ / M-')]),(455,'DRV_R','RIGHT_SUPPLY','RPWM <- U1.14 / LPWM <- U1.12',[(3,'M+ / M-'),(4,'M+ / M-')]),(730,'DRV_A','AUX_SUPPLY','IN1/2 GPIO21/22; IN3/4 GPIO23/25',[(5,'OUT1 / OUT2'),(6,'OUT1 / OUT2'),(7,'OUT3 / OUT4')])]
     for y,ref,rail,controls,motors in rows:
         isaux=ref=='DRV_A'
-        d.card(55,y,650,205,ref+' | '+C[ref]['name'],[rail+(' -> Vs; GND -> power return' if isaux else ' -> B+; GND -> power return'),('5V_LOGIC external input -> V5_LOGIC' if isaux else 'VCC -> qualified V5_LOGIC'),controls,'ENA/ENB'+' <- EN_DRIVER_5V' if isaux else 'R_EN and L_EN <- EN_DRIVER_5V','Remove EN jumpers; currents/thermal TBD'])
+        lines=([rail+' -> Vs; GND -> power return','5V_LOGIC external input -> V5_LOGIC',controls,'ENA/ENB <- EN_DRIVER_5V','Remove EN jumpers; currents/thermal TBD'] if isaux else
+               [rail+' -> B+','B- -> TB_GND; dedicated branch-rated power return',
+                'GND/B- internal bond: VERIFY; no extra return wire','VCC -> qualified V5_LOGIC',controls,
+                'R_EN and L_EN <- EN_DRIVER_5V','Remove EN jumpers; currents/thermal TBD'])
+        d.svg.append(f'<g data-driver="{ref}">')
+        d.card(55,y,650,205,ref+' | '+C[ref]['name'],lines)
+        d.svg.append('</g>')
         for j,(i,ports) in enumerate(motors):
             yy=y+j*(72 if isaux else 100)
             d.card(1130,yy,495,65,'M'+str(i)+' | '+C['M'+str(i)]['name'],[])
@@ -229,14 +255,14 @@ def physical():
     d=Drawing('Physical harness layout - placement suggestion','Not to scale or connector orientation. Bundles are separate labeled conductors; use the full terminal/connection tables before fitting any wire.')
     for x,ref,desc in [(55,'US_F','Front: GPIO32 / GPIO34'),(620,'US_L','Left: GPIO33 / GPIO35'),(1185,'US_R','Right: GPIO13 / GPIO36')]:
         d.card(x,160,440,95,ref+' HC-SR04',[desc,'VCC/GND plus protected TRIG/ECHO'])
-    d.card(560,300,570,100,'Sensor conditioning / logic harness',['3 ECHO dividers + U1 trigger channels','ECHO parts missing: do not bypass'],True)
+    d.card(560,300,570,100,'Sensor conditioning / logic harness',['3 ECHO dividers + U2; U1 triggers','ECHO parts missing: do not bypass'],True)
     d.line([(275,255),(275,330),(560,330)],COL['sensor'],2,True)
     d.line([(840,255),(840,300)],COL['sensor'],2,True)
     d.line([(1405,255),(1405,330),(1130,330)],COL['sensor'],2,True)
     d.text(290,315,'H-SF: four separate wires',13,COL['sensor'])
     d.text(850,280,'H-SL: four separate wires',13,COL['sensor'])
     d.text(1165,315,'H-SR: four separate wires',13,COL['sensor'])
-    d.card(620,470,450,135,'ESP1 + U1 logic area',['Existing 16 GPIO assignments preserved','Non-inverting buffer / local pull-downs','No motor-current return in this area'])
+    d.card(620,470,450,135,'ESP1 + U1 logic area',['Existing 16 GPIO assignments preserved','U1/U2 interfaces / local pull-downs','No motor-current return in this area'])
     d.line([(840,400),(840,470)],COL['sensor'],2,True)
     for y,ref,m1,m2 in [(475,'DRV_L','M1 left front','M2 left rear'),(755,'DRV_R','M3 right front','M4 right rear')]:
         d.card(55,y-35,245,155,ref,['5V logic / common GND','Fused switched motor supply','Two PWM + two EN terminals'])
@@ -272,6 +298,8 @@ def ground_source(node):
     if node in ('BUCK1.OUT-','BUCK2.OUT-'):return ref+'.IN-','INTERNAL_VERIFY'
     if node=='ESP1.GND':return 'BUCK1.OUT-','WIRE'
     if node in ('U1.1','U1.19'):return 'U1.10','WIRE'
+    if node=='U2.4':return 'ESP1.GND','WIRE'
+    if ref=='C_U2':return 'U2.4','WIRE'
     if node=='U1.10' or ref.startswith('US_') or ref=='OV2':return 'BUCK2.OUT-','WIRE'
     if ref=='OV1':return 'BUCK1.OUT-','WIRE'
     if ref=='Z_COIL':return 'K1.A2','WIRE'
@@ -294,6 +322,7 @@ def connection_rows():
         for dest in n['nodes'][1:]:
             source=n['nodes'][0];route='WIRE'
             if n['name']=='GND':source,route=ground_source(dest)
+            if n['name']=='PACK_PROTECTED' and dest!='TB_POS.BUS':source='TB_POS.BUS'
             high=n['kind'] in ('power_hc','motor') or dest in ('BT1.PACK-','DRV_L.B-','DRV_R.B-','DRV_A.GND') or dest.startswith('C_B') or dest in ('Z_L.-','Z_R.-','Z_A.-')
             rows.append(dict(wire_id=f'W{len(rows)+1:03}',component=C[dest.split('.')[0]]['name'],source=label(source),destination=label(dest),net=n['name'],signal_type=n['kind'],voltage=n['voltage'],color={'#c62828':'Red','#17232c':'Black','#1565c0':'Blue','#23844b':'Green','#d87800':'Orange'}[COL[n['kind']]],conductor_class='HIGH CURRENT - size TBD' if high else 'SIGNAL / LOGIC / COIL - size TBD',status=n['status'],connection_kind=route,protection=n['protection'],verification=n['verify']))
     return rows
@@ -301,6 +330,42 @@ def connection_rows():
 def csvwrite(path,rows):
     with path.open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+
+def detail_sheets():
+    """Terminal-complete focused views use model data, never hand-written pin maps."""
+    specs=[('left_bts7960','Left BTS7960 and wheel pair',['DRV_L','M1','M2','FM1','FM2']),
+           ('right_bts7960','Right BTS7960 and wheel pair',['DRV_R','M3','M4','FM3','FM4']),
+           ('cleaning_driver','Conditional L298N and cleaning motors',['DRV_A','M5','M6','M7','FM5','FM6','FM7']),
+           ('seven_motors','All seven motor terminals',['M1','M2','M3','M4','M5','M6','M7']),
+           ('logic_enable','Buffers and default-low interface',['U1','U2','R5','R13','R14','R15','R16','R17','R18','R30','R31','R32'])]
+    names=[]
+    for name,title,refs in specs:
+        d=Drawing(title,'Equal net names join. Exact connections and protection: assembly_connections sheets / READY_TO_WIRE.md. Ratings remain HOLD.')
+        ys=[148]*3
+        for ref in refs:
+            col=min(range(3),key=lambda k:ys[k])
+            assert ys[col]+component_height(ref)<1110, ('Detail sheet overflow',name,ref)
+            ys[col]+=component(d,ref,42+col*534,ys[col])+14
+        d.save(name);names.append(name)
+    return names
+
+def assembly_sheets(rows):
+    names=[]
+    for first in range(0,len(rows),22):
+        name='assembly_connections_'+str(first//22+1).zfill(2)
+        d=Drawing('Assembly: SOURCE PIN -> DESTINATION PIN / '+str(first//22+1),
+                  'Every canonical row is shown exactly once. INTERNAL_VERIFY is an existing module bond to inspect, not a wire to add.')
+        for i,r in enumerate(rows[first:first+22]):
+            y=155+i*42
+            d.svg.append(f'<g data-wire-id="{r["wire_id"]}" data-source="{html.escape(r["source"].split()[0])}" data-destination="{html.escape(r["destination"].split()[0])}">')
+            d.text(55,y,r['wire_id'],14,bold=True)
+            d.text(125,y,r['source']+' -> '+r['destination'],15,COL[r['signal_type']],True)
+            d.text(125,y+17,r['net']+' | '+r['connection_kind']+' | '+r['voltage'],12)
+            d.text(1370,y,r['status'],12,color='#995b00')
+            d.line([(50,y+23),(1630,y+23)],'#dce2e8',1)
+            d.svg.append('</g>')
+        d.save(name);names.append(name)
+    return names
 
 def tables(rows):
     csvwrite(ROOT/'electrical/connections.csv',rows)
@@ -329,7 +394,7 @@ def tables(rows):
     doc=SimpleDocTemplate(str(OUT/'pin_to_pin_table.pdf'),pagesize=landscape(A3),leftMargin=24,rightMargin=24,topMargin=30,bottomMargin=30)
     table=LongTable(data,colWidths=[125,245,220,245,306],repeatRows=1,hAlign='LEFT')
     table.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e9eef4')),('GRID',(0,0),(-1,-1),.3,colors.HexColor('#acb7c2')),('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,colors.HexColor('#fffaf0')]),('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5)]))
-    story=[Paragraph('E1 pin-to-pin connection table - DESIGN HOLD',styles['Title']),Paragraph('All physical connections remain provisional or blocked. INTERNAL_VERIFY means inspect an existing module bond, not install another thin return. Component definitions, exact notes and release gates are in FINAL_WIRING.md.',styles['BodyText']),Spacer(1,12),table]
+    story=[Paragraph('E2 pin-to-pin connection table - DESIGN HOLD',styles['Title']),Paragraph('All physical connections remain provisional or blocked. INTERNAL_VERIFY means inspect an existing module bond, not install another thin return. Component definitions, exact notes and release gates are in FINAL_WIRING.md.',styles['BodyText']),Spacer(1,12),table]
     doc.build(story)
     return terminals
 
@@ -337,11 +402,13 @@ def main():
     OUT.mkdir(parents=True,exist_ok=True)
     pages=schematics();pinout();sensors();power();emergency();drivers();physical()
     rows=connection_rows();terminals=tables(rows)
-    names=['physical_wiring','esp32_pinout','motor_drivers','power_distribution','sensor_wiring','emergency_stop']
+    from generate_ready_to_wire import generate
+    (ROOT/'docs/READY_TO_WIRE.md').write_text(generate(rows))
+    names=['physical_wiring','esp32_pinout','motor_drivers','power_distribution','sensor_wiring','emergency_stop']+detail_sheets()+assembly_sheets(rows)
     writer=PdfWriter()
-    for name in ['complete_schematic']+names+['pin_to_pin_table']:writer.append(OUT/(name+'.pdf'))
-    with (OUT/'electrical_package.pdf').open('wb') as f:writer.write(f)
-    index='# Electrical diagrams E1\n\n**Design hold: no physical connection is approved.** All pages use the same `electrical/design.json`. No KiCad installation/PCB footprint/ERC verification. Generic module/safety ports are not guessed physical pin positions.\n\n'
+    for name in ['complete_schematic']+names+['pin_to_pin_table']:writer.append(PdfReader(OUT/(name+'.pdf'),strict=True))
+    write_validated_pdf(writer,OUT/'electrical_package.pdf')
+    index='# Electrical diagrams E2\n\n**Design hold: no physical connection is approved.** All pages use the same `electrical/design.json`. No KiCad installation/PCB footprint/ERC verification. Generic module/safety ports are not guessed physical pin positions.\n\n'
     index+='[Combined electrical package PDF](electrical_package.pdf) / [full schematic PDF](complete_schematic.pdf) / [connection table PDF](pin_to_pin_table.pdf)\n\n'
     for name in pages+names:
         index+=f'- {name}: [SVG]({name}.svg), [PDF]({name}.pdf), [PNG preview]({name}.png)\n'

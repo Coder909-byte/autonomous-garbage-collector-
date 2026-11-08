@@ -4,95 +4,143 @@
 <text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">ESP32 pinout connection chart</text>
 <text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Functional GPIO labels only. Exact DevKit header positions/USB power path remain unverified; no wiring orientation implied.</text>
 <rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
-<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
 <text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
 <text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
 <text x="55" y="162" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO / terminal</text>
 <text x="275" y="162" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Firmware signal</text>
 <text x="535" y="162" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Exact proposed endpoint chain</text>
-<text x="1330" y="162" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Electrical status</text>
-<polyline points="50,211 1630,211" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text x="1260" y="162" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">Electrical status / requirement</text>
+<g data-gpio="16" data-signal="L_FWD">
+<polyline points="50,218 1630,218" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="196" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO16</text>
 <text x="275" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">L_FWD</text>
 <text x="535" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.2 -&gt; U1.18 -&gt; DRV_L.RPWM</text>
-<text x="1330" y="196" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,253 1630,253" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="196" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="210" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="17" data-signal="L_REV">
+<polyline points="50,260 1630,260" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="238" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO17</text>
 <text x="275" y="238" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">L_REV</text>
 <text x="535" y="238" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.4 -&gt; U1.16 -&gt; DRV_L.LPWM</text>
-<text x="1330" y="238" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,295 1630,295" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="238" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="252" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="18" data-signal="R_FWD">
+<polyline points="50,302 1630,302" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="280" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO18</text>
 <text x="275" y="280" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">R_FWD</text>
 <text x="535" y="280" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.6 -&gt; U1.14 -&gt; DRV_R.RPWM</text>
-<text x="1330" y="280" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,337 1630,337" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="280" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="294" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="19" data-signal="R_REV">
+<polyline points="50,344 1630,344" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="322" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO19</text>
 <text x="275" y="322" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">R_REV</text>
 <text x="535" y="322" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.8 -&gt; U1.12 -&gt; DRV_R.LPWM</text>
-<text x="1330" y="322" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,379 1630,379" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="322" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="336" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="14" data-signal="ENABLE">
+<polyline points="50,386 1630,386" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="364" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO14</text>
 <text x="275" y="364" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">ENABLE</text>
 <text x="535" y="364" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.11 -&gt; U1.9 -&gt; S2 EN NC -&gt; six enables</text>
-<text x="1330" y="364" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,421 1630,421" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="364" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="378" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias + cutoff missing</text>
+</g>
+<g data-gpio="32" data-signal="TF">
+<polyline points="50,428 1630,428" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="406" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO32</text>
 <text x="275" y="406" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#23844b">TF</text>
 <text x="535" y="406" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.13 -&gt; U1.7 -&gt; US_F.TRIG</text>
-<text x="1330" y="406" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,463 1630,463" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="406" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="420" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="33" data-signal="TL">
+<polyline points="50,470 1630,470" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="448" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO33</text>
 <text x="275" y="448" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#23844b">TL</text>
 <text x="535" y="448" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.15 -&gt; U1.5 -&gt; US_L.TRIG</text>
-<text x="1330" y="448" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,505 1630,505" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="448" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="462" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="13" data-signal="TR">
+<polyline points="50,512 1630,512" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="490" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO13</text>
 <text x="275" y="490" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#23844b">TR</text>
 <text x="535" y="490" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">U1.17 -&gt; U1.3 -&gt; US_R.TRIG</text>
-<text x="1330" y="490" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,547 1630,547" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="490" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="504" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">U1 + bias parts missing</text>
+</g>
+<g data-gpio="21" data-signal="BRUSH_IN1">
+<polyline points="50,554 1630,554" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="532" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO21</text>
 <text x="275" y="532" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">BRUSH_IN1</text>
 <text x="535" y="532" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">DRV_A.IN1 / both brushes</text>
-<text x="1330" y="532" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,589 1630,589" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="532" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">PROVISIONAL</text>
+<text data-role="route-note" x="1260" y="546" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">Carrier/pulls unverified; HOLD</text>
+</g>
+<g data-gpio="22" data-signal="BRUSH_IN2">
+<polyline points="50,596 1630,596" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="574" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO22</text>
 <text x="275" y="574" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">BRUSH_IN2</text>
 <text x="535" y="574" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">DRV_A.IN2 / held LOW</text>
-<text x="1330" y="574" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,631 1630,631" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="574" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">PROVISIONAL</text>
+<text data-role="route-note" x="1260" y="588" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">Carrier/pulls unverified; HOLD</text>
+</g>
+<g data-gpio="23" data-signal="CONVEYOR_IN3">
+<polyline points="50,638 1630,638" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="616" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO23</text>
 <text x="275" y="616" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">CONVEYOR_IN3</text>
 <text x="535" y="616" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">DRV_A.IN3 / conveyor</text>
-<text x="1330" y="616" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,673 1630,673" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="616" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">PROVISIONAL</text>
+<text data-role="route-note" x="1260" y="630" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">Carrier/pulls unverified; HOLD</text>
+</g>
+<g data-gpio="25" data-signal="CONVEYOR_IN4">
+<polyline points="50,680 1630,680" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="658" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO25</text>
 <text x="275" y="658" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">CONVEYOR_IN4</text>
 <text x="535" y="658" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">DRV_A.IN4 / held LOW</text>
-<text x="1330" y="658" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<polyline points="50,715 1630,715" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text data-role="route-status" x="1260" y="658" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">PROVISIONAL</text>
+<text data-role="route-note" x="1260" y="672" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">Carrier/pulls unverified; HOLD</text>
+</g>
+<g data-gpio="34" data-signal="EF">
+<polyline points="50,722 1630,722" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="700" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO34</text>
 <text x="275" y="700" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#23844b">EF</text>
-<text x="535" y="700" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">US_F.ECHO -&gt; R23/R24 -&gt; GPIO34</text>
-<text x="1330" y="700" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">ECHO BLOCKED</text>
-<polyline points="50,757 1630,757" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text x="535" y="700" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">ECHO -&gt; R23/R24 -&gt; U2.1/7 -&gt; GPIO34</text>
+<text data-role="route-status" x="1260" y="700" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="714" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">ECHO disconnected; parts missing</text>
+</g>
+<g data-gpio="35" data-signal="EL">
+<polyline points="50,764 1630,764" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="742" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO35</text>
 <text x="275" y="742" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#23844b">EL</text>
-<text x="535" y="742" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">US_L.ECHO -&gt; R25/R26 -&gt; GPIO35</text>
-<text x="1330" y="742" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">ECHO BLOCKED</text>
-<polyline points="50,799 1630,799" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text x="535" y="742" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">ECHO -&gt; R25/R26 -&gt; U2.3/5 -&gt; GPIO35</text>
+<text data-role="route-status" x="1260" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="756" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">ECHO disconnected; parts missing</text>
+</g>
+<g data-gpio="36" data-signal="ER">
+<polyline points="50,806 1630,806" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="784" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO36</text>
 <text x="275" y="784" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#23844b">ER</text>
-<text x="535" y="784" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">US_R.ECHO -&gt; R27/R28 -&gt; GPIO36 / VP</text>
-<text x="1330" y="784" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">ECHO BLOCKED</text>
-<polyline points="50,841 1630,841" fill="none" stroke="#dce2e8" stroke-width="1"/>
+<text x="535" y="784" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">ECHO -&gt; R27/R28 -&gt; U2.6/2 -&gt; GPIO36 / VP</text>
+<text data-role="route-status" x="1260" y="784" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="798" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">ECHO disconnected; parts missing</text>
+</g>
+<g data-gpio="27" data-signal="ESTOP_OK">
+<polyline points="50,848 1630,848" fill="none" stroke="#dce2e8" stroke-width="1"/>
 <text x="55" y="826" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">GPIO27</text>
 <text x="275" y="826" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#1565c0">ESTOP_OK</text>
 <text x="535" y="826" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">3V3 -&gt; S2 NC -&gt; K1 sense NO -&gt; GPIO27</text>
-<text x="1330" y="826" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#995b00">PROVISIONAL</text>
-<text x="55" y="910" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">5V/VIN: only V5_MCU after OV1 and actual-board qualification. 3V3: E-stop dry feedback only. GND: logic return to BUCK1 OUT-. Never</text>
-<text x="55" y="935" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">feed 5V into a GPIO or 3V3 pin.</text>
+<text data-role="route-status" x="1260" y="826" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#995b00">BLOCKED_MISSING</text>
+<text data-role="route-note" x="1260" y="840" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#995b00">Cutoff/feedback parts missing</text>
+</g>
+<text x="55" y="910" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">5V/VIN: only V5_MCU after OV1 and actual-board qualification. 3V3: E-stop dry feedback + U2 only. GND: logic return to BUCK1 OUT-.</text>
+<text x="55" y="935" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">Never feed 5V into a GPIO or 3V3 pin.</text>
 <text x="55" y="985" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">Unused: GPIO26, GPIO39/VN, GPIO4. Reserve GPIO1/3 for serial, GPIO0/2/5/12/15 boot straps, GPIO6-11 flash. Keep EN/reset under onboard</text>
 <text x="55" y="1010" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#17232c">control; no JTAG on GPIO13/14. ESP32-CAM remains disconnected.</text>
 </svg>

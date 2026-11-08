@@ -13,6 +13,19 @@ class ElectricalChecks(unittest.TestCase):
     def test_direct_5v_echo_rejected(self):
         self.net('EF_SAFE')['nodes'].remove('ESP1.GPIO34');self.net('EF_RAW')['nodes'].append('ESP1.GPIO34');self.reject()
     def test_missing_echo_ground_rejected(self): self.net('GND')['nodes'].remove('R24.2');self.reject()
+    def test_echo_isolator_on_sensor_supply_rejected(self):
+        self.net('V3V3')['nodes'].remove('U2.8');self.net('V5_LOGIC')['nodes'].append('U2.8');self.reject()
+    def test_echo_isolator_bypass_rejected(self):
+        self.net('EF_SAFE')['nodes'].remove('ESP1.GPIO34');self.net('EF_DIV')['nodes'].append('ESP1.GPIO34');self.reject()
+    def test_missing_isolator_ground_rejected(self):
+        self.net('GND')['nodes'].remove('U2.4');self.reject()
+    def test_wrong_isolator_channel_rejected(self):
+        self.net('EF_SAFE')['nodes'].remove('U2.7');self.net('EL_SAFE')['nodes'].remove('U2.5')
+        self.net('EF_SAFE')['nodes'].append('U2.5');self.net('EL_SAFE')['nodes'].append('U2.7');self.reject()
+    def test_mcu_buck_must_survive_motor_cutoff(self):
+        self.net('PACK_PROTECTED')['nodes'].remove('F1.IN');self.net('MOTOR_SWITCHED')['nodes'].append('F1.IN');self.reject()
+    def test_logic_buck_must_survive_motor_cutoff(self):
+        self.net('PACK_PROTECTED')['nodes'].remove('F2.IN');self.net('MOTOR_SWITCHED')['nodes'].append('F2.IN');self.reject()
     def test_conflicting_gpio_rejected(self): self.d['gpio_bindings']['L_REV']['gpio']=16;self.reject()
     def test_parallel_buck_outputs_rejected(self): self.net('V5_MCU_RAW')['nodes'].append('BUCK2.OUT+');self.reject()
     def test_missing_enable_pull_rejected(self): self.net('GND')['nodes'].remove('R17.2');self.reject()

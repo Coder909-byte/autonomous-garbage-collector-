@@ -35,12 +35,19 @@ def check(d):
     assert len([c for c in comps if c.startswith('DRV_')])==3
     for name,gpio,top,bottom,sensor in [('EF',34,23,24,'US_F'),('EL',35,25,26,'US_L'),('ER',36,27,28,'US_R')]:
         same(name+'_RAW',sensor+'.ECHO',f'R{top}.1')
-        same(name+'_SAFE',f'ESP1.GPIO{gpio}',f'R{top}.2',f'R{bottom}.1')
+        ip,op,r={'EF':(1,7,30),'EL':(3,5,31),'ER':(6,2,32)}[name]
+        same(name+'_DIV',f'R{top}.2',f'R{bottom}.1',f'U2.{ip}')
+        same(name+'_SAFE',f'ESP1.GPIO{gpio}',f'U2.{op}',f'R{r}.1')
+        same('GND',f'R{r}.2')
+        assert comps[f'R{r}']['value'].startswith('100k')
         same('GND',f'R{bottom}.2')
         assert comps['R'+str(top)]['value'].startswith('2.2k 1%')
         assert comps['R'+str(bottom)]['value'].startswith('3.3k 1%')
         assert nets[name+'_SAFE']['status']=='BLOCKED_MISSING'
     # No raw sensor, 5V control, battery or motor-output net may touch a GPIO.
+    assert comps['U2']['value']=='SN74LVC3G34DCU', 'Unqualified ECHO isolator'
+    same('V3V3','ESP1.3V3','U2.8','C_U2.1')
+    same('GND','U2.4','C_U2.2')
     gpio_nets={b['net'] for b in d['gpio_bindings'].values()}
     for node,n in assigned.items():
         if node.startswith('ESP1.GPIO'): assert n in gpio_nets
@@ -63,6 +70,7 @@ def check(d):
     same('COIL_FUSED','FK.OUT','OV1.PG_COM'); same('COIL_PG1','OV1.PG_NO','OV2.PG_COM')
     same('COIL_PG2','OV2.PG_NO','S2.COIL_COM')
     same('MOTOR_SWITCHED','K1.MAIN_NO','FL.IN','FR.IN','FA.IN')
+    same('PACK_PROTECTED','P1.OUT+','TB_POS.BUS','K1.MAIN_COM','F1.IN','F2.IN','FK.IN')
     for clamp,rail in [('Z_L','LEFT_SUPPLY'),('Z_R','RIGHT_SUPPLY'),('Z_A','AUX_SUPPLY')]:
         same(rail,clamp+'.+');same('GND',clamp+'.-')
     for i,rail in ((1,'V5_MCU'),(2,'V5_LOGIC')):

@@ -1,21 +1,23 @@
 # Autonomous Garbage Collector
 
-An ESP32-based autonomous waste collection rover with four wheel motors, two brushes controlled together, a separately controlled conveyor, and three ultrasonic sensors for obstacle avoidance. This repository contains the firmware, PlatformIO configuration, Wokwi control-signal simulation, automated tests, and the provisional E1 electrical design package.
+An ESP32-based autonomous waste collection rover with four wheel motors, two brushes controlled together, a separately controlled conveyor, and three ultrasonic sensors for obstacle avoidance. This repository contains the firmware, PlatformIO configuration, Wokwi control-signal simulation, automated tests, and the provisional E2 electrical design package.
 
 **Physical hardware has not been electrically verified. Electrical assembly release remains on HOLD.** Real HC-SR04 ECHO connections must remain disconnected until suitable signal conditioning and measured voltage compatibility are established. Wokwi wiring is a simulation abstraction and must not be copied directly into physical hardware.
+
+Current engineering package: [final verdict](docs/FINAL_GO_NO_GO.md), [review](docs/ENGINEERING_REVIEW_E2.md), [sectional wiring](docs/READY_TO_WIRE.md), [purchase list](docs/FINAL_PURCHASE_LIST.md), [23-case simulation procedure](docs/SIMULATION_VERIFICATION.md). E2 adds MCU-powered ECHO isolation without GPIO or firmware changes. **DESIGN NO-GO (HOLD); PHYSICAL POWER-UP NO-GO (HOLD)** until actual safety parts, motor/battery data and hardware evidence exist.
 
 ## Verification status
 
 | Scope | Result and limits |
 | --- | --- |
 | Firmware compilation | Both `esp32dev` and `wokwi_compile` environments pass |
-| Automated host tests | **100 pass:** 79 C++ controller/adapter tests, 10 Python waveform-checker tests, 11 Python electrical-model tests |
+| Automated host tests | **119 pass:** 82 C++ controller/adapter tests, 10 Python waveform-checker, 17 electrical-model and 10 audit-export regression tests |
 | Static consistency | Firmware, 16 unique GPIO assignments, generated Wokwi sketch and simulation connections agree |
-| Electrical exports | Source net model, CSV connections, SVG terminals and 21-page PDF agree; structural checks only |
+| Electrical exports | All 201 connections, SVG terminals and corrected labels/statuses agree; all 31 PDFs pass strict offset/readability checks. Combined PDF: 38 pages; no physical approval |
 | Wokwi runtime | Owner reports successful startup, three distance readings, ARM/AUTO, forward travel, left/right avoidance, brushes, conveyor and emergency-stop/no-restart; no independent CLI runtime or quantitative waveform run is claimed |
 | Physical rover | **Untested.** No hardware upload or motor/battery activation performed during software verification |
 
-Detailed evidence and remaining checks: [TEST_MATRIX.md](TEST_MATRIX.md). Logs are in [artifacts/](artifacts/). Build success and simulation results do not qualify motor currents, wiring, voltage levels or protection hardware.
+Detailed evidence and remaining checks: [TEST_MATRIX.md](TEST_MATRIX.md). The [electrical audit and correction record](docs/FINAL_ELECTRICAL_AUDIT.md) documents closure of F01–F03 while retaining every physical HOLD. Logs are in [artifacts/](artifacts/). Build success and simulation results do not qualify motor currents, wiring, voltage levels or protection hardware.
 
 ## Hardware
 
@@ -79,8 +81,8 @@ Use Python 3 and a C++ compiler for native host tests. PlatformIO downloads the 
 git clone https://github.com/Coder909-byte/autonomous-garbage-collector-.git
 cd autonomous-garbage-collector-
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-dev.txt
-python3 scripts/verify.py
+.venv/bin/python -m pip install -r requirements-dev.txt -r requirements-design.txt
+.venv/bin/python scripts/verify.py
 ```
 
 `verify.py` runs consistency checks, electrical-model checks, the complete host suite, both firmware builds, and Wokwi lint when the CLI is installed. It does not upload firmware or open a physical serial port. Run PlatformIO operations sequentially.
@@ -142,8 +144,8 @@ The prepared cases are not recorded as executed. Never commit the token or put i
 
 | Document | Contents |
 | --- | --- |
-| [Complete electrical package PDF](docs/diagrams/electrical_package.pdf) | 21 pages of terminal schematics, diagrams and connection tables |
-| [FINAL_WIRING.md](docs/FINAL_WIRING.md) | 188 proposed pin-to-pin connection rows, terminal dispositions and BOM |
+| [Complete electrical package PDF](docs/diagrams/electrical_package.pdf) | 38 pages of terminal schematics, diagrams and connection tables |
+| [FINAL_WIRING.md](docs/FINAL_WIRING.md) | 201 proposed pin-to-pin connection rows, terminal dispositions and BOM |
 | [ASSEMBLY_GUIDE.md](docs/ASSEMBLY_GUIDE.md) | 80 numbered steps across nine gated commissioning stages |
 | [ELECTRICAL_BLOCKERS.md](docs/ELECTRICAL_BLOCKERS.md) | Missing parts/data and unresolved release conditions |
 | [Diagram index](docs/diagrams/INDEX.md) | All editable SVG, PDF and PNG exports |

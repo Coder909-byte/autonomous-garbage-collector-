@@ -6,7 +6,7 @@ M4,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,righ
 M5,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,L298 A,HOLD
 M6,12V; tolerance TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,L298 A,HOLD
 M7,TBD,TBD,TBD,TBD,TBD,No datasheet or measurements supplied,L298 B,HOLD
-ESP1 + board regulator peak,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
+ESP1 + U2 + board regulator peak,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
 3 HC-SR04 + U1 + driver logic,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
 K1 coil across pack range,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD
 BUCK1 input/output thermal budget,TBD,TBD,TBD,TBD,TBD,No measurements supplied,n/a,HOLD

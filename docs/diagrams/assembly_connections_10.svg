@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Assembly: SOURCE PIN -&gt; DESTINATION PIN / 10</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Assembly: SOURCE PIN -&gt; DESTINATION PIN / 10</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every canonical row is shown exactly once. INTERNAL_VERIFY is an existing module bond to inspect, not a wire to add.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<g data-wire-id="W199" data-source="OV1.PG_NO" data-destination="OV2.PG_COM">
+<text x="55" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W199</text>
+<text x="125" y="155" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#c62828">OV1.PG_NO -&gt; OV2.PG_COM</text>
+<text x="125" y="172" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">COIL_PG1 | WIRE | Coil supply; contact isolation required</text>
+<text x="1370" y="155" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,178 1630,178" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W200" data-source="OV2.PG_NO" data-destination="S2.COIL_COM">
+<text x="55" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W200</text>
+<text x="125" y="197" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#c62828">OV2.PG_NO -&gt; S2.COIL_COM</text>
+<text x="125" y="214" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">COIL_PG2 | WIRE | Coil supply; contact isolation required</text>
+<text x="1370" y="197" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,220 1630,220" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W201" data-source="S2.SENSE_NC" data-destination="K1.AUX_SENSE_COM">
+<text x="55" y="239" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W201</text>
+<text x="125" y="239" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.SENSE_NC -&gt; K1.AUX_SENSE_COM</text>
+<text x="125" y="256" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">SENSE_STOP_OK | WIRE | 3.3 V only</text>
+<text x="1370" y="239" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,262 1630,262" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+</svg>

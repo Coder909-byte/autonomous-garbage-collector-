@@ -1,34 +1,35 @@
 {
+  "recorded_date": "2026-11-08",
   "repository": "https://github.com/Coder909-byte/autonomous-garbage-collector-",
-  "scope": "Pre-publication review of staged files; not remote confirmation",
-  "firmware_builds": {
-    "esp32dev": "PASS",
-    "wokwi_compile": "PASS"
-  },
-  "host_tests": {
-    "cpp": 79,
-    "python": 21,
-    "total": 100,
-    "result": "PASS"
-  },
-  "electrical_exports": "PASS; structural only",
-  "working_source_hashes_preserved": {
-    "firmware/rover.ino": "786f20d2adba9875d5f11847c31569d400f8ee4936225e2678ef0ac78c5d2311",
-    "include/rover_control.h": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77",
-    "include/rover_pins.h": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d",
-    "wokwi/sketch.ino": "58f3a13e382cba217c75a1c2d0e8d082c4b36465574d77483d359bda03388a69",
-    "wokwi/diagram.json": "2f84fbd432915806e9118a549e5f6abe7b0a0773493a3171a5ccae5319293024",
-    "platformio.ini": "ece3e5922685864fe2d8d89badbc179e500bdc36e51e514a95313e80932077dd"
+  "scope": "Staged local engineering package review; remote confirmation is separate",
+  "staged_files_including_this_report": 131,
+  "groups": {
+    ".gitignore": 1,
+    "README.md": 1,
+    "TEST_MATRIX.md": 1,
+    "artifacts": 11,
+    "docs": 100,
+    "electrical": 7,
+    "scripts": 7,
+    "test": 3
   },
   "secret_pattern_scan": {
-    "text_files_scanned": 76,
+    "text_files_scanned": 71,
     "findings": 0,
-    "scope": "Known credential/key patterns and assigned password/token values; no exhaustive guarantee"
+    "scope": "Known credential/private-key patterns and high-entropy quoted credential assignments; not exhaustive secret detection"
   },
-  "required_files_present": true,
-  "pdf_count": 15,
-  "svg_count": 12,
-  "excluded_local_tools_builds_credentials": true,
-  "physical_hardware": "UNTESTED; no upload or energizing",
-  "electrical_release": "HOLD"
+  "excluded_compiled_build_runtime_environment_artifacts": true,
+  "unrelated_checklist_image_excluded": true,
+  "designed_pdf_svg_png_exports": "Included intentionally as required deliverables",
+  "markdown_local_links": "PASS; generator intro evaluated in its intended docs output context",
+  "firmware_builds": "Both PASS",
+  "host_tests": {
+    "cpp": 82,
+    "python": 37,
+    "total": 119,
+    "result": "PASS"
+  },
+  "electrical_exports": "PASS for model/export consistency only",
+  "design_decision": "NO-GO (HOLD)",
+  "physical_power_up_decision": "NO-GO (HOLD)"
 }

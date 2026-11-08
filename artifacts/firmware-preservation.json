@@ -1,18 +1,29 @@
 {
-  "firmware/rover.ino": {
-    "sha256": "786f20d2adba9875d5f11847c31569d400f8ee4936225e2678ef0ac78c5d2311",
-    "unchanged": true
-  },
-  "include/rover_pins.h": {
-    "sha256": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d",
-    "unchanged": true
-  },
-  "include/rover_control.h": {
-    "sha256": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77",
-    "unchanged": true
-  },
-  "wokwi/sketch.ino": {
-    "sha256": "58f3a13e382cba217c75a1c2d0e8d082c4b36465574d77483d359bda03388a69",
-    "unchanged": true
+  "baseline": "616fd60b355e6083e085c8ba636534c5f183a034",
+  "files": {
+    "firmware/rover.ino": {
+      "sha256": "786f20d2adba9875d5f11847c31569d400f8ee4936225e2678ef0ac78c5d2311",
+      "unchanged_from_initial_HEAD": true
+    },
+    "include/rover_pins.h": {
+      "sha256": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d",
+      "unchanged_from_initial_HEAD": true
+    },
+    "include/rover_control.h": {
+      "sha256": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77",
+      "unchanged_from_initial_HEAD": true
+    },
+    "wokwi/sketch.ino": {
+      "sha256": "58f3a13e382cba217c75a1c2d0e8d082c4b36465574d77483d359bda03388a69",
+      "unchanged_from_initial_HEAD": true
+    },
+    "wokwi/diagram.json": {
+      "sha256": "2f84fbd432915806e9118a549e5f6abe7b0a0773493a3171a5ccae5319293024",
+      "unchanged_from_initial_HEAD": true
+    },
+    "platformio.ini": {
+      "sha256": "ece3e5922685864fe2d8d89badbc179e500bdc36e51e514a95313e80932077dd",
+      "unchanged_from_initial_HEAD": true
+    }
   }
 }

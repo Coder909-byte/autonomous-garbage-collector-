@@ -1,102 +1,108 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
-<title>HC-SR04 sensor wiring and voltage protection</title>
+<title>HC-SR04: dividers plus powered-off ECHO isolation</title>
 <rect width="1680" height="1188" fill="white"/>
-<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">HC-SR04 sensor wiring and voltage protection</text>
-<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Three independent dividers are REQUIRED and currently missing. Real ECHO remains disconnected until measured compatibility is established.</text>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">HC-SR04: dividers plus powered-off ECHO isolation</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">U2 = SN74LVC3G34DCU; supply from MCU 3V3, not sensor 5V. Same GPIOs. Verify actual pulse levels/edges before connection.</text>
 <rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
-<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
 <text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
 <text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
-<rect x="45" y="190" width="370" height="180" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
-<text x="57" y="215" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 / US_F</text>
-<text x="57" y="239" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO32 TRIG 0/3.3V</text>
-<text x="57" y="260" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO34 ECHO input ONLY</text>
-<text x="57" y="281" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No raw 5V input permitted</text>
-<text x="57" y="302" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND = common logic return</text>
-<rect x="540" y="190" width="330" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
-<text x="552" y="215" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1 input13 -&gt; output7</text>
-<rect x="1200" y="190" width="425" height="180" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
-<text x="1212" y="215" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_F HC-SR04</text>
-<text x="1212" y="239" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; V5_LOGIC (qualified 5V)</text>
-<text x="1212" y="260" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND -&gt; BUCK2 OUT- / GND</text>
-<text x="1212" y="281" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">TRIG &lt;- U1 5V output</text>
-<text x="1212" y="302" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO -&gt; divider (NOT direct)</text>
-<polyline points="415,232 540,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<polyline points="870,232 1200,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<text x="925" y="219" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">TRIG 0/5V</text>
-<polyline points="1200,310 1055,310" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<rect x="905" y="295" width="150" height="30" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
-<text x="916" y="315" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R23: 2.2k 1%</text>
-<polyline points="905,310 650,310 415,310" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<circle cx="650" cy="310" r="4" fill="#23844b"/>
-<text x="715" y="291" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">US_F ECHO divider</text>
-<text x="425" y="292" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">Nominal 3.0V</text>
-<polyline points="650,310 650,349" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
-<rect x="585" y="349" width="130" height="28" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
-<text x="594" y="369" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R24: 3.3k 1%</text>
-<polyline points="650,377 650,407" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
-<polyline points="620,407 680,407" fill="none" stroke="#17232c" stroke-width="3"/>
-<text x="690" y="412" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND</text>
-<rect x="45" y="465" width="370" height="180" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
-<text x="57" y="490" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 / US_L</text>
-<text x="57" y="514" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO33 TRIG 0/3.3V</text>
-<text x="57" y="535" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO35 ECHO input ONLY</text>
-<text x="57" y="556" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No raw 5V input permitted</text>
-<text x="57" y="577" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND = common logic return</text>
-<rect x="540" y="465" width="330" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
-<text x="552" y="490" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1 input15 -&gt; output5</text>
-<rect x="1200" y="465" width="425" height="180" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
-<text x="1212" y="490" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_L HC-SR04</text>
-<text x="1212" y="514" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; V5_LOGIC (qualified 5V)</text>
-<text x="1212" y="535" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND -&gt; BUCK2 OUT- / GND</text>
-<text x="1212" y="556" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">TRIG &lt;- U1 5V output</text>
-<text x="1212" y="577" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO -&gt; divider (NOT direct)</text>
-<polyline points="415,507 540,507" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<polyline points="870,507 1200,507" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<text x="925" y="494" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">TRIG 0/5V</text>
-<polyline points="1200,585 1055,585" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<rect x="905" y="570" width="150" height="30" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
-<text x="916" y="590" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R25: 2.2k 1%</text>
-<polyline points="905,585 650,585 415,585" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<circle cx="650" cy="585" r="4" fill="#23844b"/>
-<text x="715" y="566" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">US_L ECHO divider</text>
-<text x="425" y="567" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">Nominal 3.0V</text>
-<polyline points="650,585 650,624" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
-<rect x="585" y="624" width="130" height="28" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
-<text x="594" y="644" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R26: 3.3k 1%</text>
-<polyline points="650,652 650,682" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
-<polyline points="620,682 680,682" fill="none" stroke="#17232c" stroke-width="3"/>
-<text x="690" y="687" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND</text>
-<rect x="45" y="740" width="370" height="180" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
-<text x="57" y="765" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 / US_R</text>
-<text x="57" y="789" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO13 TRIG 0/3.3V</text>
-<text x="57" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO36 ECHO input ONLY</text>
-<text x="57" y="831" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No raw 5V input permitted</text>
-<text x="57" y="852" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND = common logic return</text>
-<rect x="540" y="740" width="330" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
-<text x="552" y="765" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1 input17 -&gt; output3</text>
-<rect x="1200" y="740" width="425" height="180" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
-<text x="1212" y="765" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_R HC-SR04</text>
-<text x="1212" y="789" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; V5_LOGIC (qualified 5V)</text>
-<text x="1212" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND -&gt; BUCK2 OUT- / GND</text>
-<text x="1212" y="831" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">TRIG &lt;- U1 5V output</text>
-<text x="1212" y="852" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO -&gt; divider (NOT direct)</text>
-<polyline points="415,782 540,782" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<polyline points="870,782 1200,782" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<text x="925" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">TRIG 0/5V</text>
-<polyline points="1200,860 1055,860" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<rect x="905" y="845" width="150" height="30" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
-<text x="916" y="865" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R27: 2.2k 1%</text>
-<polyline points="905,860 650,860 415,860" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<circle cx="650" cy="860" r="4" fill="#23844b"/>
-<text x="715" y="841" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">US_R ECHO divider</text>
-<text x="425" y="842" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">Nominal 3.0V</text>
-<polyline points="650,860 650,899" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
-<rect x="585" y="899" width="130" height="28" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
-<text x="594" y="919" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R28: 3.3k 1%</text>
-<polyline points="650,927 650,957" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
-<polyline points="620,957 680,957" fill="none" stroke="#17232c" stroke-width="3"/>
-<text x="690" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND</text>
-<text x="50" y="1060" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Calculated 2.827-3.175V assumes ECHO high follows a qualified 4.75-5.25V rail. Actual module VOH/VOL/overshoot must be measured. OV2 is also required</text>
-<text x="50" y="1080" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">for supply-fault protection; a divider is not a buck converter.</text>
+<rect x="45" y="170" width="360" height="200" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="57" y="195" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 / US_F</text>
+<text x="57" y="219" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO32 TRIG 0/3.3V</text>
+<text x="57" y="240" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO34 &lt;- U2.7 output</text>
+<text x="57" y="261" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R30 100k GPIO-to-GND</text>
+<text x="57" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">U2.8 -&gt; ESP1.3V3</text>
+<text x="57" y="303" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">U2.4 -&gt; ESP1.GND</text>
+<rect x="540" y="170" width="330" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="552" y="195" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1.13 -&gt; U1.7</text>
+<rect x="1200" y="170" width="425" height="200" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1212" y="195" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_F HC-SR04</text>
+<text x="1212" y="219" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; protected V5_LOGIC</text>
+<text x="1212" y="240" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND -&gt; BUCK2 OUT- / GND</text>
+<text x="1212" y="261" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">TRIG &lt;- U1.7</text>
+<text x="1212" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO -&gt; R23.1</text>
+<text x="1212" y="303" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No direct ECHO-to-GPIO</text>
+<polyline points="405,212 540,212" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="870,212 1200,212" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="925" y="199" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">TRIG 0/5V</text>
+<polyline points="1200,290 1055,290" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="905" y="275" width="150" height="30" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
+<text x="916" y="295" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R23: 2.2k 1%</text>
+<polyline points="905,290 805,290 735,290" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<circle cx="805" cy="290" r="4" fill="#23844b"/>
+<rect x="465" y="260" width="270" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="477" y="285" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U2.1 A -&gt; U2.7 Y</text>
+<polyline points="465,290 405,290" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="805,290 805,335" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="740" y="335" width="130" height="28" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
+<text x="749" y="355" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R24: 3.3k 1%</text>
+<polyline points="805,363 805,390" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="825" y="394" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND; divider nominal 3.0V</text>
+<rect x="45" y="445" width="360" height="200" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="57" y="470" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 / US_L</text>
+<text x="57" y="494" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO33 TRIG 0/3.3V</text>
+<text x="57" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO35 &lt;- U2.5 output</text>
+<text x="57" y="536" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R31 100k GPIO-to-GND</text>
+<text x="57" y="557" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">U2.8 -&gt; ESP1.3V3</text>
+<text x="57" y="578" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">U2.4 -&gt; ESP1.GND</text>
+<rect x="540" y="445" width="330" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="552" y="470" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1.15 -&gt; U1.5</text>
+<rect x="1200" y="445" width="425" height="200" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1212" y="470" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_L HC-SR04</text>
+<text x="1212" y="494" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; protected V5_LOGIC</text>
+<text x="1212" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND -&gt; BUCK2 OUT- / GND</text>
+<text x="1212" y="536" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">TRIG &lt;- U1.5</text>
+<text x="1212" y="557" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO -&gt; R25.1</text>
+<text x="1212" y="578" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No direct ECHO-to-GPIO</text>
+<polyline points="405,487 540,487" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="870,487 1200,487" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="925" y="474" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">TRIG 0/5V</text>
+<polyline points="1200,565 1055,565" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="905" y="550" width="150" height="30" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
+<text x="916" y="570" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R25: 2.2k 1%</text>
+<polyline points="905,565 805,565 735,565" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<circle cx="805" cy="565" r="4" fill="#23844b"/>
+<rect x="465" y="535" width="270" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="477" y="560" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U2.3 A -&gt; U2.5 Y</text>
+<polyline points="465,565 405,565" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="805,565 805,610" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="740" y="610" width="130" height="28" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
+<text x="749" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R26: 3.3k 1%</text>
+<polyline points="805,638 805,665" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="825" y="669" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND; divider nominal 3.0V</text>
+<rect x="45" y="720" width="360" height="200" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="57" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">ESP1 / US_R</text>
+<text x="57" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO13 TRIG 0/3.3V</text>
+<text x="57" y="790" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GPIO36 &lt;- U2.2 output</text>
+<text x="57" y="811" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R32 100k GPIO-to-GND</text>
+<text x="57" y="832" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">U2.8 -&gt; ESP1.3V3</text>
+<text x="57" y="853" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">U2.4 -&gt; ESP1.GND</text>
+<rect x="540" y="720" width="330" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="552" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U1.17 -&gt; U1.3</text>
+<rect x="1200" y="720" width="425" height="200" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
+<text x="1212" y="745" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">US_R HC-SR04</text>
+<text x="1212" y="769" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; protected V5_LOGIC</text>
+<text x="1212" y="790" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND -&gt; BUCK2 OUT- / GND</text>
+<text x="1212" y="811" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">TRIG &lt;- U1.3</text>
+<text x="1212" y="832" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ECHO -&gt; R27.1</text>
+<text x="1212" y="853" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">No direct ECHO-to-GPIO</text>
+<polyline points="405,762 540,762" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="870,762 1200,762" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="925" y="749" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#23844b">TRIG 0/5V</text>
+<polyline points="1200,840 1055,840" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="905" y="825" width="150" height="30" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
+<text x="916" y="845" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R27: 2.2k 1%</text>
+<polyline points="905,840 805,840 735,840" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<circle cx="805" cy="840" r="4" fill="#23844b"/>
+<rect x="465" y="810" width="270" height="65" fill="#fff9ed" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="477" y="835" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">U2.6 A -&gt; U2.2 Y</text>
+<polyline points="465,840 405,840" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<polyline points="805,840 805,885" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="740" y="885" width="130" height="28" fill="#fff2d8" stroke="#576572" stroke-width="1.4"/>
+<text x="749" y="905" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">R28: 3.3k 1%</text>
+<polyline points="805,913 805,940" fill="none" stroke="#17232c" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="825" y="944" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND; divider nominal 3.0V</text>
+<text x="50" y="1020" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">C_U2: 100nF U2.8-to-U2.4. U2 inputs: HIGH &gt;=2.0V, LOW &lt;=0.8V; edge rate &lt;=10ns/V at 3.3V +/-0.3V. Keep divider-to-U2 traces short. Scope actual sensor</text>
+<text x="50" y="1040" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">cable and pulse shape. U2 outputs follow MCU supply; power-off Ioff limits backfeed.</text>
 </svg>

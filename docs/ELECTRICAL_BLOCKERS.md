@@ -1,3 +1,5 @@
+Current E2 update: [ENGINEERING_REVIEW_E2.md](ENGINEERING_REVIEW_E2.md) and [FINAL_PURCHASE_LIST.md](FINAL_PURCHASE_LIST.md). U2 SN74LVC3G34DCU, C_U2 and R30–32 are now explicitly modeled between dividers and GPIOs to address the independently powered ECHO path. These are additional required parts; actual waveform/rail sequencing qualification and all B01–B14 remain HOLD.
+
 # Electrical release blockers — E1
 
 **Physical release: HOLD.** No physical connection has been approved or measured. The circuit is fully described at the net/functional-terminal level, but the following missing parts/data prevent a final build-ready component selection. Do not substitute wire links for an unresolved protection block. Inventory parts are not presumed electrically compatible merely because their names match a drawing.
@@ -24,6 +26,25 @@
 `electrical/bom.csv` marks every added item: all resistors, proposed bypass/reservoir/clamp parts, U1, fused current-rated distribution, master/stop/manual-arm/contactor hardware, P1 and OV1/OV2. They are **not present in the confirmed inventory**. A block such as OV1 is a functional requirement; no vendor module or footprint has been fabricated to make the drawing look finished. Its actual implementation must be selected and remapped before wiring.
 
 U1 provides a concrete 5V-buffer interface if the actual boards accept 5V logic, and the six ECHO resistors provide a concrete divider if actual signal margins pass. Verified existing board-level conditioning/protection could justify removing or replacing a proposed addition, but only through an explicit design revision and checks. Do not add another motor driver by default; the one-L298N architecture stays provisional until B06 resolves. If its ratings are inadequate, report it unsuitable instead of adjusting software to hide an electrical overload.
+
+## Practical completion essentials
+
+F01–F03 drawing/export defects are corrected in the [audit follow-up](FINAL_ELECTRICAL_AUDIT.md#11-correction-follow-up--f01f03-closed). **Every physical blocker B01–B14 remains open.** The following is a completion list, not approved purchasing ratings or permission to energize the rover.
+
+| Essential item under the present E1 proposal | Still required |
+|---|---|
+| Sensor and control interfaces | R23–R28 ECHO dividers or a qualified alternative; U1 SN74AHCT244N, R1–R22/R29 default-low networks and local bypassing. Resolve safe behavior with one rail unpowered; ordinary divider calculations alone do not close that requirement. Real ECHO stays disconnected. |
+| Protected supplies and battery | Selected implementations of OV1/OV2 OVP/OCP/supervision and compatible high-side 3S P1 protection, protected cell-sense wiring and a pack-compatible balance charger. These are functional requirements pending actual part selection. |
+| Independent cutoff | Rated S0, K1 main contact/coil/two auxiliary sets, latching S2 with three isolated NC contact functions, momentary S3 and qualified coil suppression. |
+| Distribution and fault protection | Fourteen proposed fuses/holders with coordinated ratings/curves, appropriately rated wire/connectors/terminals and strain relief. No motor-current breadboard or jumper-wire path. |
+| Recirculation, noise and heat control | Verify actual board flyback/bypass components; select the required local reservoirs/clamps, cooling and insulated mounting from measured load/transient behavior. Avoid duplicating components already verified on a board. |
+| Commissioning equipment access | Suitable multimeter, current-limited bench source, controlled loads, oscilloscope and appropriate current/temperature measurement methods. Availability is not assumed; initial load qualification is not performed from the LiPo. |
+
+**Essential specifications:** identify actual DevKit/driver/buck/sensor variants and terminal maps; obtain all seven motor voltages/tolerances and running/start/stall demand; establish summed wheel-side demand, both-brush plus conveyor thermal/braking limits, pack chemistry/C rating/cell limits and protection/contact/fuse/wire ratings. Conveyor voltage and shared L298 suitability remain unknown.
+
+**Essential measurements:** unpowered continuity/polarity and internal ground bonds; both buck outputs under load and during faults; raw/divided ECHO and reset/brownout/partial-power GPIO behavior; individual and summed motor start/load/overload/braking currents and temperatures; battery/rail sag, protection clearing, contactor release, residual bus voltage, physical directions, sensing/crosstalk and stopping distance. Use the existing staged assembly guide; no physical gate has passed.
+
+**Optional improvements:** encoders/speed control, current and battery telemetry, improved localization, remote interface and ESP32-CAM. Telemetry is optional; adequate overload and cell protection are essential. Another motor driver is not an automatic requirement: first measure whether the existing stages meet the actual load and fault envelope.
 
 ## Release record
 

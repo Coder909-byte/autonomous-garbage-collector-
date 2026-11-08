@@ -72,6 +72,7 @@ wokwi-cli-token*
 !/artifacts/wokwi-lint.log
 !/artifacts/wokwi-runtime.log
 !/artifacts/design-export-checks.log
+!/artifacts/completion-checks.log
 !/artifacts/firmware-preservation.json
 !/artifacts/turn-investigation-before.log
 !/artifacts/turn-investigation-after.log

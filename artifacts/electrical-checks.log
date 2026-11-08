@@ -1,7 +1,7 @@
 {
-  "components": 82,
-  "nets": 69,
-  "connected_pins": 257,
+  "components": 87,
+  "nets": 72,
+  "connected_pins": 273,
   "no_connect_pins": 19,
   "gpio_assignments": 16,
   "divider_assumed_high_bounds_V": [

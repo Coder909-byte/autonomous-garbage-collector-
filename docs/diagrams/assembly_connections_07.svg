@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Assembly: SOURCE PIN -&gt; DESTINATION PIN / 7</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Assembly: SOURCE PIN -&gt; DESTINATION PIN / 7</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every canonical row is shown exactly once. INTERNAL_VERIFY is an existing module bond to inspect, not a wire to add.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<g data-wire-id="W133" data-source="ESP1.GPIO32" data-destination="R6.1">
+<text x="55" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W133</text>
+<text x="125" y="155" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">ESP1.GPIO32 -&gt; R6.1</text>
+<text x="125" y="172" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TF_3V3 | WIRE | 0/3.3 V</text>
+<text x="1370" y="155" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,178 1630,178" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W134" data-source="U1.7" data-destination="US_F.TRIG">
+<text x="55" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W134</text>
+<text x="125" y="197" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">U1.7 (2Y2) -&gt; US_F.TRIG</text>
+<text x="125" y="214" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TF_5V | WIRE | 0/5 V</text>
+<text x="1370" y="197" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,220 1630,220" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W135" data-source="ESP1.GPIO33" data-destination="U1.15">
+<text x="55" y="239" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W135</text>
+<text x="125" y="239" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">ESP1.GPIO33 -&gt; U1.15 (2A3)</text>
+<text x="125" y="256" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TL_3V3 | WIRE | 0/3.3 V</text>
+<text x="1370" y="239" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,262 1630,262" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W136" data-source="ESP1.GPIO33" data-destination="R7.1">
+<text x="55" y="281" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W136</text>
+<text x="125" y="281" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">ESP1.GPIO33 -&gt; R7.1</text>
+<text x="125" y="298" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TL_3V3 | WIRE | 0/3.3 V</text>
+<text x="1370" y="281" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,304 1630,304" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W137" data-source="U1.5" data-destination="US_L.TRIG">
+<text x="55" y="323" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W137</text>
+<text x="125" y="323" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">U1.5 (2Y3) -&gt; US_L.TRIG</text>
+<text x="125" y="340" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TL_5V | WIRE | 0/5 V</text>
+<text x="1370" y="323" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,346 1630,346" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W138" data-source="ESP1.GPIO13" data-destination="U1.17">
+<text x="55" y="365" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W138</text>
+<text x="125" y="365" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">ESP1.GPIO13 -&gt; U1.17 (2A4)</text>
+<text x="125" y="382" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TR_3V3 | WIRE | 0/3.3 V</text>
+<text x="1370" y="365" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,388 1630,388" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W139" data-source="ESP1.GPIO13" data-destination="R8.1">
+<text x="55" y="407" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W139</text>
+<text x="125" y="407" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">ESP1.GPIO13 -&gt; R8.1</text>
+<text x="125" y="424" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TR_3V3 | WIRE | 0/3.3 V</text>
+<text x="1370" y="407" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,430 1630,430" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W140" data-source="U1.3" data-destination="US_R.TRIG">
+<text x="55" y="449" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W140</text>
+<text x="125" y="449" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#23844b">U1.3 (2Y4) -&gt; US_R.TRIG</text>
+<text x="125" y="466" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">TR_5V | WIRE | 0/5 V</text>
+<text x="1370" y="449" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,472 1630,472" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W141" data-source="S2.EN_NC" data-destination="DRV_L.R_EN">
+<text x="55" y="491" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W141</text>
+<text x="125" y="491" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; DRV_L.R_EN</text>
+<text x="125" y="508" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="491" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,514 1630,514" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W142" data-source="S2.EN_NC" data-destination="DRV_L.L_EN">
+<text x="55" y="533" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W142</text>
+<text x="125" y="533" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; DRV_L.L_EN</text>
+<text x="125" y="550" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="533" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,556 1630,556" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W143" data-source="S2.EN_NC" data-destination="DRV_R.R_EN">
+<text x="55" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W143</text>
+<text x="125" y="575" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; DRV_R.R_EN</text>
+<text x="125" y="592" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="575" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,598 1630,598" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W144" data-source="S2.EN_NC" data-destination="DRV_R.L_EN">
+<text x="55" y="617" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W144</text>
+<text x="125" y="617" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; DRV_R.L_EN</text>
+<text x="125" y="634" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="617" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,640 1630,640" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W145" data-source="S2.EN_NC" data-destination="DRV_A.ENA">
+<text x="55" y="659" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W145</text>
+<text x="125" y="659" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; DRV_A.ENA</text>
+<text x="125" y="676" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="659" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,682 1630,682" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W146" data-source="S2.EN_NC" data-destination="DRV_A.ENB">
+<text x="55" y="701" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W146</text>
+<text x="125" y="701" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; DRV_A.ENB</text>
+<text x="125" y="718" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="701" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,724 1630,724" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W147" data-source="S2.EN_NC" data-destination="R13.1">
+<text x="55" y="743" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W147</text>
+<text x="125" y="743" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; R13.1</text>
+<text x="125" y="760" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="743" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,766 1630,766" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W148" data-source="S2.EN_NC" data-destination="R14.1">
+<text x="55" y="785" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W148</text>
+<text x="125" y="785" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; R14.1</text>
+<text x="125" y="802" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="785" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,808 1630,808" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W149" data-source="S2.EN_NC" data-destination="R15.1">
+<text x="55" y="827" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W149</text>
+<text x="125" y="827" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; R15.1</text>
+<text x="125" y="844" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="827" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,850 1630,850" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W150" data-source="S2.EN_NC" data-destination="R16.1">
+<text x="55" y="869" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W150</text>
+<text x="125" y="869" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; R16.1</text>
+<text x="125" y="886" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="869" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,892 1630,892" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W151" data-source="S2.EN_NC" data-destination="R17.1">
+<text x="55" y="911" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W151</text>
+<text x="125" y="911" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; R17.1</text>
+<text x="125" y="928" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="911" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,934 1630,934" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W152" data-source="S2.EN_NC" data-destination="R18.1">
+<text x="55" y="953" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W152</text>
+<text x="125" y="953" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">S2.EN_NC -&gt; R18.1</text>
+<text x="125" y="970" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">EN_DRIVER_5V | WIRE | 0/5 V; LOW disabled</text>
+<text x="1370" y="953" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,976 1630,976" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W153" data-source="ESP1.GPIO21" data-destination="DRV_A.IN1">
+<text x="55" y="995" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W153</text>
+<text x="125" y="995" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">ESP1.GPIO21 -&gt; DRV_A.IN1</text>
+<text x="125" y="1012" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">BRUSH_IN1 | WIRE | 0/3.3 V</text>
+<text x="1370" y="995" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,1018 1630,1018" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W154" data-source="ESP1.GPIO21" data-destination="R9.1">
+<text x="55" y="1037" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W154</text>
+<text x="125" y="1037" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1565c0">ESP1.GPIO21 -&gt; R9.1</text>
+<text x="125" y="1054" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">BRUSH_IN1 | WIRE | 0/3.3 V</text>
+<text x="1370" y="1037" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,1060 1630,1060" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+</svg>

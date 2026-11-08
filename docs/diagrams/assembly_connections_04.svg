@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Assembly: SOURCE PIN -&gt; DESTINATION PIN / 4</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Assembly: SOURCE PIN -&gt; DESTINATION PIN / 4</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every canonical row is shown exactly once. INTERNAL_VERIFY is an existing module bond to inspect, not a wire to add.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<g data-wire-id="W067" data-source="U1.10" data-destination="R7.2">
+<text x="55" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W067</text>
+<text x="125" y="155" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">U1.10 (GND) -&gt; R7.2</text>
+<text x="125" y="172" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="155" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,178 1630,178" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W068" data-source="U1.10" data-destination="R8.2">
+<text x="55" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W068</text>
+<text x="125" y="197" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">U1.10 (GND) -&gt; R8.2</text>
+<text x="125" y="214" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="197" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,220 1630,220" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W069" data-source="DRV_A.GND" data-destination="R9.2">
+<text x="55" y="239" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W069</text>
+<text x="125" y="239" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_A.GND -&gt; R9.2</text>
+<text x="125" y="256" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="239" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,262 1630,262" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W070" data-source="DRV_A.GND" data-destination="R10.2">
+<text x="55" y="281" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W070</text>
+<text x="125" y="281" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_A.GND -&gt; R10.2</text>
+<text x="125" y="298" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="281" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,304 1630,304" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W071" data-source="DRV_A.GND" data-destination="R11.2">
+<text x="55" y="323" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W071</text>
+<text x="125" y="323" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_A.GND -&gt; R11.2</text>
+<text x="125" y="340" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="323" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,346 1630,346" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W072" data-source="DRV_A.GND" data-destination="R12.2">
+<text x="55" y="365" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W072</text>
+<text x="125" y="365" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_A.GND -&gt; R12.2</text>
+<text x="125" y="382" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="365" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,388 1630,388" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W073" data-source="DRV_L.GND" data-destination="R13.2">
+<text x="55" y="407" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W073</text>
+<text x="125" y="407" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_L.GND -&gt; R13.2</text>
+<text x="125" y="424" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="407" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,430 1630,430" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W074" data-source="DRV_L.GND" data-destination="R14.2">
+<text x="55" y="449" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W074</text>
+<text x="125" y="449" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_L.GND -&gt; R14.2</text>
+<text x="125" y="466" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="449" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,472 1630,472" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W075" data-source="DRV_R.GND" data-destination="R15.2">
+<text x="55" y="491" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W075</text>
+<text x="125" y="491" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_R.GND -&gt; R15.2</text>
+<text x="125" y="508" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="491" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,514 1630,514" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W076" data-source="DRV_R.GND" data-destination="R16.2">
+<text x="55" y="533" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W076</text>
+<text x="125" y="533" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_R.GND -&gt; R16.2</text>
+<text x="125" y="550" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="533" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,556 1630,556" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W077" data-source="DRV_A.GND" data-destination="R17.2">
+<text x="55" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W077</text>
+<text x="125" y="575" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_A.GND -&gt; R17.2</text>
+<text x="125" y="592" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="575" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,598 1630,598" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W078" data-source="DRV_A.GND" data-destination="R18.2">
+<text x="55" y="617" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W078</text>
+<text x="125" y="617" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_A.GND -&gt; R18.2</text>
+<text x="125" y="634" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="617" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,640 1630,640" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W079" data-source="DRV_L.GND" data-destination="R19.2">
+<text x="55" y="659" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W079</text>
+<text x="125" y="659" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_L.GND -&gt; R19.2</text>
+<text x="125" y="676" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="659" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,682 1630,682" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W080" data-source="DRV_L.GND" data-destination="R20.2">
+<text x="55" y="701" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W080</text>
+<text x="125" y="701" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_L.GND -&gt; R20.2</text>
+<text x="125" y="718" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="701" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,724 1630,724" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W081" data-source="DRV_R.GND" data-destination="R21.2">
+<text x="55" y="743" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W081</text>
+<text x="125" y="743" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_R.GND -&gt; R21.2</text>
+<text x="125" y="760" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="743" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,766 1630,766" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W082" data-source="DRV_R.GND" data-destination="R22.2">
+<text x="55" y="785" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W082</text>
+<text x="125" y="785" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_R.GND -&gt; R22.2</text>
+<text x="125" y="802" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="785" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,808 1630,808" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W083" data-source="ESP1.GND" data-destination="R29.2">
+<text x="55" y="827" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W083</text>
+<text x="125" y="827" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">ESP1.GND -&gt; R29.2</text>
+<text x="125" y="844" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="827" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,850 1630,850" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W084" data-source="U1.10" data-destination="C_U1.2">
+<text x="55" y="869" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W084</text>
+<text x="125" y="869" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">U1.10 (GND) -&gt; C_U1.2</text>
+<text x="125" y="886" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="869" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,892 1630,892" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W085" data-source="US_F.GND" data-destination="C_F.2">
+<text x="55" y="911" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W085</text>
+<text x="125" y="911" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">US_F.GND -&gt; C_F.2</text>
+<text x="125" y="928" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="911" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,934 1630,934" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W086" data-source="US_L.GND" data-destination="C_L.2">
+<text x="55" y="953" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W086</text>
+<text x="125" y="953" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">US_L.GND -&gt; C_L.2</text>
+<text x="125" y="970" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="953" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,976 1630,976" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W087" data-source="US_R.GND" data-destination="C_R.2">
+<text x="55" y="995" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W087</text>
+<text x="125" y="995" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">US_R.GND -&gt; C_R.2</text>
+<text x="125" y="1012" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="995" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,1018 1630,1018" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W088" data-source="DRV_L.B-" data-destination="C_BL.-">
+<text x="55" y="1037" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W088</text>
+<text x="125" y="1037" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#17232c">DRV_L.B- -&gt; C_BL.-</text>
+<text x="125" y="1054" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference; returns sized by branch</text>
+<text x="1370" y="1037" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">PROVISIONAL</text>
+<polyline points="50,1060 1630,1060" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+</svg>

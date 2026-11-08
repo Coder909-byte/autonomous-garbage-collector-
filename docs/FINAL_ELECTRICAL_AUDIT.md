@@ -1,6 +1,10 @@
+Historical E1 audit (2 November 2026), retained for traceability. Current design and verdict: [ENGINEERING_REVIEW_E2.md](ENGINEERING_REVIEW_E2.md) / [FINAL_GO_NO_GO.md](FINAL_GO_NO_GO.md). E2 adds ECHO isolation and regenerates every connection/export; counts and row IDs in this historical record describe E1 only.
+
 # Final electrical audit — independent re-check of E1
 
 **Review date:** 2 November 2026. **Reviewed revision:** `965183c9296b510f3991b449facb4350bde7e987`, electrical E1. **Overall verdict: HOLD — not ready for complete physical assembly or powered rover operation.**
+
+**Correction follow-up — 2 November 2026:** F01, F02 and F03 are now **CLOSED for the documented drawing/export defects**. See [§11](#11-correction-follow-up--f01f03-closed) for exact changes and validation. The observations and FAIL evidence below are retained as the historical independent review. **All H01–H11 and physical assembly HOLD conditions remain open.** No physical compatibility or safety qualification has been inferred from these corrections.
 
 The proposed functional topology is coherent and the GPIO map matches the firmware. No demonstrably wrong endpoint was found among the 188 canonical connection rows. That does **not** establish a complete, electrically qualified circuit: important blocks are unspecified functional requirements, several interfaces are missing, and no physical measurement exists. Two drawing/documentation defects in E1 and one subsequently observed working-PDF integrity defect are recorded as FAIL below. None is evidence that the canonical netlist already contains a short circuit.
 
@@ -277,6 +281,30 @@ No design correction, firmware change, commit or GitHub push is performed by thi
 | 8. What components are missing? | The mandatory interface/protection/cutoff/distribution parts listed in §9 and the BOM; implementation/ratings are still needed for the generic blocks. Existing board-level substitutes are unverified. |
 | 9. What measurements are required? | H01–H11: pin mapping/continuity; raw/divided signal and reset/rail-fault waveforms; loading/backfeed; per-motor and summed running/start/stall/braking currents; loaded voltages, temperature, cell sag; fuse/cutoff/transient response; physical direction, sensing and stopping performance. No values have been invented. |
 | 10. Is the rover READY FOR PHYSICAL ASSEMBLY? | **NO for the complete rover or powered assembly. Release remains HOLD.** Identification, labeling and separately gated bare-ESP32 USB work can be prepared under their explicit isolation conditions; that is not release of the motor/battery/sensor harness. |
+
+## 11. Correction follow-up — F01–F03 closed
+
+Only diagram/export generation, validation, regression coverage and verification documentation changed. Electrical topology, all 188 connection records, the BOM/terminal map, all 16 GPIOs, canonical firmware, Wokwi sketch/circuit and PlatformIO configuration are byte-for-byte unchanged against the pre-correction snapshot. No new ground wire or internal module bond was introduced.
+
+| Finding | Implemented correction | Closure evidence |
+| --- | --- | --- |
+| F01 — ambiguous BTS return label | Both BTS overview cards now explicitly say `B- -> TB_GND; dedicated branch-rated power return`, with a separate `GND/B- internal bond: VERIFY; no extra return wire` instruction. Updated generator and SVG/PDF/PNG exports, including the combined PDF. | Semantic checks inspect the visible text in each BTS card and its PDF export. W043/W045 retain heavy B- returns; W044/W046 remain INTERNAL_VERIFY. Ground-route guards reject conversion of a verification row into a new wire. |
+| F02 — understated pin-chart status | Row status derives from the most restrictive canonical status across the depicted signal route, including buffer output, shared enable, raw ECHO and feedback nets as applicable. Nine previously understated routes now show BLOCKED_MISSING. The three ECHO routes also show BLOCKED_MISSING with explicit disconnected notes; four L298 input rows remain PROVISIONAL with HOLD notes. | All 16 visible row labels checked against the model in SVG and individual/combined PDF. Regression rejects downgrading a buffer or ECHO row, and verifies a downstream blocker cannot disappear when the upstream status differs. |
+| F03 — damaged PDF offsets | Regenerated binary PDF from corrected sources. Merged PDFs are written to a temporary candidate, validated and atomically replace the destination only on success. The original damaged working PDF is preserved under ignored `artifacts/audit-corrections/electrical_package.damaged.pdf`. | Strict pypdf parsing, classic startxref **and every in-use object offset**, and page text extraction pass for all 15 PDFs. Combined PDF remains 21 pages. Regressions reproduce the original text-reencoding corruption and stale object offsets even after adjusting startxref. |
+
+Corrected combined PDF SHA-256: `591275a5ca91cdf4c76f4fc225f2489bf1871fa48603e4ab3311b2825327f80e`. Its electrical release is **HOLD**. Generated overview labels were also visually inspected using a renderer independent of the generator. Unrelated schematic SVGs and the complete physical-harness SVG retain their original connectivity.
+
+Validation after corrections: **79 C++ + 31 Python = 110 tests PASS**, including all original 100 tests and 10 new export regressions. Both ESP32 builds PASS. The electrical-model, source/Wokwi, complete 188-row graph, 276-terminal SVG and strict 15-PDF export checks PASS. No new Wokwi runtime was executed; owner-reported simulation and physical UNTESTED status remain distinct. No upload, real serial command, battery connection or motor activation occurred.
+
+Reproduction:
+
+```sh
+.venv/bin/python scripts/generate_wiring.py
+.venv/bin/python scripts/check_design_exports.py
+python3 scripts/verify.py
+```
+
+Logs: `artifacts/design-export-checks.log`, `artifacts/verification-run.log`, `artifacts/python-tests.log`, `artifacts/native-tests.log` and `artifacts/build.log`. Local before/after source hashes and damaged-file evidence are under ignored `artifacts/audit-corrections/`. See [ELECTRICAL_BLOCKERS.md](ELECTRICAL_BLOCKERS.md#practical-completion-essentials) for the essential components/specifications/measurements and optional improvements. Closing F01–F03 does not close any physical blocker.
 
 ## Appendix A. Individual connection dispositions
 

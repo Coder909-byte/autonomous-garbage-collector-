@@ -1,20 +1,35 @@
 {
-  "revision": "E1 - provisional electrical design",
-  "schematic_sheets": 6,
+  "revision": "E2 - isolated ECHO interface; engineering HOLD",
+  "schematic_sheets": 7,
   "diagrams": [
     "physical_wiring",
     "esp32_pinout",
     "motor_drivers",
     "power_distribution",
     "sensor_wiring",
-    "emergency_stop"
+    "emergency_stop",
+    "left_bts7960",
+    "right_bts7960",
+    "cleaning_driver",
+    "seven_motors",
+    "logic_enable",
+    "assembly_connections_01",
+    "assembly_connections_02",
+    "assembly_connections_03",
+    "assembly_connections_04",
+    "assembly_connections_05",
+    "assembly_connections_06",
+    "assembly_connections_07",
+    "assembly_connections_08",
+    "assembly_connections_09",
+    "assembly_connections_10"
   ],
-  "wire_rows": 188,
-  "terminal_rows": 276,
-  "components": 82,
-  "nets": 69,
+  "wire_rows": 201,
+  "terminal_rows": 292,
+  "components": 87,
+  "nets": 72,
   "physical_release": "HOLD",
   "kicad_available": false,
   "footprints": "NONE ASSIGNED",
-  "pdf_pages": 21
+  "pdf_pages": 38
 }

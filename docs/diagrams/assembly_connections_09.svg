@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Assembly: SOURCE PIN -&gt; DESTINATION PIN / 9</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Assembly: SOURCE PIN -&gt; DESTINATION PIN / 9</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every canonical row is shown exactly once. INTERNAL_VERIFY is an existing module bond to inspect, not a wire to add.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<g data-wire-id="W177" data-source="DRV_L.M+" data-destination="FM2.IN">
+<text x="55" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W177</text>
+<text x="125" y="155" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_L.M+ -&gt; FM2.IN</text>
+<text x="125" y="172" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_L_MP | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="155" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,178 1630,178" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W178" data-source="DRV_L.M-" data-destination="M1.B">
+<text x="55" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W178</text>
+<text x="125" y="197" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_L.M- -&gt; M1.B</text>
+<text x="125" y="214" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_L_MN | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="197" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,220 1630,220" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W179" data-source="DRV_L.M-" data-destination="M2.B">
+<text x="55" y="239" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W179</text>
+<text x="125" y="239" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_L.M- -&gt; M2.B</text>
+<text x="125" y="256" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_L_MN | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="239" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,262 1630,262" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W180" data-source="FM1.OUT" data-destination="M1.A">
+<text x="55" y="281" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W180</text>
+<text x="125" y="281" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM1.OUT -&gt; M1.A</text>
+<text x="125" y="298" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M1_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="281" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,304 1630,304" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W181" data-source="FM2.OUT" data-destination="M2.A">
+<text x="55" y="323" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W181</text>
+<text x="125" y="323" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM2.OUT -&gt; M2.A</text>
+<text x="125" y="340" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M2_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="323" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,346 1630,346" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W182" data-source="DRV_R.M+" data-destination="FM3.IN">
+<text x="55" y="365" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W182</text>
+<text x="125" y="365" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_R.M+ -&gt; FM3.IN</text>
+<text x="125" y="382" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_R_MP | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="365" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,388 1630,388" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W183" data-source="DRV_R.M+" data-destination="FM4.IN">
+<text x="55" y="407" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W183</text>
+<text x="125" y="407" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_R.M+ -&gt; FM4.IN</text>
+<text x="125" y="424" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_R_MP | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="407" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,430 1630,430" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W184" data-source="DRV_R.M-" data-destination="M3.B">
+<text x="55" y="449" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W184</text>
+<text x="125" y="449" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_R.M- -&gt; M3.B</text>
+<text x="125" y="466" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_R_MN | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="449" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,472 1630,472" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W185" data-source="DRV_R.M-" data-destination="M4.B">
+<text x="55" y="491" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W185</text>
+<text x="125" y="491" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_R.M- -&gt; M4.B</text>
+<text x="125" y="508" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_R_MN | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="491" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,514 1630,514" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W186" data-source="FM3.OUT" data-destination="M3.A">
+<text x="55" y="533" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W186</text>
+<text x="125" y="533" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM3.OUT -&gt; M3.A</text>
+<text x="125" y="550" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M3_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="533" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,556 1630,556" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W187" data-source="FM4.OUT" data-destination="M4.A">
+<text x="55" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W187</text>
+<text x="125" y="575" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM4.OUT -&gt; M4.A</text>
+<text x="125" y="592" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M4_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="575" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,598 1630,598" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W188" data-source="DRV_A.OUT1" data-destination="FM5.IN">
+<text x="55" y="617" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W188</text>
+<text x="125" y="617" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_A.OUT1 -&gt; FM5.IN</text>
+<text x="125" y="634" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_A_OUT1 | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="617" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,640 1630,640" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W189" data-source="DRV_A.OUT1" data-destination="FM6.IN">
+<text x="55" y="659" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W189</text>
+<text x="125" y="659" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_A.OUT1 -&gt; FM6.IN</text>
+<text x="125" y="676" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_A_OUT1 | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="659" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,682 1630,682" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W190" data-source="DRV_A.OUT2" data-destination="M5.B">
+<text x="55" y="701" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W190</text>
+<text x="125" y="701" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_A.OUT2 -&gt; M5.B</text>
+<text x="125" y="718" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_A_OUT2 | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="701" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,724 1630,724" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W191" data-source="DRV_A.OUT2" data-destination="M6.B">
+<text x="55" y="743" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W191</text>
+<text x="125" y="743" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_A.OUT2 -&gt; M6.B</text>
+<text x="125" y="760" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_A_OUT2 | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="743" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,766 1630,766" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W192" data-source="FM5.OUT" data-destination="M5.A">
+<text x="55" y="785" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W192</text>
+<text x="125" y="785" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM5.OUT -&gt; M5.A</text>
+<text x="125" y="802" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M5_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="785" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,808 1630,808" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W193" data-source="FM6.OUT" data-destination="M6.A">
+<text x="55" y="827" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W193</text>
+<text x="125" y="827" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM6.OUT -&gt; M6.A</text>
+<text x="125" y="844" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M6_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="827" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,850 1630,850" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W194" data-source="DRV_A.OUT3" data-destination="FM7.IN">
+<text x="55" y="869" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W194</text>
+<text x="125" y="869" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_A.OUT3 -&gt; FM7.IN</text>
+<text x="125" y="886" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_A_OUT3 | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="869" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,892 1630,892" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W195" data-source="DRV_A.OUT4" data-destination="M7.B">
+<text x="55" y="911" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W195</text>
+<text x="125" y="911" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">DRV_A.OUT4 -&gt; M7.B</text>
+<text x="125" y="928" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">DRV_A_OUT4 | WIRE | Bidirectional / PWM bridge output; not a supply rail</text>
+<text x="1370" y="911" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,934 1630,934" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W196" data-source="FM7.OUT" data-destination="M7.A">
+<text x="55" y="953" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W196</text>
+<text x="125" y="953" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d87800">FM7.OUT -&gt; M7.A</text>
+<text x="125" y="970" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">M7_A | WIRE | Bridge output after fuse</text>
+<text x="1370" y="953" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_RATING</text>
+<polyline points="50,976 1630,976" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W197" data-source="BUCK1.OUT+" data-destination="OV1.IN+">
+<text x="55" y="995" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W197</text>
+<text x="125" y="995" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#c62828">BUCK1.OUT+ -&gt; OV1.IN+</text>
+<text x="125" y="1012" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">V5_MCU_RAW | WIRE | 5V target; buck-fault voltage may approach pack</text>
+<text x="1370" y="995" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,1018 1630,1018" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+<g data-wire-id="W198" data-source="BUCK2.OUT+" data-destination="OV2.IN+">
+<text x="55" y="1037" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#17232c">W198</text>
+<text x="125" y="1037" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#c62828">BUCK2.OUT+ -&gt; OV2.IN+</text>
+<text x="125" y="1054" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#17232c">V5_LOGIC_RAW | WIRE | 5V target; buck-fault voltage may approach pack</text>
+<text x="1370" y="1037" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">BLOCKED_MISSING</text>
+<polyline points="50,1060 1630,1060" fill="none" stroke="#dce2e8" stroke-width="1"/>
+</g>
+</svg>

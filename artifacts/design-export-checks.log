@@ -1,7 +1,7 @@
 {
-  "components": 82,
-  "nets": 69,
-  "connected_pins": 257,
+  "components": 87,
+  "nets": 72,
+  "connected_pins": 273,
   "no_connect_pins": 19,
   "gpio_assignments": 16,
   "divider_assumed_high_bounds_V": [
@@ -10,8 +10,11 @@
   ],
   "enable_pulldown_load_mA": 3.0,
   "result": "PASS - structural only; all physical connections remain unapproved",
-  "wire_rows": 188,
-  "all_svg_terminals": 276,
-  "pdf_pages": 21,
-  "export_check": "PASS; structural/readability only"
+  "wire_rows": 201,
+  "all_svg_terminals": 292,
+  "pdf_pages": 38,
+  "strict_pdf_files": 31,
+  "bts_return_labels": "PASS; no added return wires",
+  "gpio_chart_statuses": "PASS; signal-route net status propagated",
+  "export_check": "PASS; structural/semantic/PDF integrity only; physical release HOLD"
 }

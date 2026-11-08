@@ -4,16 +4,20 @@
 <text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Motor-driver connections: seven motors</text>
 <text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Each orange bundle represents two separate motor conductors. Exact per-terminal nets/fuses are shown in the complete schematic and CSV.</text>
 <rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
-<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
 <text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
 <text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<g data-driver="DRV_L">
 <rect x="55" y="180" width="650" height="205" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
 <text x="67" y="205" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_L | BTS7960 / IBT-2 left</text>
-<text x="67" y="229" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">LEFT_SUPPLY -&gt; B+; GND -&gt; power return</text>
-<text x="67" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; qualified V5_LOGIC</text>
-<text x="67" y="271" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RPWM &lt;- U1.18 / LPWM &lt;- U1.16</text>
-<text x="67" y="292" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R_EN and L_EN &lt;- EN_DRIVER_5V</text>
-<text x="67" y="313" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+<text x="67" y="229" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">LEFT_SUPPLY -&gt; B+</text>
+<text x="67" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">B- -&gt; TB_GND; dedicated branch-rated power return</text>
+<text x="67" y="271" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND/B- internal bond: VERIFY; no extra return wire</text>
+<text x="67" y="292" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; qualified V5_LOGIC</text>
+<text x="67" y="313" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RPWM &lt;- U1.18 / LPWM &lt;- U1.16</text>
+<text x="67" y="334" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R_EN and L_EN &lt;- EN_DRIVER_5V</text>
+<text x="67" y="355" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+</g>
 <rect x="1130" y="180" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
 <text x="1142" y="205" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M1 | left front wheel motor</text>
 <polyline points="705,222 810,222 810,212 1130,212" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
@@ -24,13 +28,17 @@
 <polyline points="705,287 810,287 810,312 1130,312" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
 <text x="835" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">M+ / M-; A via FM2</text>
 <text x="1142" y="330" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<g data-driver="DRV_R">
 <rect x="55" y="455" width="650" height="205" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
 <text x="67" y="480" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_R | BTS7960 / IBT-2 right</text>
-<text x="67" y="504" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RIGHT_SUPPLY -&gt; B+; GND -&gt; power return</text>
-<text x="67" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; qualified V5_LOGIC</text>
-<text x="67" y="546" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RPWM &lt;- U1.14 / LPWM &lt;- U1.12</text>
-<text x="67" y="567" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R_EN and L_EN &lt;- EN_DRIVER_5V</text>
-<text x="67" y="588" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+<text x="67" y="504" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RIGHT_SUPPLY -&gt; B+</text>
+<text x="67" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">B- -&gt; TB_GND; dedicated branch-rated power return</text>
+<text x="67" y="546" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">GND/B- internal bond: VERIFY; no extra return wire</text>
+<text x="67" y="567" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">VCC -&gt; qualified V5_LOGIC</text>
+<text x="67" y="588" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">RPWM &lt;- U1.14 / LPWM &lt;- U1.12</text>
+<text x="67" y="609" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">R_EN and L_EN &lt;- EN_DRIVER_5V</text>
+<text x="67" y="630" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+</g>
 <rect x="1130" y="455" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
 <text x="1142" y="480" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M3 | right front wheel motor</text>
 <polyline points="705,497 810,497 810,487 1130,487" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
@@ -41,6 +49,7 @@
 <polyline points="705,562 810,562 810,587 1130,587" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>
 <text x="835" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#d87800">M+ / M-; A via FM4</text>
 <text x="1142" y="605" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">A: fused output; B: bridge return</text>
+<g data-driver="DRV_A">
 <rect x="55" y="730" width="650" height="205" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
 <text x="67" y="755" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">DRV_A | ONE L298N: A brushes / B conveyor</text>
 <text x="67" y="779" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">AUX_SUPPLY -&gt; Vs; GND -&gt; power return</text>
@@ -48,6 +57,7 @@
 <text x="67" y="821" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">IN1/2 GPIO21/22; IN3/4 GPIO23/25</text>
 <text x="67" y="842" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">ENA/ENB &lt;- EN_DRIVER_5V</text>
 <text x="67" y="863" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Remove EN jumpers; currents/thermal TBD</text>
+</g>
 <rect x="1130" y="730" width="495" height="65" fill="#f4f7fb" stroke="#576572" stroke-width="1.4"/>
 <text x="1142" y="755" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">M5 | brush 1 motor</text>
 <polyline points="705,772 810,772 810,762 1130,762" fill="none" stroke="#d87800" stroke-width="6" stroke-dasharray="8 5"/>

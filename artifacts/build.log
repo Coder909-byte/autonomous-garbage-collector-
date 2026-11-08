@@ -20,7 +20,7 @@ Checking size .pio/build/esp32dev/firmware.elf
 Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
 RAM:   [=         ]   6.8% (used 22232 bytes from 327680 bytes)
 Flash: [==        ]  21.5% (used 281345 bytes from 1310720 bytes)
-========================= [SUCCESS] Took 4.02 seconds =========================
+========================= [SUCCESS] Took 3.30 seconds =========================
 
 Processing wokwi_compile (platform: espressif32@6.12.0; board: esp32dev; framework: arduino)
 --------------------------------------------------------------------------------
@@ -44,10 +44,10 @@ Checking size .pio/build/wokwi_compile/firmware.elf
 Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
 RAM:   [=         ]   6.8% (used 22232 bytes from 327680 bytes)
 Flash: [==        ]  21.5% (used 281345 bytes from 1310720 bytes)
-========================= [SUCCESS] Took 2.48 seconds =========================
+========================= [SUCCESS] Took 1.89 seconds =========================
 
 Environment    Status    Duration
 -------------  --------  ------------
-esp32dev       SUCCESS   00:00:04.015
-wokwi_compile  SUCCESS   00:00:02.482
-========================= 2 succeeded in 00:00:06.498 =========================
+esp32dev       SUCCESS   00:00:03.300
+wokwi_compile  SUCCESS   00:00:01.885
+========================= 2 succeeded in 00:00:05.185 =========================

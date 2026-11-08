@@ -1,6 +1,8 @@
-# Verification matrix — one L298N, turn-state update
+# Verification matrix — one L298N, turn-state and audit corrections
 
-Recorded 2 November 2026. This revision uses channel A for both brushes in parallel and channel B for the conveyor. **No physical firmware upload, battery connection, motor activation, electrical measurement or hardware commissioning was performed.**
+Recorded 8 November 2026 (E2). This revision uses channel A for both brushes in parallel and channel B for the conveyor. **No physical firmware upload, battery connection, motor activation, electrical measurement or hardware commissioning was performed.**
+
+E2 adds three firmware-adapter regressions (physical stop during cleaning, software restart, sensor recovery) and six electrical isolation / pre-contactor rail fault-rejection tests. Full current outcomes: [FINAL_GO_NO_GO.md](docs/FINAL_GO_NO_GO.md); all requested runtime procedures: [SIMULATION_VERIFICATION.md](docs/SIMULATION_VERIFICATION.md).
 
 ## Evidence levels
 
@@ -9,11 +11,12 @@ Recorded 2 November 2026. This revision uses channel A for both brushes in paral
 | ESP32 firmware compile verified | **PASS** | `esp32dev`, Espressif32 6.12.0 / Arduino 2.0.17; `artifacts/build.log` |
 | Standalone Wokwi sketch compile verified | **PASS** | `wokwi_compile`, generated from the same controller, pin definitions and adapter; same build log |
 | Host controller/parser/interlock verified | **PASS: 38 tests** | Original 32 tests retained/adapted, plus independent auxiliary requests, ARM requirements, auxiliary commands not refreshing deadman, STOP latch/clearing requests, fault clearing both channels and CLEAN aliases |
-| Host firmware I/O boundary verified | **PASS: 21 tests** | Original 12 retained/adapted, plus one-L298N outputs, auxiliaries off during neutral/turn, right-turn polarity, GPIO27 internal pull-down, STOP cuts both auxiliary channels, four-pin auxiliary topology, full AUTO turn duration after EN, E-stop ISR during AUTO turn and reassessment fault stopping |
+| Host firmware I/O boundary verified | **PASS: 24 tests** | Original 12 retained/adapted, plus one-L298N outputs, auxiliaries off during neutral/turn, right-turn polarity, GPIO27 internal pull-down, STOP cuts both auxiliary channels, four-pin auxiliary topology, full AUTO turn duration after EN, E-stop ISR during AUTO turn and reassessment fault stopping |
 | Host turning regressions verified | **PASS: 20 tests** | `test/test_turning/test_main.cpp`: continuous turns, full enabled duration, new post-stop sensor frame, bounded retries, hysteresis, updated direction, clear recovery, rollover, emergency/sensor faults across all phases |
 | Host VCD evidence checker verified | **PASS: 10 tests** | Synthetic host traces test PWM detection, left direction, brush/conveyor independence, all-blocked state, and rejection of opposing PWM, unknown signals, stuck-HIGH output, missing channels and wrong auxiliaries. These traces are **not Wokwi recordings**. `artifacts/python-tests.log` |
-| Electrical-model fault rejection | **PASS: 11 Python tests** | Structural netlist mutations reject raw ECHO, shared buck outputs, missing pulls, wrong GPIOs, bypassed cutoff/feedback, fabricated fuse ratings and footprints; not a powered electrical simulation |
-| Electrical source/export agreement | **PASS** | E1 source defines 82 components, 69 nets, 188 connection rows and 276 modeled terminals including NC; all schematic SVG terminals, CSV connectivity and readable 21-page PDF validated. No KiCad/ERC or physical approval. `artifacts/design-export-checks.log` |
+| Electrical-model fault rejection | **PASS: 17 Python tests** | Structural netlist mutations reject raw ECHO, shared buck outputs, missing pulls, wrong GPIOs, bypassed cutoff/feedback, fabricated fuse ratings and footprints; not a powered electrical simulation |
+| Audit-export regression rejection | **PASS: 10 Python tests** | BTS power-return labeling, no added internal-ground jumpers, blocked GPIO/ECHO statuses, downstream blockers, PDF text-reencoding and stale cross-reference offsets. `test/test_design_exports.py` |
+| Electrical source/export agreement | **PASS** | E2 source defines 87 components, 72 nets, 201 connection rows and 292 modeled terminals including NC; all schematic SVG terminals, CSV connectivity, visible corrected labels/statuses and all 31 PDFs strictly validated; combined PDF is 38 pages. No KiCad/ERC or physical approval. `artifacts/design-export-checks.log` |
 | Static code/diagram agreement | **PASS** | 16 unique GPIOs, exact one-L298N map, both brush indicators sharing GPIO21, separate conveyor GPIO23, GPIO27 E-stop, analyzer mapping, no resistor components and no stale GPIO26/39 connections. `artifacts/static-checks.log` |
 | Wokwi diagram lint | **PASS, no errors or warnings** | Wokwi CLI v0.29.1. One informational notice remains about the older DevKit-v1 part. `artifacts/wokwi-lint.log` |
 | Manual Wokwi functional results before turn update | **OWNER-REPORTED PASS: 11 checks** | Startup, three readings, ARM, AUTO, forward command, left/right avoidance, brushes, conveyor, ESTOP and no automatic restart. See manual results below; no raw trace supplied. |
@@ -21,9 +24,9 @@ Recorded 2 November 2026. This revision uses channel A for both brushes in paral
 | Arduino-ESP32 3.x build | **NOT EXECUTED** | Compatibility branch exists; only pinned Arduino 2.0.17 is compile verified. |
 | Physical hardware | **UNTESTED / CONNECTION HOLDS ACTIVE** | ECHO voltage, driver logic/default enables, summed motor current, power distribution, battery protection and all mechanics remain unverified. |
 
-Both firmware builds pass without compiler warnings and use **22,232 bytes RAM / 281,345 bytes flash** (`artifacts/build.log`). `artifacts/native-tests.log` records all **79 C++ cases passing**; the Python log records **21 cases passing** (10 VCD-checker and 11 electrical-model checks). Host Arduino stubs do not reproduce actual interrupt concurrency, electrical voltage/current, PWM peripheral behavior, acoustics or mechanical loads. Their E-stop ISR test verifies the requested register operation, not measured physical response time.
+Both firmware builds pass without compiler warnings and use **22,232 bytes RAM / 281,345 bytes flash** (`artifacts/build.log`). `artifacts/native-tests.log` records all **82 C++ cases passing**; the Python log records **37 cases passing** (10 VCD-checker, 17 electrical-model and 10 audit-export regression checks), for **119 total host tests**. Host Arduino stubs do not reproduce actual interrupt concurrency, electrical voltage/current, PWM peripheral behavior, acoustics or mechanical loads. Their E-stop ISR test verifies the requested register operation, not measured physical response time.
 
-Run the entire software suite sequentially with `python3 scripts/verify.py`. Previous two-L298N logs are under `artifacts/previous_two_l298n/`; the pre-turn-update one-L298N results are under `artifacts/previous_one_l298n/`. Neither establishes verification for the changed turning behavior.
+Run the entire software suite sequentially with `.venv/bin/python scripts/verify.py`. Previous two-L298N logs are under `artifacts/previous_two_l298n/`; the pre-turn-update one-L298N results are under `artifacts/previous_one_l298n/`. Neither establishes verification for the changed turning behavior.
 
 ## Manual Wokwi results supplied by the owner
 
@@ -123,3 +126,7 @@ The working firmware/controller/pin map/generated sketch hashes are unchanged fr
 In the latest electrical-design request the owner again reports successful Wokwi autonomous movement, obstacle avoidance, cleaning controls and emergency-stop latching. These are accepted as owner-reported functional simulation results. No independent CLI run or quantitative waveform trace was supplied/executed for this package. Simulation does not verify E1's added protection hardware or physical levels/currents.
 
 **Physical verification: NONE.** No firmware was uploaded, no battery was connected and no real motor energized during this task. All E1 physical connections remain provisional/blocked. The independent cutoff/protection assemblies and motor-current/fuse/wire selections remain open. Physical K1-open feedback intentionally starts unsafe on GPIO27; future commissioning requires the hardware power-arm and RESET/ARM sequence in ASSEMBLY_GUIDE.md, not a bypass of GPIO27. Serial ESTOP disables EN but does not electrically isolate the live motor bus.
+
+## Audit correction follow-up — latest verification
+
+F01/F02 drawing defects and F03 PDF integrity failure are corrected; detailed change/closure evidence is in [FINAL_ELECTRICAL_AUDIT.md](docs/FINAL_ELECTRICAL_AUDIT.md#11-correction-follow-up--f01f03-closed). Both builds and all 110 tests pass. Canonical firmware, GPIOs, electrical source and all 188 connection records are unchanged. The earlier 100-test counts in historical sections describe the pre-correction suite. All physical blockers remain open; no hardware was energized or firmware uploaded.

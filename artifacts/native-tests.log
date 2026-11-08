@@ -43,34 +43,37 @@ test/test_navigation/test_main.cpp:84: parser_normalization	[PASSED]
 test/test_navigation/test_main.cpp:84: parser_overflow_discards	[PASSED]
 test/test_navigation/test_main.cpp:85: gate_neutral_and_reverse	[PASSED]
 test/test_navigation/test_main.cpp:85: gate_rollover	[PASSED]
--------------- native:test_navigation [PASSED] Took 4.26 seconds --------------
+-------------- native:test_navigation [PASSED] Took 2.00 seconds --------------
 
 Processing test_io in native environment
 --------------------------------------------------------------------------------
 Building...
 Testing...
-test/test_io/test_main.cpp:80: adapter_times_turn_from_enable	[PASSED]
-test/test_io/test_main.cpp:80: physical_estop_interrupts_auto_turn	[PASSED]
-test/test_io/test_main.cpp:81: reassessment_sensor_failure_keeps_adapter_disabled	[PASSED]
-test/test_io/test_main.cpp:82: one_l298n_independent_outputs	[PASSED]
-test/test_io/test_main.cpp:82: aux_suppressed_during_neutral_and_turns	[PASSED]
-test/test_io/test_main.cpp:83: right_turn_wheel_outputs	[PASSED]
-test/test_io/test_main.cpp:83: estop_input_has_internal_pulldown	[PASSED]
-test/test_io/test_main.cpp:84: stop_disables_both_aux_channels	[PASSED]
-test/test_io/test_main.cpp:84: aux_channel_topology	[PASSED]
-test/test_io/test_main.cpp:84: boot_outputs_disabled	[PASSED]
-test/test_io/test_main.cpp:84: open_loop_at_boot_latches	[PASSED]
-test/test_io/test_main.cpp:85: arm_no_pulse	[PASSED]
-test/test_io/test_main.cpp:85: forward_after_neutral	[PASSED]
-test/test_io/test_main.cpp:85: reverse_break_before_make	[PASSED]
-test/test_io/test_main.cpp:86: physical_isr_immediately_cuts_enable	[PASSED]
-test/test_io/test_main.cpp:86: release_requires_reset_and_rearm	[PASSED]
-test/test_io/test_main.cpp:87: serial_estop_all_outputs	[PASSED]
-test/test_io/test_main.cpp:87: deadman_cuts_actual_enable	[PASSED]
-test/test_io/test_main.cpp:88: overflow_disarms_actual_outputs	[PASSED]
-test/test_io/test_main.cpp:88: pwm_failure_blocks_arming	[PASSED]
-test/test_io/test_main.cpp:88: timeout_disarms_auto_outputs	[PASSED]
------------------- native:test_io [PASSED] Took 1.94 seconds ------------------
+test/test_io/test_main.cpp:105: physical_estop_during_both_cleaning_channels	[PASSED]
+test/test_io/test_main.cpp:105: software_reboot_discards_motion_and_cleaning	[PASSED]
+test/test_io/test_main.cpp:106: sensor_recovery_requires_explicit_arm_auto	[PASSED]
+test/test_io/test_main.cpp:107: adapter_times_turn_from_enable	[PASSED]
+test/test_io/test_main.cpp:107: physical_estop_interrupts_auto_turn	[PASSED]
+test/test_io/test_main.cpp:108: reassessment_sensor_failure_keeps_adapter_disabled	[PASSED]
+test/test_io/test_main.cpp:109: one_l298n_independent_outputs	[PASSED]
+test/test_io/test_main.cpp:109: aux_suppressed_during_neutral_and_turns	[PASSED]
+test/test_io/test_main.cpp:110: right_turn_wheel_outputs	[PASSED]
+test/test_io/test_main.cpp:110: estop_input_has_internal_pulldown	[PASSED]
+test/test_io/test_main.cpp:111: stop_disables_both_aux_channels	[PASSED]
+test/test_io/test_main.cpp:111: aux_channel_topology	[PASSED]
+test/test_io/test_main.cpp:111: boot_outputs_disabled	[PASSED]
+test/test_io/test_main.cpp:111: open_loop_at_boot_latches	[PASSED]
+test/test_io/test_main.cpp:112: arm_no_pulse	[PASSED]
+test/test_io/test_main.cpp:112: forward_after_neutral	[PASSED]
+test/test_io/test_main.cpp:112: reverse_break_before_make	[PASSED]
+test/test_io/test_main.cpp:113: physical_isr_immediately_cuts_enable	[PASSED]
+test/test_io/test_main.cpp:113: release_requires_reset_and_rearm	[PASSED]
+test/test_io/test_main.cpp:114: serial_estop_all_outputs	[PASSED]
+test/test_io/test_main.cpp:114: deadman_cuts_actual_enable	[PASSED]
+test/test_io/test_main.cpp:115: overflow_disarms_actual_outputs	[PASSED]
+test/test_io/test_main.cpp:115: pwm_failure_blocks_arming	[PASSED]
+test/test_io/test_main.cpp:115: timeout_disarms_auto_outputs	[PASSED]
+------------------ native:test_io [PASSED] Took 1.61 seconds ------------------
 
 Processing test_turning in native environment
 --------------------------------------------------------------------------------
@@ -96,12 +99,12 @@ test/test_turning/test_main.cpp:156: final_attempt_may_recover_with_fresh_clear_
 test/test_turning/test_main.cpp:156: obstacle_cleared_during_initial_settle_needs_no_turn	[PASSED]
 test/test_turning/test_main.cpp:157: pending_turn_safety_clearance_is_checked	[PASSED]
 test/test_turning/test_main.cpp:157: stop_command_cancels_reassessment_and_future_turns	[PASSED]
----------------- native:test_turning [PASSED] Took 1.64 seconds ----------------
+---------------- native:test_turning [PASSED] Took 1.59 seconds ----------------
 
 =================================== SUMMARY ===================================
 Environment    Test             Status    Duration
 -------------  ---------------  --------  ------------
-native         test_navigation  PASSED    00:00:04.257
-native         test_io          PASSED    00:00:01.936
-native         test_turning     PASSED    00:00:01.641
-================= 79 test cases: 79 succeeded in 00:00:07.834 =================
+native         test_navigation  PASSED    00:00:02.004
+native         test_io          PASSED    00:00:01.615
+native         test_turning     PASSED    00:00:01.592
+================= 82 test cases: 82 succeeded in 00:00:05.211 =================

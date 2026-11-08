@@ -75,8 +75,35 @@ void reassessment_sensor_failure_keeps_adapter_disabled() {
  controller.sample(1,-1,821); controller.tick(821,true); applyOutputs(821); stopped();
  TEST_ASSERT_FALSE(controller.armed); TEST_ASSERT_TRUE(controller.navigation()==rover::NavPhase::SensorFault);
 }
+void physical_estop_during_both_cleaning_channels() {
+ startForward(); send("CLEAN ON\n");
+ TEST_ASSERT_EQUAL(1,mockPins[pins::BRUSH_IN1]); TEST_ASSERT_EQUAL(1,mockPins[pins::CONVEYOR_IN3]);
+ mockPins[pins::ESTOP_OK]=LOW; mockInterrupt();
+ TEST_ASSERT_EQUAL(0,mockPins[pins::ENABLE]); loop(); stopped();
+ mockPins[pins::ESTOP_OK]=HIGH; send("ARM\nF\nCLEAN ON\n"); stopped();
+ TEST_ASSERT_TRUE(controller.estop);
+}
+void software_reboot_discards_motion_and_cleaning() {
+ startForward(); send("CLEAN ON\n");
+ // Recreate the software globals as a real restart would; this models no rail ramp.
+ controller=rover::Controller(); parser=rover::LineParser(); gate=rover::MotionGate();
+ hardwareTrip=false; setup(); loop(); stopped();
+ TEST_ASSERT_FALSE(controller.armed); TEST_ASSERT_FALSE(controller.brushes); TEST_ASSERT_FALSE(controller.conveyor);
+}
+void sensor_recovery_requires_explicit_arm_auto() {
+ setup(); for(unsigned i=0;i<3;++i) controller.sample(i,100,0);
+ send("ARM\nAUTO\nCLEAN ON\n"); mockNow=100; loop();
+ controller.sample(0,-1,101); controller.tick(101,true); applyOutputs(101); stopped();
+ for(unsigned i=0;i<3;++i) controller.sample(i,100,102);
+ controller.tick(102,true); applyOutputs(102); stopped(); TEST_ASSERT_FALSE(controller.armed);
+ mockNow=102; send("AUTO\n"); stopped();
+ send("ARM\nAUTO\n"); mockNow=202; loop(); TEST_ASSERT_EQUAL(1,mockPins[pins::ENABLE]);
+ TEST_ASSERT_EQUAL(0,mockPins[pins::BRUSH_IN1]); TEST_ASSERT_EQUAL(0,mockPins[pins::CONVEYOR_IN3]);
+}
 int main() {
  UNITY_BEGIN();
+ RUN_TEST(physical_estop_during_both_cleaning_channels); RUN_TEST(software_reboot_discards_motion_and_cleaning);
+ RUN_TEST(sensor_recovery_requires_explicit_arm_auto);
  RUN_TEST(adapter_times_turn_from_enable); RUN_TEST(physical_estop_interrupts_auto_turn);
  RUN_TEST(reassessment_sensor_failure_keeps_adapter_disabled);
  RUN_TEST(one_l298n_independent_outputs); RUN_TEST(aux_suppressed_during_neutral_and_turns);

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Complete schematic - sheet 7</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Complete schematic - sheet 7</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every component terminal is shown. Equal net labels are connected; use connection IDs in the CSV for physical routing.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<rect x="42" y="148" width="500" height="247" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="52" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">U2 | SN74LVC3G34DCU ECHO isolation</text>
+<text x="52" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="52" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">SN74LVC3G34DCU</text>
+<text x="54" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1 / 1A</text>
+<polyline points="250,232 290,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U2.1" data-net="EF_DIV" x="300" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_DIV</text>
+<text x="54" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2 / 3Y</text>
+<polyline points="250,252 290,252" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U2.2" data-net="ER_SAFE" x="300" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_SAFE</text>
+<text x="54" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">3 / 2A</text>
+<polyline points="250,272 290,272" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U2.3" data-net="EL_DIV" x="300" y="277" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_DIV</text>
+<text x="54" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">4 / GND</text>
+<polyline points="250,292 290,292" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="U2.4" data-net="GND" x="300" y="297" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<text x="54" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">5 / 2Y</text>
+<polyline points="250,312 290,312" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U2.5" data-net="EL_SAFE" x="300" y="317" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_SAFE</text>
+<text x="54" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">6 / 3A</text>
+<polyline points="250,332 290,332" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U2.6" data-net="ER_DIV" x="300" y="337" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_DIV</text>
+<text x="54" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">7 / 1Y</text>
+<polyline points="250,352 290,352" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="U2.7" data-net="EF_SAFE" x="300" y="357" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_SAFE</text>
+<text x="54" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">8 / VCC</text>
+<polyline points="250,372 290,372" fill="none" stroke="#c62828" stroke-width="2"/>
+<text data-terminal="U2.8" data-net="V3V3" x="300" y="377" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V3V3</text>
+<rect x="576" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">C_U2 | local ceramic bypass</text>
+<text x="586" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">100nF, &gt;=10V</text>
+<text x="588" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,232 824,232" fill="none" stroke="#c62828" stroke-width="2"/>
+<text data-terminal="C_U2.1" data-net="V3V3" x="834" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#c62828">V3V3</text>
+<text x="588" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,252 824,252" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="C_U2.2" data-net="GND" x="834" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,232 784,239" fill="none" stroke="#576572" stroke-width="2"/>
+<polyline points="775,239 793,239" fill="none" stroke="#576572" stroke-width="2"/>
+<polyline points="775,244 793,244" fill="none" stroke="#576572" stroke-width="2"/>
+<polyline points="784,244 784,252" fill="none" stroke="#576572" stroke-width="2"/>
+<rect x="1110" y="148" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R30 | ECHO output default-low</text>
+<text x="1120" y="193" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="213" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">100k 1%, &gt;=1/8 W</text>
+<text x="1122" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,232 1358,232" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R30.1" data-net="EF_SAFE" x="1368" y="237" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_SAFE</text>
+<text x="1122" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,252 1358,252" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R30.2" data-net="GND" x="1368" y="257" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,232 1314,235 1322,238 1314,242 1322,246 1318,252" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="576" y="291" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="586" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R31 | ECHO output default-low</text>
+<text x="586" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="586" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">100k 1%, &gt;=1/8 W</text>
+<text x="588" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="784,375 824,375" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R31.1" data-net="EL_SAFE" x="834" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EL_SAFE</text>
+<text x="588" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="784,395 824,395" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R31.2" data-net="GND" x="834" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="784,375 780,378 788,381 780,385 788,389 784,395" fill="none" stroke="#576572" stroke-width="1.5"/>
+<rect x="1110" y="291" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1120" y="315" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R32 | ECHO output default-low</text>
+<text x="1120" y="336" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#995b00">ADDITIONAL / MISSING OR SELECT</text>
+<text x="1120" y="356" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">100k 1%, &gt;=1/8 W</text>
+<text x="1122" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
+<polyline points="1318,375 1358,375" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
+<text data-terminal="R32.1" data-net="ER_SAFE" x="1368" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">ER_SAFE</text>
+<text x="1122" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
+<polyline points="1318,395 1358,395" fill="none" stroke="#17232c" stroke-width="2"/>
+<text data-terminal="R32.2" data-net="GND" x="1368" y="400" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>
+<polyline points="1318,375 1314,378 1322,381 1314,385 1322,389 1318,395" fill="none" stroke="#576572" stroke-width="1.5"/>
+</svg>

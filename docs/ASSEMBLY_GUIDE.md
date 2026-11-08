@@ -1,4 +1,6 @@
-# Staged physical assembly and commissioning guide — E1
+# Staged physical assembly and commissioning guide — E2
+
+Current E2 connection authority is [READY_TO_WIRE.md](READY_TO_WIRE.md) with [ENGINEERING_REVIEW_E2.md](ENGINEERING_REVIEW_E2.md); direct divider-to-GPIO E1 instructions are superseded.
 
 **This is a future procedure, not an executed test or an instruction for the agent to power hardware.** Firmware was not uploaded and no battery/motor was energized during package creation. A passed software test does not release an electrical hold. Follow [FINAL_WIRING.md](FINAL_WIRING.md), the numbered wire rows in `electrical/connections.csv`, and [ELECTRICAL_BLOCKERS.md](ELECTRICAL_BLOCKERS.md).
 
@@ -15,7 +17,7 @@ Do not start affected wiring while protection parts, actual terminal mapping or 
 7. **Connect the return harness first, still unpowered:** BT1 negative lead endpoint to TB_GND; dedicated DRV_L B-, DRV_R B- and DRV_A GND returns to TB_GND. The battery itself remains unplugged. Inspect/check the required existing BTS GND/B- bonds; do not create a second thin parallel motor return.
 8. Next connect each BUCK IN- to TB_GND. Verify actual non-isolated IN-/OUT- continuity. Route ESP1 GND to BUCK1 OUT- and U1/sensor logic returns to BUCK2 OUT-. Check every black-wire endpoint and R/cap ground in the connection table. Do not add unnecessary parallel ground jumpers.
 9. Fit passive conditioning on an insulated board: U1 per the exact 20-pin diagram; R1–R8, with R5 specifically 2.2k at GPIO14; six local EN pull-downs R13–R18; PWM pulls R19–R22; auxiliary-input pulls R9–R12; R29 at GPIO27; proposed bypass capacitors. Confirm resistor values with power off. All these parts must first be obtained.
-10. Prepare R23/24, R25/26 and R27/28 ECHO dividers. Verify upper=2.2k and lower=3.3k, 1%; independently trace the node and GND. **Leave both the real ECHO-to-divider and divider-to-ESP plugs disconnected** until stage 4 passes.
+10. Fit U2 SN74LVC3G34DCU per READY_TO_WIRE.md: VCC8 to ESP32 3V3, GND4 to ESP32 GND; channels 1->7 / 3->5 / 6->2; C_U2 local 100nF and 100k output pulls R30–32. Prepare R23/24, R25/26 and R27/28 ECHO dividers. Verify upper=2.2k and lower=3.3k, 1%; independently trace the node and GND. **Leave both the real ECHO-to-divider and U2-to-ESP plugs disconnected** until stage 4 passes, including U2 input edge rate <=10ns/V, output levels and off-rail leakage.
 11. With actual-board instructions established, remove L298 ENA/ENB hard-HIGH links. Identify the separate onboard regulator link; disable that regulator only in its documented external-5V mode. Confirm neither a GPIO nor a buck will be driven against a jumper/regulator output. Verify flyback diodes; do not assume a clone contains suitable ones.
 12. Connect the blue control harness to the documented terminals: GPIO16/17/18/19/14 and three TRIGs via U1; GPIO21/22 to L298 IN1/2; GPIO23/25 to IN3/4. U1 output9 goes through the separate S2 enable NC contact to all six driver enable terminals. Check each terminal independently, not just one point on the enable bus.
 13. Wire isolated stop feedback as 3V3 -> S2 sense NC -> K1 **sense** NO -> GPIO27. Do not use K1's coil seal-in contact for GPIO feedback. Verify complete isolation from coil/5V circuits and correct LOW bias on an open loop. Keep R_IS/L_IS separately insulated and camera disconnected.
@@ -25,7 +27,7 @@ Do not start affected wiring while protection parts, actual terminal mapping or 
 ## 2. ESP32 USB-only programming — steps 16–21
 
 16. Disconnect the ESP32 external power and complete external GPIO harnesses. Keep battery/balance/bench supplies and motors unplugged. Only the DevKit and approved USB cable may be powered at this stage.
-17. Build/check without upload first: `python3 scripts/verify.py`. Use the pinned `esp32dev` environment and correct actual board/port.
+17. Build/check without upload first: `.venv/bin/python scripts/verify.py`. Use the pinned `esp32dev` environment and correct actual board/port.
 18. If a later owner-run upload is needed, use PlatformIO's Upload action only after confirming step 16. No upload is part of the current automated verification. Do not use any automatic motor-test-on-upload procedure.
 19. Open Serial Monitor at 115200 baud, Newline. Expect READY/DISARMED and low requested outputs. Unwired GPIO27 reads unsafe through its internal pull-down; an ESTOP latch is expected. Do not bridge it HIGH to defeat the physical feedback design.
 20. Send STOP or ESTOP and verify disarmed/latch reporting. ARM must be rejected while the feedback input is unsafe. This proves commands/logic only, not output voltage at a real driver.

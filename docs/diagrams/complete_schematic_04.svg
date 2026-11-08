@@ -4,7 +4,7 @@
 <text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Complete schematic - sheet 4</text>
 <text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Every component terminal is shown. Equal net labels are connected; use connection IDs in the CSV for physical routing.</text>
 <rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
-<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 02 Nov 2026</text>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026</text>
 <text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
 <text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
 <rect x="42" y="148" width="500" height="167" fill="#f7f9fc" stroke="#576572" stroke-width="1.4"/>
@@ -198,7 +198,7 @@
 <text data-terminal="R23.1" data-net="EF_RAW" x="1368" y="952" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_RAW</text>
 <text x="1122" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
 <polyline points="1318,967 1358,967" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<text data-terminal="R23.2" data-net="EF_SAFE" x="1368" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_SAFE</text>
+<text data-terminal="R23.2" data-net="EF_DIV" x="1368" y="972" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_DIV</text>
 <polyline points="1318,947 1314,950 1322,953 1314,957 1322,961 1318,967" fill="none" stroke="#576572" stroke-width="1.5"/>
 <rect x="42" y="943" width="500" height="127" fill="#fffaf0" stroke="#576572" stroke-width="1.4" stroke-dasharray="7 4"/>
 <text x="52" y="967" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">R24 | ECHO lower resistor</text>
@@ -206,7 +206,7 @@
 <text x="52" y="1008" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">3.3k 1%, &gt;=1/8 W</text>
 <text x="54" y="1032" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">1</text>
 <polyline points="250,1027 290,1027" fill="none" stroke="#23844b" stroke-width="2" stroke-dasharray="8 5"/>
-<text data-terminal="R24.1" data-net="EF_SAFE" x="300" y="1032" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_SAFE</text>
+<text data-terminal="R24.1" data-net="EF_DIV" x="300" y="1032" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#23844b">EF_DIV</text>
 <text x="54" y="1052" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">2</text>
 <polyline points="250,1047 290,1047" fill="none" stroke="#17232c" stroke-width="2"/>
 <text data-terminal="R24.2" data-net="GND" x="300" y="1052" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND</text>

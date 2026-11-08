@@ -1,0 +1,6 @@
+{
+  "simplified_connections": 201,
+  "assembly_steps": 201,
+  "independent_graph_nets": 72,
+  "result": "PASS - file consistency only; electrical/physical release HOLD"
+}

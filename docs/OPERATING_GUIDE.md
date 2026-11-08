@@ -1,3 +1,5 @@
+Current E2 evidence: [FINAL_GO_NO_GO.md](FINAL_GO_NO_GO.md), [READY_TO_WIRE.md](READY_TO_WIRE.md) and [SIMULATION_VERIFICATION.md](SIMULATION_VERIFICATION.md). U2 adds powered-off ECHO isolation; all GPIOs/commands unchanged. Historical owner simulation reports below are not fresh runtime evidence.
+
 # Autonomous Waste Collection Rover — one L298N
 
 ESP32-WROOM-32 firmware plus a Wokwi **digital control-signal model** for four wheel motors, two brushes controlled together and an independently requested conveyor. Physical hardware is untested. Real ultrasonic ECHO wires stay disconnected: their exact module/output compatibility is unknown and no resistors or level shifters are available.
@@ -8,9 +10,9 @@ Read [WIRING.md](WIRING.md) for the final pin map and connection holds, and [TES
 
 ```sh
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pip install -r requirements-dev.txt -r requirements-design.txt
 python3 scripts/sync_wokwi.py
-python3 scripts/verify.py
+.venv/bin/python scripts/verify.py
 ```
 
 The verifier runs source/diagram checks, host tests, both `esp32dev` and `wokwi_compile` builds, and Wokwi lint if installed. Keep PlatformIO invocations sequential. It never uploads firmware or opens a physical serial port. PlatformIO Core is pinned to 6.1.18, Espressif32 to 6.12.0, and its Arduino core is 2.0.17. The 3.x compatibility branch is supplied but not compile verified here. No external Arduino libraries are needed.
@@ -100,9 +102,9 @@ The runner uses scene-specific distances, serial/pin assertions and VCD checks f
 
 For the STOPPED/LEFT or STOPPED/RIGHT investigation and expected new phase sequence, see [TURNING_REVIEW.md](TURNING_REVIEW.md). Fixed Wokwi distance sliders do not change automatically with a turn: a static blocked scene can legitimately cause bounded turn/stop/reassess cycles; this is not repeated interlock switching during one turn.
 
-## Electrical assembly package E1
+## Electrical assembly package E2
 
-Start with [FINAL_WIRING.md](FINAL_WIRING.md), the [21-page PDF wiring package](diagrams/electrical_package.pdf), [diagram index](diagrams/INDEX.md), [80-step assembly guide](ASSEMBLY_GUIDE.md), and [open electrical blockers](ELECTRICAL_BLOCKERS.md). GPIOs and firmware are unchanged; the proposed non-inverting buffers/protection are separate physical hardware, not Wokwi parts. Do not copy virtual ECHO/LED connections into the rover.
+Start with [FINAL_WIRING.md](FINAL_WIRING.md), the [38-page PDF wiring package](diagrams/electrical_package.pdf), [diagram index](diagrams/INDEX.md), [80-step assembly guide](ASSEMBLY_GUIDE.md), and [open electrical blockers](ELECTRICAL_BLOCKERS.md). GPIOs and firmware are unchanged; the proposed non-inverting buffers/protection are separate physical hardware, not Wokwi parts. Do not copy virtual ECHO/LED connections into the rover.
 
 The package has no physically approved connections. Exact motor/current/battery/module ratings and actual protection hardware must be established before wiring/energizing affected branches. K1-open physical boot intentionally gives unsafe GPIO27 feedback; the guide distinguishes hardware power-arm from RESET/ARM.
 
