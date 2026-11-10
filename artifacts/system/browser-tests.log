@@ -1,0 +1,21 @@
+
+> test:e2e
+> playwright test
+
+[WebServer] (node:9093) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9095) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9149) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:9151) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/camera.spec.ts:3:1 › camera network failure stays disconnected (6.4s)
+  ✓  2 test/browser/control.spec.ts:2:1 › operator drives real C++ simulator, releases, cleans, switches modes and latches stop (6.4s)
+  ✓  3 test/browser/control.spec.ts:15:1 › browser blur and pointer release stop; reconnect remains disarmed (6.2s)
+  ✓  4 test/browser/control.spec.ts:21:1 › responsive disconnected station has no horizontal overflow (2.8s)
+
+  4 passed (34.5s)

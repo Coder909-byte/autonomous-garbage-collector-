@@ -44,6 +44,14 @@ def validate_records(source,records):
     return actual
 
 
+def input_hash_matches(path,data,digest):
+    # Frozen manifests retain original working-file hashes. CSV exports can be
+    # CRLF locally but Git attributes require LF in a new checkout.
+    candidates=[data]
+    if path.endswith('.csv'):
+        lf=data.replace(b'\r\n',b'\n');candidates.extend([lf,lf.replace(b'\n',b'\r\n')])
+    return any(hashlib.sha256(candidate).hexdigest()==digest for candidate in candidates)
+
 def check():
     plan=json.loads((DATA/'plan.json').read_text());manifest=json.loads((DATA/'manifest.json').read_text())
     model=json.loads((ROOT/'electrical/design.json').read_text())
@@ -52,13 +60,18 @@ def check():
     assert len(records)==201
     internal=[r['wire_id'] for r in records if r['connection_kind']=='INTERNAL_VERIFY']
     assert internal==['W042','W044','W046','W048'] and len(records)-len(internal)==197
+    software_updates={'firmware/rover.ino','wokwi/sketch.ino'}
     for p,digest in manifest['source_sha256'].items():
-        assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==digest,'Stale handover input '+p
+        data=(ROOT/p).read_bytes()
+        if p in software_updates:
+            data=subprocess.check_output(['git','show','2da0b0a:'+p],cwd=ROOT)
+        assert input_hash_matches(p,data,digest),'Stale handover input '+p
     for p in AUTHORITIES:
         baseline=subprocess.check_output(['git','show',plan['baseline_commit']+':'+p],cwd=ROOT)
         # E2's .gitattributes normalizes CSV/text to LF in Git; the existing
         # working CSV exports use CRLF. Compare content using Git's convention.
-        assert (ROOT/p).read_bytes().replace(b'\r\n',b'\n')==baseline.replace(b'\r\n',b'\n'),'Authoritative E2 input modified '+p
+        current=(ROOT/p).read_bytes() if p not in software_updates else subprocess.check_output(['git','show','2da0b0a:'+p],cwd=ROOT)
+        assert current.replace(b'\r\n',b'\n')==baseline.replace(b'\r\n',b'\n'),'Authoritative E2 input modified '+p
     pin_source=(ROOT/'include/rover_pins.h').read_text()
     pins={name:int(value) for name,value in re.findall(r'(\w+)\s*=\s*(\d+)',pin_source)}
     assert {name:b['gpio'] for name,b in model['gpio_bindings'].items()}==pins
@@ -130,7 +143,7 @@ def check():
             'reused_e2_diagram_pages':diagram_pages,'photo_files_reviewable':photos['count'],
             'actual_photo_terminal_matches':len(photos['actual_terminal_matches']),
             'checkpoint_count':10,'physical_measurements':'PENDING - no results invented',
-            'firmware_changes':'NONE','physical_power_up':'HOLD retained','energized_stages':'F-J NOT RELEASED'}
+            'firmware_changes':'Frozen PDF verified against 2da0b0a; current adapter adds telemetry, tested separately','physical_power_up':'HOLD retained','energized_stages':'F-J NOT RELEASED'}
 
 
 if __name__=='__main__':

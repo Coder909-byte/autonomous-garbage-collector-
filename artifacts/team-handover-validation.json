@@ -19,7 +19,7 @@
   "actual_photo_terminal_matches": 0,
   "checkpoint_count": 10,
   "physical_measurements": "PENDING - no results invented",
-  "firmware_changes": "NONE",
+  "firmware_changes": "Frozen PDF verified against 2da0b0a; current adapter adds telemetry, tested separately",
   "physical_power_up": "HOLD retained",
   "energized_stages": "F-J NOT RELEASED"
 }

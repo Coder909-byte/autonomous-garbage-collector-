@@ -37,14 +37,14 @@ def label(node):
     return ref+'.'+pin+(' ('+name+')' if name!=pin else '')
 def txt(s): return str(s).replace('Ω','ohm').replace('→','->').replace('≤','<=').replace('≥','>=').replace('—','-').replace('–','-')
 class Drawing:
-    def __init__(self,title,subtitle):
+    def __init__(self,title,subtitle,revision="E2",date="08 Nov 2026"):
         self.svg=[f'<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 {W} {H}">',f'<title>{html.escape(title)}</title>','<rect width="1680" height="1188" fill="white"/>']
         self.pdf=canvas.Canvas(str(OUT/'_current.pdf'),pagesize=landscape(A3));self.pdf.scale(landscape(A3)[0]/W,landscape(A3)[1]/H)
-        self.pdf.setTitle(title+' - E2 PROVISIONAL')
+        self.pdf.setTitle(title+' - '+revision+' PROVISIONAL')
         self.image=Image.new('RGB',(W,H),'white');self.im=ImageDraw.Draw(self.image)
         self.text(42,46,title,27,bold=True);self.text(42,76,subtitle,15)
         self.rect(42,90,1596,34,fill='#fff2d8',stroke='#ad6a00')
-        self.text(53,113,'E2 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 08 Nov 2026',16,bold=True)
+        self.text(53,113,revision+' DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | '+date,16,bold=True)
         self.text(42,1141,'Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked',14)
         self.text(42,1166,'Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.',14)
     def rect(self,x,y,w,h,fill='white',stroke='#576572',dash=False):

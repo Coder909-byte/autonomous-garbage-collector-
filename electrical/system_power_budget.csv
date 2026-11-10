@@ -1,0 +1,5 @@
+load,provisional_capacity_A_at_5V,measured_run_A,measured_peak_A,peak_duration,efficiency_assumption,input_power_example_W,status
+CAM1 branch,1 continuous / 2 transient,TBD,TBD,TBD,0.80 example only,6.25 continuous / 12.5 transient,HOLD - allocation not measured consumption
+BUCK3 loss,TBD,TBD,TBD,TBD,0.80 example only,1.25 continuous / 2.5 transient,HOLD - qualify thermal transient and ambient
+Battery additional camera current,TBD,TBD,TBD,TBD,0.80 example only,6.25/Vpack continuous / 12.5/Vpack transient,HOLD - pack envelope and C rating unknown
+OV3 / F3 / camera harness,TBD,TBD,TBD,TBD,TBD,TBD,HOLD - fault/inrush and conductor ratings needed

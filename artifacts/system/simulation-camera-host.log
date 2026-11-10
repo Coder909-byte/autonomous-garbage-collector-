@@ -1,0 +1,2 @@
+camera policy/resource mocks: PASS (credentials, settings, reconnect burst/cooldown, snapshot, MJPEG framing, send/capture failures)
+camera real-handler HTTP mocks: PASS (status/snapshot/stream/settings, auth, busy, network/capture/send/init/mutex/server failures, PSRAM allocation, empty secrets)

@@ -25,6 +25,38 @@ test_motor_cutoff_bypass_rejected (test_electrical.ElectricalChecks.test_motor_c
 test_parallel_buck_outputs_rejected (test_electrical.ElectricalChecks.test_parallel_buck_outputs_rejected) ... ok
 test_weak_gpio14_pull_rejected (test_electrical.ElectricalChecks.test_weak_gpio14_pull_rejected) ... ok
 test_wrong_isolator_channel_rejected (test_electrical.ElectricalChecks.test_wrong_isolator_channel_rejected) ... ok
+test_camera_cannot_take_raw_battery (test_system.SystemGraph.test_camera_cannot_take_raw_battery) ... /Users/kokila/Downloads/autonomous_rover_build/test/test_system.py:7: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/kokila/Downloads/autonomous_rover_build/electrical/system_connections.csv' mode='r' encoding='utf-8'>
+  self.model=json.loads((ROOT/'electrical/system_netlist.json').read_text());self.rows=list(csv.DictReader((ROOT/'electrical/system_connections.csv').open()))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_camera_cannot_use_main_mcu_rail (test_system.SystemGraph.test_camera_cannot_use_main_mcu_rail) ... ok
+test_duplicate_wire_id_rejected (test_system.SystemGraph.test_duplicate_wire_id_rejected) ... ok
+test_frozen_csv_hash_is_portable_but_still_rejects_changes (test_system.SystemGraph.test_frozen_csv_hash_is_portable_but_still_rejects_changes) ... ok
+test_git_lf_checkout_is_accepted (test_system.SystemGraph.test_git_lf_checkout_is_accepted) ... /Users/kokila/Downloads/autonomous_rover_build/scripts/generate_system.py:18: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/fr/mql415s518q12_mz4c_27snw0000gp/T/tmpf9hxnhsl/electrical/connections.csv' mode='r' encoding='utf-8'>
+  rows=list(csv.DictReader((ROOT/'electrical/connections.csv').open()))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_main_mapping_remains_frozen (test_system.SystemGraph.test_main_mapping_remains_frozen) ... ok
+test_missing_camera_ground_is_rejected (test_system.SystemGraph.test_missing_camera_ground_is_rejected) ... ok
+test_parallel_positive_regulator_outputs_rejected (test_system.SystemGraph.test_parallel_positive_regulator_outputs_rejected) ... ok
+test_regulator_cannot_bypass_motor_contactor (test_system.SystemGraph.test_regulator_cannot_bypass_motor_contactor) ... ok
+test_sources_and_generated_sheets_agree (test_system.SystemGraph.test_sources_and_generated_sheets_agree) ... /Users/kokila/Downloads/autonomous_rover_build/scripts/generate_system.py:18: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/kokila/Downloads/autonomous_rover_build/electrical/connections.csv' mode='r' encoding='utf-8'>
+  rows=list(csv.DictReader((ROOT/'electrical/connections.csv').open()))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/kokila/Downloads/autonomous_rover_build/scripts/check_system.py:47: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/kokila/Downloads/autonomous_rover_build/electrical/system_connections.csv' mode='r' encoding='utf-8'>
+  rows=list(csv.DictReader((ROOT/'electrical/system_connections.csv').open()))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/kokila/Downloads/autonomous_rover_build/scripts/check_system.py:50: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/kokila/Downloads/autonomous_rover_build/electrical/connections.csv' mode='r' encoding='utf-8'>
+  base_rows=list(csv.DictReader((ROOT/'electrical/connections.csv').open()))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_changed_gpio_endpoint_is_rejected (test_team_handover.TeamHandoverContracts.test_changed_gpio_endpoint_is_rejected) ... ok
+test_complete_register_preserves_all_201_records (test_team_handover.TeamHandoverContracts.test_complete_register_preserves_all_201_records) ... ok
+test_duplicate_connection_is_rejected (test_team_handover.TeamHandoverContracts.test_duplicate_connection_is_rejected) ... ok
+test_internal_bond_cannot_be_an_extra_wire (test_team_handover.TeamHandoverContracts.test_internal_bond_cannot_be_an_extra_wire) ... ok
+test_missing_connection_is_rejected (test_team_handover.TeamHandoverContracts.test_missing_connection_is_rejected) ... ok
+test_rating_cannot_omit_expected_voltage (test_team_handover.TeamHandoverContracts.test_rating_cannot_omit_expected_voltage) ... ok
+test_verification_cannot_omit_e2_requirement (test_team_handover.TeamHandoverContracts.test_verification_cannot_omit_e2_requirement) ... ok
 test_blocked_remains_disabled (test_vcd.TraceChecks.test_blocked_remains_disabled) ... ok
 test_brush_independence (test_vcd.TraceChecks.test_brush_independence) ... ok
 test_conveyor_independence (test_vcd.TraceChecks.test_conveyor_independence) ... ok
@@ -37,6 +69,7 @@ test_unknown_enabled_signal_rejected (test_vcd.TraceChecks.test_unknown_enabled_
 test_wrong_auxiliary_rejected (test_vcd.TraceChecks.test_wrong_auxiliary_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 37 tests in 0.119s
+Ran 54 tests in 0.379s
 
 OK
+PASS: S1 211 records (206 external, 5 internal checks); all 201 E2 rows preserved; camera protected branch and diagram match. Physical HOLD.

@@ -1,0 +1,11 @@
+{
+  "revision": "S1 - additive camera and laptop architecture; physical HOLD",
+  "base_connections": 201,
+  "added_connections": 10,
+  "total_connections": 211,
+  "physical_release": "HOLD",
+  "drawings": [
+    "system_architecture",
+    "camera_power"
+  ]
+}

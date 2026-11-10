@@ -18,9 +18,9 @@ Building in release mode
 Retrieving maximum program size .pio/build/esp32dev/firmware.elf
 Checking size .pio/build/esp32dev/firmware.elf
 Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
-RAM:   [=         ]   6.8% (used 22232 bytes from 327680 bytes)
-Flash: [==        ]  21.5% (used 281345 bytes from 1310720 bytes)
-========================= [SUCCESS] Took 3.30 seconds =========================
+RAM:   [=         ]   6.8% (used 22240 bytes from 327680 bytes)
+Flash: [==        ]  21.5% (used 281945 bytes from 1310720 bytes)
+========================= [SUCCESS] Took 5.20 seconds =========================
 
 Processing wokwi_compile (platform: espressif32@6.12.0; board: esp32dev; framework: arduino)
 --------------------------------------------------------------------------------
@@ -42,12 +42,12 @@ Building in release mode
 Retrieving maximum program size .pio/build/wokwi_compile/firmware.elf
 Checking size .pio/build/wokwi_compile/firmware.elf
 Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
-RAM:   [=         ]   6.8% (used 22232 bytes from 327680 bytes)
-Flash: [==        ]  21.5% (used 281345 bytes from 1310720 bytes)
-========================= [SUCCESS] Took 1.89 seconds =========================
+RAM:   [=         ]   6.8% (used 22240 bytes from 327680 bytes)
+Flash: [==        ]  21.5% (used 281945 bytes from 1310720 bytes)
+========================= [SUCCESS] Took 2.88 seconds =========================
 
 Environment    Status    Duration
 -------------  --------  ------------
-esp32dev       SUCCESS   00:00:03.300
-wokwi_compile  SUCCESS   00:00:01.885
-========================= 2 succeeded in 00:00:05.185 =========================
+esp32dev       SUCCESS   00:00:05.199
+wokwi_compile  SUCCESS   00:00:02.879
+========================= 2 succeeded in 00:00:08.078 =========================

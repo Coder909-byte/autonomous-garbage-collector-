@@ -1,0 +1,1451 @@
+{
+  "baseline": "2da0b0a6c700491c66b8330811afd8091ed3638b",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "lines": 14,
+      "sha256": "bd79e7e7da3623b4756547ba88de5309fbe1936235cd9f7e16605650b2152a9e",
+      "references": [
+        "1: # Keep text portable and prevent generated diagrams from being treated as text."
+      ]
+    },
+    {
+      "path": ".gitignore",
+      "lines": 87,
+      "sha256": "9109481559e291b9f84705e302b5bed34178d7c8354cdf2e58229a2c7112ef71",
+      "references": [
+        "1: # PlatformIO, Python environments and downloaded tools",
+        "19: # Local editor and operating-system state",
+        "31: # Credentials and machine-specific configuration",
+        "48: # Temporary files and compiled/generated runtime outputs",
+        "63: # Retain selected verification evidence, omit caches/scenes/old build archives.",
+        "87: # Publish all designed PDF/SVG/PNG documentation under docs/diagrams/."
+      ]
+    },
+    {
+      "path": "README.md",
+      "lines": 177,
+      "sha256": "b5d820dc199e25c7f8840ee9fdb464bd89a3459ccbc3096932852cabd2203580",
+      "references": [
+        "1: # Autonomous Garbage Collector",
+        "11: ## Verification status",
+        "24: ## Hardware",
+        "41: ## Features",
+        "53: ## Software architecture",
+        "78: ## Build and test",
+        "107: ## Wokwi simulation",
+        "143: ## Electrical schematic and wiring",
+        "167: ## Physical hardware status",
+        "173: ## Repository contents and credentials"
+      ]
+    },
+    {
+      "path": "TEST_MATRIX.md",
+      "lines": 132,
+      "sha256": "5ef7732054ce56b5aa17ffe07bcd803b85bedff2108c335e3a4cc09a89093390",
+      "references": [
+        "1: # Verification matrix \u2014 one L298N, turn-state and audit corrections",
+        "7: ## Evidence levels",
+        "31: ## Manual Wokwi results supplied by the owner",
+        "49: ## Turn/stop alternation regression",
+        "57: ## Prepared Wokwi runtime cases",
+        "76: ## Post-update Wokwi rerun and remaining interactive checks",
+        "105: ## Physical holds and future acceptance requirements",
+        "122: ## Electrical package E1 verification and supplied simulation status",
+        "130: ## Audit correction follow-up \u2014 latest verification"
+      ]
+    },
+    {
+      "path": "artifacts/TEAM_ASSEMBLY_HANDOVER.pdf",
+      "bytes": 723686,
+      "sha256": "6c6fa3f6e9891ced077a8d637ecd45cb68356c16f6425bfd45fccde3e5a1fc37"
+    },
+    {
+      "path": "artifacts/build.log",
+      "lines": 53,
+      "sha256": "396ce41861aa5f7ab8c9e7bccf898bdefb7ce91ab26544e2f1d3d922b2b7a3c8",
+      "references": []
+    },
+    {
+      "path": "artifacts/completion-checks.log",
+      "lines": 6,
+      "sha256": "06928c74a6be9448387875d11764458fa352c3cf47e92c37fd746c7d933fdb51",
+      "references": []
+    },
+    {
+      "path": "artifacts/design-export-checks.log",
+      "lines": 20,
+      "sha256": "0f5b660f1ee14351404b45a8256eccbe4c20ad554625e2ee205869c25b297f23",
+      "references": []
+    },
+    {
+      "path": "artifacts/electrical-checks.log",
+      "lines": 13,
+      "sha256": "dcae9976982fbf943cbe675b5cf02f2d7c56605ee127e41839658e6ea16807ee",
+      "references": []
+    },
+    {
+      "path": "artifacts/firmware-preservation.json",
+      "lines": 29,
+      "sha256": "87050138db3f38986286cfde336a5d5fa6c8c0802d466c44f4aa7642d5373719",
+      "references": []
+    },
+    {
+      "path": "artifacts/native-tests.log",
+      "lines": 117,
+      "sha256": "393f126576b8260633187811ac3f0fe74a5b57cace3daffe941b1ffd285691a1",
+      "references": []
+    },
+    {
+      "path": "artifacts/publication-checks.json",
+      "lines": 35,
+      "sha256": "c77322787dfca4e3cb3b35620545f23a9c8265919f5ca0dc0d71930a21c192eb",
+      "references": []
+    },
+    {
+      "path": "artifacts/python-tests.log",
+      "lines": 49,
+      "sha256": "5d74e2e53cb53482858b5a1fbde25c246717150e4abd423d74140e93e5c7d521",
+      "references": []
+    },
+    {
+      "path": "artifacts/static-checks.log",
+      "lines": 2,
+      "sha256": "4af1e8738a30b6a6468a7d85976ba3b98bef0b37c5db7f8051decd73def8be32",
+      "references": []
+    },
+    {
+      "path": "artifacts/team-handover-native-tests.log",
+      "lines": 110,
+      "sha256": "234d29eb0eff55b57149cfe710b68a2a7cc96d67fb04d60d7795918ff2b0d001",
+      "references": []
+    },
+    {
+      "path": "artifacts/team-handover-python-tests.log",
+      "lines": 49,
+      "sha256": "43e4de7799e7a4503706b9195e0b0891eca1c3cbf02befbf8e841f3e4498cc26",
+      "references": []
+    },
+    {
+      "path": "artifacts/team-handover-validation.json",
+      "lines": 25,
+      "sha256": "cbf8fba39b171482fa8ad026bbb63add9f27c9f18ac9393c515f1f663fa7f0ad",
+      "references": []
+    },
+    {
+      "path": "artifacts/team-handover-verification.json",
+      "lines": 45,
+      "sha256": "de23c291859b09789f8d4b9b2b1c0090e22d8b7c8f90aceece8eb1fc21bf033e",
+      "references": []
+    },
+    {
+      "path": "artifacts/turn-investigation-after.log",
+      "lines": 12,
+      "sha256": "e2db44fbef9032145be294f617c2d00fe018ac63b4c4f03dba248065feffeeda",
+      "references": []
+    },
+    {
+      "path": "artifacts/turn-investigation-before.log",
+      "lines": 9,
+      "sha256": "6877704ee2b1957dadb08f4c0c9219708a460d914670c7f4f7a7c26acc160646",
+      "references": []
+    },
+    {
+      "path": "artifacts/vcd-checker-tests.log",
+      "lines": 15,
+      "sha256": "ef4668d6827a0e148cdb78177969177c2e561642b52ad41065336dd86a547d89",
+      "references": []
+    },
+    {
+      "path": "artifacts/verification-run.log",
+      "lines": 259,
+      "sha256": "a7eccefdfc7ea3077ad6ca935ebb48c3f2135077f36f01caa76a774338e4da1c",
+      "references": []
+    },
+    {
+      "path": "artifacts/verification-summary.json",
+      "lines": 105,
+      "sha256": "e417fc61877b0c37e3e2c3b8b9583c89a419a15d600abc0c55039f0b69090c3e",
+      "references": []
+    },
+    {
+      "path": "artifacts/wokwi-lint.log",
+      "lines": 4,
+      "sha256": "ee524fac6863273ebeb49bde89e8a23589ada037d745500b76e0bb63085d1f30",
+      "references": []
+    },
+    {
+      "path": "artifacts/wokwi-runtime.log",
+      "lines": 2,
+      "sha256": "2045ddbdd4c776636059a3af43ace98811a5b6d2206b9f08a33cbfeae0aace22",
+      "references": []
+    },
+    {
+      "path": "docs/ASSEMBLY_GUIDE.md",
+      "lines": 114,
+      "sha256": "baa38b23e216aa012b9a8adeac8ef7edcd1a9b2b477410a5d5a434c10f0e676e",
+      "references": [
+        "1: # Staged physical assembly and commissioning guide \u2014 E2",
+        "9: ## 1. Unpowered wiring inspection \u2014 steps 1\u201315",
+        "27: ## 2. ESP32 USB-only programming \u2014 steps 16\u201321",
+        "36: ## 3. Buck converter adjustment and protection \u2014 steps 22\u201331",
+        "49: ## 4. Sensor voltage verification \u2014 steps 32\u201339",
+        "60: ## 5. Motor-driver signal and cutoff verification \u2014 steps 40\u201350",
+        "74: ## 6. Individual motor testing \u2014 steps 51\u201358 (future gated motor power)",
+        "85: ## 7. Complete drivetrain testing \u2014 steps 59\u201364",
+        "94: ## 8. Cleaning-system testing \u2014 steps 65\u201371",
+        "104: ## 9. Autonomous navigation testing \u2014 steps 72\u201380"
+      ]
+    },
+    {
+      "path": "docs/ELECTRICAL_AUDIT.md",
+      "lines": 34,
+      "sha256": "92c6f148024456b7d800f0375ffc921b5fca3402b4d8b78408fc6b335021a7da",
+      "references": [
+        "3: # Actual-project electrical audit \u2014 2 November 2026",
+        "21: ## Missing, unassigned and conflicting electrical details",
+        "30: ## Working software retained"
+      ]
+    },
+    {
+      "path": "docs/ELECTRICAL_BLOCKERS.md",
+      "lines": 51,
+      "sha256": "353f040ae97d5c2043ff0d1433709102bf9b2f90a97805eb16e28fa64ae45f46",
+      "references": [
+        "3: # Electrical release blockers \u2014 E1",
+        "24: ## Required additions versus alternatives",
+        "30: ## Practical completion essentials",
+        "49: ## Release record"
+      ]
+    },
+    {
+      "path": "docs/ENGINEERING_REVIEW_E2.md",
+      "lines": 61,
+      "sha256": "2114056c1bdef5962441ac27c761b2f4e35cec182dfd9a1724606515668ee3e2",
+      "references": [
+        "1: # Engineering review E2 \u2014 8 November 2026",
+        "5: ## Evidence boundary and changes",
+        "13: ## Interface calculations and acceptance",
+        "21: ## Power and grounding",
+        "31: ## Drivetrain and cleaning qualification",
+        "39: ## Physical emergency stop and restart",
+        "45: ## Firmware and simulation review",
+        "53: ## Measurements needed to release the design"
+      ]
+    },
+    {
+      "path": "docs/FINAL_ELECTRICAL_AUDIT.md",
+      "lines": 505,
+      "sha256": "06acd974708ce772f6e9359ad8a4186f8e60c49c3609d97aec8ff750ef14c697",
+      "references": [
+        "3: # Final electrical audit \u2014 independent re-check of E1",
+        "13: ## 1. Evidence and status definitions",
+        "43: ## 2. Independently checked component requirements",
+        "60: ## 3. GPIO and firmware cross-check",
+        "95: ## 4. Subsystem verdicts",
+        "133: ## 5. FAIL findings \u2014 corrections proposed after completing the audit",
+        "167: ## 6. HOLD register \u2014 information/components needed",
+        "210: ## 7. Scenario assessment A\u2013M",
+        "230: ## 8. Actual diagram review",
+        "253: ## 9. Missing components, measurements and proposed next corrections",
+        "270: ## 10. Explicit answers to the ten final questions",
+        "285: ## 11. Correction follow-up \u2014 F01\u2013F03 closed",
+        "309: ## Appendix A. Individual connection dispositions"
+      ]
+    },
+    {
+      "path": "docs/FINAL_GO_NO_GO.md",
+      "lines": 65,
+      "sha256": "85a79ef6e6beab10494732fb0524f0962651b1be3f9807d70649152abb837afb",
+      "references": [
+        "1: # Final engineering verdict \u2014 E2, 8 November 2026",
+        "28: ## Corrections and retained architecture",
+        "34: ## Final GPIO map",
+        "48: ## Package and reproducibility",
+        "57: ## Remaining release gates"
+      ]
+    },
+    {
+      "path": "docs/FINAL_PURCHASE_LIST.md",
+      "lines": 46,
+      "sha256": "5106c6f47e63d4da6a96f2a7e9206a01d9ee8802a8ede9cb9b2731f0695dfb0f",
+      "references": [
+        "1: # Final purchase list \u2014 E2, 8 November 2026",
+        "36: ## L298 decision and replacement path",
+        "44: ## Source verification"
+      ]
+    },
+    {
+      "path": "docs/FINAL_WIRING.md",
+      "lines": 444,
+      "sha256": "d9272dd1bb59c5596e9ff02ad07c4cb7e3732ff68beb4877b3ba120bd06f5582",
+      "references": [
+        "1: # Final wiring package E2 \u2014 ESP32 waste collection rover",
+        "7: ## Drawing set",
+        "21: ## Release/status definitions",
+        "31: ## Preserved ESP32 interface and waveform behavior",
+        "39: ## U1 and safe shared enable \u2014 additional hardware, not installed",
+        "58: ## Motors and driver modules",
+        "70: ## Sensor protection \u2014 blocked physical ECHO connections",
+        "86: ## Power architecture, protection and grounds",
+        "114: ## Open selections: fuse/current/wire worksheet",
+        "120: ## Generated connection tables",
+        "328: ## No-connect / reserved terminal list",
+        "352: ## Component / terminal legend"
+      ]
+    },
+    {
+      "path": "docs/OPERATING_GUIDE.md",
+      "lines": 119,
+      "sha256": "04778515cf2bd32b886d164abc5c1ed59bab772329e6d2951ec18ee47a8b6ce0",
+      "references": [
+        "3: # Autonomous Waste Collection Rover \u2014 one L298N",
+        "9: ## Build and test without hardware",
+        "22: ## Exact Serial Monitor commands",
+        "74: ## Wokwi",
+        "105: ## Electrical assembly package E2"
+      ]
+    },
+    {
+      "path": "docs/READY_TO_WIRE.md",
+      "lines": 272,
+      "sha256": "fe599e164d76151fb80ae44617d00c2ba6efb8c9d4c1384fbf5b596fe73793b5",
+      "references": [
+        "1: # Ready-to-wire reference \u2014 E2, 8 November 2026",
+        "23: ## A. ESP32, logic buffers and bias components",
+        "96: ## B. Ultrasonic sensors",
+        "128: ## C. BTS7960 drivers",
+        "157: ## D. Cleaning driver",
+        "175: ## E. Wheel motors",
+        "192: ## F. Brushes",
+        "203: ## G. Conveyor",
+        "211: ## H. Buck converters and rail protection",
+        "229: ## I. Battery distribution",
+        "244: ## J. Emergency-stop system"
+      ]
+    },
+    {
+      "path": "docs/REVIEW.md",
+      "lines": 31,
+      "sha256": "437b7201dcdb6b2c442eb38fd8bf56ba6ec8f5feb470919e8b06a196e5604965",
+      "references": [
+        "1: # Engineering review \u2014 one L298N and electrical E1 revisions",
+        "21: ## Turn/stop alternation investigation",
+        "25: ## Electrical E1 disposition"
+      ]
+    },
+    {
+      "path": "docs/SIMULATION_VERIFICATION.md",
+      "lines": 58,
+      "sha256": "c216ae788e6485afdf61ef21c9dba69469cc5037a7e6ea677230e115336809c2",
+      "references": [
+        "1: # Simulation verification \u2014 E2, 8 November 2026",
+        "5: ## Reproduce without hardware",
+        "13: ## All 23 requested checks",
+        "45: ## Timing evidence and current tooling limits"
+      ]
+    },
+    {
+      "path": "docs/TEAM_HANDOVER.md",
+      "lines": 119,
+      "sha256": "05036f2e74dbf0b97db123f863d94e0989e76f5d584bc5932a7a2c547efb231e",
+      "references": [
+        "1: # Team assembly handover - E2 baseline d6cd479",
+        "5: ## Start here",
+        "11: ## Purchase now",
+        "25: ## Connection records",
+        "31: ## What stays disconnected",
+        "35: ## Checkpoints and remote evidence",
+        "99: ## Exact missing measurements",
+        "112: ## Rebuild and validate"
+      ]
+    },
+    {
+      "path": "docs/TURNING_REVIEW.md",
+      "lines": 57,
+      "sha256": "2a8c0992bfa4ff0509d996c04f6f0b5c151856fba662f166bf4c764738e801a9",
+      "references": [
+        "1: # STOPPED / LEFT / RIGHT alternation investigation",
+        "5: ## Finding",
+        "24: ## Updated non-blocking phases",
+        "40: ## What the new log means",
+        "51: ## Regression evidence and Wokwi follow-up"
+      ]
+    },
+    {
+      "path": "docs/WIRING.md",
+      "lines": 11,
+      "sha256": "d3b010c674c701e3c1ad159679df00f76b4f03b93e17ae0a4f1feb701ecdb508",
+      "references": [
+        "1: # Wiring documentation index \u2014 E2 physical design"
+      ]
+    },
+    {
+      "path": "docs/archive/WIRING_revision3.md",
+      "lines": 140,
+      "sha256": "98e284a881c85ce2504d54fbd8cd619e3b2fd41e3319193815f03256ed904642",
+      "references": [
+        "3: # Physical wiring \u2014 one L298N, proposed revision 3",
+        "7: ## Confirmed inventory and connection limits",
+        "21: ## Final proposed GPIO map",
+        "46: ## One L298N: exact terminal assignments",
+        "81: ## Ultrasonic compatibility hold",
+        "91: ## Wheel BTS7960 modules and shared enable",
+        "110: ## E-stop feedback and independent power cutoff",
+        "120: ## Proposed power routing \u2014 no battery connection authorized"
+      ]
+    },
+    {
+      "path": "docs/diagrams/INDEX.md",
+      "lines": 36,
+      "sha256": "fcde652fa8cb1124d4fc891fada31c50b01c31543b090205e882be095437c9a3",
+      "references": [
+        "1: # Electrical diagrams E2"
+      ]
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_01.pdf",
+      "bytes": 3458,
+      "sha256": "1b844979dd83c41acf46370be187c2e1b7cc2b800cae31a50e746d9956a266ed"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_01.png",
+      "bytes": 197152,
+      "sha256": "d86c78a64c2bb2334840e8632c74bf7f780232f3a9892cee12b4d4001e0dbd6a"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_01.svg",
+      "lines": 164,
+      "sha256": "f68e3366e7a8b9e2233243e0df452be05cb67b419285bf6d5a52264d40303897",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_02.pdf",
+      "bytes": 3489,
+      "sha256": "ea3c5e9dc434064ba9b32b8a366c40a6d73e6cdb245c711f04a3f0ae63bf0dee"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_02.png",
+      "bytes": 206308,
+      "sha256": "d008f93fdf2c6f76b370ce0b9f9a7c451f4d07f683cdd230f28c7c202141ff22"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_02.svg",
+      "lines": 164,
+      "sha256": "b33d2b86661aba321a252dedd270854371ad1536885e2b265cf6dcd0ad02cd70",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_03.pdf",
+      "bytes": 3293,
+      "sha256": "a80aed68b7452fbc0de0cf0e79a5c2411df219b2fc618d7db3fcd592f13308ed"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_03.png",
+      "bytes": 203333,
+      "sha256": "7defa6e807f30d9be4c9625263e4f9c86d570d300f0f8a45b3cc84618344a946"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_03.svg",
+      "lines": 164,
+      "sha256": "329ca0bacba018cf5c3474fe8c236036e6170370b13f1c1749245ac711bd6ff9",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_04.pdf",
+      "bytes": 3263,
+      "sha256": "fe31c8bf566181984555b512fd262620f5737d7574e3633cc71f90686f5182d3"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_04.png",
+      "bytes": 197006,
+      "sha256": "96d945866a1a8060a4c7c950d0d323af6d201bd09d935e56a1ce6803a47885ae"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_04.svg",
+      "lines": 164,
+      "sha256": "f8ef951da5cf362a60f0dd1ebdd289a545b28c59f970da6af84fcbcfb714c16c",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_05.pdf",
+      "bytes": 3589,
+      "sha256": "17f9a68e128756f9fc90bf44c49f4ffa4276b388c62e8bde9d756d71377f418e"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_05.png",
+      "bytes": 201478,
+      "sha256": "ddf60ab92fa0d084f77e29953160c4b71c0233d896455049a7f16dca89f61f90"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_05.svg",
+      "lines": 164,
+      "sha256": "a2609f0a2198683b0e573733f03909e6eeb6ce79b575eda6461744d8952e6a31",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_06.pdf",
+      "bytes": 3498,
+      "sha256": "a51a82eef6d53836f75130c9e00faa371ff073e1d65e0cec6861e68a521a601f"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_06.png",
+      "bytes": 182958,
+      "sha256": "a496a37abac24e765566541fe388b3fd4eaeb374a64218dce2501be76f4e0ba7"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_06.svg",
+      "lines": 164,
+      "sha256": "bf3affd59e852cfb26070ea29e780369e0468c8bccca95312249ed448de0c31e",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_07.pdf",
+      "bytes": 3446,
+      "sha256": "08887d742904eaee2848bfbfdf258c5a9d555cc5bd71b5c2d88b5cba702355df"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_07.png",
+      "bytes": 187173,
+      "sha256": "d123aee1245744534f4fdb4aead6991f4192992d1005a1eba761780e404a5a44"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_07.svg",
+      "lines": 164,
+      "sha256": "22ae7b731a198f97e364df7dca732cfbe13dd6bc89f4d82910a374ef7a7034dd",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_08.pdf",
+      "bytes": 3642,
+      "sha256": "17e5ec9d11ca915680e53d55cf3876bc20160074f3004f6e83a13d7c9aeb11fa"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_08.png",
+      "bytes": 204623,
+      "sha256": "8d878301da21f59b238db261b99fee64443174c2c7c1fbe2c3340dfda6b8231f"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_08.svg",
+      "lines": 164,
+      "sha256": "34f2c262735cc4ddffe5d33f754a35ef0dc00c1c722bf698347b10abb1fadb2e",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_09.pdf",
+      "bytes": 3492,
+      "sha256": "55a2515a65860c21345897141dcdfad1d146d3e108bd2b475349d5df77242b72"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_09.png",
+      "bytes": 209096,
+      "sha256": "284fbbf8d1cb9433b9e107881e210a9658566e66d1a373802025d886806f92ac"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_09.svg",
+      "lines": 164,
+      "sha256": "432ceabb0fa5d0a6e427e365b2882213ec94a7423f807cbeebec7aa26365325a",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_10.pdf",
+      "bytes": 2605,
+      "sha256": "2170d600ee86390018c36e16a20a5e9b60b98ff954ab99237805f09366c177e2"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_10.png",
+      "bytes": 63010,
+      "sha256": "9eefae432390cbdfd9115d8075635701d17d78eb69e6f75b9920e49a5895b7c7"
+    },
+    {
+      "path": "docs/diagrams/assembly_connections_10.svg",
+      "lines": 31,
+      "sha256": "b17741a6aafc909ac1c2e8e9a421647d3c736f7f9a3436c2d95de6b88682e04d",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/cleaning_driver.pdf",
+      "bytes": 3585,
+      "sha256": "c50fde71de4a79be6a60f787e2a82bc259d9d0aaad49a88169c0686b9c674e60"
+    },
+    {
+      "path": "docs/diagrams/cleaning_driver.png",
+      "bytes": 100316,
+      "sha256": "715029cdb84960c3e649387229b7a41c9b4a599839904c1db3c63bc634c4f383"
+    },
+    {
+      "path": "docs/diagrams/cleaning_driver.svg",
+      "lines": 119,
+      "sha256": "3cf8760018e7ff8e976496392969c85e67bdb0016fd740f772b9b66109f9e51d",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic.pdf",
+      "bytes": 24883,
+      "sha256": "ffea464d69ddca5239ba0bdce7eaa08f1a0ba2bb6f38721dd5663a622e08d732"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_01.pdf",
+      "bytes": 4954,
+      "sha256": "0f1bee1981baf80a2e1d21a0f2513d2094b51c874ebf65182b4003e487f67ee8"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_01.png",
+      "bytes": 187988,
+      "sha256": "c51d21b5163eb24418f185432acf0b4d12c6ee22edc2ff8b91a0be16c16b81ea"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_01.svg",
+      "lines": 230,
+      "sha256": "e6c59314ed53863b7bf6c0d56663fbd321bb207c1e8b1c2b995803c000d05b72",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_02.pdf",
+      "bytes": 3466,
+      "sha256": "16544c91a31aac0045c4511f0a8a7e4301bb00950f04f37274ad0f78306d257d"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_02.png",
+      "bytes": 112585,
+      "sha256": "a8c767a575ddb0652a715bcfbeeba32413270dbadd9d4199f347e61750386aa3"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_02.svg",
+      "lines": 108,
+      "sha256": "3b0f216bec8847343e70239420164e6f1843b7f040c4a9086dfcf0638f5abb0a",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_03.pdf",
+      "bytes": 5379,
+      "sha256": "1bf3d6593047a2389da03e5d4021c6759a36cdb164cae6e9e8de12e299c039dd"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_03.png",
+      "bytes": 222889,
+      "sha256": "510698fe0193ccda4bc6caab4453c1c320c36a358ef6de385f67add943956771"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_03.svg",
+      "lines": 308,
+      "sha256": "c87e9f99bc7ec37be5ae586d9be8de4e559c7079a5d1542c67f5ed00b5740b19",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_04.pdf",
+      "bytes": 4478,
+      "sha256": "8112d78f69051651b118b15ca0f4bafee9d135a22d4ae1a6ecc0b08d2049b0d3"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_04.png",
+      "bytes": 152340,
+      "sha256": "70753720f5d0e1a354402f036d6f0505668c803a126a1af02cd8df47fea153a0"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_04.svg",
+      "lines": 214,
+      "sha256": "a817bbee5e5025f32e0eb565e2af0ef506e6d1dcd055d1bc4c0856ed680655ea",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_05.pdf",
+      "bytes": 4429,
+      "sha256": "07990babd272b5fa9b5b7e5c63f9fbfb9e9c9fabb16971843780ffc923675cb1"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_05.png",
+      "bytes": 107394,
+      "sha256": "9d0bfee61c396c5eafcba73b6bd83fa8bed3947f19427c4e11e7bdeba1507893"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_05.svg",
+      "lines": 208,
+      "sha256": "8e0768f39a5adc8bc2ebd1c7010aeb554595c0aee4ca6e79f553573904d10597",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_06.pdf",
+      "bytes": 4366,
+      "sha256": "405becda5bb91dd8a841bb9c6f9d82b96cc79dd3ab58b17df24f26c005fa81f3"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_06.png",
+      "bytes": 105140,
+      "sha256": "d1c39051be3e0773dec0eb4bd0a02b9d87e8668fd31f7f80e1bc41634448895e"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_06.svg",
+      "lines": 207,
+      "sha256": "50e10a46f0b781cc5bfae4ea9c2c259cfcd625fedaf0bb234ddcee0acd33b76d",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_07.pdf",
+      "bytes": 3224,
+      "sha256": "739347e3ca2e6a7fe6ae20ae00a4f189324462e01ba1586a89091d78f6ca223f"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_07.png",
+      "bytes": 71409,
+      "sha256": "ded62daf6e50f63315315fc01ebb7720159b9a547bf4b938fb80959cff4d0f2f"
+    },
+    {
+      "path": "docs/diagrams/complete_schematic_07.svg",
+      "lines": 85,
+      "sha256": "9ee134db7a3e40af6fa2b08455f80d81891c14a4ae06804c8c39e12ee7a88698",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/electrical_package.pdf",
+      "bytes": 110171,
+      "sha256": "43032197558857525f7162177ae559d470bf8c04554167eac889808255d4c96f"
+    },
+    {
+      "path": "docs/diagrams/emergency_stop.pdf",
+      "bytes": 3899,
+      "sha256": "8ebe3caeb6d5e8db7803693a3995a60bcdf60207a4950b6acb3abfa7f8321e63"
+    },
+    {
+      "path": "docs/diagrams/emergency_stop.png",
+      "bytes": 124757,
+      "sha256": "77614ae9485aac678fa16216d4fe0be555b4d2bd52f6c037d3e480ac0191589c"
+    },
+    {
+      "path": "docs/diagrams/emergency_stop.svg",
+      "lines": 81,
+      "sha256": "a60e3377f00bded37e6b81146ba77d66aadc814645b9977da1e13e217e1db676",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/esp32_pinout.pdf",
+      "bytes": 3853,
+      "sha256": "e30a5c7b65b027a63a41f22c562966647793f6b1e9b2a230a17ddbca566a9a9b"
+    },
+    {
+      "path": "docs/diagrams/esp32_pinout.png",
+      "bytes": 196179,
+      "sha256": "cec9288f288e1ad4192328ab1f91492752f2649df3530b1d659c96e75cfca683"
+    },
+    {
+      "path": "docs/diagrams/esp32_pinout.svg",
+      "lines": 146,
+      "sha256": "9bac199ded0bc949a239bfb943456d90f209dc19ca41fcaf28a9b3a781a1ec14",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/left_bts7960.pdf",
+      "bytes": 3323,
+      "sha256": "da06f8580996e75d09390df6f8c56cfd1e728ef8099c8955b36f0f861a75991a"
+    },
+    {
+      "path": "docs/diagrams/left_bts7960.png",
+      "bytes": 76596,
+      "sha256": "b349221e5354281800db68cf18560ac7b0f215cbaddd83fff725f47c45d2a026"
+    },
+    {
+      "path": "docs/diagrams/left_bts7960.svg",
+      "lines": 92,
+      "sha256": "743ac163eea6babf775e0b97510d0b79b1b3a16947e3470fc61ccd67a6556807",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/logic_enable.pdf",
+      "bytes": 4639,
+      "sha256": "80270ca861a8d1f3d1be720a9ea60d804870ff206ac1071493f1120b857f0b47"
+    },
+    {
+      "path": "docs/diagrams/logic_enable.png",
+      "bytes": 169609,
+      "sha256": "05df203b9cfffd74348db7c56043cec73d5d5487e5de218abd679495cd18c579"
+    },
+    {
+      "path": "docs/diagrams/logic_enable.svg",
+      "lines": 212,
+      "sha256": "5e9948eec758ec3b9da64a356cf76c41621d0064eccbe71219dc6455179b3389",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/motor_drivers.pdf",
+      "bytes": 3512,
+      "sha256": "a78d16193cf3ed9d5b7326b364c7569549280bfbe0e4d7d4bd679bef385fa0d2"
+    },
+    {
+      "path": "docs/diagrams/motor_drivers.png",
+      "bytes": 146211,
+      "sha256": "a05aad6526b7d3ac5b8de881e8d039b98d5c168b5311db11706101c1d0d0d66d"
+    },
+    {
+      "path": "docs/diagrams/motor_drivers.svg",
+      "lines": 78,
+      "sha256": "22b47cd19287c3cfbdc255a637ebdc02ab721f3443c7fc578f0a987ff59d14a7",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/physical_wiring.pdf",
+      "bytes": 4455,
+      "sha256": "6bb8bb285a2e58ffae8c8ea516f805d37f748b1d4a6dd1662b970e7b01f752b1"
+    },
+    {
+      "path": "docs/diagrams/physical_wiring.png",
+      "bytes": 156691,
+      "sha256": "f78b52a01cea0b746addb5a402dc3d301e415b954bec26b421a3c545a0903410"
+    },
+    {
+      "path": "docs/diagrams/physical_wiring.svg",
+      "lines": 117,
+      "sha256": "274454b969d6a1d3206ff625e4dd66b10bfac9e766f4518cdf1a55066b36ef52",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/pin_to_pin_table.pdf",
+      "bytes": 28392,
+      "sha256": "ee7d75834af2bd4cd005e1ea7bb1a394dd7612d8cccbdc153be32fa90e99b911"
+    },
+    {
+      "path": "docs/diagrams/power_distribution.pdf",
+      "bytes": 3845,
+      "sha256": "77922c3ecc3af48b64cfe4520078ddcbc3f73c694088215b36ea2bbf7f8b01cb"
+    },
+    {
+      "path": "docs/diagrams/power_distribution.png",
+      "bytes": 125674,
+      "sha256": "06aa1e6e75c7de1397f8e7d37024e406c033cdcda62531911f740a0d32f2eefc"
+    },
+    {
+      "path": "docs/diagrams/power_distribution.svg",
+      "lines": 111,
+      "sha256": "7b1e265598564816282eee8b752290c1e32439b0f4b513deecae065268129842",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/right_bts7960.pdf",
+      "bytes": 3323,
+      "sha256": "3cc243eba34f971c79bd21bace4d4b22e9b70c0344bc2a3775130690d9e547b3"
+    },
+    {
+      "path": "docs/diagrams/right_bts7960.png",
+      "bytes": 78894,
+      "sha256": "69571f8e5b263b9362a16b8f3a8a702fa4dc3f0f77f4033c016eea7b402f814c"
+    },
+    {
+      "path": "docs/diagrams/right_bts7960.svg",
+      "lines": 92,
+      "sha256": "d5b8a0ab5eac3775263370285b5dc3dc47459f4e9387604785fefa3408a4ab0b",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/sensor_wiring.pdf",
+      "bytes": 3892,
+      "sha256": "4d6aed5d2e909587ffc60b1cd20308be79a4295f64c2d200075e9046cf02d6da"
+    },
+    {
+      "path": "docs/diagrams/sensor_wiring.png",
+      "bytes": 136044,
+      "sha256": "34559e92ff0c9777caf620e3dd7588b53b3d180f25061a31078c246b458d8387"
+    },
+    {
+      "path": "docs/diagrams/sensor_wiring.svg",
+      "lines": 108,
+      "sha256": "5bc9522b603a4184bdf3fdd101f48d7359c6e351e60425deb353a7073722be5d",
+      "references": []
+    },
+    {
+      "path": "docs/diagrams/seven_motors.pdf",
+      "bytes": 3010,
+      "sha256": "ac305910177bbe8c3f77678435282228502bc02aa21ea3981c4e6e2589573668"
+    },
+    {
+      "path": "docs/diagrams/seven_motors.png",
+      "bytes": 63998,
+      "sha256": "e77cb5319dc790fb9b19cecea87d7de7d59fa16ac79a15a696b205eb84d6952e"
+    },
+    {
+      "path": "docs/diagrams/seven_motors.svg",
+      "lines": 87,
+      "sha256": "a1298b0122863f6f3148b584c1d56a002a2d1e12eb49f81b87234f9d7e3d7423",
+      "references": []
+    },
+    {
+      "path": "docs/hardware_photos/README.md",
+      "lines": 109,
+      "sha256": "dcc8c42be1b0d1443e16ee8e753dbc86c3b64727dbc0dfab64a28ef5dd380ece",
+      "references": [
+        "1: # Hardware photograph request - E2 team handover",
+        "5: ## P00 - whole rover",
+        "13: ## P01 - ESP1",
+        "21: ## P02 - DRV_L",
+        "29: ## P03 - DRV_R",
+        "37: ## P04 - DRV_A",
+        "45: ## P05 - US_F / US_L / US_R",
+        "53: ## P06 - BUCK1 / BUCK2",
+        "61: ## P07 - M1-M7",
+        "69: ## P08 - BT1",
+        "77: ## P09 - U1 / U2 and interface board",
+        "85: ## P10 - P1 / OV1 / OV2 / K1 / S0 / S2 / S3",
+        "93: ## P11 - F0 / F1 / F2 / FK / FL / FR / FA / FM1-7 / TB_POS / TB_GND / clamps / capacitors / harness",
+        "101: ## P12 - checkpoint evidence"
+      ]
+    },
+    {
+      "path": "docs/team_handover/PURCHASE_NOW.csv",
+      "lines": 8,
+      "sha256": "88532ee1ecabee517276943bdcdb4f179ef41050ad27e2035514caf8cb568daf",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/TEAM_ASSEMBLY_RECORD.csv",
+      "lines": 202,
+      "sha256": "f6ef9d0856695167a677094d5d0ae2b045684b0e59489b5217fa45a5698d5d0e",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/TEAM_CHECKPOINT_RECORD.csv",
+      "lines": 12,
+      "sha256": "ed8e8227dde521b25158a6c3e0a2959aea746677a71f8c1f3adc86ec05296a9f",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/TEAM_CONNECTION_REGISTER.csv",
+      "lines": 202,
+      "sha256": "c7902025079151f2aa057f634d45e915fa6d3391afb53c1f8b381db5e2d14e23",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/TEAM_MEASUREMENT_RECORD.csv",
+      "lines": 11,
+      "sha256": "4e2671f76170294140e61d835a6e444b3e72300d2c01de295d55644840fcf514",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/TEAM_TERMINAL_MAP.csv",
+      "lines": 171,
+      "sha256": "e96afe7d1aa1164ecab83b509744ce666a29943fe02b3e6286c9cfe1dbbaa302",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/manifest.json",
+      "lines": 657,
+      "sha256": "ab401f5deb84c97e2e57e76dde2307a52d83cbb9fc37efe6a8d05d142375d54f",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/photo_inventory.json",
+      "lines": 8,
+      "sha256": "fefc1b3ccac1e7981090de501d3ca103604104d8264ffef84f0457e4b71f1c62",
+      "references": []
+    },
+    {
+      "path": "docs/team_handover/plan.json",
+      "lines": 130,
+      "sha256": "f4f9f6c91f3a345bb66178ccdf3974e478835e1f578d5c851afafad8cc511992",
+      "references": []
+    },
+    {
+      "path": "electrical/SOURCES.md",
+      "lines": 16,
+      "sha256": "c64624fae0286b8589669bb740506079578d00569a6977e5e77679111b3901d1",
+      "references": [
+        "1: # Electrical reference record \u2014 checked 2 November 2026"
+      ]
+    },
+    {
+      "path": "electrical/bom.csv",
+      "lines": 88,
+      "sha256": "38a4977c31c2c198ef9692ed8bde7ceab863ab2b6da1c95e407964dbcac1884d",
+      "references": []
+    },
+    {
+      "path": "electrical/connections.csv",
+      "lines": 202,
+      "sha256": "9de56df802e3a39dc9ba37ce7fe3f0d5246bd07974d9ecc08f01db4c182d9ce3",
+      "references": []
+    },
+    {
+      "path": "electrical/current_budget.csv",
+      "lines": 14,
+      "sha256": "1786005659921ae58ab85f2fa513d0f294d1518bf46aba70c9b52032cbfced38",
+      "references": []
+    },
+    {
+      "path": "electrical/design.json",
+      "lines": 2289,
+      "sha256": "aa62e3bc70ee252fdf5d81107d25bc7ed33b66774fff005dbc83a3abb9b6b9fb",
+      "references": []
+    },
+    {
+      "path": "electrical/export_manifest.json",
+      "lines": 35,
+      "sha256": "58fa0000b58ef0e82aaf28f4f047ddb9231b1faf4fd2640e727a0b8df505aa04",
+      "references": []
+    },
+    {
+      "path": "electrical/final_wiring_intro.md",
+      "lines": 122,
+      "sha256": "242943e109f7c77895c99054b5a5c50aa5d8a91ee1ad044678d9cf8bbb843970",
+      "references": [
+        "1: # Final wiring package E2 \u2014 ESP32 waste collection rover",
+        "7: ## Drawing set",
+        "21: ## Release/status definitions",
+        "31: ## Preserved ESP32 interface and waveform behavior",
+        "39: ## U1 and safe shared enable \u2014 additional hardware, not installed",
+        "58: ## Motors and driver modules",
+        "70: ## Sensor protection \u2014 blocked physical ECHO connections",
+        "86: ## Power architecture, protection and grounds",
+        "114: ## Open selections: fuse/current/wire worksheet",
+        "120: ## Generated connection tables"
+      ]
+    },
+    {
+      "path": "electrical/terminal_map.csv",
+      "lines": 293,
+      "sha256": "d5a0cc5d37cb0d06bd1a6ee84d8bfd7560f6052ad0b5684cd90b5297361ea6fd",
+      "references": []
+    },
+    {
+      "path": "firmware/rover.ino",
+      "lines": 148,
+      "sha256": "786f20d2adba9875d5f11847c31569d400f8ee4936225e2678ef0ac78c5d2311",
+      "references": [
+        "14: bool pwmReady = true;",
+        "18: void IRAM_ATTR stopInterrupt() {",
+        "26: bool healthy() { return digitalRead(pins::ESTOP_OK) == HIGH; }",
+        "27: void pwmWrite(unsigned channel, unsigned duty) {",
+        "34: void zeroOutputs() {",
+        "39: void applyOutputs(uint32_t now) {",
+        "76: int measure(unsigned index) {",
+        "84: void setup() {",
+        "109: void loop() {"
+      ]
+    },
+    {
+      "path": "include/rover_control.h",
+      "lines": 204,
+      "sha256": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77",
+      "references": [
+        "13: struct Range {",
+        "19: class Controller {",
+        "162: class LineParser {",
+        "192: class MotionGate {"
+      ]
+    },
+    {
+      "path": "include/rover_pins.h",
+      "lines": 12,
+      "sha256": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d",
+      "references": []
+    },
+    {
+      "path": "platformio.ini",
+      "lines": 18,
+      "sha256": "ece3e5922685864fe2d8d89badbc179e500bdc36e51e514a95313e80932077dd",
+      "references": [
+        "4: [env:esp32dev]",
+        "11: [env:native]",
+        "16: [env:wokwi_compile]"
+      ]
+    },
+    {
+      "path": "requirements-design.txt",
+      "lines": 3,
+      "sha256": "9f2b0e5e1f4ca02311e6e3123bd4f4a365dafc124c0a3d68d4347f941c56ba1e",
+      "references": [
+        "1: # Optional vector/PDF/preview generation and PDF validation dependencies."
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "lines": 1,
+      "sha256": "cdd325cbfdf5c7399bbe115cd6ad51d9ae637543aa37a644b2a5e6960b86cc8a",
+      "references": []
+    },
+    {
+      "path": "scripts/check_completion.py",
+      "lines": 42,
+      "sha256": "0f2f4351cb0e4a2c970cbab422a4785651e4ea181a92df1e285691dfb9ae0b0d",
+      "references": [
+        "10: def check():"
+      ]
+    },
+    {
+      "path": "scripts/check_design_exports.py",
+      "lines": 86,
+      "sha256": "0838ca03c83e17c055e4d209023b128813810fae2716a65cb855cf267208fb64",
+      "references": [
+        "66: # Critical visible labels must also reach the individual and combined PDFs."
+      ]
+    },
+    {
+      "path": "scripts/check_electrical.py",
+      "lines": 92,
+      "sha256": "989c408b3241b4e1a9da104742aee3f5df00c72449feedad2c8f4a8f368e248e",
+      "references": [
+        "6: def check(d):"
+      ]
+    },
+    {
+      "path": "scripts/check_project.py",
+      "lines": 38,
+      "sha256": "2aaa355d5a21d2c35ca8ad9b4302bd254ea4ab8f66bd60db87b9754b2371ccf1",
+      "references": [
+        "22: def connected(a,b): assert frozenset((a,b)) in edges, f'Missing {a} -> {b}'",
+        "23: def esp(name): return 'esp:'+{16:'RX2',17:'TX2',36:'VP'}.get(pins[name],'D'+str(pins[name]))",
+        "27: # Both brush indicators must share channel A; conveyor must use channel B."
+      ]
+    },
+    {
+      "path": "scripts/check_team_handover.py",
+      "lines": 138,
+      "sha256": "63ba1bc6560d59b7f39ef5a8bf11c47d351fb9822ee432bf0fa2fb0d5323e83f",
+      "references": [
+        "16: def read_csv(path):",
+        "20: def norm(text):",
+        "24: def validate_records(source,records):",
+        "47: def check():"
+      ]
+    },
+    {
+      "path": "scripts/check_vcd.py",
+      "lines": 47,
+      "sha256": "b6f1a7c4c523b540c8276c6f2845d3f5535b405c433ebe9f3c11eb9bf927e077",
+      "references": [
+        "6: def validate(path, case):"
+      ]
+    },
+    {
+      "path": "scripts/electrical_export_contracts.py",
+      "lines": 103,
+      "sha256": "30bf29bf778d9a2a8ab398a4d8c79c0f64a1dcb6edf4a346fee6b634bcbde4e5",
+      "references": [
+        "5: def gpio_route_status(model, name):",
+        "23: def check_pinout_svg(root, model):",
+        "43: def check_bts_overview_svg(root):",
+        "54: def check_internal_returns(rows):",
+        "72: def check_classic_pdf_xref(data):"
+      ]
+    },
+    {
+      "path": "scripts/generate_ready_to_wire.py",
+      "lines": 67,
+      "sha256": "e08ecdecfc2779ec66d09567550ab6b73810fd652b28c5a4d2e9dae9f773a3bb",
+      "references": [
+        "14: def section(row):",
+        "28: def generate(rows):"
+      ]
+    },
+    {
+      "path": "scripts/generate_team_handover.py",
+      "lines": 402,
+      "sha256": "c5598ae618a10f294eb1b75819f4e5ea04e494ee0086fb2d877920c0e326e47e",
+      "references": [
+        "42: def plain(value):",
+        "46: def esc(value):",
+        "50: def para(value, style='TeamBody', markdown=False):",
+        "59: def cell(value):",
+        "63: def table(headers, rows, widths=None):",
+        "76: def make_pdf(path, story):",
+        "85: class TopDown(Flowable):",
+        "116: def load_inputs():",
+        "123: def photo_inventory():",
+        "132: def buy_now(model):",
+        "147: def section_for(row):",
+        "162: def intermediate(row,model):",
+        "179: def rating(row):",
+        "192: def connection_register(rows,model):",
+        "202: def write_csv(path,rows):",
+        "207: def register_table(rows):",
+        "229: def checkpoint_story(plan):",
+        "244: def parse_purchase():",
+        "251: def render_section(section,plan,model,records,photos,purchases):",
+        "298: def write_team_files(plan,model,records,photos,purchases):",
+        "344: def main():"
+      ]
+    },
+    {
+      "path": "scripts/generate_wiring.py",
+      "lines": 420,
+      "sha256": "5ab0229561ad88bfb8d0351dc9dcd3025c89a94328074849b0af1a34ea7901c7",
+      "references": [
+        "25: def write_validated_pdf(writer,path):",
+        "35: def label(node):",
+        "38: def txt(s): return str(s).replace('\u03a9','ohm').replace('\u2192','->').replace('\u2264','<=').replace('\u2265','>=').replace('\u2014','-').replace('\u2013','-')",
+        "39: class Drawing:",
+        "84: def component_height(ref): return 87+20*len(C[ref]['pins'])",
+        "85: def component(d,ref,x,y,w=500):",
+        "118: def schematics():",
+        "134: def pinout():",
+        "154: def sensors():",
+        "176: def power():",
+        "203: def emergency():",
+        "233: def drivers():",
+        "254: def physical():",
+        "295: def ground_source(node):",
+        "319: def connection_rows():",
+        "330: def csvwrite(path,rows):",
+        "334: def detail_sheets():",
+        "352: def assembly_sheets(rows):",
+        "370: def tables(rows):",
+        "401: def main():"
+      ]
+    },
+    {
+      "path": "scripts/run_wokwi.py",
+      "lines": 116,
+      "sha256": "6d69a18e7d78ce7fdc9c764b3e57d20c76541c8c6482c088fb9af1096be2c788",
+      "references": [
+        "15: def state(motion, brush=0, conveyor=0):",
+        "18: def command(text, accepted=True):",
+        "21: def pin(name,value):",
+        "24: def aux(text, brush, conveyor):",
+        "28: def all_stopped():",
+        "31: def forward():",
+        "34: def cases():",
+        "55: def prepare():",
+        "75: def main():"
+      ]
+    },
+    {
+      "path": "scripts/sync_wokwi.py",
+      "lines": 18,
+      "sha256": "e662f765946a0fb17af86d5fc80aa57363440ab5271634887d979e8e79c67ae0",
+      "references": []
+    },
+    {
+      "path": "scripts/verify.py",
+      "lines": 36,
+      "sha256": "a407d5ccb8424653b8243a692360cba5e44e9a8df7f63a3780c66902cd1d3bc9",
+      "references": [
+        "13: def run(args, log):",
+        "22: # PlatformIO can invalidate build directories between test/build actions.",
+        "23: # Keep every invocation sequential; finish with deployable build artifacts."
+      ]
+    },
+    {
+      "path": "src/main.cpp",
+      "lines": 5,
+      "sha256": "237b2bf1a3e796a8e945a6772d41d1affc0e3521b475e26155f0ebe87bf45d60",
+      "references": []
+    },
+    {
+      "path": "test/stubs/Arduino.h",
+      "lines": 53,
+      "sha256": "e671e2daf8247660e61daff3191b3eb42b5aa2afe7e791307a91c0646e659d07",
+      "references": [
+        "44: struct MockSerial {"
+      ]
+    },
+    {
+      "path": "test/stubs/esp_arduino_version.h",
+      "lines": 2,
+      "sha256": "eec33b823418f2e5989659d203832b2740e407e9eab39d8c412bd93ebe45ca06",
+      "references": []
+    },
+    {
+      "path": "test/stubs/soc/gpio_reg.h",
+      "lines": 2,
+      "sha256": "05b273a9253654a8be8127e4d9c3d345036c23fb2553164f44e6f1af489509f6",
+      "references": []
+    },
+    {
+      "path": "test/stubs/soc/soc.h",
+      "lines": 2,
+      "sha256": "540bd3c82efb6331287efc48665c7b4a53f6ce3f7915d99b6e0e98c11a87a991",
+      "references": []
+    },
+    {
+      "path": "test/test_design_exports.py",
+      "lines": 76,
+      "sha256": "0ac456becc46fa4752d6bb10d68b976a3a7741a78dc9fa98dbb379623557cddf",
+      "references": [
+        "15: class AuditExportRegressions(unittest.TestCase):"
+      ]
+    },
+    {
+      "path": "test/test_electrical.py",
+      "lines": 39,
+      "sha256": "7be09019cb249f53f65c08509eb88dd5c9d427c628668b93a711ca5b49dde6bb",
+      "references": [
+        "7: class ElectricalChecks(unittest.TestCase):"
+      ]
+    },
+    {
+      "path": "test/test_io/test_main.cpp",
+      "lines": 117,
+      "sha256": "0a56be6e53e81ee890975e811f51c6671fd2b0b120c765dbe3c569f6e369eb16",
+      "references": [
+        "3: void setUp() {",
+        "11: void tearDown() {}",
+        "12: void stopped() {",
+        "17: void send(const char *s) { Serial.input=s; loop(); }",
+        "18: void startForward() { setup(); send(\"ARM\\nF\\n\"); mockNow=100; loop(); TEST_ASSERT_EQUAL(1,mockPins[pins::ENABLE]); }",
+        "19: void boot_outputs_disabled() { setup(); loop(); stopped(); TEST_ASSERT_EQUAL(0,mockEnableHighCount); }",
+        "20: void open_loop_at_boot_latches() { mockPins[pins::ESTOP_OK]=LOW; setup(); send(\"ARM\\n\"); stopped(); TEST_ASSERT_TRUE(controller.estop); }",
+        "21: void arm_no_pulse() { setup(); send(\"ARM\\n\"); stopped(); TEST_ASSERT_EQUAL(0,mockEnableHighCount); }",
+        "22: void forward_after_neutral() { setup(); send(\"ARM\\nF\\n\"); stopped(); mockNow=99; loop(); stopped(); mockNow=100; loop(); TEST_ASSERT_EQUAL(1,mockPins[14]); TEST",
+        "23: void reverse_break_before_make() { startForward(); send(\"B\\n\"); stopped(); mockNow+=100; loop(); TEST_ASSERT_EQUAL(150,mockDuty[1]); TEST_ASSERT_EQUAL(150,mockD",
+        "24: void physical_isr_immediately_cuts_enable() { startForward(); TEST_ASSERT_NOT_NULL(mockInterrupt); mockPins[pins::ESTOP_OK]=LOW; mockInterrupt(); TEST_ASSERT_EQ",
+        "25: void release_requires_reset_and_rearm() { startForward(); mockPins[pins::ESTOP_OK]=LOW; mockInterrupt(); loop(); mockPins[pins::ESTOP_OK]=HIGH; send(\"ARM\\nF\\n\")",
+        "26: void serial_estop_all_outputs() { startForward(); send(\"CLEAN ON\\n\"); TEST_ASSERT_EQUAL(1,mockPins[pins::BRUSH_IN1]); send(\"ESTOP\\n\"); stopped(); TEST_ASSERT_FA",
+        "27: void deadman_cuts_actual_enable() { startForward(); mockNow=1200; loop(); stopped(); }",
+        "28: void overflow_disarms_actual_outputs() { startForward(); Serial.input=std::string(70,'X')+\"ARM\\n\"; loop(); stopped(); loop(); stopped(); TEST_ASSERT_FALSE(contr",
+        "29: void pwm_failure_blocks_arming() { mockPwmFailure=true; setup(); send(\"ARM\\nF\\n\"); mockNow=100; loop(); stopped(); TEST_ASSERT_FALSE(controller.armed); }",
+        "30: void timeout_disarms_auto_outputs() {",
+        "35: void one_l298n_independent_outputs() {",
+        "42: void aux_suppressed_during_neutral_and_turns() {",
+        "48: void right_turn_wheel_outputs() { startForward(); send(\"R\\n\"); stopped(); mockNow+=100; loop(); TEST_ASSERT_EQUAL(140,mockDuty[0]); TEST_ASSERT_EQUAL(140,mockDu",
+        "49: void estop_input_has_internal_pulldown() { setup(); TEST_ASSERT_EQUAL(INPUT_PULLDOWN,mockModes[pins::ESTOP_OK]); TEST_ASSERT_EQUAL(27,pins::ESTOP_OK); }",
+        "50: void stop_disables_both_aux_channels() { startForward(); send(\"BRUSH ON\\nCONVEYOR ON\\nSTOP\\n\"); stopped(); TEST_ASSERT_TRUE(controller.estop); TEST_ASSERT_FALSE",
+        "51: void aux_channel_topology() { TEST_ASSERT_EQUAL(4,sizeof(pins::AUX)/sizeof(pins::AUX[0])); TEST_ASSERT_EQUAL(21,pins::BRUSH_IN1); TEST_ASSERT_EQUAL(22,pins::BRU",
+        "52: void autoStep(uint32_t at,int front=20) {",
+        "56: void startAutoTurn() {",
+        "60: void adapter_times_turn_from_enable() {",
+        "67: void physical_estop_interrupts_auto_turn() {",
+        "73: void reassessment_sensor_failure_keeps_adapter_disabled() {",
+        "78: void physical_estop_during_both_cleaning_channels() {",
+        "86: void software_reboot_discards_motion_and_cleaning() {",
+        "93: void sensor_recovery_requires_explicit_arm_auto() {",
+        "103: int main() {"
+      ]
+    },
+    {
+      "path": "test/test_navigation/test_main.cpp",
+      "lines": 87,
+      "sha256": "749046828ce77e3c7fcdf939f6004a91e3359ec4043f0ca19918eb9049732071",
+      "references": [
+        "5: void setUp() {}",
+        "6: void tearDown() {}",
+        "7: void ranges(Controller &c,uint32_t t,int f=100,int l=100,int r=100) {",
+        "10: void autoStart(Controller &c,uint32_t t=0,int f=100,int l=100,int r=100) {",
+        "14: void boot_safe() { Controller c; c.tick(0,true); TEST_ASSERT_FALSE(c.armed); TEST_ASSERT_TRUE(c.motion==Motion::Stop); TEST_ASSERT_FALSE(c.cleanOutput()); }",
+        "15: void arm_stays_stopped() { Controller c; c.command(\"ARM\",0,true); c.tick(100,true); TEST_ASSERT_TRUE(c.armed); TEST_ASSERT_TRUE(c.motion==Motion::Stop); }",
+        "16: void auto_requires_arm_and_ranges() { Controller c; TEST_ASSERT_FALSE(c.command(\"AUTO\",0,true)); c.command(\"ARM\",0,true); TEST_ASSERT_FALSE(c.command(\"AUTO\",0,t",
+        "17: void clear_forward() { Controller c; autoStart(c); TEST_ASSERT_TRUE(c.motion==Motion::Forward); TEST_ASSERT_FALSE(c.cleanOutput()); }",
+        "18: void obstacle_settles_then_left() { Controller c; autoStart(c,0,35,100,60); TEST_ASSERT_TRUE(c.motion==Motion::Stop); c.tick(179,true); TEST_ASSERT_TRUE(c.motio",
+        "19: void clearer_right() { Controller c; autoStart(c,0,20,50,120); c.tick(180,true); TEST_ASSERT_TRUE(c.motion==Motion::Right); }",
+        "20: void ties_left() { Controller c; autoStart(c,0,20,100,100); c.tick(180,true); TEST_ASSERT_TRUE(c.motion==Motion::Left); }",
+        "21: void all_blocked() { Controller c; autoStart(c,0,20,45,45); for (uint32_t t=0;t<2000;t+=100) { ranges(c,t,20,45,45); c.tick(t,true); TEST_ASSERT_TRUE(c.motion==",
+        "22: void side_too_close() { Controller c; autoStart(c,0,100,20,100); c.tick(180,true); TEST_ASSERT_TRUE(c.motion==Motion::Stop); }",
+        "23: void turn_stops_on_side_obstacle() { Controller c; autoStart(c,0,20,100,60); c.tick(180,true); ranges(c,200,20,45,60); c.tick(200,true); TEST_ASSERT_TRUE(c.moti",
+        "24: void turn_time_bounded() { Controller c; autoStart(c,0,20,100,60); c.tick(180,true); c.reportApplied(Motion::Left,280); ranges(c,819,20,100,60); c.tick(819,true",
+        "25: void missing_disarms_no_restart() { Controller c; autoStart(c); c.sample(1,-1,100); c.tick(100,true); TEST_ASSERT_FALSE(c.armed); ranges(c,150); c.tick(150,true",
+        "26: void out_of_range() { for (int cm : {0,1,401}) { Controller c; ranges(c,0,cm); c.command(\"ARM\",0,true); TEST_ASSERT_FALSE(c.command(\"AUTO\",0,true)); } }",
+        "27: void stale_individual_sensor() { Controller c; autoStart(c); c.sample(0,100,501); c.sample(1,100,501); c.tick(501,true); TEST_ASSERT_FALSE(c.armed); }",
+        "28: void freshness_boundary() { Controller c; autoStart(c); c.tick(500,true); TEST_ASSERT_TRUE(c.armed); c.tick(501,true); TEST_ASSERT_FALSE(c.armed); }",
+        "29: void manual_deadman() { Controller c; c.command(\"ARM\",0,true); c.command(\"F\",0,true); c.tick(1199,true); TEST_ASSERT_TRUE(c.motion==Motion::Forward); c.tick(120",
+        "30: void unknown_does_not_refresh() { Controller c; c.command(\"ARM\",0,true); c.command(\"F\",0,true); TEST_ASSERT_FALSE(c.command(\"BOGUS\",1199,true)); c.tick(1200,tru",
+        "31: void repeat_manual_refreshes() { Controller c; c.command(\"ARM\",0,true); c.command(\"B\",0,true); c.command(\"B\",1100,true); c.tick(1200,true); TEST_ASSERT_TRUE(c.m",
+        "32: void manual_rollover() { Controller c; uint32_t t=UINT32_MAX-500; c.command(\"ARM\",t,true); c.command(\"F\",t,true); c.tick(t+1199,true); TEST_ASSERT_TRUE(c.motion",
+        "33: void turn_rollover() { Controller c; uint32_t t=UINT32_MAX-200; autoStart(c,t,20,100,60); c.tick(t+180,true); TEST_ASSERT_TRUE(c.motion==Motion::Left); c.report",
+        "34: void estop_latches() { Controller c; autoStart(c); c.command(\"ESTOP\",0,true); TEST_ASSERT_FALSE(c.armed); TEST_ASSERT_TRUE(c.estop); TEST_ASSERT_FALSE(c.command",
+        "35: void switch_open_cannot_reset() { Controller c; c.tick(0,false); TEST_ASSERT_TRUE(c.estop); TEST_ASSERT_FALSE(c.command(\"RESET\",1,false)); TEST_ASSERT_FALSE(c.c",
+        "36: void hardware_stop_from_manual() { Controller c; c.command(\"ARM\",0,true); c.command(\"B\",0,true); c.tick(1,false); TEST_ASSERT_TRUE(c.motion==Motion::Stop); TEST",
+        "37: void s_exits_auto() { Controller c; autoStart(c); c.command(\"S\",1,true); c.tick(2,true); TEST_ASSERT_FALSE(c.automatic); TEST_ASSERT_TRUE(c.motion==Motion::Stop",
+        "38: void mode_clears_turn() { Controller c; autoStart(c,0,20,100,60); c.tick(180,true); c.command(\"MANUAL\",181,true); ranges(c,182); c.command(\"AUTO\",182,true); c.t",
+        "39: void arm_clears_modes() { Controller c; autoStart(c); c.command(\"CLEAN ON\",0,true); c.command(\"ARM\",1,true); TEST_ASSERT_FALSE(c.automatic); TEST_ASSERT_FALSE(c",
+        "40: void cleaning_forward_only() { Controller c; c.command(\"ARM\",0,true); c.command(\"CLEAN ON\",0,true); c.command(\"F\",0,true); TEST_ASSERT_TRUE(c.cleanOutput()); fo",
+        "41: void clean_off_and_disarm() { Controller c; autoStart(c); c.command(\"CLEAN ON\",0,true); TEST_ASSERT_TRUE(c.cleanOutput()); c.command(\"CLEAN OFF\",1,true); TEST_A",
+        "42: void parser_normalization() { LineParser p; for (char ch : {' ','a','r','m',' ','\\r'}) { auto r=p.feed(ch); if (ch=='\\r') { TEST_ASSERT_EQUAL(LineParser::Ready,",
+        "43: void parser_overflow_discards() { LineParser p; for(int i=0;i<48;++i) TEST_ASSERT_EQUAL(LineParser::None,p.feed(' ')); TEST_ASSERT_EQUAL(LineParser::Overflow,p.",
+        "44: void gate_neutral_and_reverse() { MotionGate g; TEST_ASSERT_TRUE(g.update(Motion::Forward,0)==Motion::Stop); TEST_ASSERT_TRUE(g.update(Motion::Forward,99)==Moti",
+        "45: void gate_rollover() { MotionGate g; uint32_t t=UINT32_MAX-50; g.update(Motion::Left,t); TEST_ASSERT_TRUE(g.update(Motion::Left,t+99)==Motion::Stop); TEST_ASSER",
+        "46: void independent_aux_requests() {",
+        "53: void aux_require_arm() { Controller c; TEST_ASSERT_FALSE(c.command(\"BRUSH ON\",0,true)); TEST_ASSERT_FALSE(c.command(\"CONVEYOR ON\",0,true)); TEST_ASSERT_FALSE(c.",
+        "54: void aux_requests_do_not_refresh_deadman() {",
+        "59: void stop_alias_latches_and_clears_aux() {",
+        "64: void sensor_fault_clears_independent_aux() {",
+        "68: void cleaning_aliases_control_both() {",
+        "73: int main() {"
+      ]
+    },
+    {
+      "path": "test/test_team_handover.py",
+      "lines": 48,
+      "sha256": "f67f2239f12a24c1ab55a35613acf9a6a1bdbd95cfb8a6914470dc458568493f",
+      "references": [
+        "13: class TeamHandoverContracts(unittest.TestCase):"
+      ]
+    },
+    {
+      "path": "test/test_turning/test_main.cpp",
+      "lines": 159,
+      "sha256": "3230f37925cdf365e56463f49296984bfcfed541f7acefbf3b22cde8e74d76c1",
+      "references": [
+        "5: void setUp() {}",
+        "6: void tearDown() {}",
+        "7: void frame(Controller &c,uint32_t now,int f=20,int l=100,int r=60) {",
+        "10: struct Event { uint32_t at; Motion motion; };",
+        "11: struct Rover {",
+        "34: void left_turn_is_continuous() {",
+        "39: void right_turn_is_continuous() {",
+        "44: void dead_time_does_not_consume_turn_duration() {",
+        "49: void repeated_applied_feedback_does_not_extend_turn() {",
+        "53: void reassessment_requires_every_new_sensor() {",
+        "59: void reassessment_minimum_settle_time() {",
+        "63: void fresh_clear_path_exits_avoidance() {",
+        "68: void hysteresis_prevents_front_threshold_chatter() {",
+        "73: void bounded_retries(Motion direction) {",
+        "87: void persistent_left_obstacle_is_bounded() { bounded_retries(Motion::Left); }",
+        "88: void persistent_right_obstacle_is_bounded() { bounded_retries(Motion::Right); }",
+        "89: void reassessment_selects_updated_direction() {",
+        "94: void estop_preempts_every_phase() {",
+        "102: void invalid_sensor_preempts_every_phase() {",
+        "111: void stale_sensor_preempts_every_phase() {",
+        "119: void timer_and_reassessment_survive_rollover() {",
+        "124: void side_clearance_loss_stops_without_immediate_retry() {",
+        "129: void final_attempt_may_recover_with_fresh_clear_path() {",
+        "134: void obstacle_cleared_during_initial_settle_needs_no_turn() {",
+        "138: void pending_turn_safety_clearance_is_checked() {",
+        "142: void stop_command_cancels_reassessment_and_future_turns() {",
+        "146: int main() {"
+      ]
+    },
+    {
+      "path": "test/test_vcd.py",
+      "lines": 40,
+      "sha256": "9be91825922ea64297d41c31234cc62ca8fd6eb2b83a36d2c32b746b22d7e1b5",
+      "references": [
+        "9: class TraceChecks(unittest.TestCase):"
+      ]
+    },
+    {
+      "path": "wokwi/diagram.json",
+      "lines": 393,
+      "sha256": "2f84fbd432915806e9118a549e5f6abe7b0a0773493a3171a5ccae5319293024",
+      "references": []
+    },
+    {
+      "path": "wokwi/libraries.txt",
+      "lines": 1,
+      "sha256": "0cadd1b7ffc20a991219d08bc565b777c1f8a479c8ab898a494d0a07b601bce4",
+      "references": [
+        "1: # No additional libraries required"
+      ]
+    },
+    {
+      "path": "wokwi/sketch.ino",
+      "lines": 367,
+      "sha256": "58f3a13e382cba217c75a1c2d0e8d082c4b36465574d77483d359bda03388a69",
+      "references": [
+        "15: struct Range {",
+        "21: class Controller {",
+        "164: class LineParser {",
+        "194: class MotionGate {",
+        "233: bool pwmReady = true;",
+        "237: void IRAM_ATTR stopInterrupt() {",
+        "245: bool healthy() { return digitalRead(pins::ESTOP_OK) == HIGH; }",
+        "246: void pwmWrite(unsigned channel, unsigned duty) {",
+        "253: void zeroOutputs() {",
+        "258: void applyOutputs(uint32_t now) {",
+        "295: int measure(unsigned index) {",
+        "303: void setup() {",
+        "328: void loop() {"
+      ]
+    },
+    {
+      "path": "wokwi/wokwi.toml",
+      "lines": 4,
+      "sha256": "c25cff4854e29b81bf07b5ed33901b977593d86a39c15de8a4f3ce02d9b8ac54",
+      "references": []
+    }
+  ]
+}

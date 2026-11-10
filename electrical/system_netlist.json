@@ -1,0 +1,2398 @@
+{
+  "revision": "S1 - additive camera and laptop architecture; physical HOLD",
+  "date": "2026-11-08",
+  "release": "HOLD - not approved for powered assembly",
+  "components": {
+    "ESP1": {
+      "name": "ESP32-WROOM-32 DevKit",
+      "pins": {
+        "5V_VIN": "5V_VIN",
+        "3V3": "3V3",
+        "GND": "GND",
+        "GPIO16": "GPIO16",
+        "GPIO17": "GPIO17",
+        "GPIO18": "GPIO18",
+        "GPIO19": "GPIO19",
+        "GPIO14": "GPIO14",
+        "GPIO21": "GPIO21",
+        "GPIO22": "GPIO22",
+        "GPIO23": "GPIO23",
+        "GPIO25": "GPIO25",
+        "GPIO32": "GPIO32",
+        "GPIO34": "GPIO34",
+        "GPIO33": "GPIO33",
+        "GPIO35": "GPIO35",
+        "GPIO13": "GPIO13",
+        "GPIO36": "GPIO36",
+        "GPIO27": "GPIO27",
+        "GPIO0": "GPIO0",
+        "GPIO2": "GPIO2",
+        "GPIO4": "GPIO4",
+        "GPIO5": "GPIO5",
+        "GPIO12": "GPIO12",
+        "GPIO15": "GPIO15",
+        "GPIO26": "GPIO26",
+        "GPIO39": "GPIO39",
+        "UART0_TX_GPIO1": "UART0_TX_GPIO1",
+        "UART0_RX_GPIO3": "UART0_RX_GPIO3",
+        "EN_RESET": "EN_RESET"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Header positions and USB power path unknown. GPIO labels only; verify actual board silkscreen. Functional unused headers are explicit NC; GPIO6-11 flash connections are never part of this harness. Duplicate physical power/GND header positions are not inferred."
+    },
+    "DRV_L": {
+      "name": "BTS7960 / IBT-2 left",
+      "pins": {
+        "B+": "B+",
+        "B-": "B-",
+        "M+": "M+",
+        "M-": "M-",
+        "VCC": "VCC",
+        "GND": "GND",
+        "RPWM": "RPWM",
+        "LPWM": "LPWM",
+        "R_EN": "R_EN",
+        "L_EN": "L_EN",
+        "R_IS": "R_IS",
+        "L_IS": "L_IS"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Exact board buffer, supply and continuous/stall rating unverified."
+    },
+    "DRV_R": {
+      "name": "BTS7960 / IBT-2 right",
+      "pins": {
+        "B+": "B+",
+        "B-": "B-",
+        "M+": "M+",
+        "M-": "M-",
+        "VCC": "VCC",
+        "GND": "GND",
+        "RPWM": "RPWM",
+        "LPWM": "LPWM",
+        "R_EN": "R_EN",
+        "L_EN": "L_EN",
+        "R_IS": "R_IS",
+        "L_IS": "L_IS"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Exact board buffer, supply and continuous/stall rating unverified."
+    },
+    "DRV_A": {
+      "name": "ONE L298N: A brushes / B conveyor",
+      "pins": {
+        "Vs_12V": "Vs_12V",
+        "5V_LOGIC": "5V_LOGIC",
+        "GND": "GND",
+        "IN1": "IN1",
+        "IN2": "IN2",
+        "IN3": "IN3",
+        "IN4": "IN4",
+        "ENA": "ENA",
+        "ENB": "ENB",
+        "OUT1": "OUT1",
+        "OUT2": "OUT2",
+        "OUT3": "OUT3",
+        "OUT4": "OUT4"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Remove ENA/ENB links. Disable onboard regulator before external 5V input, if exact module supports it. Verify flyback diodes."
+    },
+    "M1": {
+      "name": "left front wheel motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "12 V / 30 RPM",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "M2": {
+      "name": "left rear wheel motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "12 V / 30 RPM",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "M3": {
+      "name": "right front wheel motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "12 V / 30 RPM",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "M4": {
+      "name": "right rear wheel motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "12 V / 30 RPM",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "M5": {
+      "name": "brush 1 motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "12 V",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "M6": {
+      "name": "brush 2 motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "12 V",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "M7": {
+      "name": "conveyor motor",
+      "pins": {
+        "A": "A",
+        "B": "B"
+      },
+      "in_inventory": true,
+      "kind": "motor",
+      "value": "Voltage TBD",
+      "footprint": null,
+      "note": "Terminals A/B are functional lead identifiers; physical rotation and currents are unverified."
+    },
+    "US_F": {
+      "name": "HC-SR04 front",
+      "pins": {
+        "VCC": "VCC",
+        "TRIG": "TRIG",
+        "ECHO": "ECHO",
+        "GND": "GND"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Exact variant unknown. Real ECHO connection blocked until conditioning fitted and measured."
+    },
+    "US_L": {
+      "name": "HC-SR04 left",
+      "pins": {
+        "VCC": "VCC",
+        "TRIG": "TRIG",
+        "ECHO": "ECHO",
+        "GND": "GND"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Exact variant unknown. Real ECHO connection blocked until conditioning fitted and measured."
+    },
+    "US_R": {
+      "name": "HC-SR04 right",
+      "pins": {
+        "VCC": "VCC",
+        "TRIG": "TRIG",
+        "ECHO": "ECHO",
+        "GND": "GND"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "",
+      "footprint": null,
+      "note": "Exact variant unknown. Real ECHO connection blocked until conditioning fitted and measured."
+    },
+    "BUCK1": {
+      "name": "LM2596 #1",
+      "pins": {
+        "IN+": "IN+",
+        "IN-": "IN-",
+        "OUT+": "OUT+",
+        "OUT-": "OUT-"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "5.0 V target",
+      "footprint": null,
+      "note": "Module current/thermal rating unverified; never parallel OUT+ rails."
+    },
+    "BUCK2": {
+      "name": "LM2596 #2",
+      "pins": {
+        "IN+": "IN+",
+        "IN-": "IN-",
+        "OUT+": "OUT+",
+        "OUT-": "OUT-"
+      },
+      "in_inventory": true,
+      "kind": "module",
+      "value": "5.0 V target",
+      "footprint": null,
+      "note": "Module current/thermal rating unverified; never parallel OUT+ rails."
+    },
+    "BT1": {
+      "name": "3S LiPo / connector",
+      "pins": {
+        "PACK+": "PACK+",
+        "PACK-": "PACK-",
+        "BAL_CELL0": "BAL_CELL0",
+        "BAL_CELL1": "BAL_CELL1",
+        "BAL_CELL2": "BAL_CELL2",
+        "BAL_CELL3": "BAL_CELL3"
+      },
+      "in_inventory": true,
+      "kind": "battery",
+      "value": "11.1 V nominal / 3300 mAh",
+      "footprint": null,
+      "note": "12.6 V full only for conventional 4.2 V/cell chemistry. Balance names are potentials, NOT connector positions."
+    },
+    "CAM1": {
+      "name": "Separate ESP32-CAM",
+      "pins": {
+        "5V": "5V",
+        "GND": "GND",
+        "U0R": "U0R",
+        "U0T": "U0T"
+      },
+      "kind": "module",
+      "in_inventory": true,
+      "value": "Actual variant UNIDENTIFIED; AI-Thinker supported only",
+      "footprint": null,
+      "note": "No connector numbering inferred; verify actual regulated-5V input. Internal camera wiring is board-specific"
+    },
+    "P1": {
+      "name": "3S high-side protection assembly",
+      "pins": {
+        "IN+": "IN+",
+        "OUT+": "OUT+",
+        "GND": "GND",
+        "CELL0": "CELL0",
+        "CELL1": "CELL1",
+        "CELL2": "CELL2",
+        "CELL3": "CELL3"
+      },
+      "in_inventory": false,
+      "kind": "functional",
+      "value": "SELECT PART",
+      "footprint": null,
+      "note": "Functional port contract, NOT vendor pinout. Required cell-level UV/OV/overcurrent protection; high-side topology avoids USB ground bypass. Balance lead protection per selected manufacturer."
+    },
+    "S0": {
+      "name": "Master load isolator",
+      "pins": {
+        "COM": "COM",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "switch",
+      "value": "DC rating TBD",
+      "footprint": null,
+      "note": "Functional terminal names; isolate positive load feed. Balance leads stay live until unplugged."
+    },
+    "S2": {
+      "name": "Latching E-stop / 3 isolated NC contacts",
+      "pins": {
+        "COIL_COM": "COIL_COM",
+        "COIL_NC": "COIL_NC",
+        "SENSE_COM": "SENSE_COM",
+        "SENSE_NC": "SENSE_NC",
+        "EN_COM": "EN_COM",
+        "EN_NC": "EN_NC"
+      },
+      "in_inventory": false,
+      "kind": "functional",
+      "value": "SELECT PART",
+      "footprint": null,
+      "note": "Select actual NC contact blocks: coil, 3.3 V dry feedback, 5 V enable. Verify low-current wetting and isolation; not a certified safety circuit."
+    },
+    "S3": {
+      "name": "Momentary motor-power ARM",
+      "pins": {
+        "COM": "COM",
+        "NO": "NO"
+      },
+      "in_inventory": false,
+      "kind": "switch",
+      "value": "NO; rating TBD",
+      "footprint": null,
+      "note": "Deliberate hardware power-arm, not the software ARM command. Press only after verifying EN low."
+    },
+    "K1": {
+      "name": "DC motor contactor",
+      "pins": {
+        "MAIN_COM": "MAIN_COM",
+        "MAIN_NO": "MAIN_NO",
+        "A1": "A1",
+        "A2": "A2",
+        "AUX_HOLD_COM": "AUX_HOLD_COM",
+        "AUX_HOLD_NO": "AUX_HOLD_NO",
+        "AUX_SENSE_COM": "AUX_SENSE_COM",
+        "AUX_SENSE_NO": "AUX_SENSE_NO"
+      },
+      "in_inventory": false,
+      "kind": "functional",
+      "value": "CONTACT / COIL TBD",
+      "footprint": null,
+      "note": "A1/A2 coil function; other names are logical contact roles. Map actual manufacturer terminals; DC main rating and coil operating range pending. Two separate NO auxiliary contact sets required: seal-in and isolated GPIO feedback."
+    },
+    "Z_COIL": {
+      "name": "Coil suppression network",
+      "pins": {
+        "A1": "A1",
+        "A2": "A2"
+      },
+      "in_inventory": false,
+      "kind": "functional",
+      "value": "SELECT FOR K1",
+      "footprint": null,
+      "note": "Manufacturer-specified clamp; release time and voltage must be qualified. Do not assume an arbitrary flyback diode is suitable."
+    },
+    "F0": {
+      "name": "main pack fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FL": {
+      "name": "left driver fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FR": {
+      "name": "right driver fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FA": {
+      "name": "auxiliary driver fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "F1": {
+      "name": "MCU buck input fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "F2": {
+      "name": "logic buck input fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FK": {
+      "name": "contactor coil fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM1": {
+      "name": "motor 1 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM2": {
+      "name": "motor 2 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM3": {
+      "name": "motor 3 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM4": {
+      "name": "motor 4 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM5": {
+      "name": "motor 5 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM6": {
+      "name": "motor 6 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "FM7": {
+      "name": "motor 7 fuse / holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "in_inventory": false,
+      "kind": "fuse",
+      "value": "DC A / interrupt rating TBD",
+      "footprint": null,
+      "note": "IN/OUT identify routing only; no fuse current or wire gauge approved. Coordinate time-current curves with wires, electronics and motor overload requirements."
+    },
+    "U1": {
+      "name": "SN74AHCT244N 3.3-to-5 V buffer",
+      "pins": {
+        "1": "1OE_N",
+        "2": "1A1",
+        "3": "2Y4",
+        "4": "1A2",
+        "5": "2Y3",
+        "6": "1A3",
+        "7": "2Y2",
+        "8": "1A4",
+        "9": "2Y1",
+        "10": "GND",
+        "11": "2A1",
+        "12": "1Y4",
+        "13": "2A2",
+        "14": "1Y3",
+        "15": "2A3",
+        "16": "1Y2",
+        "17": "2A4",
+        "18": "1Y1",
+        "19": "2OE_N",
+        "20": "VCC"
+      },
+      "in_inventory": false,
+      "kind": "ic",
+      "value": "SN74AHCT244N",
+      "footprint": null,
+      "note": "Exact 20-pin pinout per TI. No PCB footprint assigned; package must match procured part. This is AHCT, not HC."
+    },
+    "R23": {
+      "name": "ECHO upper resistor",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "2.2k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Not in inventory. Sensor-to-node series element; not MCU series-only protection."
+    },
+    "R24": {
+      "name": "ECHO lower resistor",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "3.3k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Node to GND; three separate divider pairs required."
+    },
+    "R25": {
+      "name": "ECHO upper resistor",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "2.2k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Not in inventory. Sensor-to-node series element; not MCU series-only protection."
+    },
+    "R26": {
+      "name": "ECHO lower resistor",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "3.3k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Node to GND; three separate divider pairs required."
+    },
+    "R27": {
+      "name": "ECHO upper resistor",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "2.2k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Not in inventory. Sensor-to-node series element; not MCU series-only protection."
+    },
+    "R28": {
+      "name": "ECHO lower resistor",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "3.3k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Node to GND; three separate divider pairs required."
+    },
+    "R1": {
+      "name": "L_FWD input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R2": {
+      "name": "L_REV input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R3": {
+      "name": "R_FWD input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R4": {
+      "name": "R_REV input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R5": {
+      "name": "ENABLE input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "2.2k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R6": {
+      "name": "TF input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R7": {
+      "name": "TL input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R8": {
+      "name": "TR input pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R9": {
+      "name": "BRUSH_IN1 pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R10": {
+      "name": "BRUSH_IN2 pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R11": {
+      "name": "CONVEYOR_IN3 pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R12": {
+      "name": "CONVEYOR_IN4 pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R13": {
+      "name": "DRV_L.R_EN local EN pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Fit at the receiver terminal so unplugging EN leaves it LOW."
+    },
+    "R14": {
+      "name": "DRV_L.L_EN local EN pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Fit at the receiver terminal so unplugging EN leaves it LOW."
+    },
+    "R15": {
+      "name": "DRV_R.R_EN local EN pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Fit at the receiver terminal so unplugging EN leaves it LOW."
+    },
+    "R16": {
+      "name": "DRV_R.L_EN local EN pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Fit at the receiver terminal so unplugging EN leaves it LOW."
+    },
+    "R17": {
+      "name": "DRV_A.ENA local EN pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Fit at the receiver terminal so unplugging EN leaves it LOW."
+    },
+    "R18": {
+      "name": "DRV_A.ENB local EN pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "Fit at the receiver terminal so unplugging EN leaves it LOW."
+    },
+    "R19": {
+      "name": "L_FWD receiver pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R20": {
+      "name": "L_REV receiver pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R21": {
+      "name": "R_FWD receiver pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R22": {
+      "name": "R_REV receiver pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "R29": {
+      "name": "E-stop feedback pull-down",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "10k 1%, >=1/8 W",
+      "footprint": null,
+      "note": ""
+    },
+    "C_U1": {
+      "name": "local ceramic bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "100nF, >=10V",
+      "footprint": null,
+      "note": "Fit close to supply/GND of the named receiver."
+    },
+    "C_F": {
+      "name": "local ceramic bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "100nF, >=10V",
+      "footprint": null,
+      "note": "Fit close to supply/GND of the named receiver."
+    },
+    "C_L": {
+      "name": "local ceramic bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "100nF, >=10V",
+      "footprint": null,
+      "note": "Fit close to supply/GND of the named receiver."
+    },
+    "C_R": {
+      "name": "local ceramic bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "100nF, >=10V",
+      "footprint": null,
+      "note": "Fit close to supply/GND of the named receiver."
+    },
+    "C_BL": {
+      "name": "local motor-bus reservoir",
+      "pins": {
+        "+": "+",
+        "-": "-"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "C / ESR / voltage TBD",
+      "footprint": null,
+      "note": "Select from measured ripple, wire inductance and coordinated clamp; do not assume buck absorbs regenerative energy."
+    },
+    "C_BR": {
+      "name": "local motor-bus reservoir",
+      "pins": {
+        "+": "+",
+        "-": "-"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "C / ESR / voltage TBD",
+      "footprint": null,
+      "note": "Select from measured ripple, wire inductance and coordinated clamp; do not assume buck absorbs regenerative energy."
+    },
+    "C_BA": {
+      "name": "local motor-bus reservoir",
+      "pins": {
+        "+": "+",
+        "-": "-"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "C / ESR / voltage TBD",
+      "footprint": null,
+      "note": "Select from measured ripple, wire inductance and coordinated clamp; do not assume buck absorbs regenerative energy."
+    },
+    "OV1": {
+      "name": "5V rail 1 OVP/OCP and supervision assembly",
+      "pins": {
+        "IN+": "IN+",
+        "OUT+": "OUT+",
+        "GND": "GND",
+        "PG_COM": "PG_COM",
+        "PG_NO": "PG_NO"
+      },
+      "in_inventory": false,
+      "kind": "functional",
+      "value": "SELECT / VERIFY",
+      "footprint": null,
+      "note": "Functional ports, NOT vendor pins. Required output fault protection and fail-open isolated power-good contact. Select thresholds/tolerances/response to keep qualified 5V envelope; contact must handle K1 coil. May require separate protection + supervisor/interface parts."
+    },
+    "OV2": {
+      "name": "5V rail 2 OVP/OCP and supervision assembly",
+      "pins": {
+        "IN+": "IN+",
+        "OUT+": "OUT+",
+        "GND": "GND",
+        "PG_COM": "PG_COM",
+        "PG_NO": "PG_NO"
+      },
+      "in_inventory": false,
+      "kind": "functional",
+      "value": "SELECT / VERIFY",
+      "footprint": null,
+      "note": "Functional ports, NOT vendor pins. Required output fault protection and fail-open isolated power-good contact. Select thresholds/tolerances/response to keep qualified 5V envelope; contact must handle K1 coil. May require separate protection + supervisor/interface parts."
+    },
+    "TB_GND": {
+      "name": "Common ground distribution",
+      "pins": {
+        "BUS": "BUS"
+      },
+      "kind": "functional",
+      "in_inventory": false,
+      "value": "Conductor / terminal rating TBD",
+      "footprint": null,
+      "note": "Functional bus connection, not a connector position. Secure insulated current-rated distribution; no solderless breadboard."
+    },
+    "TB_POS": {
+      "name": "Protected positive distribution",
+      "pins": {
+        "BUS": "BUS"
+      },
+      "kind": "functional",
+      "in_inventory": false,
+      "value": "Conductor / terminal rating TBD",
+      "footprint": null,
+      "note": "Functional bus connection, not a connector position. Secure insulated current-rated distribution; no solderless breadboard."
+    },
+    "Z_L": {
+      "name": "Local driver-bus transient clamp",
+      "pins": {
+        "+": "+",
+        "-": "-"
+      },
+      "kind": "functional",
+      "in_inventory": false,
+      "value": "Standoff / clamp / energy TBD",
+      "footprint": null,
+      "note": "Load side of branch fuse so opening a fuse cannot isolate the driver from its clamp. Select from motor regeneration, 12.6V pack, wire/diode/capacitor and module limits; no arbitrary TVS rating."
+    },
+    "Z_R": {
+      "name": "Local driver-bus transient clamp",
+      "pins": {
+        "+": "+",
+        "-": "-"
+      },
+      "kind": "functional",
+      "in_inventory": false,
+      "value": "Standoff / clamp / energy TBD",
+      "footprint": null,
+      "note": "Load side of branch fuse so opening a fuse cannot isolate the driver from its clamp. Select from motor regeneration, 12.6V pack, wire/diode/capacitor and module limits; no arbitrary TVS rating."
+    },
+    "Z_A": {
+      "name": "Local driver-bus transient clamp",
+      "pins": {
+        "+": "+",
+        "-": "-"
+      },
+      "kind": "functional",
+      "in_inventory": false,
+      "value": "Standoff / clamp / energy TBD",
+      "footprint": null,
+      "note": "Load side of branch fuse so opening a fuse cannot isolate the driver from its clamp. Select from motor regeneration, 12.6V pack, wire/diode/capacitor and module limits; no arbitrary TVS rating."
+    },
+    "U2": {
+      "name": "SN74LVC3G34DCU ECHO isolation",
+      "pins": {
+        "1": "1A",
+        "2": "3Y",
+        "3": "2A",
+        "4": "GND",
+        "5": "2Y",
+        "6": "3A",
+        "7": "1Y",
+        "8": "VCC"
+      },
+      "in_inventory": false,
+      "kind": "ic",
+      "value": "SN74LVC3G34DCU",
+      "footprint": null,
+      "note": "TI SCES366L 8-pin VSSOP pin map. 5.5V tolerant inputs and Ioff; supply ONLY from ESP1 3V3. Fit verified adapter. Input edges must meet <=10ns/V at VCC=3.3+/-0.3V; locate beside dividers and qualify waveform. Not a generic bidirectional MOSFET shifter."
+    },
+    "C_U2": {
+      "name": "local ceramic bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "capacitor",
+      "value": "100nF, >=10V",
+      "footprint": null,
+      "note": "100nF directly between U2.8 and U2.4; >=10V ceramic."
+    },
+    "R30": {
+      "name": "ECHO output default-low",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "100k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "U2 output to ESP32 GND; limits nominal output load to 33uA plus GPIO leakage. Not a raw ECHO divider."
+    },
+    "R31": {
+      "name": "ECHO output default-low",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "100k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "U2 output to ESP32 GND; limits nominal output load to 33uA plus GPIO leakage. Not a raw ECHO divider."
+    },
+    "R32": {
+      "name": "ECHO output default-low",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "in_inventory": false,
+      "kind": "resistor",
+      "value": "100k 1%, >=1/8 W",
+      "footprint": null,
+      "note": "U2 output to ESP32 GND; limits nominal output load to 33uA plus GPIO leakage. Not a raw ECHO divider."
+    },
+    "F3": {
+      "name": "Camera branch DC fuse/holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "kind": "fuse",
+      "in_inventory": false,
+      "value": "TBD",
+      "footprint": null,
+      "note": "Coordinate wire/regulator inrush and battery DC interrupt rating; no guessed fuse current"
+    },
+    "BUCK3": {
+      "name": "Separate camera DC/DC regulator",
+      "pins": {
+        "IN+": "IN+",
+        "IN-": "IN-",
+        "OUT+": "OUT+",
+        "OUT-": "OUT-"
+      },
+      "kind": "module",
+      "in_inventory": false,
+      "value": "TBD: regulated 5V; qualified 1A continuous / 2A transient allocation",
+      "footprint": null,
+      "note": "Not either existing LM2596. Verify sustained thermal capability at actual pack range; nonisolated common-negative topology"
+    },
+    "OV3": {
+      "name": "Camera output OVP/OCP protection",
+      "pins": {
+        "IN+": "IN+",
+        "OUT+": "OUT+",
+        "GND": "GND"
+      },
+      "kind": "module",
+      "in_inventory": false,
+      "value": "TBD: 5V envelope and buck fail-through protection",
+      "footprint": null,
+      "note": "Functional ports only; camera fault not added to K1 coil permissives"
+    },
+    "C_CAM": {
+      "name": "Camera local supply bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "kind": "capacitor",
+      "in_inventory": false,
+      "value": "TBD capacitance/ESR/voltage",
+      "footprint": null,
+      "note": "Determine from measured current peaks and regulator stability guidance; verify onboard decoupling"
+    }
+  },
+  "nets": [
+    {
+      "name": "PACK_RAW",
+      "nodes": [
+        "BT1.PACK+",
+        "F0.IN"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack: up to 12.6 V",
+      "status": "BLOCKED_RATING",
+      "protection": "Main fuse adjacent to pack; insulated connector",
+      "verify": "Verify chemistry, polarity, pack C rating and connector interrupt/short-circuit capability"
+    },
+    {
+      "name": "PACK_FUSED",
+      "nodes": [
+        "F0.OUT",
+        "S0.COM"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_RATING",
+      "protection": "F0 protects feed",
+      "verify": "Select F0 from measured/spec start/stall currents and conductor ampacity"
+    },
+    {
+      "name": "PACK_ISOLATED",
+      "nodes": [
+        "S0.OUT",
+        "P1.IN+"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_MISSING",
+      "protection": "Master isolation plus P1",
+      "verify": "Verify selected protection assembly input/output polarity and high-side topology"
+    },
+    {
+      "name": "PACK_PROTECTED",
+      "nodes": [
+        "P1.OUT+",
+        "TB_POS.BUS",
+        "K1.MAIN_COM",
+        "F1.IN",
+        "F2.IN",
+        "FK.IN",
+        "F3.IN"
+      ],
+      "kind": "power_hc",
+      "voltage": "Loaded pack voltage; up to 12.6 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "Cell-level protection + F0 + downstream fuses",
+      "verify": "Select P1 and current ratings; do not use undefined raw BMS terminals"
+    },
+    {
+      "name": "MOTOR_SWITCHED",
+      "nodes": [
+        "K1.MAIN_NO",
+        "FL.IN",
+        "FR.IN",
+        "FA.IN"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack voltage when K1 closed",
+      "status": "BLOCKED_RATING",
+      "protection": "Independent motor power removal",
+      "verify": "Prove E-stop drops K1, release alone does not re-latch, and stored bus energy decays"
+    },
+    {
+      "name": "LEFT_SUPPLY",
+      "nodes": [
+        "FL.OUT",
+        "DRV_L.B+",
+        "C_BL.+",
+        "Z_L.+"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_RATING",
+      "protection": "FL; motor branch overload coordination",
+      "verify": "Verify sum of two left start/stall currents and actual IBT-2 thermal/connector capacity"
+    },
+    {
+      "name": "RIGHT_SUPPLY",
+      "nodes": [
+        "FR.OUT",
+        "DRV_R.B+",
+        "C_BR.+",
+        "Z_R.+"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_RATING",
+      "protection": "FR; motor branch overload coordination",
+      "verify": "Verify sum of two right start/stall currents and actual IBT-2 thermal/connector capacity"
+    },
+    {
+      "name": "AUX_SUPPLY",
+      "nodes": [
+        "FA.OUT",
+        "DRV_A.Vs_12V",
+        "C_BA.+",
+        "Z_A.+"
+      ],
+      "kind": "power_hc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_RATING",
+      "protection": "FA + FM5/FM6/FM7; package thermal review",
+      "verify": "Verify combined brush current, conveyor current, per-channel and shared thermal constraints"
+    },
+    {
+      "name": "MCU_BUCK_IN",
+      "nodes": [
+        "F1.OUT",
+        "BUCK1.IN+"
+      ],
+      "kind": "power_lc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_RATING",
+      "protection": "F1 for buck input and lead",
+      "verify": "Verify module input range and fault-current/wire coordination"
+    },
+    {
+      "name": "LOGIC_BUCK_IN",
+      "nodes": [
+        "F2.OUT",
+        "BUCK2.IN+"
+      ],
+      "kind": "power_lc",
+      "voltage": "Pack voltage",
+      "status": "BLOCKED_RATING",
+      "protection": "F2 for buck input and lead",
+      "verify": "Verify buck input range and module load budget"
+    },
+    {
+      "name": "V5_MCU",
+      "nodes": [
+        "OV1.OUT+",
+        "ESP1.5V_VIN"
+      ],
+      "kind": "power_lc",
+      "voltage": "Regulated 5.0 V target",
+      "status": "BLOCKED_MISSING",
+      "protection": "Independent OVP/OCP/supervision; qualify voltage envelope and fault response",
+      "verify": "Measure output unloaded/loaded and verify actual DevKit regulated-5V input and USB backfeed path"
+    },
+    {
+      "name": "V5_LOGIC",
+      "nodes": [
+        "OV2.OUT+",
+        "U1.20",
+        "DRV_L.VCC",
+        "DRV_R.VCC",
+        "DRV_A.5V_LOGIC",
+        "US_F.VCC",
+        "US_L.VCC",
+        "US_R.VCC",
+        "C_U1.1",
+        "C_F.1",
+        "C_L.1",
+        "C_R.1"
+      ],
+      "kind": "power_lc",
+      "voltage": "Regulated 5.0 V target; qualify 4.75-5.25 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "Independent OVP/OCP/supervision; qualify voltage envelope and fault response",
+      "verify": "No MCU-connected 5V signal; verify ripple/load response and all actual board logic supply requirements"
+    },
+    {
+      "name": "V3V3",
+      "nodes": [
+        "ESP1.3V3",
+        "S2.SENSE_COM",
+        "U2.8",
+        "C_U2.1"
+      ],
+      "kind": "power_lc",
+      "voltage": "ESP32 3.3 V",
+      "status": "PROVISIONAL",
+      "protection": "MCU-derived 3V3; dry feedback and U2 only; never V5_LOGIC",
+      "verify": "Verify no connection to 5V/coil circuit and actual feedback-contact minimum current"
+    },
+    {
+      "name": "GND",
+      "nodes": [
+        "TB_GND.BUS",
+        "BT1.PACK-",
+        "P1.GND",
+        "ESP1.GND",
+        "BUCK1.IN-",
+        "BUCK1.OUT-",
+        "BUCK2.IN-",
+        "BUCK2.OUT-",
+        "DRV_L.B-",
+        "DRV_L.GND",
+        "DRV_R.B-",
+        "DRV_R.GND",
+        "DRV_A.GND",
+        "US_F.GND",
+        "US_L.GND",
+        "US_R.GND",
+        "U1.10",
+        "U1.1",
+        "U1.19",
+        "K1.A2",
+        "Z_COIL.A2",
+        "R24.2",
+        "R26.2",
+        "R28.2",
+        "R1.2",
+        "R2.2",
+        "R3.2",
+        "R4.2",
+        "R5.2",
+        "R6.2",
+        "R7.2",
+        "R8.2",
+        "R9.2",
+        "R10.2",
+        "R11.2",
+        "R12.2",
+        "R13.2",
+        "R14.2",
+        "R15.2",
+        "R16.2",
+        "R17.2",
+        "R18.2",
+        "R19.2",
+        "R20.2",
+        "R21.2",
+        "R22.2",
+        "R29.2",
+        "C_U1.2",
+        "C_F.2",
+        "C_L.2",
+        "C_R.2",
+        "C_BL.-",
+        "C_BR.-",
+        "C_BA.-",
+        "OV1.GND",
+        "OV2.GND",
+        "Z_L.-",
+        "Z_R.-",
+        "Z_A.-",
+        "U2.4",
+        "C_U2.2",
+        "R30.2",
+        "R31.2",
+        "R32.2",
+        "BUCK3.IN-",
+        "BUCK3.OUT-",
+        "OV3.GND",
+        "CAM1.GND",
+        "C_CAM.2"
+      ],
+      "kind": "ground",
+      "voltage": "0 V reference; returns sized by branch",
+      "status": "PROVISIONAL",
+      "protection": "Star power returns, isolated signal routing; never switch only GND",
+      "verify": "Verify actual buck common negatives; no motor return via ESP32/USB/breadboard"
+    },
+    {
+      "name": "CELL0",
+      "nodes": [
+        "BT1.BAL_CELL0",
+        "P1.CELL0"
+      ],
+      "kind": "sensor",
+      "voltage": "Cell-stack potential; order TBD",
+      "status": "BLOCKED_RATING",
+      "protection": "Sense lead protection and connector order per selected P1",
+      "verify": "No connector pin order assumed. Verify cumulative cell potentials without probing adjacent contacts with bare tips"
+    },
+    {
+      "name": "CELL1",
+      "nodes": [
+        "BT1.BAL_CELL1",
+        "P1.CELL1"
+      ],
+      "kind": "sensor",
+      "voltage": "Cell-stack potential; order TBD",
+      "status": "BLOCKED_RATING",
+      "protection": "Sense lead protection and connector order per selected P1",
+      "verify": "No connector pin order assumed. Verify cumulative cell potentials without probing adjacent contacts with bare tips"
+    },
+    {
+      "name": "CELL2",
+      "nodes": [
+        "BT1.BAL_CELL2",
+        "P1.CELL2"
+      ],
+      "kind": "sensor",
+      "voltage": "Cell-stack potential; order TBD",
+      "status": "BLOCKED_RATING",
+      "protection": "Sense lead protection and connector order per selected P1",
+      "verify": "No connector pin order assumed. Verify cumulative cell potentials without probing adjacent contacts with bare tips"
+    },
+    {
+      "name": "CELL3",
+      "nodes": [
+        "BT1.BAL_CELL3",
+        "P1.CELL3"
+      ],
+      "kind": "sensor",
+      "voltage": "Cell-stack potential; order TBD",
+      "status": "BLOCKED_RATING",
+      "protection": "Sense lead protection and connector order per selected P1",
+      "verify": "No connector pin order assumed. Verify cumulative cell potentials without probing adjacent contacts with bare tips"
+    },
+    {
+      "name": "COIL_FUSED",
+      "nodes": [
+        "FK.OUT",
+        "OV1.PG_COM"
+      ],
+      "kind": "power_lc",
+      "voltage": "Pack voltage; K1 coil compatibility TBD",
+      "status": "BLOCKED_RATING",
+      "protection": "FK + S2 coil NC",
+      "verify": "Coil must operate across actual loaded pack range, or a qualified coil supply is required"
+    },
+    {
+      "name": "COIL_STOP_CHAIN",
+      "nodes": [
+        "S2.COIL_NC",
+        "S3.COM",
+        "K1.AUX_HOLD_COM"
+      ],
+      "kind": "power_lc",
+      "voltage": "Coil supply when stop released",
+      "status": "BLOCKED_MISSING",
+      "protection": "Independent NC E-stop chain",
+      "verify": "Pressing stop must break coil circuit even if MCU hung"
+    },
+    {
+      "name": "COIL_HOLD",
+      "nodes": [
+        "S3.NO",
+        "K1.AUX_HOLD_NO",
+        "K1.A1",
+        "Z_COIL.A1"
+      ],
+      "kind": "power_lc",
+      "voltage": "Coil supply when manually latched",
+      "status": "BLOCKED_MISSING",
+      "protection": "Momentary S3 in parallel with K1 NO auxiliary",
+      "verify": "Verify seal-in, dropout, no automatic restart on stop release/power restoration, and clamp release time"
+    },
+    {
+      "name": "ESTOP_OK",
+      "nodes": [
+        "K1.AUX_SENSE_NO",
+        "ESP1.GPIO27",
+        "R29.1"
+      ],
+      "kind": "control",
+      "voltage": "Healthy 3.3 V; open/pressed 0 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "Isolated NC contact, R29 pull-down; firmware internal pull-down",
+      "verify": "HIGH only when S2 released AND K1 closed. Open contact/wire or power-good loss trips; initial K1-open boot latches ESTOP until manual power-arm, RESET, ARM."
+    },
+    {
+      "name": "L_FWD_3V3",
+      "nodes": [
+        "ESP1.GPIO16",
+        "U1.2",
+        "R1.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R1",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "L_FWD_5V",
+      "nodes": [
+        "U1.18",
+        "DRV_L.RPWM",
+        "R19.1"
+      ],
+      "kind": "control",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "L_REV_3V3",
+      "nodes": [
+        "ESP1.GPIO17",
+        "U1.4",
+        "R2.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R2",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "L_REV_5V",
+      "nodes": [
+        "U1.16",
+        "DRV_L.LPWM",
+        "R20.1"
+      ],
+      "kind": "control",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "R_FWD_3V3",
+      "nodes": [
+        "ESP1.GPIO18",
+        "U1.6",
+        "R3.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R3",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "R_FWD_5V",
+      "nodes": [
+        "U1.14",
+        "DRV_R.RPWM",
+        "R21.1"
+      ],
+      "kind": "control",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "R_REV_3V3",
+      "nodes": [
+        "ESP1.GPIO19",
+        "U1.8",
+        "R4.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R4",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "R_REV_5V",
+      "nodes": [
+        "U1.12",
+        "DRV_R.LPWM",
+        "R22.1"
+      ],
+      "kind": "control",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "ENABLE_3V3",
+      "nodes": [
+        "ESP1.GPIO14",
+        "U1.11",
+        "R5.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R5",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "ENABLE_5V",
+      "nodes": [
+        "U1.9",
+        "S2.EN_COM"
+      ],
+      "kind": "control",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "TF_3V3",
+      "nodes": [
+        "ESP1.GPIO32",
+        "U1.13",
+        "R6.1"
+      ],
+      "kind": "sensor",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R6",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "TF_5V",
+      "nodes": [
+        "U1.7",
+        "US_F.TRIG"
+      ],
+      "kind": "sensor",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "TL_3V3",
+      "nodes": [
+        "ESP1.GPIO33",
+        "U1.15",
+        "R7.1"
+      ],
+      "kind": "sensor",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R7",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "TL_5V",
+      "nodes": [
+        "U1.5",
+        "US_L.TRIG"
+      ],
+      "kind": "sensor",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "TR_3V3",
+      "nodes": [
+        "ESP1.GPIO13",
+        "U1.17",
+        "R8.1"
+      ],
+      "kind": "sensor",
+      "voltage": "0/3.3 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "U1 TTL-compatible input; pull-down R8",
+      "verify": "Continuity and scope at reset/boot/brownout; do not bypass buffer without exact-board qualification"
+    },
+    {
+      "name": "TR_5V",
+      "nodes": [
+        "U1.3",
+        "US_R.TRIG"
+      ],
+      "kind": "sensor",
+      "voltage": "0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "5V non-inverting AHCT output",
+      "verify": "Verify target board accepts 5V logic; scope high/low margins and no opposing PWM"
+    },
+    {
+      "name": "EN_DRIVER_5V",
+      "nodes": [
+        "S2.EN_NC",
+        "DRV_L.R_EN",
+        "DRV_L.L_EN",
+        "DRV_R.R_EN",
+        "DRV_R.L_EN",
+        "DRV_A.ENA",
+        "DRV_A.ENB",
+        "R13.1",
+        "R14.1",
+        "R15.1",
+        "R16.1",
+        "R17.1",
+        "R18.1"
+      ],
+      "kind": "control",
+      "voltage": "0/5 V; LOW disabled",
+      "status": "BLOCKED_MISSING",
+      "protection": "Six local 10k pull-downs; EN jumpers removed; independent S2 NC",
+      "verify": "Calculate total input/pull load <= U1 drive and receiver VIH/VIL; no hard-HIGH module links; scope reset sequence"
+    },
+    {
+      "name": "BRUSH_IN1",
+      "nodes": [
+        "ESP1.GPIO21",
+        "DRV_A.IN1",
+        "R9.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "PROVISIONAL",
+      "protection": "Genuine L298 TTL input; local 10k pull-down",
+      "verify": "Verify exact module input circuit, common GND and inputs LOW at reset; IN2/IN4 held LOW by firmware"
+    },
+    {
+      "name": "BRUSH_IN2",
+      "nodes": [
+        "ESP1.GPIO22",
+        "DRV_A.IN2",
+        "R10.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "PROVISIONAL",
+      "protection": "Genuine L298 TTL input; local 10k pull-down",
+      "verify": "Verify exact module input circuit, common GND and inputs LOW at reset; IN2/IN4 held LOW by firmware"
+    },
+    {
+      "name": "CONVEYOR_IN3",
+      "nodes": [
+        "ESP1.GPIO23",
+        "DRV_A.IN3",
+        "R11.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "PROVISIONAL",
+      "protection": "Genuine L298 TTL input; local 10k pull-down",
+      "verify": "Verify exact module input circuit, common GND and inputs LOW at reset; IN2/IN4 held LOW by firmware"
+    },
+    {
+      "name": "CONVEYOR_IN4",
+      "nodes": [
+        "ESP1.GPIO25",
+        "DRV_A.IN4",
+        "R12.1"
+      ],
+      "kind": "control",
+      "voltage": "0/3.3 V",
+      "status": "PROVISIONAL",
+      "protection": "Genuine L298 TTL input; local 10k pull-down",
+      "verify": "Verify exact module input circuit, common GND and inputs LOW at reset; IN2/IN4 held LOW by firmware"
+    },
+    {
+      "name": "EF_RAW",
+      "nodes": [
+        "US_F.ECHO",
+        "R23.1"
+      ],
+      "kind": "sensor",
+      "voltage": "Standard module: potentially 0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "2.2k upper / 3.3k lower 1% divider required",
+      "verify": "Keep actual ECHO disconnected until parts fitted and high/low/overshoot verified independently of ESP32"
+    },
+    {
+      "name": "EF_DIV",
+      "nodes": [
+        "R23.2",
+        "R24.1",
+        "U2.1"
+      ],
+      "kind": "sensor",
+      "voltage": "Nominal 3.0 V at 5.0V ECHO",
+      "status": "BLOCKED_MISSING",
+      "protection": "2.2k/3.3k 1% divider then U2 power-off isolation",
+      "verify": "At U2 input: HIGH >=2.0V, LOW <=0.8V, 0..5.5V and edge rate <=10ns/V. Measure actual sensor VOH/VOL/overshoot."
+    },
+    {
+      "name": "EF_SAFE",
+      "nodes": [
+        "U2.7",
+        "ESP1.GPIO34",
+        "R30.1"
+      ],
+      "kind": "sensor",
+      "voltage": "0 / MCU-derived 3.3V; U2 off -> high impedance",
+      "status": "BLOCKED_MISSING",
+      "protection": "U2 Ioff supplied by ESP1.3V3; 100k output bias",
+      "verify": "Verify U2 VCC equals ESP32 VDD; output HIGH >=0.75*VDD, LOW <=0.25*VDD; no phantom MCU power with sensor rail live"
+    },
+    {
+      "name": "EL_RAW",
+      "nodes": [
+        "US_L.ECHO",
+        "R25.1"
+      ],
+      "kind": "sensor",
+      "voltage": "Standard module: potentially 0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "2.2k upper / 3.3k lower 1% divider required",
+      "verify": "Keep actual ECHO disconnected until parts fitted and high/low/overshoot verified independently of ESP32"
+    },
+    {
+      "name": "EL_DIV",
+      "nodes": [
+        "R25.2",
+        "R26.1",
+        "U2.3"
+      ],
+      "kind": "sensor",
+      "voltage": "Nominal 3.0 V at 5.0V ECHO",
+      "status": "BLOCKED_MISSING",
+      "protection": "2.2k/3.3k 1% divider then U2 power-off isolation",
+      "verify": "At U2 input: HIGH >=2.0V, LOW <=0.8V, 0..5.5V and edge rate <=10ns/V. Measure actual sensor VOH/VOL/overshoot."
+    },
+    {
+      "name": "EL_SAFE",
+      "nodes": [
+        "U2.5",
+        "ESP1.GPIO35",
+        "R31.1"
+      ],
+      "kind": "sensor",
+      "voltage": "0 / MCU-derived 3.3V; U2 off -> high impedance",
+      "status": "BLOCKED_MISSING",
+      "protection": "U2 Ioff supplied by ESP1.3V3; 100k output bias",
+      "verify": "Verify U2 VCC equals ESP32 VDD; output HIGH >=0.75*VDD, LOW <=0.25*VDD; no phantom MCU power with sensor rail live"
+    },
+    {
+      "name": "ER_RAW",
+      "nodes": [
+        "US_R.ECHO",
+        "R27.1"
+      ],
+      "kind": "sensor",
+      "voltage": "Standard module: potentially 0/5 V",
+      "status": "BLOCKED_MISSING",
+      "protection": "2.2k upper / 3.3k lower 1% divider required",
+      "verify": "Keep actual ECHO disconnected until parts fitted and high/low/overshoot verified independently of ESP32"
+    },
+    {
+      "name": "ER_DIV",
+      "nodes": [
+        "R27.2",
+        "R28.1",
+        "U2.6"
+      ],
+      "kind": "sensor",
+      "voltage": "Nominal 3.0 V at 5.0V ECHO",
+      "status": "BLOCKED_MISSING",
+      "protection": "2.2k/3.3k 1% divider then U2 power-off isolation",
+      "verify": "At U2 input: HIGH >=2.0V, LOW <=0.8V, 0..5.5V and edge rate <=10ns/V. Measure actual sensor VOH/VOL/overshoot."
+    },
+    {
+      "name": "ER_SAFE",
+      "nodes": [
+        "U2.2",
+        "ESP1.GPIO36",
+        "R32.1"
+      ],
+      "kind": "sensor",
+      "voltage": "0 / MCU-derived 3.3V; U2 off -> high impedance",
+      "status": "BLOCKED_MISSING",
+      "protection": "U2 Ioff supplied by ESP1.3V3; 100k output bias",
+      "verify": "Verify U2 VCC equals ESP32 VDD; output HIGH >=0.75*VDD, LOW <=0.25*VDD; no phantom MCU power with sensor rail live"
+    },
+    {
+      "name": "DRV_L_MP",
+      "nodes": [
+        "DRV_L.M+",
+        "FM1.IN",
+        "FM2.IN"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "DRV_L_MN",
+      "nodes": [
+        "DRV_L.M-",
+        "M1.B",
+        "M2.B"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "M1_A",
+      "nodes": [
+        "FM1.OUT",
+        "M1.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM1; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "M2_A",
+      "nodes": [
+        "FM2.OUT",
+        "M2.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM2; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "DRV_R_MP",
+      "nodes": [
+        "DRV_R.M+",
+        "FM3.IN",
+        "FM4.IN"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "DRV_R_MN",
+      "nodes": [
+        "DRV_R.M-",
+        "M3.B",
+        "M4.B"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "M3_A",
+      "nodes": [
+        "FM3.OUT",
+        "M3.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM3; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "M4_A",
+      "nodes": [
+        "FM4.OUT",
+        "M4.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM4; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "DRV_A_OUT1",
+      "nodes": [
+        "DRV_A.OUT1",
+        "FM5.IN",
+        "FM6.IN"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "DRV_A_OUT2",
+      "nodes": [
+        "DRV_A.OUT2",
+        "M5.B",
+        "M6.B"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "M5_A",
+      "nodes": [
+        "FM5.OUT",
+        "M5.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM5; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "M6_A",
+      "nodes": [
+        "FM6.OUT",
+        "M6.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM6; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "DRV_A_OUT3",
+      "nodes": [
+        "DRV_A.OUT3",
+        "FM7.IN"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "DRV_A_OUT4",
+      "nodes": [
+        "DRV_A.OUT4",
+        "M7.B"
+      ],
+      "kind": "motor",
+      "voltage": "Bidirectional / PWM bridge output; not a supply rail",
+      "status": "BLOCKED_RATING",
+      "protection": "DC motor-lead fuse and rated branch/driver; recirculation diodes required",
+      "verify": "Verify motor current, polarity/direction, pigtail rating and overload coordination; no motor trial yet"
+    },
+    {
+      "name": "M7_A",
+      "nodes": [
+        "FM7.OUT",
+        "M7.A"
+      ],
+      "kind": "motor",
+      "voltage": "Bridge output after fuse",
+      "status": "BLOCKED_RATING",
+      "protection": "FM7; value/time curve TBD",
+      "verify": "One motor lead per fuse; no breadboard path. Motor voltage/direction still unverified"
+    },
+    {
+      "name": "V5_MCU_RAW",
+      "nodes": [
+        "BUCK1.OUT+",
+        "OV1.IN+"
+      ],
+      "kind": "power_lc",
+      "voltage": "5V target; buck-fault voltage may approach pack",
+      "status": "BLOCKED_MISSING",
+      "protection": "OV1 required; never assume LM2596 is an overvoltage protector",
+      "verify": "Select actual independent output protection and supervisor; simulate abnormal voltage with electronics disconnected"
+    },
+    {
+      "name": "V5_LOGIC_RAW",
+      "nodes": [
+        "BUCK2.OUT+",
+        "OV2.IN+"
+      ],
+      "kind": "power_lc",
+      "voltage": "5V target; buck-fault voltage may approach pack",
+      "status": "BLOCKED_MISSING",
+      "protection": "OV2 required; never assume LM2596 is an overvoltage protector",
+      "verify": "Select actual independent output protection and supervisor; simulate abnormal voltage with electronics disconnected"
+    },
+    {
+      "name": "COIL_PG1",
+      "nodes": [
+        "OV1.PG_NO",
+        "OV2.PG_COM"
+      ],
+      "kind": "power_lc",
+      "voltage": "Coil supply; contact isolation required",
+      "status": "BLOCKED_MISSING",
+      "protection": "Both logic rails must be healthy before K1 can energize/hold",
+      "verify": "A missing/abnormal rail opens the coil chain; restoration alone must not re-latch K1. Select actual supervisor/interface circuitry."
+    },
+    {
+      "name": "COIL_PG2",
+      "nodes": [
+        "OV2.PG_NO",
+        "S2.COIL_COM"
+      ],
+      "kind": "power_lc",
+      "voltage": "Coil supply; contact isolation required",
+      "status": "BLOCKED_MISSING",
+      "protection": "Both logic rails must be healthy before K1 can energize/hold",
+      "verify": "A missing/abnormal rail opens the coil chain; restoration alone must not re-latch K1. Select actual supervisor/interface circuitry."
+    },
+    {
+      "name": "SENSE_STOP_OK",
+      "nodes": [
+        "S2.SENSE_NC",
+        "K1.AUX_SENSE_COM"
+      ],
+      "kind": "control",
+      "voltage": "3.3 V only",
+      "status": "BLOCKED_MISSING",
+      "protection": "Separate dry K1 NO feedback contact in series with S2 NC",
+      "verify": "Map actual contact terminals; keep isolated from seal-in coil circuit. No jumper around this interlock."
+    },
+    {
+      "name": "CAMERA_INPUT",
+      "kind": "power_lc",
+      "nodes": [
+        "F3.OUT",
+        "BUCK3.IN+"
+      ],
+      "voltage": "Protected pack; exact voltage envelope TBD",
+      "status": "BLOCKED_MISSING",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verify": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "name": "V5_CAMERA_RAW",
+      "kind": "power_lc",
+      "nodes": [
+        "BUCK3.OUT+",
+        "OV3.IN+"
+      ],
+      "voltage": "5.00V target; unqualified",
+      "status": "BLOCKED_MISSING",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verify": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "name": "V5_CAMERA",
+      "kind": "power_lc",
+      "nodes": [
+        "OV3.OUT+",
+        "CAM1.5V",
+        "C_CAM.1"
+      ],
+      "voltage": "Qualified 5V envelope; actual board limits TBD",
+      "status": "BLOCKED_MISSING",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verify": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    }
+  ],
+  "no_connect": {
+    "DRV_L.R_IS": "Unused diagnostics; insulate separately; no ESP32 ADC link",
+    "DRV_L.L_IS": "Unused diagnostics; insulate separately; no ESP32 ADC link",
+    "DRV_R.R_IS": "Unused diagnostics; insulate separately; no ESP32 ADC link",
+    "DRV_R.L_IS": "Unused diagnostics; insulate separately; no ESP32 ADC link",
+    "CAM1.U0R": "Temporary isolated programming only; no permanent wire",
+    "CAM1.U0T": "Temporary isolated programming only; no permanent wire",
+    "ESP1.GPIO0": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO2": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO4": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO5": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO12": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO15": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO26": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.GPIO39": "Unassigned/reserved boot pin; leave external header unconnected",
+    "ESP1.UART0_TX_GPIO1": "Reserved for actual DevKit serial/programming circuit; no permanent external harness",
+    "ESP1.UART0_RX_GPIO3": "Reserved for actual DevKit serial/programming circuit; no permanent external harness",
+    "ESP1.EN_RESET": "Onboard reset only; not motor ENABLE GPIO14"
+  },
+  "gpio_bindings": {
+    "L_FWD": {
+      "gpio": 16,
+      "endpoint": "ESP1.GPIO16",
+      "net": "L_FWD_3V3",
+      "buffer_in": "2",
+      "buffer_out": "18"
+    },
+    "L_REV": {
+      "gpio": 17,
+      "endpoint": "ESP1.GPIO17",
+      "net": "L_REV_3V3",
+      "buffer_in": "4",
+      "buffer_out": "16"
+    },
+    "R_FWD": {
+      "gpio": 18,
+      "endpoint": "ESP1.GPIO18",
+      "net": "R_FWD_3V3",
+      "buffer_in": "6",
+      "buffer_out": "14"
+    },
+    "R_REV": {
+      "gpio": 19,
+      "endpoint": "ESP1.GPIO19",
+      "net": "R_REV_3V3",
+      "buffer_in": "8",
+      "buffer_out": "12"
+    },
+    "ENABLE": {
+      "gpio": 14,
+      "endpoint": "ESP1.GPIO14",
+      "net": "ENABLE_3V3",
+      "buffer_in": "11",
+      "buffer_out": "9"
+    },
+    "TF": {
+      "gpio": 32,
+      "endpoint": "ESP1.GPIO32",
+      "net": "TF_3V3",
+      "buffer_in": "13",
+      "buffer_out": "7"
+    },
+    "TL": {
+      "gpio": 33,
+      "endpoint": "ESP1.GPIO33",
+      "net": "TL_3V3",
+      "buffer_in": "15",
+      "buffer_out": "5"
+    },
+    "TR": {
+      "gpio": 13,
+      "endpoint": "ESP1.GPIO13",
+      "net": "TR_3V3",
+      "buffer_in": "17",
+      "buffer_out": "3"
+    },
+    "BRUSH_IN1": {
+      "gpio": 21,
+      "endpoint": "ESP1.GPIO21",
+      "net": "BRUSH_IN1"
+    },
+    "BRUSH_IN2": {
+      "gpio": 22,
+      "endpoint": "ESP1.GPIO22",
+      "net": "BRUSH_IN2"
+    },
+    "CONVEYOR_IN3": {
+      "gpio": 23,
+      "endpoint": "ESP1.GPIO23",
+      "net": "CONVEYOR_IN3"
+    },
+    "CONVEYOR_IN4": {
+      "gpio": 25,
+      "endpoint": "ESP1.GPIO25",
+      "net": "CONVEYOR_IN4"
+    },
+    "EF": {
+      "gpio": 34,
+      "endpoint": "ESP1.GPIO34",
+      "net": "EF_SAFE"
+    },
+    "EL": {
+      "gpio": 35,
+      "endpoint": "ESP1.GPIO35",
+      "net": "EL_SAFE"
+    },
+    "ER": {
+      "gpio": 36,
+      "endpoint": "ESP1.GPIO36",
+      "net": "ER_SAFE"
+    },
+    "ESTOP_OK": {
+      "gpio": 27,
+      "endpoint": "ESP1.GPIO27",
+      "net": "ESTOP_OK"
+    }
+  },
+  "notes": [
+    "Generic module symbols show terminal functions, not connector orientation or footprints.",
+    "No physical connection is approved by software or this netlist.",
+    "U1, all protection/passive parts, fuses, disconnects and contactor are additional hardware not confirmed in inventory.",
+    "E2: retain dividers; insert U2 powered by ESP1.3V3 before each ECHO GPIO to address independently powered sensor rail. All actual waveform/partial-power tests remain HOLD."
+  ],
+  "communication_links": [
+    {
+      "id": "LINK-USB",
+      "source": "Laptop USB",
+      "destination": "ESP1 native board USB connector",
+      "medium": "USB serial 115200",
+      "status": "HOLD - actual board USB/backfeed path unqualified"
+    },
+    {
+      "id": "LINK-VIDEO",
+      "source": "CAM1 Wi-Fi",
+      "destination": "Laptop trusted WLAN",
+      "medium": "HTTP/MJPEG",
+      "status": "HOLD - actual camera/module/stream unverified"
+    }
+  ],
+  "physical_release": "HOLD"
+}

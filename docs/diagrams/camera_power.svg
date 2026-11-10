@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<title>Camera protected-power wiring / S1</title>
+<rect width="1680" height="1188" fill="white"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#17232c">Camera protected-power wiring / S1</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="15" font-weight="normal" fill="#17232c">Additive connection sheet. All source and destination ports below are functional until exact hardware identification and mapping.</text>
+<rect x="42" y="90" width="1596" height="34" fill="#fff2d8" stroke="#ad6a00" stroke-width="1.4"/>
+<text x="53" y="113" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">S1 DESIGN HOLD | Physical connections unapproved | Generic ports require actual-part mapping | 10 Nov 2026</text>
+<text x="42" y="1141" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Red +supply | Black GND | Blue control | Green sensor | Orange motor | Thick = high-current | Dashed = missing/blocked</text>
+<text x="42" y="1166" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Net labels join across sheets. Crossings alone do not join. No component footprint / connector orientation is implied.</text>
+<g data-wire-id="W202" data-source="TB_POS.BUS" data-destination="F3.IN">
+<text x="60" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W202</text>
+<text x="165" y="172" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">TB_POS.BUS -&gt; F3.IN</text>
+<text x="165" y="194" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">PACK_PROTECTED | WIRE | Protected pack; exact voltage envelope TBD</text>
+<text x="165" y="214" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W203" data-source="F3.OUT" data-destination="BUCK3.IN+">
+<text x="60" y="242" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W203</text>
+<text x="165" y="242" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">F3.OUT -&gt; BUCK3.IN+</text>
+<text x="165" y="264" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">CAMERA_INPUT | WIRE | Protected pack; exact voltage envelope TBD</text>
+<text x="165" y="284" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W204" data-source="TB_GND.BUS" data-destination="BUCK3.IN-">
+<text x="60" y="312" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W204</text>
+<text x="165" y="312" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">TB_GND.BUS -&gt; BUCK3.IN-</text>
+<text x="165" y="334" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference</text>
+<text x="165" y="354" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W205" data-source="BUCK3.IN-" data-destination="BUCK3.OUT-">
+<text x="60" y="382" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W205</text>
+<text x="165" y="382" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BUCK3.IN- -&gt; BUCK3.OUT-</text>
+<text x="165" y="404" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND | INTERNAL_VERIFY | 0 V reference</text>
+<text x="165" y="424" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Inspect existing bond only; no added conductor</text>
+</g>
+<g data-wire-id="W206" data-source="BUCK3.OUT+" data-destination="OV3.IN+">
+<text x="60" y="452" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W206</text>
+<text x="165" y="452" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BUCK3.OUT+ -&gt; OV3.IN+</text>
+<text x="165" y="474" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">V5_CAMERA_RAW | WIRE | 5.00V target; unqualified</text>
+<text x="165" y="494" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W207" data-source="BUCK3.OUT-" data-destination="OV3.GND">
+<text x="60" y="522" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W207</text>
+<text x="165" y="522" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BUCK3.OUT- -&gt; OV3.GND</text>
+<text x="165" y="544" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference</text>
+<text x="165" y="564" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W208" data-source="OV3.OUT+" data-destination="CAM1.5V">
+<text x="60" y="592" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W208</text>
+<text x="165" y="592" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">OV3.OUT+ -&gt; CAM1.5V</text>
+<text x="165" y="614" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">V5_CAMERA | WIRE | Qualified 5V envelope; actual board limits TBD</text>
+<text x="165" y="634" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W209" data-source="BUCK3.OUT-" data-destination="CAM1.GND">
+<text x="60" y="662" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W209</text>
+<text x="165" y="662" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">BUCK3.OUT- -&gt; CAM1.GND</text>
+<text x="165" y="684" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference</text>
+<text x="165" y="704" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W210" data-source="OV3.OUT+" data-destination="C_CAM.1">
+<text x="60" y="732" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W210</text>
+<text x="165" y="732" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">OV3.OUT+ -&gt; C_CAM.1</text>
+<text x="165" y="754" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">V5_CAMERA | WIRE | Qualified 5V envelope; actual board limits TBD</text>
+<text x="165" y="774" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<g data-wire-id="W211" data-source="CAM1.GND" data-destination="C_CAM.2">
+<text x="60" y="802" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#17232c">W211</text>
+<text x="165" y="802" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#17232c">CAM1.GND -&gt; C_CAM.2</text>
+<text x="165" y="824" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#17232c">GND | WIRE | 0 V reference</text>
+<text x="165" y="844" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#995b00">Separate F3/BUCK3/OV3 branch; select ratings before wiring</text>
+</g>
+<text x="65" y="925" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">BUCK3 IN-/OUT- bond W205 is an internal continuity inspection, never an extra jumper. Camera power return is dedicated to this branch. No physical ESP1 GPIO connection to CAM1. Laptop</text>
+<text x="65" y="948" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">camera connection is Wi-Fi only; programmer is a separate temporary isolated setup.</text>
+<text x="65" y="1015" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">Provisional allocation only: 5V x 1A = 5W continuous; 5V x 2A = 10W transient envelope. At assumed 80% efficiency: 6.25W / 12.5W input; losses 1.25W / 2.5W. These are design</text>
+<text x="65" y="1038" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#17232c">assumptions, not camera measurements or regulator qualification. Fuse current/thermal values remain TBD.</text>
+</svg>

@@ -13,7 +13,7 @@
   "wire_rows": 201,
   "all_svg_terminals": 292,
   "pdf_pages": 38,
-  "strict_pdf_files": 31,
+  "strict_pdf_files": 33,
   "bts_return_labels": "PASS; no added return wires",
   "gpio_chart_statuses": "PASS; signal-route net status propagated",
   "export_check": "PASS; structural/semantic/PDF integrity only; physical release HOLD"

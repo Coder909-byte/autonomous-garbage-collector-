@@ -1,0 +1,249 @@
+{
+  "revision": "S1 - additive camera and laptop architecture; physical HOLD",
+  "base_revision": "E2",
+  "base_sha256": {
+    "electrical/design.json": "aa62e3bc70ee252fdf5d81107d25bc7ed33b66774fff005dbc83a3abb9b6b9fb",
+    "electrical/connections.csv": "bd98e61b39ce670db03ed9a6828837024ec27c0edc8c1bd3d53f66f08c8b1ba6",
+    "include/rover_pins.h": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d"
+  },
+  "components": {
+    "F3": {
+      "name": "Camera branch DC fuse/holder",
+      "pins": {
+        "IN": "IN",
+        "OUT": "OUT"
+      },
+      "kind": "fuse",
+      "in_inventory": false,
+      "value": "TBD",
+      "footprint": null,
+      "note": "Coordinate wire/regulator inrush and battery DC interrupt rating; no guessed fuse current"
+    },
+    "BUCK3": {
+      "name": "Separate camera DC/DC regulator",
+      "pins": {
+        "IN+": "IN+",
+        "IN-": "IN-",
+        "OUT+": "OUT+",
+        "OUT-": "OUT-"
+      },
+      "kind": "module",
+      "in_inventory": false,
+      "value": "TBD: regulated 5V; qualified 1A continuous / 2A transient allocation",
+      "footprint": null,
+      "note": "Not either existing LM2596. Verify sustained thermal capability at actual pack range; nonisolated common-negative topology"
+    },
+    "OV3": {
+      "name": "Camera output OVP/OCP protection",
+      "pins": {
+        "IN+": "IN+",
+        "OUT+": "OUT+",
+        "GND": "GND"
+      },
+      "kind": "module",
+      "in_inventory": false,
+      "value": "TBD: 5V envelope and buck fail-through protection",
+      "footprint": null,
+      "note": "Functional ports only; camera fault not added to K1 coil permissives"
+    },
+    "CAM1": {
+      "name": "Separate ESP32-CAM",
+      "pins": {
+        "5V": "5V",
+        "GND": "GND",
+        "U0R": "U0R",
+        "U0T": "U0T"
+      },
+      "kind": "module",
+      "in_inventory": true,
+      "value": "Actual variant UNIDENTIFIED; AI-Thinker supported only",
+      "footprint": null,
+      "note": "No connector numbering inferred; verify actual regulated-5V input. Internal camera wiring is board-specific"
+    },
+    "C_CAM": {
+      "name": "Camera local supply bypass",
+      "pins": {
+        "1": "1",
+        "2": "2"
+      },
+      "kind": "capacitor",
+      "in_inventory": false,
+      "value": "TBD capacitance/ESR/voltage",
+      "footprint": null,
+      "note": "Determine from measured current peaks and regulator stability guidance; verify onboard decoupling"
+    }
+  },
+  "connections": [
+    {
+      "wire_id": "W202",
+      "component": "Camera branch DC fuse/holder",
+      "source": "TB_POS.BUS",
+      "destination": "F3.IN",
+      "net": "PACK_PROTECTED",
+      "signal_type": "power_hc",
+      "voltage": "Protected pack; exact voltage envelope TBD",
+      "color": "Red",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W203",
+      "component": "Separate camera DC/DC regulator",
+      "source": "F3.OUT",
+      "destination": "BUCK3.IN+",
+      "net": "CAMERA_INPUT",
+      "signal_type": "power_lc",
+      "voltage": "Protected pack; exact voltage envelope TBD",
+      "color": "Red",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W204",
+      "component": "Separate camera DC/DC regulator",
+      "source": "TB_GND.BUS",
+      "destination": "BUCK3.IN-",
+      "net": "GND",
+      "signal_type": "ground",
+      "voltage": "0 V reference",
+      "color": "Black",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W205",
+      "component": "Separate camera DC/DC regulator",
+      "source": "BUCK3.IN-",
+      "destination": "BUCK3.OUT-",
+      "net": "GND",
+      "signal_type": "ground",
+      "voltage": "0 V reference",
+      "color": "Black",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "INTERNAL_VERIFY",
+      "protection": "Inspect existing bond only; no added conductor",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W206",
+      "component": "Camera output OVP/OCP protection",
+      "source": "BUCK3.OUT+",
+      "destination": "OV3.IN+",
+      "net": "V5_CAMERA_RAW",
+      "signal_type": "power_lc",
+      "voltage": "5.00V target; unqualified",
+      "color": "Red",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W207",
+      "component": "Camera output OVP/OCP protection",
+      "source": "BUCK3.OUT-",
+      "destination": "OV3.GND",
+      "net": "GND",
+      "signal_type": "ground",
+      "voltage": "0 V reference",
+      "color": "Black",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W208",
+      "component": "Separate ESP32-CAM",
+      "source": "OV3.OUT+",
+      "destination": "CAM1.5V",
+      "net": "V5_CAMERA",
+      "signal_type": "power_lc",
+      "voltage": "Qualified 5V envelope; actual board limits TBD",
+      "color": "Red",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W209",
+      "component": "Separate ESP32-CAM",
+      "source": "BUCK3.OUT-",
+      "destination": "CAM1.GND",
+      "net": "GND",
+      "signal_type": "ground",
+      "voltage": "0 V reference",
+      "color": "Black",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W210",
+      "component": "Camera local supply bypass",
+      "source": "OV3.OUT+",
+      "destination": "C_CAM.1",
+      "net": "V5_CAMERA",
+      "signal_type": "power_lc",
+      "voltage": "Qualified 5V envelope; actual board limits TBD",
+      "color": "Red",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    },
+    {
+      "wire_id": "W211",
+      "component": "Camera local supply bypass",
+      "source": "CAM1.GND",
+      "destination": "C_CAM.2",
+      "net": "GND",
+      "signal_type": "ground",
+      "voltage": "0 V reference",
+      "color": "Black",
+      "conductor_class": "SIGNAL / LOGIC / COIL - size TBD",
+      "status": "BLOCKED_MISSING",
+      "connection_kind": "WIRE",
+      "protection": "Separate F3/BUCK3/OV3 branch; select ratings before wiring",
+      "verification": "Unpowered terminal/polarity/continuity first; later qualified current-limited load/ripple/peak/thermal tests; HOLD"
+    }
+  ],
+  "communication_links": [
+    {
+      "id": "LINK-USB",
+      "source": "Laptop USB",
+      "destination": "ESP1 native board USB connector",
+      "medium": "USB serial 115200",
+      "status": "HOLD - actual board USB/backfeed path unqualified"
+    },
+    {
+      "id": "LINK-VIDEO",
+      "source": "CAM1 Wi-Fi",
+      "destination": "Laptop trusted WLAN",
+      "medium": "HTTP/MJPEG",
+      "status": "HOLD - actual camera/module/stream unverified"
+    }
+  ],
+  "no_connect": {
+    "CAM1.U0R": "Temporary isolated programming only; no permanent wire",
+    "CAM1.U0T": "Temporary isolated programming only; no permanent wire"
+  },
+  "hash_convention": "Git LF-normalized text; CRLF working exports accepted"
+}

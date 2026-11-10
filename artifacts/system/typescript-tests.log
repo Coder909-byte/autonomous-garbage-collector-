@@ -1,0 +1,15 @@
+
+> test
+> vitest run
+
+
+ RUN  v5.1.0 /Users/kokila/Downloads/autonomous_rover_build
+
+
+ Test Files  5 passed (5)
+      Tests  56 passed (56)
+   Start at  18:38:02
+   Duration  17.67s (tests 67%, environment 16%, import 14%, transform 2%)
+
+    Isolate  5 workers spawned · ~1.59s startup each (spawn + environment, per file)
+             at least ~1.06s faster with isolate: false — reuses workers across files instead of one per file

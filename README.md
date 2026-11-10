@@ -175,3 +175,18 @@ Keep real ECHO connections insulated/disconnected. Do not bypass missing protect
 Firmware, PlatformIO configuration, simulation sources, tests, existing documentation, electrical source data and designed PDF/SVG/PNG exports are included. Local environments, downloaded tools, compiled binaries, simulation traces, editor state and redundant ZIP packages are excluded. Selected verification logs are retained as evidence.
 
 API keys, Wi-Fi passwords, access tokens and Wokwi tokens belong outside versioned files. `.gitignore` excludes common credential paths; review staged changes before every commit. No network credentials are needed by the current firmware.
+
+## S1 laptop and camera system (10 November 2026)
+
+The local USB bridge, React dashboard, separate camera firmware and native C++ offline simulator are now included. Start with [laptop setup](docs/LAPTOP_CONTROL_SETUP.md), [system architecture](docs/SYSTEM_ARCHITECTURE.md), [camera wiring](docs/CAMERA_WIRING.md), [serial protocol](docs/SERIAL_PROTOCOL.md), [full audit](docs/FULL_CODEBASE_AUDIT.md) and [implementation report](docs/FINAL_SYSTEM_IMPLEMENTATION_REPORT.md).
+
+```sh
+npm ci
+npm run sim:build
+npm run build
+npm start
+```
+
+Open http://127.0.0.1:8787 and select Offline simulator. The dashboard explicitly labels simulation and shows no fake camera feed. For development, run `npm run bridge` and `npm run dashboard` in separate terminals. Full unpowered verification: `.venv/bin/python scripts/verify_system.py`.
+
+The E2 201-record wiring sources and 74-page handover remain frozen. S1 adds a canonical additive system model and camera power sheet (`electrical/system_design.json`, generated `system_netlist.json` and `system_connections.csv`): 211 total records, 206 external and five internal inspections. Hardware release remains HOLD. Actual camera-board identity, power/current qualification, main firmware installation, real serial/video and physical safety acceptance remain pending. Do not use historical E2 software counts/build sizes as the result for the new S1 software; see the current report/logs.

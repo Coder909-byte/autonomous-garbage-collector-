@@ -1,0 +1,186 @@
+{
+  "utc": "2026-11-10T13:09:24.411008+00:00",
+  "source_commit": "2da0b0a6c700491c66b8330811afd8091ed3638b",
+  "working_tree": [
+    " M .gitignore",
+    " M README.md",
+    " M artifacts/build.log",
+    " M artifacts/design-export-checks.log",
+    " M artifacts/native-tests.log",
+    " M artifacts/python-tests.log",
+    " M artifacts/team-handover-validation.json",
+    " M firmware/rover.ino",
+    " M scripts/check_team_handover.py",
+    " M scripts/generate_wiring.py",
+    " M scripts/sync_wokwi.py",
+    " M test/stubs/Arduino.h",
+    " M test/test_io/test_main.cpp",
+    " M wokwi/sketch.ino",
+    "?? .env.example",
+    "?? apps/",
+    "?? artifacts/dashboard-mobile.png",
+    "?? artifacts/dashboard-simulation.png",
+    "?? artifacts/system/",
+    "?? camera/",
+    "?? docs/CAMERA_WIRING.md",
+    "?? docs/FINAL_SYSTEM_IMPLEMENTATION_REPORT.md",
+    "?? docs/FULL_CODEBASE_AUDIT.md",
+    "?? docs/LAPTOP_CONTROL_SETUP.md",
+    "?? docs/SERIAL_PROTOCOL.md",
+    "?? docs/SYSTEM_ARCHITECTURE.md",
+    "?? docs/UPDATED_HARDWARE_REQUIREMENTS.md",
+    "?? docs/audit_inventory.json",
+    "?? docs/diagrams/camera_power.pdf",
+    "?? docs/diagrams/camera_power.png",
+    "?? docs/diagrams/camera_power.svg",
+    "?? docs/diagrams/system_architecture.pdf",
+    "?? docs/diagrams/system_architecture.png",
+    "?? docs/diagrams/system_architecture.svg",
+    "?? electrical/system_connections.csv",
+    "?? electrical/system_design.json",
+    "?? electrical/system_manifest.json",
+    "?? electrical/system_netlist.json",
+    "?? electrical/system_power_budget.csv",
+    "?? include/rover_telemetry.h",
+    "?? package-lock.json",
+    "?? package.json",
+    "?? packages/",
+    "?? playwright.config.ts",
+    "?? scripts/build_simulator.py",
+    "?? scripts/check_system.py",
+    "?? scripts/generate_system.py",
+    "?? scripts/simulation/",
+    "?? scripts/smoke_production.mjs",
+    "?? scripts/verify_system.py",
+    "?? test/browser/",
+    "?? test/test_system.py",
+    "?? tsconfig.json",
+    "?? vitest.config.ts"
+  ],
+  "hardware_used": false,
+  "firmware_uploaded": false,
+  "physical_release": "HOLD",
+  "checks": [
+    {
+      "name": "baseline-regression",
+      "command": [
+        "/Users/kokila/Downloads/autonomous_rover_build/.venv/bin/python",
+        "scripts/verify.py"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/baseline-regression.log"
+    },
+    {
+      "name": "simulation-camera-host",
+      "command": [
+        "python3",
+        "scripts/build_simulator.py"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/simulation-camera-host.log"
+    },
+    {
+      "name": "typescript-tests",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/typescript-tests.log"
+    },
+    {
+      "name": "laptop-build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/laptop-build.log"
+    },
+    {
+      "name": "production-smoke",
+      "command": [
+        "node",
+        "scripts/smoke_production.mjs"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/production-smoke.log"
+    },
+    {
+      "name": "camera-build",
+      "command": [
+        "/Users/kokila/Downloads/autonomous_rover_build/.venv/bin/pio",
+        "run",
+        "-d",
+        "camera"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/camera-build.log"
+    },
+    {
+      "name": "system-graph",
+      "command": [
+        "/Users/kokila/Downloads/autonomous_rover_build/.venv/bin/python",
+        "scripts/check_system.py"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/system-graph.log"
+    },
+    {
+      "name": "frozen-handover",
+      "command": [
+        "/Users/kokila/Downloads/autonomous_rover_build/.venv/bin/python",
+        "scripts/check_team_handover.py"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/frozen-handover.log"
+    },
+    {
+      "name": "browser-tests",
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/browser-tests.log"
+    },
+    {
+      "name": "dependency-audit",
+      "command": [
+        "npm",
+        "audit",
+        "--json",
+        "--registry=https://registry.npmjs.org"
+      ],
+      "exit_code": 0,
+      "log": "artifacts/system/dependency-audit.log"
+    }
+  ],
+  "followup_checks": [
+    {
+      "name": "LF/CRLF portability and Python regressions",
+      "exit_code": 0,
+      "tests": 54,
+      "log": "artifacts/python-tests.log"
+    },
+    {
+      "name": "additive graph after LF hash correction",
+      "exit_code": 0,
+      "log": "artifacts/system/system-graph.log"
+    },
+    {
+      "name": "frozen handover after CSV portability correction",
+      "exit_code": 0,
+      "log": "artifacts/system/frozen-handover.log"
+    }
+  ],
+  "test_counts": {
+    "native_cpp": 84,
+    "python": 54,
+    "typescript": 56,
+    "browser": 4,
+    "camera_host_executables": 2
+  }
+}

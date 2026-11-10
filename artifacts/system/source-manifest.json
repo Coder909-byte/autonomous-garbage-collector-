@@ -1,0 +1,370 @@
+{
+  "software_commit": "325aa53cda379ea2cdcfb3bedd72c3564cebfb96",
+  "hash_convention": "LF-normalized text",
+  "files": [
+    {
+      "path": "apps/rover-bridge/package.json",
+      "sha256_git_lf": "9f1372138f4348faf63eb488df400674ce66963215499ecdcbd11327243e7e96"
+    },
+    {
+      "path": "apps/rover-bridge/src/bridge.ts",
+      "sha256_git_lf": "cffc291d7711b77011598a0b4146dae0d993f8ce3490d483aaccbe20ae550909"
+    },
+    {
+      "path": "apps/rover-bridge/src/camera.ts",
+      "sha256_git_lf": "55f9a823164fd396bfd4f5db26eccdcf464d4e6ae135cb87113f32e71433c12d"
+    },
+    {
+      "path": "apps/rover-bridge/src/server.ts",
+      "sha256_git_lf": "747898f2140bfdbea69e1e28b1b04d39976ae95d51328cdf2585b24ac829324a"
+    },
+    {
+      "path": "apps/rover-bridge/src/transports.ts",
+      "sha256_git_lf": "872d21f70ab7d269ee54ce9b8fdaaee799a6c207540d145eceec798640bfe931"
+    },
+    {
+      "path": "apps/rover-bridge/test/bridge.test.ts",
+      "sha256_git_lf": "b227d70461e552ca4a0ddb0208be1a1b036e2cbdd21d7635386088e40a62e73f"
+    },
+    {
+      "path": "apps/rover-bridge/test/camera.test.ts",
+      "sha256_git_lf": "0501dba037572f54587ce10cef830ede147d0d2697fa23333985535bdaebe492"
+    },
+    {
+      "path": "apps/rover-bridge/test/fixtures.ts",
+      "sha256_git_lf": "208168f0037a5424c59b3bffa3db8071d446e19b485929b835e01deb38538ec5"
+    },
+    {
+      "path": "apps/rover-bridge/test/integration.test.ts",
+      "sha256_git_lf": "279b84f55cb8f530976897bcfca0d4538a8f28ade785fc35a782dafbd88dff8b"
+    },
+    {
+      "path": "apps/rover-bridge/test/transports.test.ts",
+      "sha256_git_lf": "7dd004073a5e3e6b0da24567b8c52e4bbff0dbd2e3150ca240838cfd8b0a0263"
+    },
+    {
+      "path": "apps/rover-bridge/tsconfig.json",
+      "sha256_git_lf": "09d8bc151f23336f4a6ebd97bb338b654e2b5bbb60f9d4f36317f1ee09b6117a"
+    },
+    {
+      "path": "apps/rover-dashboard/package.json",
+      "sha256_git_lf": "70f5bb60976f6eb228617abbd002a6a817b7f6ee0374fb4adf792a1e03c2e145"
+    },
+    {
+      "path": "apps/rover-dashboard/src/App.tsx",
+      "sha256_git_lf": "2cb91db1c930c5f7a04523b263cd0a9cc79d291c218776730962f46bbf6cd1e0"
+    },
+    {
+      "path": "apps/rover-dashboard/src/control.ts",
+      "sha256_git_lf": "2120ce300213bc70ed47fd60a84ef95ff6a684a57f8af170961cb06680b35075"
+    },
+    {
+      "path": "apps/rover-dashboard/src/main.tsx",
+      "sha256_git_lf": "ecadc6a5afd9d62544e9dceaf30b6e99514d9ef94b94b878f8fc3d4ad2850b7d"
+    },
+    {
+      "path": "apps/rover-dashboard/src/style.css",
+      "sha256_git_lf": "48ba4568396e02f1d066576a7ef4b8a1f660c95a2b7b86a9f1f99e02ddb36c31"
+    },
+    {
+      "path": "apps/rover-dashboard/test/App.test.tsx",
+      "sha256_git_lf": "afb319d3727b729c0b4e7c353d42f226a500b895d160a14e4f9a0f5a3382062d"
+    },
+    {
+      "path": "apps/rover-dashboard/tsconfig.json",
+      "sha256_git_lf": "b717c4f23290ca5fa7ce0c04cb2536bd05bdaffe9e4a03cd3ac73a82c73ec333"
+    },
+    {
+      "path": "apps/rover-dashboard/vite.config.ts",
+      "sha256_git_lf": "41c8998e740adf3479fe4034ea4de2f1e358405ba374f2cec40696ffc3244043"
+    },
+    {
+      "path": "camera/include/board_ai_thinker.h",
+      "sha256_git_lf": "b8e6702d363129dda730213f3320d2a7a5bd4e77280b3f2aea3afced319136c8"
+    },
+    {
+      "path": "camera/include/camera_policy.h",
+      "sha256_git_lf": "490acc6a46f2226c71b8a6416eafbd4c8bc577e38268360638cb0202012dc5e2"
+    },
+    {
+      "path": "camera/include/config.example.h",
+      "sha256_git_lf": "ce476f2dc3a876dc03aa11bd6391f70ad32293471653dd01f7d65eb20e8b6bdd"
+    },
+    {
+      "path": "camera/platformio.ini",
+      "sha256_git_lf": "c5dcf7e059a781f52c4a0d7bb8e08190b233429285696045594489a474bf8ffc"
+    },
+    {
+      "path": "camera/src/main.cpp",
+      "sha256_git_lf": "74578579b62dad7dfbff33bc403a8916b3b0cd6d026b565df6e4920c852f2cc0"
+    },
+    {
+      "path": "camera/test/http_test.cpp",
+      "sha256_git_lf": "4aa4be40b818e7cde75fffd140a8ae1425670d0580a5d9751b87f761a8a02e76"
+    },
+    {
+      "path": "camera/test/policy_test.cpp",
+      "sha256_git_lf": "1c2506a6d50602991f2eb5c2cb6728775bdff96a8a4e4edb291b5ee560d9658c"
+    },
+    {
+      "path": "camera/test/stubs/Arduino.h",
+      "sha256_git_lf": "1b9999fa9bbb0a7440e89ce0b88b2515d999db281aed1dfe889d6ac8cbbc6daf"
+    },
+    {
+      "path": "camera/test/stubs/ESPmDNS.h",
+      "sha256_git_lf": "7ae4781d0d81cb008b6660753a14b338ad34af7786d8b621e759d013bbc8110a"
+    },
+    {
+      "path": "camera/test/stubs/WiFi.h",
+      "sha256_git_lf": "1c53c32ae7de49ee7e84c382215e8a49fca4d0d2c5b0497408400ebcbcc09868"
+    },
+    {
+      "path": "camera/test/stubs/esp_camera.h",
+      "sha256_git_lf": "f835c0a6cb1f5d36ac130148d1884610dd8c4e1c1a6273eda494392c93954e4b"
+    },
+    {
+      "path": "camera/test/stubs/esp_http_server.h",
+      "sha256_git_lf": "8cd302433587ad5be37a2da0008a7014fa35263733a18abff03abedd1da855db"
+    },
+    {
+      "path": "camera/test/stubs/lwip/sockets.h",
+      "sha256_git_lf": "f824d71007d3d33d943b1c3d8e90419a2b044a4bf24e59bff58baba7e51155c3"
+    },
+    {
+      "path": "electrical/bom.csv",
+      "sha256_git_lf": "e89a64607db1ae04fb764b6ede9cb0e48accf4c6367a7663dabe14b22f526225"
+    },
+    {
+      "path": "electrical/connections.csv",
+      "sha256_git_lf": "bd98e61b39ce670db03ed9a6828837024ec27c0edc8c1bd3d53f66f08c8b1ba6"
+    },
+    {
+      "path": "electrical/current_budget.csv",
+      "sha256_git_lf": "1786005659921ae58ab85f2fa513d0f294d1518bf46aba70c9b52032cbfced38"
+    },
+    {
+      "path": "electrical/design.json",
+      "sha256_git_lf": "aa62e3bc70ee252fdf5d81107d25bc7ed33b66774fff005dbc83a3abb9b6b9fb"
+    },
+    {
+      "path": "electrical/export_manifest.json",
+      "sha256_git_lf": "58fa0000b58ef0e82aaf28f4f047ddb9231b1faf4fd2640e727a0b8df505aa04"
+    },
+    {
+      "path": "electrical/system_connections.csv",
+      "sha256_git_lf": "37de97f1c02ae3e3a3a12155e57fa0881e9fdbe893af57c020e3bee76689c52c"
+    },
+    {
+      "path": "electrical/system_design.json",
+      "sha256_git_lf": "dd24d70886bb2c6312bd574c606f784da28658710abb37274bec6515298f8ac9"
+    },
+    {
+      "path": "electrical/system_manifest.json",
+      "sha256_git_lf": "37ad68c57928c35e3f05eb64cd6272f215899a557ebe54ff513fa5381043dd02"
+    },
+    {
+      "path": "electrical/system_netlist.json",
+      "sha256_git_lf": "a01ffa2d9bce419dd115433b0beaabdee11f97d12f01f0ad9f0144ff96b12a1a"
+    },
+    {
+      "path": "electrical/system_power_budget.csv",
+      "sha256_git_lf": "a616a83108f0f80bbdd91d1df45ba98d0058d1eb81b817b989d43223d485c82d"
+    },
+    {
+      "path": "electrical/terminal_map.csv",
+      "sha256_git_lf": "34d025e9eec8755136d755b8430b0b66aac3ec92613ec663e706d0bfc10e91fe"
+    },
+    {
+      "path": "firmware/rover.ino",
+      "sha256_git_lf": "7cd606f0282c650bff198170b5b18cfb9b77d3fe88c6be52ca93adef13181a11"
+    },
+    {
+      "path": "include/rover_control.h",
+      "sha256_git_lf": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77"
+    },
+    {
+      "path": "include/rover_pins.h",
+      "sha256_git_lf": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d"
+    },
+    {
+      "path": "include/rover_telemetry.h",
+      "sha256_git_lf": "3b32673fe0efcc94271d4c732770e1d3f81c801d13024bfd5241b581c79f1094"
+    },
+    {
+      "path": "packages/protocol/index.ts",
+      "sha256_git_lf": "53875908e28c76e73f5a37c9db56c7f4e27b6d72c45a02d02f5e7ec2ffac211d"
+    },
+    {
+      "path": "scripts/build_simulator.py",
+      "sha256_git_lf": "c6310f2034d1485d45f7295378892ea1b521cbe2e9220eb679c3da66bf870a58"
+    },
+    {
+      "path": "scripts/check_completion.py",
+      "sha256_git_lf": "0f2f4351cb0e4a2c970cbab422a4785651e4ea181a92df1e285691dfb9ae0b0d"
+    },
+    {
+      "path": "scripts/check_design_exports.py",
+      "sha256_git_lf": "0838ca03c83e17c055e4d209023b128813810fae2716a65cb855cf267208fb64"
+    },
+    {
+      "path": "scripts/check_electrical.py",
+      "sha256_git_lf": "989c408b3241b4e1a9da104742aee3f5df00c72449feedad2c8f4a8f368e248e"
+    },
+    {
+      "path": "scripts/check_project.py",
+      "sha256_git_lf": "2aaa355d5a21d2c35ca8ad9b4302bd254ea4ab8f66bd60db87b9754b2371ccf1"
+    },
+    {
+      "path": "scripts/check_system.py",
+      "sha256_git_lf": "9ab7c8a3a6a3dfac7a54be175607cab113943fffbdd4c67c8a37778fb4655acc"
+    },
+    {
+      "path": "scripts/check_team_handover.py",
+      "sha256_git_lf": "e349e6b5601073ca5f61e21cef8d7732366c69bca65e1e52f6772bfa60565b08"
+    },
+    {
+      "path": "scripts/check_vcd.py",
+      "sha256_git_lf": "b6f1a7c4c523b540c8276c6f2845d3f5535b405c433ebe9f3c11eb9bf927e077"
+    },
+    {
+      "path": "scripts/electrical_export_contracts.py",
+      "sha256_git_lf": "30bf29bf778d9a2a8ab398a4d8c79c0f64a1dcb6edf4a346fee6b634bcbde4e5"
+    },
+    {
+      "path": "scripts/generate_ready_to_wire.py",
+      "sha256_git_lf": "e08ecdecfc2779ec66d09567550ab6b73810fd652b28c5a4d2e9dae9f773a3bb"
+    },
+    {
+      "path": "scripts/generate_system.py",
+      "sha256_git_lf": "548f647a7dac9fae6795817de5e6dabba4b9d8d8fc1fe9700d2829b8994de1c1"
+    },
+    {
+      "path": "scripts/generate_team_handover.py",
+      "sha256_git_lf": "c5598ae618a10f294eb1b75819f4e5ea04e494ee0086fb2d877920c0e326e47e"
+    },
+    {
+      "path": "scripts/generate_wiring.py",
+      "sha256_git_lf": "d709dc7ea9a0fb5d8f2c88f7c9626be03746413f674b04f6bdc3e10d7fa223ca"
+    },
+    {
+      "path": "scripts/run_wokwi.py",
+      "sha256_git_lf": "6d69a18e7d78ce7fdc9c764b3e57d20c76541c8c6482c088fb9af1096be2c788"
+    },
+    {
+      "path": "scripts/simulation/rover_sim.cpp",
+      "sha256_git_lf": "a1d0feea25901650a14ef201db9054b65c68d6784a348cdc17dca7dee4f2fd8d"
+    },
+    {
+      "path": "scripts/smoke_production.mjs",
+      "sha256_git_lf": "b721d639b64811a67e25c69fb69eec69a378e04b396366a88bd48a349dcd0518"
+    },
+    {
+      "path": "scripts/sync_wokwi.py",
+      "sha256_git_lf": "af20cd9742322509026ca183e5415222102fd09c2d4ecbc033c05e5b7ad5c9e6"
+    },
+    {
+      "path": "scripts/verify.py",
+      "sha256_git_lf": "a407d5ccb8424653b8243a692360cba5e44e9a8df7f63a3780c66902cd1d3bc9"
+    },
+    {
+      "path": "scripts/verify_system.py",
+      "sha256_git_lf": "98042ecf982aec43b8955d6e5c9ab4f5d850f7c6e872816d25007e7cbe19b878"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256_git_lf": "237b2bf1a3e796a8e945a6772d41d1affc0e3521b475e26155f0ebe87bf45d60"
+    },
+    {
+      "path": "test/browser/camera.spec.ts",
+      "sha256_git_lf": "5fd1d39ca5925759b84bcfc8ee9e1aed13530833c741983307df665ae37f44e5"
+    },
+    {
+      "path": "test/browser/control.spec.ts",
+      "sha256_git_lf": "763bf17e44adf65677e3be8992ab2ab6c4cd2eb923380bec7d30b724314f5cac"
+    },
+    {
+      "path": "test/stubs/Arduino.h",
+      "sha256_git_lf": "ea2516c68e4a63cd3a976082b25b761f6fcdb0bb859708674d743cf9e52efe11"
+    },
+    {
+      "path": "test/stubs/esp_arduino_version.h",
+      "sha256_git_lf": "eec33b823418f2e5989659d203832b2740e407e9eab39d8c412bd93ebe45ca06"
+    },
+    {
+      "path": "test/stubs/soc/gpio_reg.h",
+      "sha256_git_lf": "05b273a9253654a8be8127e4d9c3d345036c23fb2553164f44e6f1af489509f6"
+    },
+    {
+      "path": "test/stubs/soc/soc.h",
+      "sha256_git_lf": "540bd3c82efb6331287efc48665c7b4a53f6ce3f7915d99b6e0e98c11a87a991"
+    },
+    {
+      "path": "test/test_design_exports.py",
+      "sha256_git_lf": "0ac456becc46fa4752d6bb10d68b976a3a7741a78dc9fa98dbb379623557cddf"
+    },
+    {
+      "path": "test/test_electrical.py",
+      "sha256_git_lf": "7be09019cb249f53f65c08509eb88dd5c9d427c628668b93a711ca5b49dde6bb"
+    },
+    {
+      "path": "test/test_io/test_main.cpp",
+      "sha256_git_lf": "709a830f278f56c18f6e7c8a704183e8899300407797866b7db83ed336eeeb2b"
+    },
+    {
+      "path": "test/test_navigation/test_main.cpp",
+      "sha256_git_lf": "749046828ce77e3c7fcdf939f6004a91e3359ec4043f0ca19918eb9049732071"
+    },
+    {
+      "path": "test/test_system.py",
+      "sha256_git_lf": "d08671ed69b3715a9bcf67a5a00d0702fd3b804fbf567330b5143dad9b0137d9"
+    },
+    {
+      "path": "test/test_team_handover.py",
+      "sha256_git_lf": "f67f2239f12a24c1ab55a35613acf9a6a1bdbd95cfb8a6914470dc458568493f"
+    },
+    {
+      "path": "test/test_turning/test_main.cpp",
+      "sha256_git_lf": "3230f37925cdf365e56463f49296984bfcfed541f7acefbf3b22cde8e74d76c1"
+    },
+    {
+      "path": "test/test_vcd.py",
+      "sha256_git_lf": "9be91825922ea64297d41c31234cc62ca8fd6eb2b83a36d2c32b746b22d7e1b5"
+    },
+    {
+      "path": "wokwi/diagram.json",
+      "sha256_git_lf": "2f84fbd432915806e9118a549e5f6abe7b0a0773493a3171a5ccae5319293024"
+    },
+    {
+      "path": "wokwi/sketch.ino",
+      "sha256_git_lf": "0c71cfa18304e50d416ee7be1fae26c78138c59df98cec8ffba318165a8fefe8"
+    },
+    {
+      "path": "wokwi/wokwi.toml",
+      "sha256_git_lf": "c25cff4854e29b81bf07b5ed33901b977593d86a39c15de8a4f3ce02d9b8ac54"
+    },
+    {
+      "path": "package.json",
+      "sha256_git_lf": "fbe7dc13d17c3bb6029076ba8c97947bd13c876bcaff51f57af357a3f84f7c92"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256_git_lf": "c8b4ee71811ca366ac6de7568e0e733f328036161a368f90565794a1dcb2bedc"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256_git_lf": "a9877115c09e26ecde7fd75c39ec0a4acc53ff10c5a0ea4d9e44a5da70dea7fb"
+    },
+    {
+      "path": "vitest.config.ts",
+      "sha256_git_lf": "8a1e2587d7e50db79f3980b36963edd9232da35be9a5078bdbc6ac42055cd3e0"
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256_git_lf": "0d77d32180deb53e27bafd1226b6952c5fe433ca1d80eb213cdcafb7f62d6105"
+    },
+    {
+      "path": "platformio.ini",
+      "sha256_git_lf": "ece3e5922685864fe2d8d89badbc179e500bdc36e51e514a95313e80932077dd"
+    }
+  ]
+}

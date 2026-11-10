@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "path": "include/rover_control.h",
+      "unchanged_from": "2da0b0a",
+      "sha256_git_text_convention": "94a4bdc20e4e6fb04a661548bccd7e51227abca1249efbb5c7dc18317df7ff77"
+    },
+    {
+      "path": "include/rover_pins.h",
+      "unchanged_from": "2da0b0a",
+      "sha256_git_text_convention": "6890d12c336d6ee9fa2b169a4379bda215c18b3a5f90551e243ec8ac1461258d"
+    },
+    {
+      "path": "electrical/design.json",
+      "unchanged_from": "2da0b0a",
+      "sha256_git_text_convention": "aa62e3bc70ee252fdf5d81107d25bc7ed33b66774fff005dbc83a3abb9b6b9fb"
+    },
+    {
+      "path": "electrical/connections.csv",
+      "unchanged_from": "2da0b0a",
+      "sha256_git_text_convention": "bd98e61b39ce670db03ed9a6828837024ec27c0edc8c1bd3d53f66f08c8b1ba6"
+    },
+    {
+      "path": "electrical/terminal_map.csv",
+      "unchanged_from": "2da0b0a",
+      "sha256_git_text_convention": "34d025e9eec8755136d755b8430b0b66aac3ec92613ec663e706d0bfc10e91fe"
+    },
+    {
+      "path": "artifacts/TEAM_ASSEMBLY_HANDOVER.pdf",
+      "unchanged_from": "2da0b0a",
+      "sha256_git_text_convention": "6c6fa3f6e9891ced077a8d637ecd45cb68356c16f6425bfd45fccde3e5a1fc37"
+    }
+  ],
+  "result": "PASS",
+  "main_adapter_change": "Periodic telemetry only; GPIO/controller unchanged; UART overhead documented",
+  "physical_release": "HOLD"
+}
