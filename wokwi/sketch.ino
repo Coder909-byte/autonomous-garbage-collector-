@@ -218,6 +218,24 @@ constexpr int TRIG[] = {TF,TL,TR};
 constexpr int ECHO[] = {EF,EL,ER};
 }
 
+// Source: include/rover_telemetry.h
+#include <stdio.h>
+namespace rover {
+constexpr const char *FIRMWARE_ID="rover-usb-v1";
+// Adapter-supplied output state: never claims encoders or physical movement.
+inline int telemetry(char *out,unsigned capacity,const Controller &c,uint32_t now,
+                     Motion applied,bool enabled,bool brush,bool conveyor,bool healthy) {
+  return snprintf(out,capacity,
+    "TEL {\"v\":1,\"fw\":\"%s\",\"ms\":%lu,\"armed\":%s,\"auto\":%s,\"estop\":%s,\"healthy\":%s,"
+    "\"requested\":%d,\"applied\":%d,\"en\":%s,\"brushReq\":%s,\"conveyorReq\":%s,\"brush\":%s,\"conveyor\":%s,"
+    "\"nav\":\"%s\",\"cm\":[%d,%d,%d],\"age\":[%lu,%lu,%lu]}",
+    FIRMWARE_ID,static_cast<unsigned long>(now),c.armed?"true":"false",c.automatic?"true":"false",c.estop?"true":"false",healthy?"true":"false",
+    static_cast<int>(c.motion),static_cast<int>(applied),enabled?"true":"false",c.brushes?"true":"false",c.conveyor?"true":"false",brush?"true":"false",conveyor?"true":"false",c.navigationName(),
+    c.ranges[0].cm,c.ranges[1].cm,c.ranges[2].cm,
+    static_cast<unsigned long>(uint32_t(now-c.ranges[0].at)),static_cast<unsigned long>(uint32_t(now-c.ranges[1].at)),static_cast<unsigned long>(uint32_t(now-c.ranges[2].at)));
+}
+}
+
 // Source: firmware/rover.ino
 // Canonical ESP32 firmware. No motor/battery power is needed for software tests.
 #include <Arduino.h>
@@ -233,6 +251,8 @@ portMUX_TYPE safetyMux = portMUX_INITIALIZER_UNLOCKED;
 bool pwmReady = true;
 uint32_t lastPing = 0, lastLog = 0;
 unsigned sensorIndex = 0;
+rover::Motion appliedMotion = rover::Motion::Stop;
+bool appliedEnable = false, appliedBrush = false, appliedConveyor = false;
 
 void IRAM_ATTR stopInterrupt() {
   // GPIO14 is below 32. Cut EN even during pulseIn; the physical power cutoff
@@ -282,6 +302,8 @@ void applyOutputs(uint32_t now) {
   // so short turns and independently requested auxiliaries can be inspected.
   rover::Motion reported = permit ? actual : rover::Motion::Stop;
   controller.reportApplied(reported,now);
+  appliedMotion = reported; appliedEnable = permit;
+  appliedBrush = permit && brush; appliedConveyor = permit && conveyor;
   int outputs = static_cast<int>(reported)*4 + (permit && brush ? 2 : 0) + (permit && conveyor ? 1 : 0);
   int state = outputs*16 + static_cast<int>(controller.navigation());
   static int previousState = -1;
@@ -360,6 +382,10 @@ void loop() {
   now = millis();
   if (uint32_t(now-lastLog) >= 500 && Serial.availableForWrite() >= 100) {
     lastLog = now;
+    char message[512];
+    int length = rover::telemetry(message,sizeof(message),controller,now,appliedMotion,
+      appliedEnable,appliedBrush,appliedConveyor,healthy());
+    if (length > 0 && length < static_cast<int>(sizeof(message))) Serial.println(message);
     Serial.printf("DIST %d %d %d armed=%d auto=%d estop=%d motion=%d en=%d\n",
       controller.ranges[0].cm,controller.ranges[1].cm,controller.ranges[2].cm,
       controller.armed,controller.automatic,controller.estop,static_cast<int>(controller.motion),digitalRead(pins::ENABLE));

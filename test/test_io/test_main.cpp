@@ -5,7 +5,7 @@ void setUp() {
   hardwareTrip=false; pwmReady=true; lastPing=lastLog=0; sensorIndex=0;
   mockNow=0; mockPwmFailure=false; mockHazard=false; mockPulse=5800; mockEnableHighCount=0;
   std::fill(mockPins,mockPins+40,0); std::fill(mockDuty,mockDuty+4,0);
-  mockPins[pins::ESTOP_OK]=HIGH; Serial.input.clear();
+  mockPins[pins::ESTOP_OK]=HIGH; Serial.input.clear(); Serial.output.clear();
   applyOutputs(0); // also reset adapter's previous output state
 }
 void tearDown() {}
@@ -100,8 +100,24 @@ void sensor_recovery_requires_explicit_arm_auto() {
  send("ARM\nAUTO\n"); mockNow=202; loop(); TEST_ASSERT_EQUAL(1,mockPins[pins::ENABLE]);
  TEST_ASSERT_EQUAL(0,mockPins[pins::BRUSH_IN1]); TEST_ASSERT_EQUAL(0,mockPins[pins::CONVEYOR_IN3]);
 }
+void versioned_telemetry_reports_requested_and_applied() {
+ setup(); send("ARM\nCLEAN ON\nF\n");
+ char b[512]; int n=rover::telemetry(b,sizeof(b),controller,0,appliedMotion,appliedEnable,appliedBrush,appliedConveyor,healthy());
+ TEST_ASSERT_TRUE(n>0 && n<512); TEST_ASSERT_NOT_NULL(strstr(b,"\"brushReq\":true"));
+ TEST_ASSERT_NOT_NULL(strstr(b,"\"brush\":false")); TEST_ASSERT_NOT_NULL(strstr(b,"\"applied\":0"));
+ mockNow=500; loop(); TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"TEL {\"v\":1"));
+ TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"\"fw\":\"rover-usb-v1\""));
+ TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"\"brush\":true"));
+}
+void telemetry_sizing_and_rollover() {
+ char b[512]; controller.sample(0,-1,0xfffffff0u);
+ int n=rover::telemetry(b,sizeof(b),controller,10,rover::Motion::Stop,false,false,false,false);
+ TEST_ASSERT_TRUE(n>0 && n<512); TEST_ASSERT_NOT_NULL(strstr(b,"\"age\":[26,"));
+ char small[12]; TEST_ASSERT_TRUE(rover::telemetry(small,sizeof(small),controller,10,rover::Motion::Stop,false,false,false,false)>=12);
+}
 int main() {
  UNITY_BEGIN();
+ RUN_TEST(versioned_telemetry_reports_requested_and_applied); RUN_TEST(telemetry_sizing_and_rollover);
  RUN_TEST(physical_estop_during_both_cleaning_channels); RUN_TEST(software_reboot_discards_motion_and_cleaning);
  RUN_TEST(sensor_recovery_requires_explicit_arm_auto);
  RUN_TEST(adapter_times_turn_from_enable); RUN_TEST(physical_estop_interrupts_auto_turn);

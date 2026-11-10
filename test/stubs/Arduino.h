@@ -42,10 +42,10 @@ static void ledcWrite(unsigned channel,unsigned duty) {
   if (mockPins[14] && ((mockDuty[0] && mockDuty[1]) || (mockDuty[2] && mockDuty[3]))) mockHazard=true;
 }
 struct MockSerial {
-  std::string input;
+  std::string input, output;
   void begin(int) {}
-  void println(const char *) {}
-  template<typename... T> void printf(const char *,T...) {}
+  void println(const char *s) { output += std::string(s)+"\n"; }
+  template<typename... T> void printf(const char *format,T... args) { char b[1024]; snprintf(b,sizeof(b),format,args...); output+=b; }
   int availableForWrite() { return 128; }
   int available() { return static_cast<int>(input.size()); }
   int read() { char c=input[0]; input.erase(0,1); return c; }

@@ -5,6 +5,7 @@
 #include <soc/gpio_reg.h>
 #include "rover_control.h"
 #include "rover_pins.h"
+#include "rover_telemetry.h"
 
 rover::Controller controller;
 rover::LineParser parser;
@@ -14,6 +15,8 @@ portMUX_TYPE safetyMux = portMUX_INITIALIZER_UNLOCKED;
 bool pwmReady = true;
 uint32_t lastPing = 0, lastLog = 0;
 unsigned sensorIndex = 0;
+rover::Motion appliedMotion = rover::Motion::Stop;
+bool appliedEnable = false, appliedBrush = false, appliedConveyor = false;
 
 void IRAM_ATTR stopInterrupt() {
   // GPIO14 is below 32. Cut EN even during pulseIn; the physical power cutoff
@@ -63,6 +66,8 @@ void applyOutputs(uint32_t now) {
   // so short turns and independently requested auxiliaries can be inspected.
   rover::Motion reported = permit ? actual : rover::Motion::Stop;
   controller.reportApplied(reported,now);
+  appliedMotion = reported; appliedEnable = permit;
+  appliedBrush = permit && brush; appliedConveyor = permit && conveyor;
   int outputs = static_cast<int>(reported)*4 + (permit && brush ? 2 : 0) + (permit && conveyor ? 1 : 0);
   int state = outputs*16 + static_cast<int>(controller.navigation());
   static int previousState = -1;
@@ -141,6 +146,10 @@ void loop() {
   now = millis();
   if (uint32_t(now-lastLog) >= 500 && Serial.availableForWrite() >= 100) {
     lastLog = now;
+    char message[512];
+    int length = rover::telemetry(message,sizeof(message),controller,now,appliedMotion,
+      appliedEnable,appliedBrush,appliedConveyor,healthy());
+    if (length > 0 && length < static_cast<int>(sizeof(message))) Serial.println(message);
     Serial.printf("DIST %d %d %d armed=%d auto=%d estop=%d motion=%d en=%d\n",
       controller.ranges[0].cm,controller.ranges[1].cm,controller.ranges[2].cm,
       controller.armed,controller.automatic,controller.estop,static_cast<int>(controller.motion),digitalRead(pins::ENABLE));
