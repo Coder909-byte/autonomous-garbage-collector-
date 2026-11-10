@@ -1,0 +1,32 @@
+{
+  "name": "autonomous-rover-system",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "sim:build": "python3 scripts/build_simulator.py",
+    "bridge": "npm run dev -w apps/rover-bridge",
+    "dashboard": "npm run dev -w apps/rover-dashboard",
+    "build": "npm run build -w apps/rover-bridge && npm run build -w apps/rover-dashboard",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "start": "node apps/rover-bridge/dist/apps/rover-bridge/src/server.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "jsdom": "^26.1.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  }
+}

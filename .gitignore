@@ -85,3 +85,15 @@ wokwi-cli-token*
 !/artifacts/team-handover-python-tests.log
 
 # Publish all designed PDF/SVG/PNG documentation under docs/diagrams/.
+
+# Laptop tooling and browser test output
+node_modules/
+test-results/
+playwright-report/
+
+# Reproducible S1 software evidence
+!/artifacts/system/
+!/artifacts/system/*.log
+!/artifacts/system/*.json
+!/artifacts/dashboard-simulation.png
+!/artifacts/dashboard-mobile.png

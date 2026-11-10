@@ -1,0 +1,30 @@
+// @vitest-environment jsdom
+import {act,cleanup,fireEvent,render,screen} from '@testing-library/react';
+import '@testing-library/jest-dom/vitest';
+import {afterEach,beforeEach,it,expect,vi} from 'vitest';
+import App from '../src/App';
+import {HoldControl} from '../src/control';
+import {sample} from '../../rover-bridge/test/fixtures';
+import type {BridgeState} from '../../../packages/protocol/index';
+class Socket {
+ static OPEN=1;static current:Socket;readyState=1;onopen:()=>void=()=>{};onmessage:(e:{data:string})=>void=()=>{};onclose:()=>void=()=>{};onerror:()=>void=()=>{};
+ sent:Record<string,unknown>[]=[];constructor(){Socket.current=this;}
+ send(s:string){this.sent.push(JSON.parse(s));}close(){this.readyState=3;}
+}
+const connected:BridgeState={connected:true,connecting:false,protocolReady:true,simulation:true,port:'SIMULATION',telemetry:{...sample,armed:false,nav:'DISARMED'},receivedAt:Date.now(),intent:null,logs:[],error:null};
+function mount(state=connected){render(<App/>);act(()=>vi.advanceTimersByTime(0));act(()=>Socket.current.onopen());act(()=>Socket.current.onmessage({data:JSON.stringify({...state,receivedAt:Date.now()})}));}
+function update(change:Partial<BridgeState['telemetry']>){act(()=>Socket.current.onmessage({data:JSON.stringify({...connected,receivedAt:Date.now(),telemetry:{...sample,...change}})}));}
+beforeEach(()=>{vi.useFakeTimers();vi.stubGlobal('WebSocket',Socket);vi.stubGlobal('fetch',vi.fn(async()=>({ok:true,json:async()=>[]})));vi.spyOn(document,'hasFocus').mockReturnValue(true);});
+afterEach(()=>{cleanup();vi.useRealTimers();vi.unstubAllGlobals();});
+it('renders disconnected camera, simulation label, firmware and real readings',()=>{mount();expect(screen.getByText('No camera connected')).toBeInTheDocument();expect(screen.getAllByText('SIMULATION MODE').length).toBeGreaterThan(0);expect(screen.getByText('120')).toBeInTheDocument();expect(screen.getByText('rover-usb-v1')).toBeInTheDocument();expect(screen.getByText('not measured')).toBeInTheDocument();});
+it('ARM is explicit and does not send a direction',()=>{mount();fireEvent.click(screen.getByRole('button',{name:'ARM',exact:true}));expect(Socket.current.sent).toContainEqual({type:'command',command:'ARM'});expect(Socket.current.sent.some(m=>m.type==='hold')).toBe(false);});
+it('keyboard movement renews only while held and keyup stops',()=>{mount();update({armed:true});fireEvent.keyDown(window,{key:'w',code:'KeyW'});act(()=>vi.advanceTimersByTime(170));expect(Socket.current.sent.filter(m=>m.type==='hold').length).toBe(3);fireEvent.keyUp(window,{key:'w'});const count=Socket.current.sent.length;act(()=>vi.advanceTimersByTime(250));expect(Socket.current.sent.length).toBe(count);expect(Socket.current.sent.at(-1)).toEqual({type:'release'});});
+it('pointer release/cancel and browser blur stop leases',()=>{mount();update({armed:true});const forward=screen.getByRole('button',{name:'Forward',exact:true});fireEvent.pointerDown(forward,{button:0,pointerId:1});fireEvent.pointerUp(forward,{pointerId:1});fireEvent.keyDown(window,{key:'d'});fireEvent.blur(window);expect(Socket.current.sent.at(-1)).toEqual({type:'release'});});
+it('Space stops and mode change ends active hold',()=>{mount();update({armed:true});fireEvent.keyDown(window,{key:'w'});fireEvent.keyDown(window,{key:' ',code:'Space'});expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'S'});fireEvent.click(screen.getByRole('button',{name:'Autonomous',exact:true}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'AUTO'});});
+it('software emergency stop sends ESTOP and shows physical cutoff distinction',()=>{mount();fireEvent.click(screen.getByRole('button',{name:/SOFTWARE EMERGENCY STOP/}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'ESTOP'});expect(screen.getByText(/physical cutoff still required/)).toBeInTheDocument();});
+it('requested cleaning stays distinct from applied state',()=>{mount();update({brushReq:true,brush:false});expect(screen.getByRole('button',{name:'Brushes OFF'})).toHaveAttribute('aria-pressed','true');expect(screen.getAllByText('OFF',{exact:true}).length).toBeGreaterThan(0);fireEvent.click(screen.getByRole('button',{name:'Brushes OFF'}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'BRUSH OFF'});});
+it('stale telemetry disables movement and masks sensor values',()=>{mount();update({armed:true});act(()=>vi.advanceTimersByTime(1300));expect(screen.getByText('STALE TELEMETRY')).toBeInTheDocument();expect(screen.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();expect(screen.queryByText('120')).not.toBeInTheDocument();});
+it('disconnection disables controls and reports delivery uncertainty',()=>{mount();act(()=>Socket.current.onclose());expect(screen.getByRole('button',{name:'ARM',exact:true})).toBeDisabled();expect(screen.getByRole('alert')).toHaveTextContent('STOP delivery is unconfirmed');});
+it('invalid server responses close control rather than populate invented state',()=>{mount();act(()=>Socket.current.onmessage({data:'{"connected":true}'}));expect(screen.getByRole('alert')).toHaveTextContent('Invalid server response');expect(Socket.current.readyState).toBe(3);});
+it('camera failures remain explicit and create no fake stream',async()=>{mount();vi.stubGlobal('fetch',vi.fn(async()=>({ok:false,json:async()=>({error:'camera offline'})})));fireEvent.change(screen.getByLabelText('Camera address'),{target:{value:'192.168.50.20'}});await act(async()=>{fireEvent.click(screen.getByRole('button',{name:'Connect camera',exact:true}));});expect(screen.getByText(/camera offline/)).toBeInTheDocument();expect(screen.queryByAltText('Live ESP32-CAM MJPEG stream')).not.toBeInTheDocument();});
+it('HoldControl releases on visibility/focus loss and does not extend stale intent',()=>{const send=vi.fn();const hold=new HoldControl(send);hold.start('L','key:a');vi.spyOn(document,'hasFocus').mockReturnValue(false);vi.advanceTimersByTime(100);expect(send).toHaveBeenLastCalledWith({type:'release'});const n=send.mock.calls.length;vi.advanceTimersByTime(300);expect(send).toHaveBeenCalledTimes(n);hold.release();});
