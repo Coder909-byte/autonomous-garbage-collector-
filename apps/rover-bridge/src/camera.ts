@@ -1,6 +1,7 @@
 import http from 'node:http';
 import type { Request,Response } from 'express';
 export function cameraAddress(value:unknown):string {
+ if(typeof value==='string'&&/^http:\/\/\d{1,3}(\.\d{1,3}){3}(?::(?:80|81))?(?:\/(?:stream)?)?$/.test(value))value=new URL(value).hostname;
  if(typeof value!=='string'||!/^\d{1,3}(\.\d{1,3}){3}$/.test(value))throw Error('Enter the camera numeric private IPv4 address');
  const p=value.split('.').map(Number);
  if(p.some(n=>n>255)||p[3]===0||p[3]===255||!(p[0]===10||(p[0]===192&&p[1]===168)||(p[0]===172&&p[1]>=16&&p[1]<=31)))throw Error('Camera must be on the configured private WLAN');

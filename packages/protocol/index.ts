@@ -8,6 +8,10 @@ export interface Telemetry {
  nav:string; cm:[number,number,number]; age:[number,number,number];
 }
 export interface Log {at:number;kind:'TX'|'RX'|'ACK'|'ERROR'|'INFO';text:string}
+export interface DiagnosticRecord {
+ id:number; at:number; timestamp:string; session:string; source:'hardware'|'simulation'|'bridge'; port:string|null;
+ event:'telemetry'|'emergency'|'connection'|'communication'|'command'|'ack'|'info'; kind:Log['kind']; message:string; telemetry:Telemetry|null;
+}
 export interface BridgeState {
  connected:boolean; connecting:boolean; protocolReady:boolean; simulation:boolean; port:string|null; telemetry:Telemetry|null;
  receivedAt:number|null; intent:Direction|null; logs:Log[]; error:string|null;
@@ -35,6 +39,6 @@ export function parseLine(line:string):{kind:'telemetry';data:Telemetry}|{kind:'
 }
 export function isState(value:unknown):value is BridgeState {
  if(!value||typeof value!=='object')return false;const s=value as BridgeState;
- if(typeof s.connected!=='boolean'||typeof s.connecting!=='boolean'||typeof s.protocolReady!=='boolean'||typeof s.simulation!=='boolean'||!Array.isArray(s.logs)||s.logs.length>200||!(s.receivedAt===null||Number.isFinite(s.receivedAt))||!(s.intent===null||isDirection(s.intent)))return false;
+ if(typeof s.connected!=='boolean'||typeof s.connecting!=='boolean'||typeof s.protocolReady!=='boolean'||typeof s.simulation!=='boolean'||!(s.port===null||typeof s.port==='string')||!(s.error===null||typeof s.error==='string')||!Array.isArray(s.logs)||s.logs.length>200||!(s.receivedAt===null||Number.isFinite(s.receivedAt))||!(s.intent===null||isDirection(s.intent)))return false;
  try{if(s.telemetry!==null)telemetry(s.telemetry);return s.logs.every(l=>l&&Number.isFinite(l.at)&&['TX','RX','ACK','ERROR','INFO'].includes(l.kind)&&typeof l.text==='string');}catch{return false;}
 }

@@ -9,11 +9,13 @@ import { Hardware,Simulation,ports } from './transports.js';
 import { cameraAddress,proxyCamera } from './camera.js';
 let root=dirname(fileURLToPath(import.meta.url));while(!existsSync(resolve(root,'include/rover_control.h'))&&dirname(root)!==root)root=dirname(root);
 process.env.ROVER_ROOT=root;
+function configuredPort(name:string,fallback:number){const value=process.env[name];if(value===undefined)return fallback;const port=Number(value);if(!/^\d+$/.test(value)||!Number.isInteger(port)||port<1||port>65535)throw Error(`Invalid ${name}`);return port;}
 export function makeServer(bridge=new Bridge(),testPort?:number){
+ const dashboardPort=configuredPort('ROVER_DASHBOARD_PORT',5173);
  const app=express();const server=createServer(app);const wss=new WebSocketServer({noServer:true,maxPayload:1024});let client:import('ws').WebSocket|null=null;let cameraIP='';
  const validOrigin=(origin:string|undefined)=>{
   const p=testPort??(server.address() as import('node:net').AddressInfo|null)?.port??8787;
-  return !!origin&&[`http://127.0.0.1:${p}`,`http://localhost:${p}`,'http://127.0.0.1:5173','http://localhost:5173'].includes(origin);
+  return !!origin&&[`http://127.0.0.1:${p}`,`http://localhost:${p}`,`http://127.0.0.1:${dashboardPort}`,`http://localhost:${dashboardPort}`].includes(origin);
  };
  const validHost=(host:string|undefined)=>{
   const p=testPort??(server.address() as import('node:net').AddressInfo|null)?.port??8787;
@@ -30,6 +32,12 @@ export function makeServer(bridge=new Bridge(),testPort?:number){
  app.use(express.json({limit:'1kb'}));
  app.get('/api/state',(_req,res)=>res.json(bridge.state));
  app.get('/api/ports',async(_req,res)=>{try{res.json(await ports());}catch(e){res.status(503).json({error:String(e)});}});
+ app.get('/api/diagnostics',(_req,res)=>res.set('Cache-Control','no-store').json(bridge.diagnostics.recent()));
+ app.get('/api/diagnostics/export',(req,res)=>{
+  const format=req.query.format??'json';if(format!=='json'&&format!=='csv')return void res.status(400).json({error:'Use csv or json'});
+  res.set('Cache-Control','no-store').attachment(`rover-diagnostics-${Date.now()}.${format}`);
+  if(format==='csv')res.type('text/csv').send(bridge.diagnostics.csv());else res.json(bridge.diagnostics.snapshot());
+ });
  app.post('/api/camera',(req,res)=>{try{cameraIP=cameraAddress(req.body.ip);res.json({ip:cameraIP});}catch(e){res.status(400).json({error:String(e)});}});
  app.all('/api/camera/:endpoint',(req,res)=>{
   try{if(!cameraIP)throw Error('Camera disconnected: configure address first');
@@ -71,6 +79,6 @@ export function makeServer(bridge=new Bridge(),testPort?:number){
  return {server,bridge,async close(){client?.terminate();bridge.off('state',publish);await bridge.dispose();wss.close();await new Promise<void>(ok=>server.close(()=>ok()));}};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const runtime=makeServer();runtime.server.listen(8787,'127.0.0.1',()=>console.log('Rover bridge http://127.0.0.1:8787 · local operator only · disarmed on connect'));
+ const port=configuredPort('ROVER_BRIDGE_PORT',8787),runtime=makeServer();runtime.server.listen(port,'127.0.0.1',()=>console.log(`Rover bridge http://127.0.0.1:${port} · local operator only · disarmed on connect`));
  for(const signal of ['SIGINT','SIGTERM'] as const)process.on(signal,()=>void runtime.close().finally(()=>process.exit(0)));
 }

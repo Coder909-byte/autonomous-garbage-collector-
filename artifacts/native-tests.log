@@ -43,7 +43,7 @@ test/test_navigation/test_main.cpp:84: parser_normalization	[PASSED]
 test/test_navigation/test_main.cpp:84: parser_overflow_discards	[PASSED]
 test/test_navigation/test_main.cpp:85: gate_neutral_and_reverse	[PASSED]
 test/test_navigation/test_main.cpp:85: gate_rollover	[PASSED]
--------------- native:test_navigation [PASSED] Took 4.22 seconds --------------
+-------------- native:test_navigation [PASSED] Took 5.67 seconds --------------
 
 Processing test_io in native environment
 --------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ test/test_io/test_main.cpp:130: deadman_cuts_actual_enable	[PASSED]
 test/test_io/test_main.cpp:131: overflow_disarms_actual_outputs	[PASSED]
 test/test_io/test_main.cpp:131: pwm_failure_blocks_arming	[PASSED]
 test/test_io/test_main.cpp:131: timeout_disarms_auto_outputs	[PASSED]
------------------- native:test_io [PASSED] Took 2.50 seconds ------------------
+------------------ native:test_io [PASSED] Took 9.42 seconds ------------------
 
 Processing test_turning in native environment
 --------------------------------------------------------------------------------
@@ -101,12 +101,12 @@ test/test_turning/test_main.cpp:156: final_attempt_may_recover_with_fresh_clear_
 test/test_turning/test_main.cpp:156: obstacle_cleared_during_initial_settle_needs_no_turn	[PASSED]
 test/test_turning/test_main.cpp:157: pending_turn_safety_clearance_is_checked	[PASSED]
 test/test_turning/test_main.cpp:157: stop_command_cancels_reassessment_and_future_turns	[PASSED]
----------------- native:test_turning [PASSED] Took 2.60 seconds ----------------
+---------------- native:test_turning [PASSED] Took 6.44 seconds ----------------
 
 =================================== SUMMARY ===================================
 Environment    Test             Status    Duration
 -------------  ---------------  --------  ------------
-native         test_navigation  PASSED    00:00:04.221
-native         test_io          PASSED    00:00:02.500
-native         test_turning     PASSED    00:00:02.598
-================= 84 test cases: 84 succeeded in 00:00:09.319 =================
+native         test_navigation  PASSED    00:00:05.670
+native         test_io          PASSED    00:00:09.416
+native         test_turning     PASSED    00:00:06.443
+================= 84 test cases: 84 succeeded in 00:00:21.529 =================

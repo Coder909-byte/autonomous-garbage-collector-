@@ -32,7 +32,7 @@ ok
 test_camera_cannot_use_main_mcu_rail (test_system.SystemGraph.test_camera_cannot_use_main_mcu_rail) ... ok
 test_duplicate_wire_id_rejected (test_system.SystemGraph.test_duplicate_wire_id_rejected) ... ok
 test_frozen_csv_hash_is_portable_but_still_rejects_changes (test_system.SystemGraph.test_frozen_csv_hash_is_portable_but_still_rejects_changes) ... ok
-test_git_lf_checkout_is_accepted (test_system.SystemGraph.test_git_lf_checkout_is_accepted) ... /Users/kokila/Downloads/autonomous_rover_build/scripts/generate_system.py:18: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/fr/mql415s518q12_mz4c_27snw0000gp/T/tmpf9hxnhsl/electrical/connections.csv' mode='r' encoding='utf-8'>
+test_git_lf_checkout_is_accepted (test_system.SystemGraph.test_git_lf_checkout_is_accepted) ... /Users/kokila/Downloads/autonomous_rover_build/scripts/generate_system.py:18: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/fr/mql415s518q12_mz4c_27snw0000gp/T/tmppu_vmlfy/electrical/connections.csv' mode='r' encoding='utf-8'>
   rows=list(csv.DictReader((ROOT/'electrical/connections.csv').open()))
 ResourceWarning: Enable tracemalloc to get the object allocation traceback
 ok
@@ -69,7 +69,7 @@ test_unknown_enabled_signal_rejected (test_vcd.TraceChecks.test_unknown_enabled_
 test_wrong_auxiliary_rejected (test_vcd.TraceChecks.test_wrong_auxiliary_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 54 tests in 0.379s
+Ran 54 tests in 0.502s
 
 OK
 PASS: S1 211 records (206 external, 5 internal checks); all 201 E2 rows preserved; camera protected branch and diagram match. Physical HOLD.

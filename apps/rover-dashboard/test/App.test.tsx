@@ -14,7 +14,7 @@ class Socket {
 const connected:BridgeState={connected:true,connecting:false,protocolReady:true,simulation:true,port:'SIMULATION',telemetry:{...sample,armed:false,nav:'DISARMED'},receivedAt:Date.now(),intent:null,logs:[],error:null};
 function mount(state=connected){render(<App/>);act(()=>vi.advanceTimersByTime(0));act(()=>Socket.current.onopen());act(()=>Socket.current.onmessage({data:JSON.stringify({...state,receivedAt:Date.now()})}));}
 function update(change:Partial<BridgeState['telemetry']>){act(()=>Socket.current.onmessage({data:JSON.stringify({...connected,receivedAt:Date.now(),telemetry:{...sample,...change}})}));}
-beforeEach(()=>{vi.useFakeTimers();vi.stubGlobal('WebSocket',Socket);vi.stubGlobal('fetch',vi.fn(async()=>({ok:true,json:async()=>[]})));vi.spyOn(document,'hasFocus').mockReturnValue(true);});
+beforeEach(()=>{vi.useFakeTimers();vi.stubGlobal('WebSocket',Socket);vi.stubGlobal('fetch',vi.fn(async(url:string)=>({ok:true,json:async()=>url==='/api/diagnostics'?{count:0,capacity:10000,dropped:0,samples:[],events:[]}:[]})));vi.spyOn(document,'hasFocus').mockReturnValue(true);});
 afterEach(()=>{cleanup();vi.useRealTimers();vi.unstubAllGlobals();});
 it('renders disconnected camera, simulation label, firmware and real readings',()=>{mount();expect(screen.getByText('No camera connected')).toBeInTheDocument();expect(screen.getAllByText('SIMULATION MODE').length).toBeGreaterThan(0);expect(screen.getByText('120')).toBeInTheDocument();expect(screen.getByText('rover-usb-v1')).toBeInTheDocument();expect(screen.getByText('not measured')).toBeInTheDocument();});
 it('ARM is explicit and does not send a direction',()=>{mount();fireEvent.click(screen.getByRole('button',{name:'ARM',exact:true}));expect(Socket.current.sent).toContainEqual({type:'command',command:'ARM'});expect(Socket.current.sent.some(m=>m.type==='hold')).toBe(false);});
@@ -28,3 +28,25 @@ it('disconnection disables controls and reports delivery uncertainty',()=>{mount
 it('invalid server responses close control rather than populate invented state',()=>{mount();act(()=>Socket.current.onmessage({data:'{"connected":true}'}));expect(screen.getByRole('alert')).toHaveTextContent('Invalid server response');expect(Socket.current.readyState).toBe(3);});
 it('camera failures remain explicit and create no fake stream',async()=>{mount();vi.stubGlobal('fetch',vi.fn(async()=>({ok:false,json:async()=>({error:'camera offline'})})));fireEvent.change(screen.getByLabelText('Camera address'),{target:{value:'192.168.50.20'}});await act(async()=>{fireEvent.click(screen.getByRole('button',{name:'Connect camera',exact:true}));});expect(screen.getByText(/camera offline/)).toBeInTheDocument();expect(screen.queryByAltText('Live ESP32-CAM MJPEG stream')).not.toBeInTheDocument();});
 it('HoldControl releases on visibility/focus loss and does not extend stale intent',()=>{const send=vi.fn();const hold=new HoldControl(send);hold.start('L','key:a');vi.spyOn(document,'hasFocus').mockReturnValue(false);vi.advanceTimersByTime(100);expect(send).toHaveBeenLastCalledWith({type:'release'});const n=send.mock.calls.length;vi.advanceTimersByTime(300);expect(send).toHaveBeenCalledTimes(n);hold.release();});
+it('never displays stale ARMED state or selected control mode as current',()=>{mount();update({armed:true});act(()=>vi.advanceTimersByTime(1300));expect(screen.queryByText('ARMED',{exact:true})).not.toBeInTheDocument();expect(screen.getByRole('button',{name:'Manual',exact:true})).not.toHaveClass('selected');expect(screen.getByRole('region',{name:'Navigation visualization'})).toHaveTextContent('No fresh firmware decision');});
+it('displays invalid readings and prominent sensor fault disarm without inventing motion',()=>{mount();update({armed:false,nav:'SENSOR_FAULT',cm:[-1,100,70]});expect(screen.getByRole('alert')).toHaveTextContent('SENSOR_FAULT');expect(screen.getByRole('region',{name:'Navigation visualization'})).toHaveTextContent('Fresh readings alone never restart');expect(screen.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();expect(screen.getAllByText('INVALID / STALE')).toHaveLength(1);});
+it('discovers hotplugged ports automatically while preserving manual selection and never opens them',async()=>{
+ let available=[{path:'/dev/mock-a',label:'A'},{path:'/dev/mock-b',label:'B'}];
+ vi.stubGlobal('fetch',vi.fn(async(url:string)=>({ok:true,json:async()=>url==='/api/ports'?available:{count:0,capacity:10000,dropped:0,samples:[],events:[]}})));
+ mount({...connected,connected:false,protocolReady:false,telemetry:null,receivedAt:null});
+ fireEvent.change(screen.getByLabelText('Control source'),{target:{value:'hardware'}});await act(async()=>{});
+ expect(screen.getByLabelText('Serial port')).toHaveValue('/dev/mock-a');fireEvent.change(screen.getByLabelText('Serial port'),{target:{value:'/dev/mock-b'}});
+ await act(async()=>{vi.advanceTimersByTime(3000);});expect(screen.getByLabelText('Serial port')).toHaveValue('/dev/mock-b');
+ available=[];await act(async()=>{vi.advanceTimersByTime(3000);});expect(screen.getByLabelText('Serial port')).toHaveValue('');expect(screen.getByRole('button',{name:/Connect rover/})).toBeDisabled();expect(Socket.current.sent.some(m=>m.type==='connect')).toBe(false);
+});
+it('camera status alone cannot claim live video and missing decoded frames time out',async()=>{
+ mount();vi.stubGlobal('fetch',vi.fn(async(url:string)=>({ok:true,json:async()=>url.startsWith('/api/camera')?{ready:true,streaming:true,width:320,quality:14}:url==='/api/ports'?[]:{count:0,capacity:10000,dropped:0,samples:[],events:[]}})));
+ fireEvent.change(screen.getByLabelText('Camera address'),{target:{value:'http://192.168.50.20'}});
+ await act(async()=>{fireEvent.click(screen.getByRole('button',{name:'Connect camera',exact:true}));});
+ await act(async()=>{vi.advanceTimersByTime(2000);});expect(screen.queryByText('LIVE CAMERA',{exact:true})).not.toBeInTheDocument();
+ await act(async()=>{vi.advanceTimersByTime(10000);});expect(screen.getByText(/No decoded video received/)).toBeInTheDocument();expect(screen.queryByAltText('Live ESP32-CAM MJPEG stream')).not.toBeInTheDocument();
+});
+it('separates physical safety feedback from the firmware latch and matches the actual connected source',()=>{
+ mount({...connected,simulation:false,port:'/dev/mock'});expect(screen.getByLabelText('Control source')).toHaveValue('hardware');update({armed:false,estop:true,healthy:true,nav:'ESTOP'});
+ expect(screen.getByText('HIGH · healthy',{exact:true})).toBeInTheDocument();expect(screen.getByText('LATCHED',{exact:true})).toBeInTheDocument();
+});

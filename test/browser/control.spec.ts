@@ -10,7 +10,7 @@ test('operator drives real C++ simulator, releases, cleans, switches modes and l
  await page.getByRole('button',{name:'Autonomous',exact:true}).click();await expect(page.getByRole('region',{name:'Operational state'}).getByText('CRUISE',{exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Manual',exact:true}).click();await expect(page.getByRole('region',{name:'Operational state'}).getByText('STOPPED',{exact:true})).toHaveCount(2);
  await page.getByRole('button',{name:/SOFTWARE EMERGENCY STOP/}).click();await expect(page.getByText('LATCHED',{exact:true})).toBeVisible();await expect(forward).toBeDisabled();
- await page.screenshot({path:'artifacts/dashboard-simulation.png',fullPage:true});
+ await page.screenshot({path:'artifacts/monitoring-validation/dashboard-simulation.png',fullPage:true});
 });
 test('browser blur and pointer release stop; reconnect remains disarmed',async({page})=>{
  await page.goto('/');await page.getByRole('button',{name:'Connect rover',exact:false}).click();await page.getByRole('button',{name:'ARM',exact:true}).click();
@@ -18,4 +18,4 @@ test('browser blur and pointer release stop; reconnect remains disarmed',async({
  await page.keyboard.down('d');await expect(page.getByRole('region',{name:'Operational state'}).getByText('RIGHT',{exact:true})).toHaveCount(2);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.getByRole('region',{name:'Operational state'}).getByText('STOPPED',{exact:true})).toHaveCount(2);await page.keyboard.up('d');
  await page.getByRole('button',{name:'Disconnect rover',exact:true}).click();await page.getByRole('button',{name:'Connect rover',exact:false}).click();await expect(page.getByRole('button',{name:'ARM',exact:true})).toBeEnabled();await expect(button).toBeDisabled();
 });
-test('responsive disconnected station has no horizontal overflow',async({page})=>{await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByText('No camera connected')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:'artifacts/dashboard-mobile.png',fullPage:true});});
+test('responsive disconnected station has no horizontal overflow',async({page})=>{await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByText('No camera connected')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:'artifacts/monitoring-validation/dashboard-mobile.png',fullPage:true});});

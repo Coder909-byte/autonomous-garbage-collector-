@@ -1,13 +1,16 @@
 import {afterEach,it,expect} from 'vitest';
 import {WebSocket} from 'ws';
 import http from 'node:http';
+import {vi} from 'vitest';
 import {makeServer} from '../src/server';
+import {Hardware} from '../src/transports';
 import type {BridgeState} from '../../../packages/protocol/index';
 const runtimes:ReturnType<typeof makeServer>[]=[];
 afterEach(async()=>{for(const r of runtimes.splice(0))await r.close();});
 const waitFor=async(test:()=>boolean,ms=4000)=>{const start=Date.now();while(!test()){if(Date.now()-start>ms)throw Error('Condition timed out');await new Promise(r=>setTimeout(r,25));}};
 it('full WebSocket → bridge → real C++ mock serial → telemetry path',async()=>{
  const r=makeServer();runtimes.push(r);await new Promise<void>(ok=>r.server.listen(0,'127.0.0.1',ok));const port=(r.server.address() as {port:number}).port;
+ const physicalOpen=vi.spyOn(Hardware,'open').mockRejectedValue(Error('Physical serial forbidden in simulator test'));
  const socket=new WebSocket(`ws://127.0.0.1:${port}/api/control`,{origin:`http://127.0.0.1:${port}`});let state:BridgeState|null=null;
  socket.on('message',b=>{state=JSON.parse(b.toString());});await new Promise<void>(ok=>socket.on('open',ok));
  const send=(value:unknown)=>socket.send(JSON.stringify(value));send({type:'connect',simulation:true,scenario:'clear'});
@@ -18,6 +21,11 @@ it('full WebSocket → bridge → real C++ mock serial → telemetry path',async
  await waitFor(()=>state?.telemetry?.applied===0);expect(state!.intent).toBe(null);
  send({type:'command',command:'ESTOP'});await waitFor(()=>!!state?.telemetry?.estop);expect(state!.telemetry?.armed).toBe(false);
  socket.close();await waitFor(()=>!r.bridge.state.connected);
+ expect(physicalOpen).not.toHaveBeenCalled();physicalOpen.mockRestore();
+ const url=`http://127.0.0.1:${port}/api/diagnostics`;
+ const recent=await (await fetch(url)).json();expect(recent.count).toBeGreaterThan(0);expect(recent.samples.every((r:{source:string})=>r.source==='simulation')).toBe(true);
+ const json=await fetch(url+'/export?format=json');expect(json.headers.get('content-disposition')).toContain('.json');const exported=await json.json();expect(exported.schema).toBe(1);expect(exported.records.some((r:{event:string;telemetry?:{estop:boolean}})=>r.event==='emergency'&&r.telemetry?.estop)).toBe(true);
+ const csv=await fetch(url+'/export?format=csv');expect(csv.headers.get('content-type')).toContain('text/csv');expect(await csv.text()).toContain('"SIMULATION"');expect((await fetch(url+'/export?format=xml')).status).toBe(400);
 });
 it('rejects cross-origin requests, DNS rebinding and unauthenticated writes',async()=>{
  const r=makeServer();runtimes.push(r);await new Promise<void>(ok=>r.server.listen(0,'127.0.0.1',ok));const port=(r.server.address() as {port:number}).port,url=`http://127.0.0.1:${port}`;
