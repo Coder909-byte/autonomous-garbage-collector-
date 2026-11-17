@@ -7,7 +7,9 @@
 #include <lwip/sockets.h>
 #include "board_ai_thinker.h"
 #include "camera_policy.h"
-#if __has_include("secrets.h")
+#if defined(CAMERA_HOST_TEST)
+#include "camera_test_config.h"
+#elif __has_include("secrets.h")
 #include "secrets.h"
 #else
 #include "config.example.h"
@@ -18,14 +20,25 @@ static std::atomic<bool> streaming{false};
 static SemaphoreHandle_t cameraLock=nullptr;
 static httpd_handle_t controlServer=nullptr, streamServer=nullptr;
 static cam::Retry retry;
-static IPAddress trusted,mask;
+static cam::TrustedNetwork trustedNetwork;
 static int width=320,quality=14;
-static bool networkAllowed(IPAddress ip) { return (uint32_t(ip)&uint32_t(mask))==uint32_t(trusted); }
+static bool networkAllowed(IPAddress ip) { return trustedNetwork.contains(cam::ipv4(ip[0],ip[1],ip[2],ip[3])); }
+static bool peerAllowed(httpd_req_t *req) {
+  struct sockaddr_storage peer={};socklen_t len=sizeof(peer);
+  if (getpeername(httpd_req_to_sockfd(req),reinterpret_cast<sockaddr*>(&peer),&len)!=0) return false;
+  if (peer.ss_family==AF_INET && len>=sizeof(sockaddr_in))
+    return networkAllowed(IPAddress(reinterpret_cast<const sockaddr_in*>(&peer)->sin_addr.s_addr));
+  // ESP-IDF's dual-stack HTTP listener can return IPv4-mapped IPv6 peers.
+  // Decode only ::ffff:a.b.c.d; native IPv6 is outside this IPv4 allowlist.
+  if (peer.ss_family==AF_INET6 && len>=sizeof(sockaddr_in6)) {
+    const uint8_t *b=reinterpret_cast<const uint8_t*>(&reinterpret_cast<const sockaddr_in6*>(&peer)->sin6_addr);
+    for (unsigned i=0;i<10;++i) if (b[i]!=0) return false;
+    if (b[10]==0xff && b[11]==0xff) return trustedNetwork.contains(cam::ipv4(b[12],b[13],b[14],b[15]));
+  }
+  return false;
+}
 static bool allowed(httpd_req_t *req) {
-  struct sockaddr_in peer={};socklen_t len=sizeof(peer);
-  if (!configOK || WiFi.status()!=WL_CONNECTED || !networkAllowed(WiFi.localIP()) ||
-      getpeername(httpd_req_to_sockfd(req),reinterpret_cast<sockaddr*>(&peer),&len)!=0 ||
-      !networkAllowed(IPAddress(peer.sin_addr.s_addr))) {
+  if (!configOK || WiFi.status()!=WL_CONNECTED || !networkAllowed(WiFi.localIP()) || !peerAllowed(req)) {
     httpd_resp_send_err(req,HTTPD_403_FORBIDDEN,"Trusted WLAN only");return false;
   }
   httpd_resp_set_hdr(req,"Cache-Control","no-store");return true;
@@ -118,11 +131,9 @@ void setup() {
   c.jpeg_quality=quality;c.fb_count=hasPSRAM?2:1;c.fb_location=hasPSRAM?CAMERA_FB_IN_PSRAM:CAMERA_FB_IN_DRAM;c.grab_mode=CAMERA_GRAB_WHEN_EMPTY;
   esp_err_t result=cameraLock?esp_camera_init(&c):ESP_ERR_NO_MEM;ready=result==ESP_OK;
   Serial.printf("Camera init=0x%x PSRAM=%d heap=%u width=%d quality=%d ready=%d\n",result,hasPSRAM,ESP.getFreeHeap(),width,quality,ready);
-  configOK=cam::credentials(CAMERA_WIFI_SSID,CAMERA_WIFI_PASSWORD) && trusted.fromString(CAMERA_TRUSTED_NETWORK) && mask.fromString(CAMERA_TRUSTED_MASK);
-  // Explicit /24 trusted subnet; reject wildcard/public/ambiguous networks.
-  configOK=configOK && mask==IPAddress(255,255,255,0) && trusted[3]==0 &&
-    (trusted[0]==10 || (trusted[0]==192 && trusted[1]==168) || (trusted[0]==172 && trusted[1]>=16 && trusted[1]<=31));
-  if (!configOK) { Serial.println("FAULT configure secrets.h: trusted RFC1918 /24 and WPA2 password required; Wi-Fi disabled");return; }
+  configOK=cam::credentials(CAMERA_WIFI_SSID,CAMERA_WIFI_PASSWORD) &&
+    trustedNetwork.configure(CAMERA_TRUSTED_NETWORK,CAMERA_TRUSTED_MASK);
+  if (!configOK) { Serial.println("FAULT configure secrets.h: trusted RFC1918 /24 or /28 and WPA2 password required; Wi-Fi disabled");return; }
   WiFi.mode(WIFI_STA);WiFi.setAutoReconnect(false);WiFi.setHostname(CAMERA_HOSTNAME);
 }
 void loop() {

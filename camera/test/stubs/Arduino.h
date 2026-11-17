@@ -12,7 +12,8 @@ static SemaphoreHandle_t xSemaphoreCreateMutex(){static int mutex;return fakeMut
 static int xSemaphoreTake(SemaphoreHandle_t lock,int){if(!lock||!fakeLockAvailable)return 0;fakeLockAvailable=false;return pdTRUE;}
 static void xSemaphoreGive(SemaphoreHandle_t){fakeLockAvailable=true;}
 static void delay(unsigned n){fakeNow+=n;}
-static void vTaskDelay(unsigned n){fakeNow+=n;}
+static void (*fakeOnTaskDelay)()=nullptr;
+static void vTaskDelay(unsigned n){fakeNow+=n;if(fakeOnTaskDelay)fakeOnTaskDelay();}
 static uint32_t millis(){return fakeNow;}
 static bool fakePSRAM=true;
 static bool psramFound(){return fakePSRAM;}
