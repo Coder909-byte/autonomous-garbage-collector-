@@ -97,3 +97,6 @@ playwright-report/
 !/artifacts/system/*.json
 !/artifacts/dashboard-simulation.png
 !/artifacts/dashboard-mobile.png
+
+# Stock YOLO weights that Ultralytics downloads into the working directory
+/yolov8n.pt
