@@ -96,7 +96,7 @@ export function makeServer(bridge=new Bridge(),testPort?:number,share?:ShareOpti
   }
   wss.handleUpgrade(req,socket,head,ws=>wss.emit('connection',ws,req));
  });
- const publish=()=>{if(client?.readyState===1){if(client.bufferedAmount>65536){client.terminate();return;}client.send(JSON.stringify(bridge.state));}};
+ const publish=()=>{if(client?.readyState===1){if(client.bufferedAmount>65536){client.terminate();return;}client.send(JSON.stringify({...bridge.state,serverNow:bridge.time()}));}};
  bridge.on('state',publish);
  wss.on('connection',ws=>{
   client=ws;publish();let rateAt=Date.now(),count=0,alive=true;

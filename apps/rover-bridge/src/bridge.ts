@@ -14,6 +14,7 @@ export class Bridge extends EventEmitter {
  constructor(private now=()=>Date.now()){super();this.timer=setInterval(()=>{try{this.watchdog();}catch(e){this.log('ERROR',String(e));void this.disconnect();}},25);}
  log(kind:BridgeState['logs'][number]['kind'],text:string,t?:BridgeState['telemetry'],event?:DiagnosticRecord['event']){this.diagnostics.record(this.now(),kind,text,t??undefined,event);this.state.logs.push({at:this.now(),kind,text:text.slice(0,1024)});this.state.logs=this.state.logs.slice(-150);if(kind==='ERROR')this.state.error=text;this.publish();}
  publish(){this.emit('state',this.state);}
+ time(){return this.now();}
  async connect(open:()=>Promise<Transport>,simulation:boolean,port:string){
   if(this.device||this.state.connecting||this.closing)throw Error('One serial owner permitted; disconnect first');
   const generation=++this.generation;this.disarmAck=false;this.state.protocolReady=false;this.state={...this.state,connecting:true,error:null,logs:[],telemetry:null,receivedAt:null,intent:null,simulation,port};this.publish();

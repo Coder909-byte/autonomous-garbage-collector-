@@ -18,7 +18,7 @@ export default function App(){
  const [link,setLink]=useState<'usb'|'wifi'>('usb'),[wifiHost,setWifiHost]=useState('192.168.4.1');
  const [switching,setSwitching]=useState(false),switchTarget=useRef<boolean|null>(null);
  const [busy,setBusy]=useState(false),takeControl=useRef<()=>void>(()=>{});
- const ws=useRef<WebSocket|null>(null);
+ const ws=useRef<WebSocket|null>(null),clockOffset=useRef(0);
  const send=useCallback((m:Record<string,unknown>)=>{if(ws.current?.readyState===WebSocket.OPEN)ws.current.send(JSON.stringify(m));else setError('Bridge disconnected. Stop delivery is unconfirmed.');},[]);
  const hold=useMemo(()=>new HoldControl(send),[send]);
  const refresh=useCallback(async()=>{try{const p=await api('ports');if(!Array.isArray(p)||!p.every(v=>typeof v.path==='string'&&typeof v.label==='string'))throw Error('Invalid serial discovery response');setPorts(p);setPort(prev=>p.some(v=>v.path===prev)?prev:p[0]?.path??'');}catch(e){setPorts([]);setPort('');setError('Serial discovery failed: '+String(e));}},[]);
@@ -30,6 +30,7 @@ export default function App(){
    const socket=new WebSocket(`${location.protocol==='https:'?'wss':'ws'}://${location.host}/api/control${takeover?'?takeover=1':''}`);ws.current=socket;
    socket.onopen=()=>{if(!disposed&&ws.current===socket){setOnline(true);setBusy(false);setError('');void refresh();}};
    socket.onmessage=e=>{if(disposed||ws.current!==socket)return;try{const value=JSON.parse(e.data);if(!isState(value))throw Error('Invalid bridge state');
+    clockOffset.current=value.serverNow===undefined?0:Date.now()-value.serverNow;
     if(switchTarget.current!==null){if(value.connected||value.connecting||value.disconnecting)return;setSimulation(switchTarget.current);switchTarget.current=null;setSwitching(false);}
     else if(value.connected||value.connecting)setSimulation(value.simulation);
     setState(value);
@@ -46,7 +47,7 @@ export default function App(){
  },[hold,refresh]);
  useEffect(()=>{if(state.connected&&!state.simulation&&state.port)setLink(state.port.startsWith('WIFI ')?'wifi':'usb');},[state.connected,state.simulation,state.port]);
  const sourceMatches=state.simulation===simulation&&!switching&&!state.disconnecting;
- const t=sourceMatches?state.telemetry:null,age=state.receivedAt===null?Infinity:clock-state.receivedAt;
+ const t=sourceMatches?state.telemetry:null,bridgeClock=clock-clockOffset.current,age=state.receivedAt===null?Infinity:bridgeClock-state.receivedAt;
  useEffect(()=>{
   if(!t||state.receivedAt===null){setHistory([]);return;}
   setHistory(current=>{const previous=current.at(-1);return previous&&previous.nav===t.nav&&previous.motion===t.applied?current:[...current,{at:state.receivedAt!,nav:t.nav,motion:t.applied}].slice(-7);});
@@ -110,7 +111,7 @@ export default function App(){
      <p className="tiny">{diagnostic?'Motor control is disabled by this firmware build.':motorOperation&&!motorAvailable?'Motor control is inhibited; inspect commissioning and firmware status.':'ARM permits control; it does not start motion.'}</p>
     </section>
    </aside>
-   <div className="center-column"><Camera vision={state.vision} clock={clock}/>
+   <div className="center-column"><Camera vision={state.vision} clock={bridgeClock}/>
     <section className="panel operations" aria-label="Operational state"><div className="panel-title"><h2>Operational state</h2><span className={'pill '+(fresh?'good':'warn')}>{t?(fresh?'Fresh telemetry':'STALE TELEMETRY'):'Awaiting telemetry'}</span></div>
      <div className="metric-grid"><div><label>REQUESTED MOVEMENT</label><strong>{fresh&&t?MOTIONS[t.requested]:'—'}</strong></div><div><label>APPLIED FIRMWARE OUTPUT</label><strong className="accent">{fresh&&t?MOTIONS[t.applied]:'—'}</strong></div><div><label>NAVIGATION PHASE</label><strong>{fresh?t?.nav:'—'}</strong></div><div><label>DRIVER ENABLE</label><strong>{fresh?(t?.en?'HIGH':'LOW'):'UNKNOWN'}</strong></div></div>
      <div className="metric-grid"><div><label>OPERATING MODE</label><strong>{fresh?(t?.mode??'LEGACY V1'):'UNKNOWN'}</strong></div><div><label>MOTOR OUTPUT STATE</label><strong>{fresh&&t?motorOutputState(t):'UNKNOWN'}</strong></div></div>
@@ -149,7 +150,7 @@ function Camera({vision,clock}:{vision?:VisionState;clock:number}){
   {active?<img alt="Live ESP32-CAM MJPEG stream" src="/api/camera/stream" onLoad={()=>{imageLoaded.current=true;setStatus('VIDEO RECEIVED');}} onError={()=>{setActive(false);setStatus('STREAM FAILED');setError('MJPEG stream failed. Check camera power, Wi-Fi and address.');}}/>:<div className="camera-placeholder"><div className="camera-reticle"><Icon type="camera"/></div><h3>No camera connected</h3><p>Connect the separate ESP32-CAM on your trusted Wi-Fi network.</p><span>No simulated or prerecorded video</span></div>}
   {active&&detectionAge(vision,clock)<1000&&<div className="detections" aria-hidden="true">{vision!.targets.map((d,i)=><span key={i} style={{left:`${(d.cx-d.w/2)*100}%`,top:`${(d.cy-d.h/2)*100}%`,width:`${d.w*100}%`,height:`${d.h*100}%`}}><em>{d.label} {Math.round(d.conf*100)}%</em></span>)}</div>}
   <span className="feed-label">CAM 01 <i/> LOCAL WI-FI</span><span className="feed-corner top-left"/><span className="feed-corner bottom-right"/>
- </div><div className="camera-toolbar"><label>CAMERA IPv4 / HTTP URL<input aria-label="Camera address" placeholder="http://192.168.50.20" value={ip} disabled={active} onChange={e=>setIP(e.target.value)}/></label><button className="button secondary" disabled={busy} onClick={()=>active?(setActive(false),setStatus('DISCONNECTED')):void connect()}>{active?'Disconnect camera':'Connect camera'}</button><button className="button icon-button" aria-label="Snapshot" disabled={!active} onClick={()=>void snapshot()}><Icon type="camera"/></button></div>
+ </div><div className="camera-toolbar"><label>CAMERA IPv4 / HTTP URL<input aria-label="Camera address" placeholder="192.168.4.200" value={ip} disabled={active} onChange={e=>setIP(e.target.value)}/></label><button className="button secondary" disabled={busy} onClick={()=>active?(setActive(false),setStatus('DISCONNECTED')):void connect()}>{active?'Disconnect camera':'Connect camera'}</button><button className="button icon-button" aria-label="Snapshot" disabled={!active} onClick={()=>void snapshot()}><Icon type="camera"/></button></div>
  <details className="camera-settings"><summary>Camera settings <span>Disconnect stream before applying</span></summary><div><select aria-label="Camera resolution" value={width} disabled={active} onChange={e=>setWidth(Number(e.target.value))}><option value={320}>QVGA / 320 × 240</option><option value={640}>VGA / 640 × 480 · PSRAM required</option></select><label>JPEG quality<input aria-label="JPEG quality" type="number" min="10" max="40" value={quality} disabled={active} onChange={e=>setQuality(Number(e.target.value))}/></label><button className="button secondary" disabled={active||busy||!ip} onClick={()=>{setBusy(true);void api('camera',{ip}).then(()=>api(`camera/settings?width=${width}&quality=${quality}`,{})).then(raw=>{validate(raw);setError('');}).catch(e=>setError(String(e))).finally(()=>setBusy(false));}}>Apply</button></div></details>
  <p className="tiny detection-status" data-testid="detection-status">{detectionAge(vision,clock)<1500?`Garbage detection (${vision!.detector}): ${vision!.targets.length?vision!.targets.map(d=>`${d.label} ${Math.round(d.conf*100)}%`).join(' · '):'nothing in view'}`:'Garbage detection offline: run python vision/rover_vision.py on this laptop.'}</p>
  {error&&<p role="alert" className="camera-error">{error}</p>}</section>;

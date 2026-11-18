@@ -1,7 +1,10 @@
 import http from 'node:http';
 import type { Request,Response } from 'express';
 export function cameraAddress(value:unknown):string {
- if(typeof value==='string'&&/^http:\/\/\d{1,3}(\.\d{1,3}){3}(?::(?:80|81))?(?:\/(?:stream)?)?$/.test(value))value=new URL(value).hostname;
+ if(typeof value==='string'){
+  const typed=/^(?:http:\/\/)?(\d{1,3}(?:\.\d{1,3}){3})(?::(?:80|81))?(?:\/(?:stream|status|snapshot)?)?$/.exec(value.trim());
+  if(typed)value=typed[1];
+ }
  if(typeof value!=='string'||!/^\d{1,3}(\.\d{1,3}){3}$/.test(value))throw Error('Enter the camera numeric private IPv4 address');
  const p=value.split('.').map(Number);
  if(p.some(n=>n>255)||p[3]===0||p[3]===255||!(p[0]===10||(p[0]===192&&p[1]===168)||(p[0]===172&&p[1]>=16&&p[1]<=31)))throw Error('Camera must be on the configured private WLAN');
@@ -34,6 +37,6 @@ export function proxyCamera(ip:string,endpoint:string,req:Request,res:Response,a
   res.setHeader('Content-Type',String(source.headers['content-type']));res.setHeader('Cache-Control','no-store');
   source.on('error',fail);source.on('end',()=>{ended=true;});source.pipe(res);
  });
- upstream.on('timeout',()=>upstream.destroy(Error('Camera timed out')));upstream.on('error',fail);
+ upstream.on('timeout',()=>upstream.destroy(Error(`no answer from ${ip}. Check the camera is powered and on ROVER-CTRL: open http://${ip}/status in a browser`)));upstream.on('error',fail);
  res.on('close',closed);upstream.end();
 }

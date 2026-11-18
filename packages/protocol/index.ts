@@ -21,6 +21,8 @@ export interface BridgeState {
  receivedAt:number|null; intent:Direction|null; logs:Log[]; error:string|null;
  disconnecting?:boolean;
  vision?:VisionState;
+ // Bridge clock at send time. receivedAt/detectedAt use it, so other devices compare against it, not their own clock.
+ serverNow?:number;
 }
 // Camera detections in normalized frame coordinates (0..1), box centre and size.
 export interface VisionTarget {label:string; conf:number; cx:number; cy:number; w:number; h:number}
@@ -93,6 +95,7 @@ export function isState(value:unknown):value is BridgeState {
  if(!value||typeof value!=='object')return false;const s=value as BridgeState;
  if(typeof s.connected!=='boolean'||typeof s.connecting!=='boolean'||typeof s.protocolReady!=='boolean'||typeof s.simulation!=='boolean'||!(s.port===null||typeof s.port==='string')||!(s.error===null||typeof s.error==='string')||!Array.isArray(s.logs)||s.logs.length>200||!(s.receivedAt===null||Number.isFinite(s.receivedAt))||!(s.intent===null||isDirection(s.intent)))return false;
  if(s.disconnecting!==undefined&&typeof s.disconnecting!=='boolean')return false;
+ if(s.serverNow!==undefined&&!Number.isFinite(s.serverNow))return false;
  if(s.vision!==undefined){const v=s.vision;if(!v||typeof v.enabled!=='boolean'||!(VISION_PHASES as readonly string[]).includes(v.phase)||typeof v.reason!=='string'||!(v.detectedAt===null||Number.isFinite(v.detectedAt))||!(v.detector===null||typeof v.detector==='string'))return false;try{visionFrame({detector:v.detector??'none',targets:v.targets});}catch{return false;}}
  if(s.telemetry&&((!s.simulation&&s.telemetry.mode==='SIMULATION')||(s.simulation&&['MOTOR_OPERATION','USB_BENCH_DIAGNOSTIC'].includes(s.telemetry.mode??''))))return false;
  try{if(s.telemetry!==null)telemetry(s.telemetry);return s.logs.every(l=>l&&Number.isFinite(l.at)&&['TX','RX','ACK','ERROR','INFO'].includes(l.kind)&&typeof l.text==='string');}catch{return false;}

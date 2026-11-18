@@ -11,7 +11,7 @@ describe('protocol boundaries',()=>{
  it.each([{v:2},{cm:[0,20,30]},{age:[0,0,-1]},{en:true},{applied:9},{brush:true},{healthy:'yes'},{nav:'FAKE'}])('rejects malformed/contradictory telemetry %j',change=>{expect(()=>telemetry({...sample,...change})).toThrow();});
  it('bounds lines and rejects truncated JSON',()=>{expect(()=>parseLine('TEL {')).toThrow();expect(()=>parseLine('x'.repeat(1025))).toThrow();});
  it.each(['127.0.0.1','8.8.8.8','192.168.1.0','192.168.1.999','https://192.168.1.2','http://192.168.1.2:22','http://user@192.168.1.2','http://192.168.1.2/?redirect=evil','192.168.1.1@evil','169.254.1.2'])('rejects camera SSRF target %s',value=>expect(()=>cameraAddress(value)).toThrow());
- it('accepts fixed private camera HTTP URLs without expanding proxy access',()=>{expect(cameraAddress('http://192.168.50.20')).toBe('192.168.50.20');expect(cameraAddress('http://192.168.50.20:81/stream')).toBe('192.168.50.20');});
+ it('accepts fixed private camera HTTP URLs without expanding proxy access',()=>{expect(cameraAddress('http://192.168.50.20')).toBe('192.168.50.20');expect(cameraAddress('http://192.168.50.20:81/stream')).toBe('192.168.50.20');for(const typed of [' 192.168.4.200 ','192.168.4.200:81/stream','http://192.168.4.200/status','192.168.4.200/'])expect(cameraAddress(typed)).toBe('192.168.4.200');});
  it('validates private camera targets and endpoint settings',()=>{expect(cameraAddress('192.168.50.20')).toBe('192.168.50.20');expect(cameraAddress('10.0.0.2')).toBe('10.0.0.2');expect(cameraPath('settings',{width:'320',quality:'14'})).toContain('width=320');expect(()=>cameraPath('settings',{width:'800',quality:'1'})).toThrow();expect(()=>cameraPath('reboot',{})).toThrow();});
 });
 describe('serial bridge safety',()=>{

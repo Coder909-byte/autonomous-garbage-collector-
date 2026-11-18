@@ -116,3 +116,11 @@ it('switching from an inhibited physical rover to simulation clears the session 
  fireEvent.keyDown(window,{key:'d'});expect(Socket.current.sent.at(-1)).toEqual({type:'disconnect'});
  expect(Socket.current.sent.filter(m=>m.type==='connect')).toHaveLength(1);
 });
+it('another device with a different clock still sees bridge telemetry as fresh',()=>{
+ render(<App/>);act(()=>vi.advanceTimersByTime(0));act(()=>Socket.current.onopen());
+ const bridgeNow=Date.now()-5*60_000;
+ const send=()=>act(()=>Socket.current.onmessage({data:JSON.stringify({...connected,telemetry:{...sample,armed:true,nav:'MANUAL'},receivedAt:bridgeNow,serverNow:bridgeNow+50})}));
+ send();act(()=>vi.advanceTimersByTime(200));
+ expect(screen.queryByText('STALE TELEMETRY')).not.toBeInTheDocument();expect(screen.getByRole('button',{name:'Forward',exact:true})).toBeEnabled();
+ act(()=>vi.advanceTimersByTime(1300));expect(screen.getByText('STALE TELEMETRY')).toBeInTheDocument();
+});
