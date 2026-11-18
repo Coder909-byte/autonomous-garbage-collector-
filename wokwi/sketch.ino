@@ -20,9 +20,17 @@ struct Commissioning {
 #endif
 // Host-only branch coverage; never a physical commissioning/release claim.
 constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,"HOST TEST ONLY"};
+#elif defined(ROVER_BENCH_RELEASE)
+// Owner-supervised bench release. Selected only by the motor_bench_release
+// build or the --bench-release Arduino package; the default build stays locked.
+#ifndef ROVER_BENCH_RECORD
+#error ROVER_BENCH_RELEASE requires ROVER_BENCH_RECORD, a non-empty operator record string
+#endif
+constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,ROVER_BENCH_RECORD};
+static_assert(COMMISSIONING.ready(), "ROVER_BENCH_RECORD must not be empty");
 #else
 // Available hardware has not met these requirements. No serial/UI bypass.
-constexpr Commissioning COMMISSIONING = {false,false,false,false,false,false,""};
+constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,""};
 #endif
 constexpr bool COMMISSIONING_READY = COMMISSIONING.ready();
 }
@@ -430,6 +438,9 @@ void setup() {
 #elif ROVER_OPERATING_MODE == MOTOR_OPERATION
   Serial.println("READY MOTOR_OPERATION DISARMED; GPIO27 is reported, not a physical interlock; independent motor-supply disconnect required.");
   Serial.printf("COMMISSIONING ready=%d inhibit=%s; software ESTOP is not battery isolation\n",rover::COMMISSIONING_READY,motorInhibit());
+#if defined(ROVER_BENCH_RELEASE)
+  Serial.printf("BENCH RELEASE record=%s\n",rover::COMMISSIONING.record);
+#endif
 #else
   Serial.println("READY DISARMED; RESET after ESTOP, then ARM. Motor power stays disconnected for software tests.");
 #endif

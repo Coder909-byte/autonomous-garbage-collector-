@@ -18,6 +18,14 @@ struct Commissioning {
 #endif
 // Host-only branch coverage; never a physical commissioning/release claim.
 constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,"HOST TEST ONLY"};
+#elif defined(ROVER_BENCH_RELEASE)
+// Owner-supervised bench release. Selected only by the motor_bench_release
+// build or the --bench-release Arduino package; the default build stays locked.
+#ifndef ROVER_BENCH_RECORD
+#error ROVER_BENCH_RELEASE requires ROVER_BENCH_RECORD, a non-empty operator record string
+#endif
+constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,ROVER_BENCH_RECORD};
+static_assert(COMMISSIONING.ready(), "ROVER_BENCH_RECORD must not be empty");
 #else
 // Available hardware has not met these requirements. No serial/UI bypass.
 constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,""};

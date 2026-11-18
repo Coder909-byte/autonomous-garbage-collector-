@@ -59,7 +59,7 @@ void telemetry_fits_with_maximum_ages_and_inhibit() {
   TEST_ASSERT_TRUE(n>0 && n<512);TEST_ASSERT_NOT_NULL(strstr(message,"\"age\":[4294967295,4294967295,4294967295]"));
 }
 
-#if defined(ROVER_COMMISSIONING_TEST_FIXTURE)
+#if defined(ROVER_COMMISSIONING_TEST_FIXTURE) || defined(ROVER_BENCH_RELEASE)
 void forward() { setup();send("ARM");stopped();send("F");stopped();step(mockNow+100);TEST_ASSERT_TRUE(appliedEnable); }
 void all_direction_pwm_and_neutral_intervals() {
   setup();send("ARM");
@@ -126,6 +126,15 @@ void command_timeout_handles_millis_rollover() {
 void serial_overflow_disarms_applied_outputs() {
   forward();Serial.input=std::string(70,'X')+"ARM\n";loop();loop();stopped();TEST_ASSERT_FALSE(controller.armed);
 }
+#if defined(ROVER_BENCH_RELEASE)
+void bench_release_is_ready_with_operator_record() {
+  TEST_ASSERT_TRUE(rover::COMMISSIONING_READY);TEST_ASSERT_TRUE(rover::MOTOR_OUTPUTS_ALLOWED);
+  TEST_ASSERT_TRUE(strlen(rover::COMMISSIONING.record)>0);
+  setup();TEST_ASSERT_EQUAL_STRING("NONE",motorInhibit());
+  TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"COMMISSIONING ready=1 inhibit=NONE"));
+  TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"BENCH RELEASE record="));
+}
+#endif
 #else
 void pending_commissioning_rejects_all_motor_commands() {
   setup();for(const char *c:{"ARM","AUTO","F","B","L","R","CLEAN ON","BRUSH ON","CONVEYOR ON"}){send(c);stopped();TEST_ASSERT_FALSE(controller.armed);}
@@ -147,7 +156,7 @@ int main() {
   UNITY_BEGIN();RUN_TEST(fixed_gpio_map);RUN_TEST(commissioning_requires_all_six_conditions_and_record);
   RUN_TEST(boot_disarmed_with_real_gpio27_low);RUN_TEST(software_stop_latches_with_gpio27_low);
   RUN_TEST(sensor_polling_and_compatible_tel);RUN_TEST(telemetry_fits_with_maximum_ages_and_inhibit);
-#if defined(ROVER_COMMISSIONING_TEST_FIXTURE)
+#if defined(ROVER_COMMISSIONING_TEST_FIXTURE) || defined(ROVER_BENCH_RELEASE)
   RUN_TEST(all_direction_pwm_and_neutral_intervals);RUN_TEST(pwm_is_prepared_with_enable_low_then_enable_asserted);
   RUN_TEST(normal_stop_disarm_and_rearm);RUN_TEST(independent_cleaning_and_forward_gating);
   RUN_TEST(estop_disables_wheels_and_cleaning_until_reset_and_arm);RUN_TEST(command_silence_disarms_manual_and_clears_cleaning);
@@ -155,6 +164,9 @@ int main() {
   RUN_TEST(unchanged_auto_avoidance_reaches_applied_turn);RUN_TEST(stale_sensor_disarms_auto);
   RUN_TEST(pwm_failure_cannot_be_ignored_with_gpio27_high);RUN_TEST(command_timeout_handles_millis_rollover);
   RUN_TEST(serial_overflow_disarms_applied_outputs);
+#if defined(ROVER_BENCH_RELEASE)
+  RUN_TEST(bench_release_is_ready_with_operator_record);
+#endif
 #else
   RUN_TEST(pending_commissioning_rejects_all_motor_commands);RUN_TEST(gpio27_high_cannot_substitute_for_commissioning);
   RUN_TEST(pending_adapter_and_pwm_reject_forced_requests);RUN_TEST(heartbeat_and_reset_do_not_satisfy_commissioning);

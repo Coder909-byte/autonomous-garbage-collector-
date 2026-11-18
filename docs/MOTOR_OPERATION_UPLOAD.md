@@ -30,6 +30,24 @@ ground and USB backfeed checks. That identifier must be supplied before changing
 the final field and rebuilding the motor-enabled artifact. It is not a firmware
 build error. Editing a source header after export does not update the binaries.
 
+## Supervised bench release (unlocked)
+
+The default export above stays locked because its record identifier is empty.
+For a supervised drive test, build and export the separate bench release, which
+sets all six conditions with a non-empty operator record:
+
+```sh
+pio run -e motor_bench_release
+python3 scripts/package_motor_upload.py --bench-release
+```
+
+This writes `build/arduino/motor_operation_bench_release/rover_main_motor_operation_bench_release.zip`.
+Flash it with the same esptool command below. Boot must print
+`COMMISSIONING ready=1 inhibit=NONE` and `BENCH RELEASE record=...`; Mission
+Control then accepts ARM. Run with the wheels off the ground, a fused or
+current-limited motor supply and a manual disconnect within reach. Software
+ESTOP does not isolate the battery.
+
 ## Exported files
 
 - `build/arduino/motor_operation/rover_main_motor_operation.zip`

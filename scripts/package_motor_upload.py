@@ -8,16 +8,18 @@ import subprocess
 import tempfile
 import zipfile
 
-from package_main_arduino import ROOT, package
+from package_main_arduino import BENCH_RECORD, ROOT, package
 
 
-def commissioning_ready():
+def commissioning_ready(bench_release=False):
     # Evaluate the actual header; do not infer readiness from the six flags or
     # let a command-line option substitute for the release record.
     with tempfile.TemporaryDirectory() as directory:
         executable = Path(directory) / 'readiness'
         subprocess.run(['c++', '-std=c++11', '-x', 'c++', '-I'+str(ROOT/'include'),
-                        '-DROVER_OPERATING_MODE=MOTOR_OPERATION', '-', '-o', str(executable)],
+                        '-DROVER_OPERATING_MODE=MOTOR_OPERATION',
+                        *(['-DROVER_BENCH_RELEASE', '-DROVER_BENCH_RECORD="'+BENCH_RECORD+'"'] if bench_release else []),
+                        '-', '-o', str(executable)],
                        input='#include "rover_mode.h"\nint main(){return rover::COMMISSIONING_READY?0:1;}\n',
                        text=True, check=True)
         result = subprocess.run([str(executable)], check=False)
@@ -26,7 +28,7 @@ def commissioning_ready():
         return result.returncode == 0
 
 
-def export(build, boot_app, output):
+def export(build, boot_app, output, bench_release=False):
     build, boot_app, output = Path(build), Path(boot_app), Path(output)
     inputs = {'bootloader.bin': build/'bootloader.bin', 'partitions.bin': build/'partitions.bin',
               'boot_app0.bin': boot_app, 'firmware.bin': build/'firmware.bin'}
@@ -34,13 +36,15 @@ def export(build, boot_app, output):
     images = {name: path.read_bytes() for name, path in inputs.items()}
     if any(not value for value in images.values()):
         raise ValueError('Empty firmware image')
-    ready = commissioning_ready()
-    sketch, archive = package('MOTOR_OPERATION', output)
+    ready = commissioning_ready(bench_release)
+    sketch, archive = package('MOTOR_OPERATION', output, bench_release)
     files = {'rover_main/'+path.name: path.read_bytes() for path in sketch.iterdir()
              if path.name in ('rover_main.ino', 'rover_build_config.h', 'rover_commissioning.h',
                               'rover_mode.h', 'rover_control.h', 'rover_pins.h', 'rover_telemetry.h')}
     files.update({'firmware/'+name: data for name, data in images.items()})
-    status = ('Compile-time commissioning record accepted; hardware behavior is not detected or verified by this package.'
+    status = ('SUPERVISED BENCH RELEASE: motor outputs are not commissioning-locked. Wheels off the ground, fused supply, manual disconnect within reach.'
+              if bench_release else
+              'Compile-time commissioning record accepted; hardware behavior is not detected or verified by this package.'
               if ready else 'OUTPUTS INHIBITED: commissioning flags and a nonempty retained record identifier are required. ARM remains rejected.')
     instructions = f'''MAIN ESP32 ONLY - MOTOR_OPERATION - Arduino-ESP32 2.0.17
 {status}
@@ -89,7 +93,7 @@ https://docs.espressif.com/projects/esptool/en/release-v4/esp32/esptool/flashing
     files['README_UPLOAD.txt'] = instructions.encode()
     hashes = {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}
     manifest = {'mode': 'MOTOR_OPERATION', 'arduino_core': '2.0.17', 'board': 'esp32dev',
-                'commissioning_ready': ready, 'expected_boot_inhibit': 'NONE' if ready else 'COMMISSIONING_REQUIRED',
+                'bench_release': bench_release, 'commissioning_ready': ready, 'expected_boot_inhibit': 'NONE' if ready else 'COMMISSIONING_REQUIRED',
                 'physical_tests_performed_by_codex': False, 'uploaded': False,
                 'offsets': {'0x1000': 'firmware/bootloader.bin', '0x8000': 'firmware/partitions.bin',
                             '0xe000': 'firmware/boot_app0.bin', '0x10000': 'firmware/firmware.bin'},
@@ -107,10 +111,15 @@ https://docs.espressif.com/projects/esptool/en/release-v4/esp32/esptool/flashing
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--build', type=Path, default=ROOT/'.pio/build/motor_operation')
+    parser.add_argument('--bench-release', action='store_true',
+                        help='Export the motor_bench_release build (run pio run -e motor_bench_release first)')
+    parser.add_argument('--build', type=Path)
     parser.add_argument('--boot-app', type=Path, default=Path.home()/'.platformio/packages/framework-arduinoespressif32/tools/partitions/boot_app0.bin')
-    parser.add_argument('--output', type=Path, default=ROOT/'build/arduino/motor_operation')
+    parser.add_argument('--output', type=Path)
     args = parser.parse_args()
-    archive, manifest = export(args.build, args.boot_app, args.output)
+    env = 'motor_bench_release' if args.bench_release else 'motor_operation'
+    build = args.build or ROOT/'.pio/build'/env
+    output = args.output or ROOT/'build/arduino'/('motor_operation_bench_release' if args.bench_release else 'motor_operation')
+    archive, manifest = export(build, args.boot_app, output, args.bench_release)
     print('ZIP:', archive)
     print('Commissioning ready:', manifest['commissioning_ready'])

@@ -34,6 +34,23 @@ class MainArduinoPackage(unittest.TestCase):
                                 self.assertNotIn(b'PRIVATE_CANARY', z.read(name))
                             self.assertIn(('#define ROVER_OPERATING_MODE '+mode).encode(), z.read('rover_main/rover_build_config.h'))
 
+    def test_bench_release_package_is_separate_and_motor_operation_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            sketch, archive = package('MOTOR_OPERATION', target/'bench', bench_release=True)
+            self.assertEqual(archive.name, 'rover_main_motor_operation_bench_release.zip')
+            with zipfile.ZipFile(archive) as z:
+                config = z.read('rover_main/rover_build_config.h')
+            self.assertIn(b'#define ROVER_OPERATING_MODE MOTOR_OPERATION', config)
+            self.assertIn(b'#define ROVER_BENCH_RELEASE', config)
+            self.assertIn(b'#define ROVER_BENCH_RECORD "', config)
+            _, locked = package('MOTOR_OPERATION', target/'locked')
+            with zipfile.ZipFile(locked) as z:
+                self.assertNotIn(b'ROVER_BENCH_RELEASE', z.read('rover_main/rover_build_config.h'))
+            for mode in ('PROTECTED_ROVER', 'USB_BENCH_DIAGNOSTIC'):
+                with self.assertRaises(ValueError):
+                    package(mode, target/mode, bench_release=True)
+
     def test_invalid_mode_is_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory)/'invalid'

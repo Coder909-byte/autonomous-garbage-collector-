@@ -6,7 +6,7 @@ import type {Transport} from '../src/transports';
 
 class MotorFirmware extends EventEmitter implements Transport {
  private child;dropHeartbeat=false;
- constructor(kind:'pending'|'qualified-test'){
+ constructor(kind:'pending'|'qualified-test'|'bench-release'){
   super();this.child=spawn('build/rover-motor-'+kind+'-sim');
   this.child.stdout.on('data',b=>this.emit('data',b.toString()));
   this.child.on('error',e=>this.emit('fault',e));this.child.on('exit',()=>this.emit('lost'));
@@ -30,4 +30,13 @@ it('host-only released adapter drives/cleans/AUTO with heartbeats, then disarms 
  await new Promise(r=>setTimeout(r,1500));expect(b.state.telemetry?.en).toBe(true);
  device.dropHeartbeat=true;await waitFor(()=>b.state.telemetry?.inhibit==='COMMAND_TIMEOUT');
  expect(b.state.telemetry).toMatchObject({armed:false,en:false,applied:0,brush:false,conveyor:false,auto:false});
+},15000);
+it('bench-release firmware is unlocked: ARM, hold forward, release stops, command loss disarms',async()=>{
+ const b=new Bridge();bridges.push(b);const device=new MotorFirmware('bench-release');await b.connect(async()=>device,false,'HOST-BENCH-RELEASE');
+ await waitFor(()=>b.ready());expect(b.state.telemetry).toMatchObject({mode:'MOTOR_OPERATION',commissioningReady:true,inhibit:'NONE',armed:false,en:false});
+ b.command('ARM');await waitFor(()=>!!b.state.telemetry?.armed);
+ b.hold('F');const held=setInterval(()=>b.hold('F'),100);
+ try{await waitFor(()=>b.state.telemetry?.applied===1);expect(b.state.telemetry).toMatchObject({en:true,inhibit:'NONE'});}finally{clearInterval(held);}
+ b.stopHold();await waitFor(()=>b.state.telemetry?.applied===0);expect(b.state.telemetry).toMatchObject({armed:true,en:false});
+ device.dropHeartbeat=true;await waitFor(()=>b.state.telemetry?.inhibit==='COMMAND_TIMEOUT');expect(b.state.telemetry?.armed).toBe(false);
 },15000);

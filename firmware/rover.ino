@@ -139,6 +139,9 @@ void setup() {
 #elif ROVER_OPERATING_MODE == MOTOR_OPERATION
   Serial.println("READY MOTOR_OPERATION DISARMED; GPIO27 is reported, not a physical interlock; independent motor-supply disconnect required.");
   Serial.printf("COMMISSIONING ready=%d inhibit=%s; software ESTOP is not battery isolation\n",rover::COMMISSIONING_READY,motorInhibit());
+#if defined(ROVER_BENCH_RELEASE)
+  Serial.printf("BENCH RELEASE record=%s\n",rover::COMMISSIONING.record);
+#endif
 #else
   Serial.println("READY DISARMED; RESET after ESTOP, then ARM. Motor power stays disconnected for software tests.");
 #endif

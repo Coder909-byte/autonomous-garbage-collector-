@@ -23,5 +23,26 @@ class CommissioningBuildGuard(unittest.TestCase):
             with self.subTest(mode=mode):
                 self.assertEqual(self.preprocess('-DROVER_OPERATING_MODE='+mode).returncode, 0)
 
+    def check(self, *flags):
+        return subprocess.run(['c++', '-std=c++11', '-x', 'c++', '-fsyntax-only', '-Iinclude', *flags, '-'],
+                              input='#include "rover_mode.h"\nstatic_assert(rover::MOTOR_OUTPUTS_ALLOWED, "locked");\n',
+                              cwd=ROOT, capture_output=True, text=True)
+
+    def test_default_motor_operation_stays_locked(self):
+        p = self.check('-DROVER_OPERATING_MODE=MOTOR_OPERATION', '-DARDUINO=10819')
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn('locked', p.stderr)
+
+    def test_bench_release_unlocks_hardware_build_with_record(self):
+        p = self.check('-DROVER_OPERATING_MODE=MOTOR_OPERATION', '-DARDUINO=10819',
+                       '-DROVER_BENCH_RELEASE', '-DROVER_BENCH_RECORD="BENCH"')
+        self.assertEqual(p.returncode, 0, p.stderr)
+
+    def test_bench_release_requires_nonempty_record(self):
+        missing = self.check('-DROVER_OPERATING_MODE=MOTOR_OPERATION', '-DROVER_BENCH_RELEASE')
+        self.assertIn('requires ROVER_BENCH_RECORD', missing.stderr)
+        empty = self.check('-DROVER_OPERATING_MODE=MOTOR_OPERATION', '-DROVER_BENCH_RELEASE', '-DROVER_BENCH_RECORD=""')
+        self.assertIn('must not be empty', empty.stderr)
+
     def test_unknown_mode_is_a_compile_error(self):
         self.assertNotEqual(self.preprocess('-DROVER_OPERATING_MODE=99').returncode, 0)

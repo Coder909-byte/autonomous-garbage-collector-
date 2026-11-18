@@ -32,6 +32,21 @@ class MotorUploadPackage(unittest.TestCase):
                     self.assertEqual(hashlib.sha256(z.read(name)).hexdigest(), digest)
                 self.assertEqual(z.read('firmware/firmware.bin'), (root/'firmware.bin').read_bytes())
 
+    def test_bench_release_export_is_unlocked_and_separate(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('bootloader.bin', 'partitions.bin', 'boot_app0.bin', 'firmware.bin'):
+                (root/name).write_bytes(('TEST IMAGE '+name).encode())
+            archive, manifest = export(root, root/'boot_app0.bin', root/'output', bench_release=True)
+            self.assertEqual(archive.name, 'rover_main_motor_operation_bench_release.zip')
+            self.assertTrue(manifest['bench_release'])
+            self.assertTrue(manifest['commissioning_ready'])
+            self.assertEqual(manifest['expected_boot_inhibit'], 'NONE')
+            with zipfile.ZipFile(archive) as z:
+                self.assertIn(b'#define ROVER_BENCH_RELEASE', z.read('rover_main/rover_build_config.h'))
+                self.assertIn(b'SUPERVISED BENCH RELEASE', z.read('README_UPLOAD.txt'))
+                self.assertIn(b'Expected compile-time commissioningReady: true', z.read('README_UPLOAD.txt'))
+
     def test_missing_images_do_not_replace_archive(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
