@@ -7,3 +7,6 @@
 #define CAMERA_TRUSTED_NETWORK "192.168.50.0"
 #define CAMERA_TRUSTED_MASK "255.255.255.0"
 #define CAMERA_HOSTNAME "rover-camera"
+// Optional fixed address so Mission Control always uses the same camera IP.
+// Must be inside CAMERA_TRUSTED_NETWORK and outside the DHCP pool. On ROVER-CTRL:
+// #define CAMERA_STATIC_IP "192.168.4.200"

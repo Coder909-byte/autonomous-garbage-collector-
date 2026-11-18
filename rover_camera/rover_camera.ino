@@ -162,6 +162,16 @@ void setup() {
     trustedNetwork.configure(CAMERA_TRUSTED_NETWORK,CAMERA_TRUSTED_MASK);
   if (!configOK) { Serial.println("FAULT configure secrets.h: trusted RFC1918 /24 or /28 and WPA2 password required; Wi-Fi disabled");return; }
   WiFi.mode(WIFI_STA);WiFi.setAutoReconnect(false);WiFi.setHostname(CAMERA_HOSTNAME);
+#ifdef CAMERA_STATIC_IP
+  // Optional fixed address; keep it outside the access point's DHCP pool (ESP32 SoftAP leases from .2).
+  IPAddress fixed,gateway,mask;
+  if (!fixed.fromString(CAMERA_STATIC_IP)||!networkAllowed(fixed)||!gateway.fromString(CAMERA_TRUSTED_NETWORK)||!mask.fromString(CAMERA_TRUSTED_MASK)) {
+    Serial.println("FAULT CAMERA_STATIC_IP must be inside CAMERA_TRUSTED_NETWORK; Wi-Fi disabled");configOK=false;return;
+  }
+  gateway[3]+=1; // the access point is the network's first address, e.g. ROVER-CTRL 192.168.4.1
+  if (!WiFi.config(fixed,gateway,mask)) Serial.println("FAULT static IP rejected; using DHCP");
+  else Serial.printf("Static IP %s requested\n",CAMERA_STATIC_IP);
+#endif
 }
 void loop() {
   if (!configOK) { delay(100);return; }
