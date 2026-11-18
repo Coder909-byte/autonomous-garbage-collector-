@@ -18,9 +18,17 @@ Periodic JSON follows the prefix `TEL `:
 
 ## Compile-time operating mode extension
 
-New firmware adds `mode` (`PROTECTED_ROVER` or `USB_BENCH_DIAGNOSTIC`) and `motorCapable` (boolean) to TEL v1. All existing fields/types remain, including the actual GPIO27 value in `healthy`. Legacy v1 messages without the pair remain accepted. New metadata must be consistent; diagnostic telemetry cannot claim armed/AUTO/movement/cleaning authorization or output.
+New firmware adds `mode` (`PROTECTED_ROVER`, `USB_BENCH_DIAGNOSTIC` or `MOTOR_OPERATION`) and `motorCapable` (boolean) to TEL v1. All existing fields/types remain, including the actual GPIO27 value in `healthy`. Legacy v1 messages without the pair remain accepted. New metadata must be consistent; diagnostic telemetry cannot claim armed/AUTO/movement/cleaning authorization or output.
 
 USB_BENCH_DIAGNOSTIC boots disarmed, rejects ARM/AUTO/directions/cleaning ON and never configures motor PWM or permits enable. Software STOP/ESTOP remains latched until explicit RESET while disarmed, even when GPIO27 remains LOW; RESET cannot enable motors. S/DISARM/MANUAL/cleaning OFF retain safe behavior. USB readiness, real sensor telemetry and the independent camera remain available. The bridge/dashboard explicitly disable motor control in this configuration. Full build/wiring instructions: [USB_BENCH_DIAGNOSTIC.md](USB_BENCH_DIAGNOSTIC.md).
+
+### MOTOR_OPERATION extension
+
+MOTOR_OPERATION adds mandatory `commissioningReady` (boolean release-record status, not live hardware detection) and `inhibit` (`NONE`, `COMMISSIONING_REQUIRED`, `PWM_FAULT` or `COMMAND_TIMEOUT`) while retaining the existing fields/types. `healthy` is still the actual GPIO27 reading. That input is not an authorization interlock in MOTOR_OPERATION; it remains required in PROTECTED_ROVER. Invalid/inconsistent commissioning metadata fails closed in the parser. Unreleased builds cannot claim armed/AUTO/movement/cleaning authorization.
+
+Only MOTOR_OPERATION accepts the internal serial `HEARTBEAT` line. The bridge sends it every 200 ms after fresh protocol readiness, including during AUTO. Accepted serial commands renew a 1200 ms motor command deadline. Expiry disarms, clears cleaning requests and stops all outputs; later heartbeats alone never rearm. Invalid commands do not renew it. Loop/serial/pulseIn latency applies; no hard real-time stop bound or battery-isolation claim is made. The browser command allowlist does not expose HEARTBEAT. Existing modes receive no new heartbeat traffic.
+
+Normal `S` remains a non-latching stop; `STOP` and `ESTOP` retain their existing latched behavior. MOTOR_OPERATION software RESET requires disarmed state and working controller/PWM authorization, not an unavailable GPIO27 circuit. Commissioning requirements are never satisfied by ARM/RESET/HEARTBEAT or by setting GPIO27 HIGH. See [handover](MOTOR_OPERATION_HANDOVER.md) and [exact blocked wiring requirements](MOTOR_OPERATION_WIRING.md).
 
 ## Laptop control protocol
 
@@ -39,6 +47,6 @@ Browser messages:
 
 The bridge sends a non-latching S and DISARM on open and again after READY. `protocolReady` becomes true only after DISARM acknowledgement and stopped/disarmed v1 telemetry; old installed firmware remains observable but cannot drive through this UI. No automatic RESET, ARM, AUTO or movement on reconnect. Browser control-channel reconnection returns to a disconnected rover session.
 
-Held controls renew an intent lease every 80ms while focused/visible. Bridge movement heartbeats run every 200ms only while that lease is younger than 300ms and fresh telemetry permits manual movement. Release, blur, hidden page, mode changes, ESTOP, rejection, errors, control-channel loss or disconnection cease renewal/heartbeats; the bridge attempts S and, on disconnect, DISARM. The controller's independent 1200ms manual timeout remains unchanged. A delayed/failed STOP cannot prove a physical stop. If the backend dies during AUTO, the existing autonomous controller can continue navigating: no new AUTO serial-link deadman is claimed. Its sensor/safety decisions remain onboard, and critical stopping requires physical S2.
+Held controls renew an intent lease every 80ms while focused/visible. Bridge movement heartbeats run every 200ms only while that lease is younger than 300ms and fresh telemetry permits manual movement. Release, blur, hidden page, mode changes, ESTOP, rejection, errors, control-channel loss or disconnection cease renewal/heartbeats; the bridge attempts S and, on disconnect, DISARM. The controller's independent 1200ms manual timeout remains unchanged. A delayed/failed STOP cannot prove a physical stop. In PROTECTED_ROVER, if the backend dies during AUTO, the existing autonomous controller can continue navigating: no new AUTO serial-link deadman is claimed. Its sensor/safety decisions remain onboard, and critical stopping requires physical S2.
 
 Bridge input lines are capped at 1024 bytes; malformed JSON and contradictory output fields are rejected. Acknowledgement timeout is 2s, stale telemetry disconnect is 1.5s; queued duplicate commands retain the earliest ACK deadline. State snapshots and 150 timestamped log entries are bounded. WebSocket payload and rate limits protect the local control loop. No command string from the browser is interpolated into shell commands.

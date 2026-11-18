@@ -36,7 +36,7 @@ class Controller {
       estop = false; disarm(); return true;
     }
     if (!strcmp(cmd,"ARM")) {
-      if (!MOTOR_CAPABLE || estop || !healthy) return false;
+      if (!MOTOR_OUTPUTS_ALLOWED || estop || !healthy) return false;
       disarm(); armed = true; return true;
     }
     if (!strcmp(cmd,"S")) {
@@ -49,7 +49,7 @@ class Controller {
     if (!strcmp(cmd,"CLEAN OFF")) { brushes = conveyor = false; return true; }
     if (!strcmp(cmd,"BRUSH OFF")) { brushes = false; return true; }
     if (!strcmp(cmd,"CONVEYOR OFF")) { conveyor = false; return true; }
-    if (!MOTOR_CAPABLE || !armed || estop) return false;
+    if (!MOTOR_OUTPUTS_ALLOWED || !armed || estop) return false;
     if (!strcmp(cmd,"CLEAN ON")) { brushes = conveyor = true; return true; }
     if (!strcmp(cmd,"BRUSH ON")) { brushes = true; return true; }
     if (!strcmp(cmd,"CONVEYOR ON")) { conveyor = true; return true; }
@@ -106,7 +106,7 @@ class Controller {
   }
   void tick(uint32_t now, bool healthy) {
     if (MOTOR_CAPABLE && !healthy) emergency();
-    if (!MOTOR_CAPABLE) { disarm(); return; }
+    if (!MOTOR_OUTPUTS_ALLOWED) { disarm(); return; }
     if (!armed || estop) { motion = Motion::Stop; return; }
     if (!automatic) {
       if (motion != Motion::Stop && uint32_t(now-manualAt) >= MANUAL_MS) motion = Motion::Stop;

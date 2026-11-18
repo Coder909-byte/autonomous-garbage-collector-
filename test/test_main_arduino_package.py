@@ -16,7 +16,7 @@ class MainArduinoPackage(unittest.TestCase):
             root = Path(directory)
             (root/'firmware').mkdir(); (root/'include').mkdir()
             (root/'firmware/rover.ino').write_text('void setup() {}\nvoid loop() {}\n')
-            headers = ('rover_mode.h', 'rover_control.h', 'rover_pins.h', 'rover_telemetry.h')
+            headers = ('rover_commissioning.h', 'rover_mode.h', 'rover_control.h', 'rover_pins.h', 'rover_telemetry.h')
             for name in headers:
                 (root/'include'/name).write_text('// '+name+'\n')
             (root/'include/secrets.h').write_text('PRIVATE_CANARY_DO_NOT_PACKAGE')

@@ -14,6 +14,8 @@ volatile bool hardwareTrip = false;
 portMUX_TYPE safetyMux = portMUX_INITIALIZER_UNLOCKED;
 bool pwmReady = true;
 uint32_t lastPing = 0, lastLog = 0;
+uint32_t lastMotorCommand = 0;
+bool motorCommandTimeout = false;
 unsigned sensorIndex = 0;
 rover::Motion appliedMotion = rover::Motion::Stop;
 bool appliedEnable = false, appliedBrush = false, appliedConveyor = false;
@@ -27,14 +29,24 @@ void IRAM_ATTR stopInterrupt() {
   portEXIT_CRITICAL_ISR(&safetyMux);
 }
 bool healthy() { return digitalRead(pins::ESTOP_OK) == HIGH; }
+// Controller authorization input; healthy() telemetry always remains raw GPIO27.
+bool controllerHealthy() { return rover::MOTOR_OPERATION_MODE ? pwmReady : healthy(); }
+const char *motorInhibit() {
+  if (rover::MOTOR_OPERATION_MODE && !rover::COMMISSIONING_READY) return "COMMISSIONING_REQUIRED";
+  if (rover::MOTOR_OPERATION_MODE && !pwmReady) return "PWM_FAULT";
+  if (rover::MOTOR_OPERATION_MODE && motorCommandTimeout) return "COMMAND_TIMEOUT";
+  return "NONE";
+}
 void pwmWrite(unsigned channel, unsigned duty) {
 #if ROVER_OPERATING_MODE == USB_BENCH_DIAGNOSTIC
   // No LEDC peripheral is attached in this build; even a nonzero request is LOW.
   (void)duty;
   digitalWrite(pins::PWM[channel],LOW);
 #elif ESP_ARDUINO_VERSION_MAJOR >= 3
+  if (!rover::MOTOR_OUTPUTS_ALLOWED) duty=0;
   ledcWrite(pins::PWM[channel], duty);
 #else
+  if (!rover::MOTOR_OUTPUTS_ALLOWED) duty=0;
   ledcWrite(channel, duty);
 #endif
 }
@@ -44,7 +56,12 @@ void zeroOutputs() {
   for (int p : pins::AUX) digitalWrite(p,LOW);
 }
 void applyOutputs(uint32_t now) {
-  rover::Motion request = rover::MOTOR_CAPABLE && controller.armed && !controller.estop && pwmReady ? controller.motion : rover::Motion::Stop;
+  // MOTOR_OPERATION requires continuing valid serial commands even during AUTO.
+  // Expiry disarms; later heartbeats alone never rearm or restore cleaning.
+  if (rover::MOTOR_OPERATION_MODE && controller.armed && uint32_t(now-lastMotorCommand)>=rover::MANUAL_MS) {
+    motorCommandTimeout=true; controller.disarm();
+  }
+  rover::Motion request = rover::MOTOR_OUTPUTS_ALLOWED && controller.armed && !controller.estop && pwmReady ? controller.motion : rover::Motion::Stop;
   rover::Motion actual = gate.update(request,now);
   // Only rewrite direction channels on a change: avoid transient opposite
   // bridge states and unnecessary PWM resets on every loop iteration.
@@ -62,7 +79,8 @@ void applyOutputs(uint32_t now) {
   digitalWrite(pins::BRUSH_IN1,brush); digitalWrite(pins::BRUSH_IN2,LOW);
   digitalWrite(pins::CONVEYOR_IN3,conveyor); digitalWrite(pins::CONVEYOR_IN4,LOW);
   portENTER_CRITICAL(&safetyMux);
-  bool permit = rover::MOTOR_CAPABLE && actual != rover::Motion::Stop && !hardwareTrip && healthy() && pwmReady;
+  bool permit = rover::MOTOR_OUTPUTS_ALLOWED && actual != rover::Motion::Stop && !hardwareTrip &&
+    (!rover::PHYSICAL_FEEDBACK_REQUIRED || healthy()) && pwmReady;
   digitalWrite(pins::ENABLE,permit ? HIGH : LOW);
   portEXIT_CRITICAL(&safetyMux);
   if (!permit) zeroOutputs();
@@ -118,6 +136,9 @@ void setup() {
   Serial.begin(115200);
 #if ROVER_OPERATING_MODE == USB_BENCH_DIAGNOSTIC
   Serial.println("READY USB_BENCH_DIAGNOSTIC DISARMED; NO MOTOR POWER; ARM/AUTO/motor commands rejected; software ESTOP/RESET available.");
+#elif ROVER_OPERATING_MODE == MOTOR_OPERATION
+  Serial.println("READY MOTOR_OPERATION DISARMED; GPIO27 is reported, not a physical interlock; independent motor-supply disconnect required.");
+  Serial.printf("COMMISSIONING ready=%d inhibit=%s; software ESTOP is not battery isolation\n",rover::COMMISSIONING_READY,motorInhibit());
 #else
   Serial.println("READY DISARMED; RESET after ESTOP, then ARM. Motor power stays disconnected for software tests.");
 #endif
@@ -125,8 +146,8 @@ void setup() {
   if (!pwmReady) Serial.println("FAULT PWM setup; arming disabled");
 }
 void loop() {
-  if (rover::MOTOR_CAPABLE && (hardwareTrip || !healthy())) controller.emergency();
-  controller.tick(millis(),healthy());
+  if (rover::PHYSICAL_FEEDBACK_REQUIRED && (hardwareTrip || !healthy())) controller.emergency();
+  controller.tick(millis(),controllerHealthy());
   applyOutputs(millis());
   // Bounded serial work prevents input flooding from starving the deadman.
   for (unsigned count=0;count<64 && Serial.available();++count) {
@@ -136,8 +157,10 @@ void loop() {
     } else if (result == rover::LineParser::Ready) {
       bool accepted;
       portENTER_CRITICAL(&safetyMux);
-      if (rover::MOTOR_CAPABLE && hardwareTrip) controller.emergency();
-      accepted = controller.command(parser.line(),millis(),healthy() && pwmReady);
+      if (rover::PHYSICAL_FEEDBACK_REQUIRED && hardwareTrip) controller.emergency();
+      accepted = rover::MOTOR_OPERATION_MODE && !strcmp(parser.line(),"HEARTBEAT");
+      if (!accepted) accepted = controller.command(parser.line(),millis(),controllerHealthy() && pwmReady);
+      if (rover::MOTOR_OPERATION_MODE && accepted) { lastMotorCommand=millis(); motorCommandTimeout=false; }
       if (accepted && !strcmp(parser.line(),"RESET")) hardwareTrip = false;
       portEXIT_CRITICAL(&safetyMux);
       applyOutputs(millis());
@@ -153,15 +176,15 @@ void loop() {
     controller.sample(sensorIndex,cm,millis());
     sensorIndex = (sensorIndex+1)%3;
   }
-  if (rover::MOTOR_CAPABLE && hardwareTrip) controller.emergency();
-  controller.tick(millis(),healthy());
+  if (rover::PHYSICAL_FEEDBACK_REQUIRED && hardwareTrip) controller.emergency();
+  controller.tick(millis(),controllerHealthy());
   applyOutputs(millis());
   now = millis();
   if (uint32_t(now-lastLog) >= 500 && Serial.availableForWrite() >= 100) {
     lastLog = now;
     char message[512];
     int length = rover::telemetry(message,sizeof(message),controller,now,appliedMotion,
-      appliedEnable,appliedBrush,appliedConveyor,healthy());
+      appliedEnable,appliedBrush,appliedConveyor,healthy(),motorInhibit());
     if (length > 0 && length < static_cast<int>(sizeof(message))) Serial.println(message);
     Serial.printf("DIST %d %d %d armed=%d auto=%d estop=%d motion=%d en=%d\n",
       controller.ranges[0].cm,controller.ranges[1].cm,controller.ranges[2].cm,

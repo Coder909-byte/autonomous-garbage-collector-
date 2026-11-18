@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
-import {isState,MOTIONS,motorControlAvailable,type BridgeState,type Command,type Direction} from '../../../packages/protocol/index';
+import {isState,MOTIONS,motorControlAvailable,feedbackAllowsControl,motorOutputState,type BridgeState,type Command,type Direction} from '../../../packages/protocol/index';
 import {HoldControl,keyDirection} from './control';
 import {Navigation,DiagnosticsPanel} from './Monitoring';
 const empty:BridgeState={connected:false,connecting:false,protocolReady:false,simulation:false,port:null,telemetry:null,receivedAt:null,intent:null,logs:[],error:null};
@@ -37,8 +37,8 @@ export default function App(){
   if(!t||state.receivedAt===null){setHistory([]);return;}
   setHistory(current=>{const previous=current.at(-1);return previous&&previous.nav===t.nav&&previous.motion===t.applied?current:[...current,{at:state.receivedAt!,nav:t.nav,motion:t.applied}].slice(-7);});
  },[t,state.receivedAt]);
- const diagnostic=t?.mode==='USB_BENCH_DIAGNOSTIC',motorAvailable=motorControlAvailable(t);
- const fresh=state.connected&&state.protocolReady&&age<1200,canMove=online&&fresh&&motorAvailable&&!!t?.armed&&!t.auto&&!t.estop&&t.healthy;
+ const diagnostic=t?.mode==='USB_BENCH_DIAGNOSTIC',motorOperation=t?.mode==='MOTOR_OPERATION',motorAvailable=motorControlAvailable(t);
+ const fresh=state.connected&&state.protocolReady&&age<1200,canMove=online&&fresh&&motorAvailable&&!!t?.armed&&!t.auto&&!t.estop&&feedbackAllowsControl(t);
  const command=useCallback((c:Command)=>{hold.release();send({type:'command',command:c});},[send,hold]);
  useEffect(()=>{if(!canMove)hold.release();},[canMove,hold]);
  useEffect(()=>{
@@ -57,14 +57,15 @@ export default function App(){
  onPointerDown={e=>{if(e.button!==0)return;e.preventDefault();e.currentTarget.setPointerCapture?.(e.pointerId);hold.start(d,'pointer:'+e.pointerId);}}
  onPointerUp={e=>hold.release('pointer:'+e.pointerId)} onPointerCancel={()=>hold.release()} onLostPointerCapture={()=>hold.release()}>{arrow}<kbd>{({F:'W',B:'S',L:'A',R:'D'})[d]}</kbd></button>;
  const lastTX=[...state.logs].reverse().find(l=>l.kind==='TX'),lastACK=[...state.logs].reverse().find(l=>l.kind==='ACK');
- const session=state.connected?(state.simulation?'SIMULATION MODE':diagnostic?'USB BENCH · NO MOTOR POWER':'USB HARDWARE'):online?'NO ROVER CONNECTED':'BRIDGE OFFLINE';
+ const session=state.connected?(state.simulation?'SIMULATION MODE':diagnostic?'USB BENCH · NO MOTOR POWER':motorOperation?'MOTOR OPERATION':'USB HARDWARE'):online?'NO ROVER CONNECTED':'BRIDGE OFFLINE';
  return <div className="station">
   <header><div className="brand"><span className="brandmark"><Icon type="rover"/></span><div>ROVER<span className="brand-sub">AUTONOMOUS COLLECTION SYSTEM</span></div></div><div className="header-right"><span className={'session '+(state.simulation&&state.connected?'sim':'')}><i/> {session}</span><span className="clock">{new Date(clock).toLocaleTimeString()}</span></div></header>
   <div className="page-heading"><div><div className="eyebrow">OPERATOR WORKSPACE <span>/ 01</span></div><h1>Mission control<span className="live-dot"/></h1><p>Local control. Onboard authority. Every output accounted for.</p></div><button className="estop" disabled={!state.connected} onClick={()=>command('ESTOP')}><span>■</span> SOFTWARE EMERGENCY STOP<small>Latches firmware E-stop · physical cutoff still required</small></button></div>
   {(error||state.error)&&<div role="alert" className="alert">{error||state.error}<button aria-label="Dismiss error" onClick={()=>{setError('');setState(s=>({...s,error:null}));}}>×</button></div>}
   {state.connected&&state.simulation&&<div className="simulation-banner">SIMULATION MODE <span>Native controller · synthetic distances · no physical outputs or camera footage</span></div>}
   {fresh&&diagnostic&&<div className="simulation-banner" role="status">USB BENCH DIAGNOSTIC · NO MOTOR POWER <span>Sensor and USB testing only. Motor outputs locked LOW; ARM, manual drive, AUTO and cleaning ON are unavailable. GPIO27 is reported as read, without simulating installed protection.</span></div>}
-  {fresh&&t&&(t.estop||(!diagnostic&&!t.healthy)||['SENSOR_FAULT','TURN_LIMIT'].includes(t.nav))&&<div className="alert safety-fault" role="alert">Firmware safety state: {t.nav}. GPIO27 feedback {t.healthy?'HIGH':'LOW'}. {t.estop?'Firmware E-stop latched. ':''}Use the physical cutoff when required; software does not confirm power isolation.</div>}
+  {fresh&&motorOperation&&<div className="simulation-banner" role="status">MOTOR OPERATION · {t?.commissioningReady?'COMMISSIONING RECORD ACCEPTED':'OUTPUTS INHIBITED · COMMISSIONING REQUIRED'}<span>GPIO27 is reported as read and is not a physical interlock in this mode. Software stop does not isolate the battery. Independent motor-supply disconnection and qualified electrical hardware are required.</span></div>}
+  {fresh&&t&&(t.estop||!feedbackAllowsControl(t)||['SENSOR_FAULT','TURN_LIMIT'].includes(t.nav))&&<div className="alert safety-fault" role="alert">Firmware safety state: {t.nav}. GPIO27 feedback {t.healthy?'HIGH':'LOW'}. {t.estop?'Firmware E-stop latched. ':''}Use the physical cutoff when required; software does not confirm power isolation.</div>}
   <main className="dashboard-grid">
    <aside className="left-column">
     <section className="panel"><div className="panel-title"><Icon type="link"/><h2>Connection</h2><span className={'pill '+(fresh?'good':'')}>{state.connecting?'Opening':fresh?'Protocol ready':state.connected?'Awaiting handshake':'Disconnected'}</span></div>
@@ -78,14 +79,15 @@ export default function App(){
      <div className="segmented"><button disabled={!fresh} className={fresh&&!t?.auto?'selected':''} onClick={()=>command('MANUAL')}>Manual</button><button disabled={!fresh||!motorAvailable||!t?.armed} className={fresh&&t?.auto?'selected':''} onClick={()=>command('AUTO')}>Autonomous</button></div>
      <div className="dpad">{direction('Forward','F','↑')}{direction('Left','L','←')}<button className="direction stop" aria-label="Stop movement" disabled={!state.connected} onClick={()=>command('S')}>■<kbd>SPACE</kbd></button>{direction('Right','R','→')}{direction('Backward','B','↓')}</div>
      <p className="control-hint">Hold to move. Release to stop.<br/>W A S D · Space to stop</p>
-     <div className="two-buttons"><button className="button primary" disabled={!fresh||!motorAvailable||t?.armed||t?.estop||!t?.healthy} onClick={()=>command('ARM')}>ARM</button><button className="button secondary" disabled={!state.connected} onClick={()=>command('DISARM')}>DISARM</button></div>
-     <button className="text-button reset" disabled={!fresh||t?.armed||(!diagnostic&&!t?.healthy)||!t?.estop} onClick={()=>command('RESET')}>Reset firmware E-stop latch</button>
-     <p className="tiny">{diagnostic?'Motor control is disabled by this firmware build.':'ARM permits control; it does not start motion.'}</p>
+     <div className="two-buttons"><button className="button primary" disabled={!fresh||!motorAvailable||t?.armed||t?.estop||!feedbackAllowsControl(t)} onClick={()=>command('ARM')}>ARM</button><button className="button secondary" disabled={!state.connected} onClick={()=>command('DISARM')}>DISARM</button></div>
+     <button className="text-button reset" disabled={!fresh||t?.armed||!feedbackAllowsControl(t)||!t?.estop} onClick={()=>command('RESET')}>Reset firmware E-stop latch</button>
+     <p className="tiny">{diagnostic?'Motor control is disabled by this firmware build.':motorOperation&&!motorAvailable?'Motor control is inhibited; inspect commissioning and firmware status.':'ARM permits control; it does not start motion.'}</p>
     </section>
    </aside>
    <div className="center-column"><Camera/>
     <section className="panel operations" aria-label="Operational state"><div className="panel-title"><h2>Operational state</h2><span className={'pill '+(fresh?'good':'warn')}>{t?(fresh?'Fresh telemetry':'STALE TELEMETRY'):'Awaiting telemetry'}</span></div>
      <div className="metric-grid"><div><label>REQUESTED MOVEMENT</label><strong>{fresh&&t?MOTIONS[t.requested]:'—'}</strong></div><div><label>APPLIED FIRMWARE OUTPUT</label><strong className="accent">{fresh&&t?MOTIONS[t.applied]:'—'}</strong></div><div><label>NAVIGATION PHASE</label><strong>{fresh?t?.nav:'—'}</strong></div><div><label>DRIVER ENABLE</label><strong>{fresh?(t?.en?'HIGH':'LOW'):'UNKNOWN'}</strong></div></div>
+     <div className="metric-grid"><div><label>OPERATING MODE</label><strong>{fresh?(t?.mode??'LEGACY V1'):'UNKNOWN'}</strong></div><div><label>MOTOR OUTPUT STATE</label><strong>{fresh&&t?motorOutputState(t):'UNKNOWN'}</strong></div></div>
      <div className="authority"><i/> Physical movement: <b>not measured</b><span>No encoders or independent motion feedback</span></div>
     </section>
     <Navigation t={t} fresh={fresh} age={age}/>
@@ -99,7 +101,7 @@ export default function App(){
     </section>
    </aside>
   </main>
-  <section className="panel telemetry-strip"><div><span className="eyebrow">LAST UPDATE</span><b>{time(state.receivedAt)}</b></div><div><span className="eyebrow">FIRMWARE</span><b>{t?.fw??'Not identified'}</b></div><div><span className="eyebrow">E-STOP FEEDBACK</span><b className={fresh&&!diagnostic&&!t?.healthy?'danger':''}>{fresh?(diagnostic?(t?.healthy?'HIGH · diagnostic input':'LOW · diagnostic input'):(t?.healthy?'HIGH · healthy':'LOW · unsafe')):'UNKNOWN'}</b></div><div><span className="eyebrow">FIRMWARE E-STOP</span><b className={fresh&&t?.estop?'danger':''}>{fresh?(t?.estop?'LATCHED':'CLEAR'):'UNKNOWN'}</b></div><div><span className="eyebrow">LAST TRANSMITTED</span><b>{lastTX?.text??'—'}</b></div><div><span className="eyebrow">LAST ACKNOWLEDGED</span><b>{lastACK?.text??'—'}</b></div></section>
+  <section className="panel telemetry-strip"><div><span className="eyebrow">LAST UPDATE</span><b>{time(state.receivedAt)}</b></div><div><span className="eyebrow">FIRMWARE</span><b>{t?.fw??'Not identified'}</b></div><div><span className="eyebrow">E-STOP FEEDBACK</span><b className={fresh&&!feedbackAllowsControl(t)?'danger':''}>{fresh?(motorOperation?(t?.healthy?'HIGH · no physical interlock':'LOW · no physical interlock'):diagnostic?(t?.healthy?'HIGH · diagnostic input':'LOW · diagnostic input'):(t?.healthy?'HIGH · healthy':'LOW · unsafe')):'UNKNOWN'}</b></div><div><span className="eyebrow">FIRMWARE E-STOP</span><b className={fresh&&t?.estop?'danger':''}>{fresh?(t?.estop?'LATCHED':'CLEAR'):'UNKNOWN'}</b></div><div><span className="eyebrow">LAST TRANSMITTED</span><b>{lastTX?.text??'—'}</b></div><div><span className="eyebrow">LAST ACKNOWLEDGED</span><b>{lastACK?.text??'—'}</b></div></section>
   <DiagnosticsPanel online={online}/>
   <section className="panel timeline" aria-label="Telemetry timeline"><span className="eyebrow">STATE TIMELINE</span><div>{history.length?history.map((entry,i)=><div key={i}><span className="timeline-point"/><time>{time(entry.at)}</time><b>{MOTIONS[entry.motion]}</b><small>{entry.nav}</small></div>):<p>Waiting for firmware state changes.</p>}</div></section>
   <details className="panel console"><summary><span className="terminal-icon">›_</span> Developer console <span>Commands · acknowledgements · raw serial · parsed telemetry</span><b>{state.logs.length} events</b></summary><div className="console-content"><div className="logs" role="log">{state.logs.length?state.logs.slice().reverse().map((l,i)=><div key={i} className={'log '+l.kind}><time>{time(l.at)}</time><b>{l.kind}</b><code>{l.text}</code></div>):<p>No serial events. Connect a rover or simulator.</p>}</div><pre aria-label="Parsed telemetry">{t?JSON.stringify(t,null,2):'No versioned telemetry received.'}</pre></div></details>

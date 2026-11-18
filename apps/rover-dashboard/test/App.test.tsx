@@ -67,3 +67,21 @@ it('diagnostic software stop can be explicitly reset with LOW feedback and never
  expect(screen.getByRole('button',{name:'ARM',exact:true})).toBeDisabled();
  fireEvent.click(screen.getByRole('button',{name:/SOFTWARE EMERGENCY STOP/}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'ESTOP'});
 });
+it('shows MOTOR_OPERATION as inhibited until its commissioning record is accepted',()=>{
+ mount({...connected,simulation:false,telemetry:{...sample,armed:false,healthy:false,nav:'DISARMED',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:false,inhibit:'COMMISSIONING_REQUIRED'}});
+ expect(screen.getByRole('status')).toHaveTextContent('OUTPUTS INHIBITED · COMMISSIONING REQUIRED');
+ expect(screen.getByText('LOW · no physical interlock')).toBeInTheDocument();expect(screen.getByText('120')).toBeInTheDocument();
+ for(const name of ['ARM','Autonomous','Forward','CLEAN ON'])expect(screen.getByRole('button',{name,exact:true})).toBeDisabled();
+ expect(screen.getByRole('region',{name:'Operational state'})).toHaveTextContent('INHIBITED · COMMISSIONING REQUIRED');
+ expect(screen.getByRole('button',{name:'Connect camera',exact:true})).toBeEnabled();
+});
+it('released MOTOR_OPERATION supports software arming/movement with raw GPIO27 LOW',()=>{
+ mount({...connected,simulation:false,telemetry:{...sample,armed:false,healthy:false,nav:'DISARMED',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:true,inhibit:'NONE'}});
+ fireEvent.click(screen.getByRole('button',{name:'ARM',exact:true}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'ARM'});
+ update({armed:true,healthy:false,nav:'MANUAL',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:true,inhibit:'NONE'});
+ fireEvent.keyDown(window,{key:'w',code:'KeyW'});expect(Socket.current.sent.at(-1)).toEqual({type:'hold',direction:'F'});
+ update({armed:true,healthy:false,requested:1,applied:1,en:true,nav:'MANUAL',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:true,inhibit:'NONE'});
+ expect(screen.getByText('COMMANDED ACTIVE')).toBeInTheDocument();expect(screen.getByText('not measured')).toBeInTheDocument();
+ update({armed:false,healthy:false,requested:0,applied:0,en:false,nav:'DISARMED',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:true,inhibit:'COMMAND_TIMEOUT'});
+ expect(screen.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();expect(Socket.current.sent.at(-1)).toEqual({type:'release'});
+});

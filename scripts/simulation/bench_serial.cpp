@@ -1,11 +1,11 @@
-// Actual USB bench firmware adapter with host GPIO/serial mocks and synthetic
+// Actual bench/motor firmware adapter with host GPIO/serial mocks and synthetic
 // ultrasonic echoes. Never opens a device or generates physical outputs.
 #include "../../firmware/rover.ino"
 #include <chrono>
 #include <iostream>
 #include <unistd.h>
 #include <sys/select.h>
-static_assert(!rover::MOTOR_CAPABLE,"Compile this harness in bench mode only");
+static_assert(!rover::MOTOR_CAPABLE || rover::MOTOR_OPERATION_MODE,"Host bench/motor modes only");
 int main() {
   const auto start=std::chrono::steady_clock::now();
   setup();
@@ -19,7 +19,8 @@ int main() {
     mockNow=std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()-start).count();
     const unsigned distances[]={120,100,70}; mockPulse=58*distances[sensorIndex];
     loop();
-    if (mockMotorHighCount || mockNonzeroDutyCount || mockPwmAttachCount) return 1;
+    if (!rover::MOTOR_OUTPUTS_ALLOWED && (mockMotorHighCount || mockNonzeroDutyCount)) return 1;
+    if (!rover::MOTOR_CAPABLE && mockPwmAttachCount) return 1;
     std::cout<<Serial.output<<std::flush; Serial.output.clear();
   }
 }

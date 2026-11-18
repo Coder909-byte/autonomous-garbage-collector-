@@ -21,11 +21,11 @@ run([sys.executable,root/'scripts/check_project.py'],'static-checks.log')
 run([sys.executable,root/'scripts/check_electrical.py'],'electrical-checks.log')
 # PlatformIO can invalidate build directories between test/build actions.
 # Keep every invocation sequential; finish with deployable build artifacts.
-run([pio,'test','-e','native','-e','native_bench'],'native-tests.log')
+run([pio,'test','-e','native','-e','native_bench','-e','native_motor_operation','-e','native_motor_qualified_test'],'native-tests.log')
 run([sys.executable,'-m','unittest','discover','-s','test','-p','test_*.py','-v'],'python-tests.log')
 run([sys.executable,root/'scripts/check_design_exports.py'],'design-export-checks.log')
 run([sys.executable,root/'scripts/check_completion.py'],'completion-checks.log')
-run([pio,'run','-e','esp32dev','-e','usb_bench_diagnostic','-e','wokwi_compile'],'build.log')
+run([pio,'run','-e','esp32dev','-e','usb_bench_diagnostic','-e','motor_operation','-e','wokwi_compile'],'build.log')
 wokwi = shutil.which('wokwi-cli')
 if not wokwi and (root/'.tools/wokwi-cli').exists():
     wokwi = str(root/'.tools/wokwi-cli')

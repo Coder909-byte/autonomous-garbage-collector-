@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <algorithm>
+#include <vector>
 #define IRAM_ATTR
 #define HIGH 1
 #define LOW 0
@@ -23,6 +24,8 @@ static unsigned mockDuty[4]={};
 static bool mockPwmFailure=false, mockHazard=false;
 static unsigned mockEnableHighCount=0;
 static unsigned mockMotorHighCount=0, mockNonzeroDutyCount=0, mockPwmSetupCount=0, mockPwmAttachCount=0;
+struct MockMotorEvent { bool pwm; int output; unsigned value; bool enabled; };
+static std::vector<MockMotorEvent> mockMotorEvents;
 static unsigned long mockPulse=5800;
 static void (*mockInterrupt)()=nullptr;
 static uint32_t millis() { return mockNow; }
@@ -31,6 +34,8 @@ static void digitalWrite(int p,int v) {
   mockPins[p]=v;
   if (p==14 && v) ++mockEnableHighCount;
   if (v && (p==14 || (p>=16 && p<=19) || p==21 || p==22 || p==23 || p==25)) ++mockMotorHighCount;
+  if (p==14 || (p>=16 && p<=19) || p==21 || p==22 || p==23 || p==25)
+    mockMotorEvents.push_back({false,p,static_cast<unsigned>(v),mockPins[14]!=0});
 }
 static int digitalRead(int p) { return mockPins[p]; }
 static void delayMicroseconds(unsigned) {}
@@ -40,6 +45,7 @@ static inline void attachInterrupt(int,void (*fn)(),int) { mockInterrupt=fn; }
 static inline double ledcSetup(unsigned,int,int) { ++mockPwmSetupCount; return mockPwmFailure ? 0 : 1200; }
 static inline void ledcAttachPin(int,unsigned) { ++mockPwmAttachCount; }
 static inline void ledcWrite(unsigned channel,unsigned duty) {
+  mockMotorEvents.push_back({true,static_cast<int>(channel),duty,mockPins[14]!=0});
   if (duty) ++mockNonzeroDutyCount;
   mockDuty[channel]=duty;
   if (mockPins[14] && ((mockDuty[0] && mockDuty[1]) || (mockDuty[2] && mockDuty[3]))) mockHazard=true;

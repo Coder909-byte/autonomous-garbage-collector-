@@ -10,6 +10,8 @@ Implementation base: `e8243c8` (18 November 2026), after camera release `7835925
 
 The existing protected controller retains its 1200 ms manual movement timeout, sensor freshness checks, neutral interval and autonomous navigation. There is no new protected AUTO serial-link deadman: backend loss can leave onboard AUTO running, as previously documented in [SERIAL_PROTOCOL.md](SERIAL_PROTOCOL.md). Bench outputs remain disabled regardless of command loss.
 
+A separate [MOTOR_OPERATION configuration](MOTOR_OPERATION_HANDOVER.md) now provides the motor-capable path under an explicit commissioning record. It does not change either configuration documented here.
+
 ## Explicit compile-time configurations
 
 | Behavior | PROTECTED_ROVER (default) | USB_BENCH_DIAGNOSTIC |
@@ -95,7 +97,7 @@ py -3 scripts/package_main_arduino.py --mode USB_BENCH_DIAGNOSTIC
 py -3 scripts/package_main_arduino.py --mode PROTECTED_ROVER
 ```
 
-On macOS use `python3` instead of `py -3`. Outputs are under `build/arduino/usb_bench_diagnostic/` and `build/arduino/protected_rover/`. Each ZIP contains exactly six source files in `rover_main/`: `rover_main.ino`, `rover_build_config.h`, and the four canonical `rover_*.h` headers. No camera source, credentials or binary is included. Default package generation selects PROTECTED_ROVER. Inspect `rover_build_config.h` to confirm the selected compile-time mode.
+On macOS use `python3` instead of `py -3`. Outputs are under `build/arduino/usb_bench_diagnostic/` and `build/arduino/protected_rover/`. Each ZIP contains exactly seven source files in `rover_main/`: `rover_main.ino`, `rover_build_config.h`, and the five canonical `rover_*.h` headers, including `rover_commissioning.h`. No camera source, credentials or binary is included. Default package generation selects PROTECTED_ROVER. Inspect `rover_build_config.h` to confirm the selected compile-time mode.
 
 Extract only the intended package to a separate folder and open `rover_main/rover_main.ino`. In Boards Manager install **esp32 by Espressif Systems 2.0.17**. Select **ESP32 Dev Module**, 240 MHz CPU, DIO/40 MHz/4 MB flash, default 4 MB partition scheme, PSRAM disabled (matching esp32dev; confirm the actual main board). Click **Verify**. Only after the separate manual preparation above, select the main ESP32 COM port and click **Upload**. Serial Monitor uses 115200 and newline; close it before Mission Control connects. Do not select AI Thinker ESP32-CAM for this sketch.
 

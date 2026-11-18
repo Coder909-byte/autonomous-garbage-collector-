@@ -5,7 +5,7 @@ import argparse
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-MODES = ('PROTECTED_ROVER', 'USB_BENCH_DIAGNOSTIC')
+MODES = ('PROTECTED_ROVER', 'USB_BENCH_DIAGNOSTIC', 'MOTOR_OPERATION')
 
 def package(mode, output):
     if mode not in MODES:
@@ -16,7 +16,7 @@ def package(mode, output):
     # Explicit inventory prevents accidental inclusion of local configuration.
     files = {'rover_main.ino': '#include "rover_build_config.h"\n' + (ROOT/'firmware/rover.ino').read_text(encoding='utf-8'),
              'rover_build_config.h': '#pragma once\n// Compile-time selection; USB bench never drives motors.\n#define ROVER_OPERATING_MODE ' + mode + '\n'}
-    for name in ('rover_mode.h', 'rover_control.h', 'rover_pins.h', 'rover_telemetry.h'):
+    for name in ('rover_commissioning.h', 'rover_mode.h', 'rover_control.h', 'rover_pins.h', 'rover_telemetry.h'):
         files[name] = (ROOT/'include'/name).read_text(encoding='utf-8')
     for name, contents in files.items():
         (sketch/name).write_bytes(contents.encode('utf-8'))
