@@ -14,7 +14,7 @@ export class Bridge extends EventEmitter {
  async connect(open:()=>Promise<Transport>,simulation:boolean,port:string){
   if(this.device||this.state.connecting||this.closing)throw Error('One serial owner permitted; disconnect first');
   const generation=++this.generation;this.disarmAck=false;this.state.protocolReady=false;this.state={...this.state,connecting:true,error:null,logs:[],telemetry:null,receivedAt:null,intent:null,simulation,port};this.publish();
-  this.diagnostics.begin(simulation,port);this.log('INFO',`Opening ${simulation?'simulator':'USB'}: ${port}`,null,'connection');
+  this.diagnostics.begin(simulation,port);this.log('INFO',`Opening ${simulation?'simulator':port.startsWith('WIFI ')?'Wi-Fi':'USB'}: ${port}`,null,'connection');
   try{
    const device=await open();if(generation!==this.generation){await device.close();return;}
    this.device=device;this.openedAt=this.now();this.heartbeatAt=0;this.buffer='';this.discard=false;this.state.connected=true;this.state.connecting=false;
@@ -22,7 +22,7 @@ export class Bridge extends EventEmitter {
    device.on('fault',(e:Error)=>{if(this.device===device){this.log('ERROR',e.message);void this.disconnect();}});
    device.on('lost',()=>{if(this.device===device){this.log('ERROR','Serial device disconnected; STOP delivery not confirmed');void this.disconnect();}});
    // Best effort, repeated at READY to cover USB-induced board reset. No rearm.
-   this.send('S');this.send('DISARM');this.log('INFO',simulation?'SIMULATION MODE · portable virtual controller, no hardware':'USB open · waiting for versioned telemetry',null,'connection');
+   this.send('S');this.send('DISARM');this.log('INFO',simulation?'SIMULATION MODE · portable virtual controller, no hardware':`${port.startsWith('WIFI ')?'Wi-Fi':'USB'} open · waiting for versioned telemetry`,null,'connection');
   }catch(e){if(generation!==this.generation)return;this.state.connecting=false;this.state.connected=false;this.state.port=null;this.log('ERROR',String(e));await this.disconnect();throw e;}
  }
  private send(command:Command|'HEARTBEAT'){

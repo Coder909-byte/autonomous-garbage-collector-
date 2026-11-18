@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname,resolve } from 'node:path';
 import { existsSync } from 'node:fs';
 import { Bridge } from './bridge.js';
-import { Hardware,Simulation,ports } from './transports.js';
+import { Hardware,Network,Simulation,parseWifiTarget,ports } from './transports.js';
 import { cameraAddress,proxyCamera } from './camera.js';
 let root=dirname(fileURLToPath(import.meta.url));while(!existsSync(resolve(root,'include/rover_control.h'))&&dirname(root)!==root)root=dirname(root);
 process.env.ROVER_ROOT=root;
@@ -64,6 +64,7 @@ export function makeServer(bridge=new Bridge(),testPort?:number){
     switch(m.type){
      case 'connect':
       if(m.simulation!==true&&m.simulation!==false)throw Error('Select hardware or simulation explicitly');
+      if(!m.simulation&&m.wifi!==undefined){const target=parseWifiTarget(m.wifi);await bridge.connect(async()=>Network.open(`${target.host}:${target.port}`),false,`WIFI ${target.host}:${target.port}`);break;}
       await bridge.connect(async()=>m.simulation?new Simulation(m.scenario||'clear'):Hardware.open(String(m.port)),m.simulation,m.simulation?'SIMULATION':String(m.port));break;
      case 'disconnect':await bridge.disconnect();break;
      case 'command':bridge.command(m.command);break;

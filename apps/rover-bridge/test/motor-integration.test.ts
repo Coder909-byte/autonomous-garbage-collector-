@@ -2,7 +2,7 @@ import {spawn} from 'node:child_process';
 import {EventEmitter} from 'node:events';
 import {afterEach,it,expect} from 'vitest';
 import {Bridge} from '../src/bridge';
-import type {Transport} from '../src/transports';
+import {Network,parseWifiTarget,type Transport} from '../src/transports';
 
 class MotorFirmware extends EventEmitter implements Transport {
  private child;dropHeartbeat=false;
@@ -40,3 +40,26 @@ it('bench-release firmware is unlocked: ARM, hold forward, release stops, comman
  b.stopHold();await waitFor(()=>b.state.telemetry?.applied===0);expect(b.state.telemetry).toMatchObject({armed:true,en:false});
  device.dropHeartbeat=true;await waitFor(()=>b.state.telemetry?.inhibit==='COMMAND_TIMEOUT');expect(b.state.telemetry?.armed).toBe(false);
 },15000);
+it('Wi-Fi bench firmware: bridge drives and cleans over TCP, link loss stops and disarms',async()=>{
+ const port=String(14000+Math.floor(Math.random()*1000));
+ const firmware=spawn('build/rover-motor-bench-release-wifi-sim',{env:{...process.env,ROVER_SIM_WIFI_PORT:port}});
+ try{
+  let usb='';firmware.stdout.on('data',d=>{usb+=String(d);});
+  await waitFor(()=>usb.includes('WIFI AP ssid=ROVER-CTRL'));
+  const b=new Bridge();bridges.push(b);let link:Network|undefined;
+  await b.connect(async()=>(link=await Network.open('127.0.0.1:'+port)),false,'WIFI 127.0.0.1:'+port);
+  await waitFor(()=>b.ready());expect(b.state.telemetry).toMatchObject({mode:'MOTOR_OPERATION',commissioningReady:true,inhibit:'NONE',armed:false});
+  b.command('ARM');await waitFor(()=>!!b.state.telemetry?.armed);b.command('CLEAN ON');
+  b.hold('F');const held=setInterval(()=>b.hold('F'),100);
+  try{await waitFor(()=>b.state.telemetry?.applied===1&&b.state.telemetry?.brush===true);expect(b.state.telemetry).toMatchObject({en:true,conveyor:true});}finally{clearInterval(held);}
+  await new Promise(r=>setTimeout(r,1500));expect(b.state.telemetry?.armed).toBe(true);
+  b.hold('F');(link as unknown as {socket:{destroy():void}}).socket.destroy();
+  await waitFor(()=>usb.includes('WIFI client lost; DISARMED'));
+  expect(usb.slice(usb.lastIndexOf('WIFI client lost'))).not.toMatch(/en=1/);
+ }finally{firmware.kill();}
+},20000);
+it('Wi-Fi address parsing accepts host[:port] and rejects injection',()=>{
+ expect(parseWifiTarget('192.168.4.1')).toEqual({host:'192.168.4.1',port:3333});
+ expect(parseWifiTarget(' rover.local:4000 ')).toEqual({host:'rover.local',port:4000});
+ for(const bad of ['', 'http://192.168.4.1', '192.168.4.1:0', '192.168.4.1:70000', 'a b', '1.2.3.4/x', 42])expect(()=>parseWifiTarget(bad)).toThrow();
+});

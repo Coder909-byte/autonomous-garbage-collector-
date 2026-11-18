@@ -25,7 +25,7 @@ run([pio,'test','-e','native','-e','native_bench','-e','native_motor_operation',
 run([sys.executable,'-m','unittest','discover','-s','test','-p','test_*.py','-v'],'python-tests.log')
 run([sys.executable,root/'scripts/check_design_exports.py'],'design-export-checks.log')
 run([sys.executable,root/'scripts/check_completion.py'],'completion-checks.log')
-run([pio,'run','-e','esp32dev','-e','usb_bench_diagnostic','-e','motor_operation','-e','motor_bench_release','-e','wokwi_compile'],'build.log')
+run([pio,'run','-e','esp32dev','-e','usb_bench_diagnostic','-e','motor_operation','-e','motor_bench_release','-e','motor_bench_release_wifi','-e','wokwi_compile'],'build.log')
 wokwi = shutil.which('wokwi-cli')
 if not wokwi and (root/'.tools/wokwi-cli').exists():
     wokwi = str(root/'.tools/wokwi-cli')

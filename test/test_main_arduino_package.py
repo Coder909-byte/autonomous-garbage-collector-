@@ -51,6 +51,23 @@ class MainArduinoPackage(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     package(mode, target/mode, bench_release=True)
 
+    def test_wifi_package_adds_only_the_wifi_header_and_flag(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            sketch, archive = package('MOTOR_OPERATION', target/'wifi', bench_release=True, wifi=True)
+            self.assertEqual(archive.name, 'rover_main_motor_operation_bench_release_wifi.zip')
+            with zipfile.ZipFile(archive) as z:
+                names = set(z.namelist())
+                config = z.read('rover_main/rover_build_config.h')
+            self.assertIn('rover_main/rover_wifi.h', names)
+            self.assertEqual(len(names), 8)
+            self.assertIn(b'#define ROVER_WIFI', config)
+            self.assertIn(b'#define ROVER_BENCH_RELEASE', config)
+            _, usb = package('MOTOR_OPERATION', target/'usb', bench_release=True)
+            with zipfile.ZipFile(usb) as z:
+                self.assertNotIn('rover_main/rover_wifi.h', z.namelist())
+                self.assertNotIn(b'ROVER_WIFI', z.read('rover_main/rover_build_config.h'))
+
     def test_invalid_mode_is_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory)/'invalid'

@@ -6,6 +6,14 @@
 #include "rover_control.h"
 #include "rover_pins.h"
 #include "rover_telemetry.h"
+#if defined(ROVER_WIFI)
+#include "rover_wifi.h"
+rover::WifiLink roverLink;
+rover::LineParser wifiParser;
+#define ROVER_OUT roverLink
+#else
+#define ROVER_OUT Serial
+#endif
 
 rover::Controller controller;
 rover::LineParser parser;
@@ -96,7 +104,7 @@ void applyOutputs(uint32_t now) {
   if (state != previousState) {
     previousState = state;
     const char *names[] = {"STOPPED","FORWARD","BACKWARD","LEFT","RIGHT"};
-    Serial.printf("STATE motion=%s en=%d brush=%d conveyor=%d nav=%s ms=%lu\n",names[static_cast<int>(reported)],
+    ROVER_OUT.printf("STATE motion=%s en=%d brush=%d conveyor=%d nav=%s ms=%lu\n",names[static_cast<int>(reported)],
       permit,permit && brush,permit && conveyor,controller.navigationName(),static_cast<unsigned long>(now));
   }
 }
@@ -107,6 +115,23 @@ int measure(unsigned index) {
   unsigned long us = pulseIn(pins::ECHO[index],HIGH,25000);
   int cm = static_cast<int>(us/58UL);
   return cm>=2 && cm<=400 ? cm : -1;
+}
+void feedCommand(rover::LineParser &lines, char ch) {
+  rover::LineParser::Result result = lines.feed(ch);
+  if (result == rover::LineParser::Overflow) {
+    controller.disarm(); applyOutputs(millis()); ROVER_OUT.println("ERR line overflow; DISARMED");
+  } else if (result == rover::LineParser::Ready) {
+    bool accepted;
+    portENTER_CRITICAL(&safetyMux);
+    if (rover::PHYSICAL_FEEDBACK_REQUIRED && hardwareTrip) controller.emergency();
+    accepted = rover::MOTOR_OPERATION_MODE && !strcmp(lines.line(),"HEARTBEAT");
+    if (!accepted) accepted = controller.command(lines.line(),millis(),controllerHealthy() && pwmReady);
+    if (rover::MOTOR_OPERATION_MODE && accepted) { lastMotorCommand=millis(); motorCommandTimeout=false; }
+    if (accepted && !strcmp(lines.line(),"RESET")) hardwareTrip = false;
+    portEXIT_CRITICAL(&safetyMux);
+    applyOutputs(millis());
+    ROVER_OUT.printf("%s %s\n",accepted ? "OK" : "ERR",lines.line());
+  }
 }
 void setup() {
   // Firmware holds EN low after setup begins. Reset/power-ramp safety still
@@ -135,41 +160,39 @@ void setup() {
   zeroOutputs();
   Serial.begin(115200);
 #if ROVER_OPERATING_MODE == USB_BENCH_DIAGNOSTIC
-  Serial.println("READY USB_BENCH_DIAGNOSTIC DISARMED; NO MOTOR POWER; ARM/AUTO/motor commands rejected; software ESTOP/RESET available.");
+  ROVER_OUT.println("READY USB_BENCH_DIAGNOSTIC DISARMED; NO MOTOR POWER; ARM/AUTO/motor commands rejected; software ESTOP/RESET available.");
 #elif ROVER_OPERATING_MODE == MOTOR_OPERATION
-  Serial.println("READY MOTOR_OPERATION DISARMED; GPIO27 is reported, not a physical interlock; independent motor-supply disconnect required.");
-  Serial.printf("COMMISSIONING ready=%d inhibit=%s; software ESTOP is not battery isolation\n",rover::COMMISSIONING_READY,motorInhibit());
+  ROVER_OUT.println("READY MOTOR_OPERATION DISARMED; GPIO27 is reported, not a physical interlock; independent motor-supply disconnect required.");
+  ROVER_OUT.printf("COMMISSIONING ready=%d inhibit=%s; software ESTOP is not battery isolation\n",rover::COMMISSIONING_READY,motorInhibit());
 #if defined(ROVER_BENCH_RELEASE)
-  Serial.printf("BENCH RELEASE record=%s\n",rover::COMMISSIONING.record);
+  ROVER_OUT.printf("BENCH RELEASE record=%s\n",rover::COMMISSIONING.record);
 #endif
 #else
-  Serial.println("READY DISARMED; RESET after ESTOP, then ARM. Motor power stays disconnected for software tests.");
+  ROVER_OUT.println("READY DISARMED; RESET after ESTOP, then ARM. Motor power stays disconnected for software tests.");
 #endif
-  Serial.printf("MODE %s; motorCapable=%d\n",rover::OPERATING_MODE,rover::MOTOR_CAPABLE);
-  if (!pwmReady) Serial.println("FAULT PWM setup; arming disabled");
+  ROVER_OUT.printf("MODE %s; motorCapable=%d\n",rover::OPERATING_MODE,rover::MOTOR_CAPABLE);
+#if defined(ROVER_WIFI)
+  if (roverLink.begin()) ROVER_OUT.printf("WIFI AP ssid=%s ip=%s port=%d\n",ROVER_WIFI_SSID,WiFi.softAPIP().toString().c_str(),ROVER_WIFI_PORT);
+  else ROVER_OUT.println("WIFI AP start failed; USB control only");
+#endif
+  if (!pwmReady) ROVER_OUT.println("FAULT PWM setup; arming disabled");
 }
 void loop() {
   if (rover::PHYSICAL_FEEDBACK_REQUIRED && (hardwareTrip || !healthy())) controller.emergency();
   controller.tick(millis(),controllerHealthy());
   applyOutputs(millis());
   // Bounded serial work prevents input flooding from starving the deadman.
-  for (unsigned count=0;count<64 && Serial.available();++count) {
-    rover::LineParser::Result result = parser.feed(static_cast<char>(Serial.read()));
-    if (result == rover::LineParser::Overflow) {
-      controller.disarm(); applyOutputs(millis()); Serial.println("ERR line overflow; DISARMED");
-    } else if (result == rover::LineParser::Ready) {
-      bool accepted;
-      portENTER_CRITICAL(&safetyMux);
-      if (rover::PHYSICAL_FEEDBACK_REQUIRED && hardwareTrip) controller.emergency();
-      accepted = rover::MOTOR_OPERATION_MODE && !strcmp(parser.line(),"HEARTBEAT");
-      if (!accepted) accepted = controller.command(parser.line(),millis(),controllerHealthy() && pwmReady);
-      if (rover::MOTOR_OPERATION_MODE && accepted) { lastMotorCommand=millis(); motorCommandTimeout=false; }
-      if (accepted && !strcmp(parser.line(),"RESET")) hardwareTrip = false;
-      portEXIT_CRITICAL(&safetyMux);
-      applyOutputs(millis());
-      Serial.printf("%s %s\n",accepted ? "OK" : "ERR",parser.line());
-    }
+  for (unsigned count=0;count<64 && Serial.available();++count) feedCommand(parser,static_cast<char>(Serial.read()));
+#if defined(ROVER_WIFI)
+  if (roverLink.service()) {
+    controller.disarm(); applyOutputs(millis()); ROVER_OUT.println("WIFI client lost; DISARMED");
   }
+  if (roverLink.connectedNow()) {
+    wifiParser = rover::LineParser(); controller.disarm(); applyOutputs(millis());
+    ROVER_OUT.println("WIFI client connected; DISARMED until ARM");
+  }
+  for (unsigned count=0;count<64 && roverLink.available();++count) feedCommand(wifiParser,static_cast<char>(roverLink.read()));
+#endif
   // One ping every 65 ms; no 45/180 ms blocking delays. Serial stop latency
   // can still be up to one 25 ms pulseIn timeout plus loop/serial overhead.
   uint32_t now = millis();
@@ -188,8 +211,8 @@ void loop() {
     char message[512];
     int length = rover::telemetry(message,sizeof(message),controller,now,appliedMotion,
       appliedEnable,appliedBrush,appliedConveyor,healthy(),motorInhibit());
-    if (length > 0 && length < static_cast<int>(sizeof(message))) Serial.println(message);
-    Serial.printf("DIST %d %d %d armed=%d auto=%d estop=%d motion=%d en=%d\n",
+    if (length > 0 && length < static_cast<int>(sizeof(message))) ROVER_OUT.println(message);
+    ROVER_OUT.printf("DIST %d %d %d armed=%d auto=%d estop=%d motion=%d en=%d\n",
       controller.ranges[0].cm,controller.ranges[1].cm,controller.ranges[2].cm,
       controller.armed,controller.automatic,controller.estop,static_cast<int>(controller.motion),digitalRead(pins::ENABLE));
   }
