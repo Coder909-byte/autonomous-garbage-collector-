@@ -1,64 +1,5 @@
 Verbosity level can be increased via `-v, -vv, or -vvv` option
-Collected 5 tests
-
-Processing test_io in native environment
---------------------------------------------------------------------------------
-Building...
-Testing...
-test/test_io/test_main.cpp:129: protected_feedback_low_still_polls_sensors	[PASSED]
-test/test_io/test_main.cpp:130: versioned_telemetry_reports_requested_and_applied	[PASSED]
-test/test_io/test_main.cpp:130: telemetry_sizing_and_rollover	[PASSED]
-test/test_io/test_main.cpp:131: physical_estop_during_both_cleaning_channels	[PASSED]
-test/test_io/test_main.cpp:131: software_reboot_discards_motion_and_cleaning	[PASSED]
-test/test_io/test_main.cpp:132: sensor_recovery_requires_explicit_arm_auto	[PASSED]
-test/test_io/test_main.cpp:133: adapter_times_turn_from_enable	[PASSED]
-test/test_io/test_main.cpp:133: physical_estop_interrupts_auto_turn	[PASSED]
-test/test_io/test_main.cpp:134: reassessment_sensor_failure_keeps_adapter_disabled	[PASSED]
-test/test_io/test_main.cpp:135: one_l298n_independent_outputs	[PASSED]
-test/test_io/test_main.cpp:135: aux_suppressed_during_neutral_and_turns	[PASSED]
-test/test_io/test_main.cpp:136: right_turn_wheel_outputs	[PASSED]
-test/test_io/test_main.cpp:136: estop_input_has_internal_pulldown	[PASSED]
-test/test_io/test_main.cpp:137: stop_disables_both_aux_channels	[PASSED]
-test/test_io/test_main.cpp:137: aux_channel_topology	[PASSED]
-test/test_io/test_main.cpp:137: boot_outputs_disabled	[PASSED]
-test/test_io/test_main.cpp:137: open_loop_at_boot_latches	[PASSED]
-test/test_io/test_main.cpp:138: arm_no_pulse	[PASSED]
-test/test_io/test_main.cpp:138: forward_after_neutral	[PASSED]
-test/test_io/test_main.cpp:138: reverse_break_before_make	[PASSED]
-test/test_io/test_main.cpp:139: physical_isr_immediately_cuts_enable	[PASSED]
-test/test_io/test_main.cpp:139: release_requires_reset_and_rearm	[PASSED]
-test/test_io/test_main.cpp:140: serial_estop_all_outputs	[PASSED]
-test/test_io/test_main.cpp:140: deadman_cuts_actual_enable	[PASSED]
-test/test_io/test_main.cpp:141: overflow_disarms_actual_outputs	[PASSED]
-test/test_io/test_main.cpp:141: pwm_failure_blocks_arming	[PASSED]
-test/test_io/test_main.cpp:141: timeout_disarms_auto_outputs	[PASSED]
------------------- native:test_io [PASSED] Took 0.64 seconds ------------------
-
-Processing test_turning in native environment
---------------------------------------------------------------------------------
-Building...
-Testing...
-test/test_turning/test_main.cpp:148: left_turn_is_continuous	[PASSED]
-test/test_turning/test_main.cpp:148: right_turn_is_continuous	[PASSED]
-test/test_turning/test_main.cpp:149: dead_time_does_not_consume_turn_duration	[PASSED]
-test/test_turning/test_main.cpp:149: repeated_applied_feedback_does_not_extend_turn	[PASSED]
-test/test_turning/test_main.cpp:150: reassessment_requires_every_new_sensor	[PASSED]
-test/test_turning/test_main.cpp:150: reassessment_minimum_settle_time	[PASSED]
-test/test_turning/test_main.cpp:151: fresh_clear_path_exits_avoidance	[PASSED]
-test/test_turning/test_main.cpp:151: hysteresis_prevents_front_threshold_chatter	[PASSED]
-test/test_turning/test_main.cpp:152: persistent_left_obstacle_is_bounded	[PASSED]
-test/test_turning/test_main.cpp:152: persistent_right_obstacle_is_bounded	[PASSED]
-test/test_turning/test_main.cpp:153: reassessment_selects_updated_direction	[PASSED]
-test/test_turning/test_main.cpp:153: estop_preempts_every_phase	[PASSED]
-test/test_turning/test_main.cpp:154: invalid_sensor_preempts_every_phase	[PASSED]
-test/test_turning/test_main.cpp:154: stale_sensor_preempts_every_phase	[PASSED]
-test/test_turning/test_main.cpp:155: timer_and_reassessment_survive_rollover	[PASSED]
-test/test_turning/test_main.cpp:155: side_clearance_loss_stops_without_immediate_retry	[PASSED]
-test/test_turning/test_main.cpp:156: final_attempt_may_recover_with_fresh_clear_path	[PASSED]
-test/test_turning/test_main.cpp:156: obstacle_cleared_during_initial_settle_needs_no_turn	[PASSED]
-test/test_turning/test_main.cpp:157: pending_turn_safety_clearance_is_checked	[PASSED]
-test/test_turning/test_main.cpp:157: stop_command_cancels_reassessment_and_future_turns	[PASSED]
----------------- native:test_turning [PASSED] Took 0.51 seconds ----------------
+Collected 3 tests
 
 Processing test_navigation in native environment
 --------------------------------------------------------------------------------
@@ -102,100 +43,70 @@ test/test_navigation/test_main.cpp:84: parser_normalization	[PASSED]
 test/test_navigation/test_main.cpp:84: parser_overflow_discards	[PASSED]
 test/test_navigation/test_main.cpp:85: gate_neutral_and_reverse	[PASSED]
 test/test_navigation/test_main.cpp:85: gate_rollover	[PASSED]
--------------- native:test_navigation [PASSED] Took 0.43 seconds --------------
+-------------- native:test_navigation [PASSED] Took 5.67 seconds --------------
 
-Processing test_bench in native_bench environment
+Processing test_io in native environment
 --------------------------------------------------------------------------------
 Building...
 Testing...
-test/test_bench/test_main.cpp:95: bench_boot_disarmed_without_protection	[PASSED]
-test/test_bench/test_main.cpp:95: bench_rejects_every_motor_command	[PASSED]
-test/test_bench/test_main.cpp:96: bench_software_estop_latches_until_reset	[PASSED]
-test/test_bench/test_main.cpp:96: bench_stop_alias_latches	[PASSED]
-test/test_bench/test_main.cpp:97: bench_gpio27_cannot_unlock_motors	[PASSED]
-test/test_bench/test_main.cpp:97: bench_adapter_rejects_forced_controller_state	[PASSED]
-test/test_bench/test_main.cpp:98: bench_pwm_helper_never_drives_high	[PASSED]
-test/test_bench/test_main.cpp:98: bench_usb_loss_and_rollover_keep_outputs_disabled	[PASSED]
-test/test_bench/test_main.cpp:99: bench_sensors_and_tel_are_live_with_feedback_low	[PASSED]
-test/test_bench/test_main.cpp:99: bench_parser_overflow_cannot_arm	[PASSED]
-test/test_bench/test_main.cpp:100: bench_telemetry_fits_buffer_at_maximum_ages	[PASSED]
--------------- native_bench:test_bench [PASSED] Took 0.72 seconds --------------
+test/test_io/test_main.cpp:120: versioned_telemetry_reports_requested_and_applied	[PASSED]
+test/test_io/test_main.cpp:120: telemetry_sizing_and_rollover	[PASSED]
+test/test_io/test_main.cpp:121: physical_estop_during_both_cleaning_channels	[PASSED]
+test/test_io/test_main.cpp:121: software_reboot_discards_motion_and_cleaning	[PASSED]
+test/test_io/test_main.cpp:122: sensor_recovery_requires_explicit_arm_auto	[PASSED]
+test/test_io/test_main.cpp:123: adapter_times_turn_from_enable	[PASSED]
+test/test_io/test_main.cpp:123: physical_estop_interrupts_auto_turn	[PASSED]
+test/test_io/test_main.cpp:124: reassessment_sensor_failure_keeps_adapter_disabled	[PASSED]
+test/test_io/test_main.cpp:125: one_l298n_independent_outputs	[PASSED]
+test/test_io/test_main.cpp:125: aux_suppressed_during_neutral_and_turns	[PASSED]
+test/test_io/test_main.cpp:126: right_turn_wheel_outputs	[PASSED]
+test/test_io/test_main.cpp:126: estop_input_has_internal_pulldown	[PASSED]
+test/test_io/test_main.cpp:127: stop_disables_both_aux_channels	[PASSED]
+test/test_io/test_main.cpp:127: aux_channel_topology	[PASSED]
+test/test_io/test_main.cpp:127: boot_outputs_disabled	[PASSED]
+test/test_io/test_main.cpp:127: open_loop_at_boot_latches	[PASSED]
+test/test_io/test_main.cpp:128: arm_no_pulse	[PASSED]
+test/test_io/test_main.cpp:128: forward_after_neutral	[PASSED]
+test/test_io/test_main.cpp:128: reverse_break_before_make	[PASSED]
+test/test_io/test_main.cpp:129: physical_isr_immediately_cuts_enable	[PASSED]
+test/test_io/test_main.cpp:129: release_requires_reset_and_rearm	[PASSED]
+test/test_io/test_main.cpp:130: serial_estop_all_outputs	[PASSED]
+test/test_io/test_main.cpp:130: deadman_cuts_actual_enable	[PASSED]
+test/test_io/test_main.cpp:131: overflow_disarms_actual_outputs	[PASSED]
+test/test_io/test_main.cpp:131: pwm_failure_blocks_arming	[PASSED]
+test/test_io/test_main.cpp:131: timeout_disarms_auto_outputs	[PASSED]
+------------------ native:test_io [PASSED] Took 9.42 seconds ------------------
 
-Processing test_motor_operation in native_motor_operation environment
+Processing test_turning in native environment
 --------------------------------------------------------------------------------
 Building...
 Testing...
-test/test_motor_operation/test_main.cpp:156: fixed_gpio_map	[PASSED]
-test/test_motor_operation/test_main.cpp:156: commissioning_requires_all_six_conditions_and_record	[PASSED]
-test/test_motor_operation/test_main.cpp:157: boot_disarmed_with_real_gpio27_low	[PASSED]
-test/test_motor_operation/test_main.cpp:157: software_stop_latches_with_gpio27_low	[PASSED]
-test/test_motor_operation/test_main.cpp:158: sensor_polling_and_compatible_tel	[PASSED]
-test/test_motor_operation/test_main.cpp:158: telemetry_fits_with_maximum_ages_and_inhibit	[PASSED]
-test/test_motor_operation/test_main.cpp:171: pending_commissioning_rejects_all_motor_commands	[PASSED]
-test/test_motor_operation/test_main.cpp:171: gpio27_high_cannot_substitute_for_commissioning	[PASSED]
-test/test_motor_operation/test_main.cpp:172: pending_adapter_and_pwm_reject_forced_requests	[PASSED]
-test/test_motor_operation/test_main.cpp:172: heartbeat_and_reset_do_not_satisfy_commissioning	[PASSED]
----- native_motor_operation:test_motor_operation [PASSED] Took 0.60 seconds ----
-
-Processing test_motor_operation in native_motor_qualified_test environment
---------------------------------------------------------------------------------
-Building...
-Testing...
-test/test_motor_operation/test_main.cpp:156: fixed_gpio_map	[PASSED]
-test/test_motor_operation/test_main.cpp:156: commissioning_requires_all_six_conditions_and_record	[PASSED]
-test/test_motor_operation/test_main.cpp:157: boot_disarmed_with_real_gpio27_low	[PASSED]
-test/test_motor_operation/test_main.cpp:157: software_stop_latches_with_gpio27_low	[PASSED]
-test/test_motor_operation/test_main.cpp:158: sensor_polling_and_compatible_tel	[PASSED]
-test/test_motor_operation/test_main.cpp:158: telemetry_fits_with_maximum_ages_and_inhibit	[PASSED]
-test/test_motor_operation/test_main.cpp:160: all_direction_pwm_and_neutral_intervals	[PASSED]
-test/test_motor_operation/test_main.cpp:160: pwm_is_prepared_with_enable_low_then_enable_asserted	[PASSED]
-test/test_motor_operation/test_main.cpp:161: normal_stop_disarm_and_rearm	[PASSED]
-test/test_motor_operation/test_main.cpp:161: independent_cleaning_and_forward_gating	[PASSED]
-test/test_motor_operation/test_main.cpp:162: estop_disables_wheels_and_cleaning_until_reset_and_arm	[PASSED]
-test/test_motor_operation/test_main.cpp:162: command_silence_disarms_manual_and_clears_cleaning	[PASSED]
-test/test_motor_operation/test_main.cpp:163: invalid_commands_do_not_renew_the_motor_lease	[PASSED]
-test/test_motor_operation/test_main.cpp:163: heartbeat_keeps_auto_live_but_loss_still_disarms	[PASSED]
-test/test_motor_operation/test_main.cpp:164: unchanged_auto_avoidance_reaches_applied_turn	[PASSED]
-test/test_motor_operation/test_main.cpp:164: stale_sensor_disarms_auto	[PASSED]
-test/test_motor_operation/test_main.cpp:165: pwm_failure_cannot_be_ignored_with_gpio27_high	[PASSED]
-test/test_motor_operation/test_main.cpp:165: command_timeout_handles_millis_rollover	[PASSED]
-test/test_motor_operation/test_main.cpp:166: serial_overflow_disarms_applied_outputs	[PASSED]
-- native_motor_qualified_test:test_motor_operation [PASSED] Took 0.61 seconds -
-
-Processing test_motor_operation in native_motor_bench_release environment
---------------------------------------------------------------------------------
-Building...
-Testing...
-test/test_motor_operation/test_main.cpp:156: fixed_gpio_map	[PASSED]
-test/test_motor_operation/test_main.cpp:156: commissioning_requires_all_six_conditions_and_record	[PASSED]
-test/test_motor_operation/test_main.cpp:157: boot_disarmed_with_real_gpio27_low	[PASSED]
-test/test_motor_operation/test_main.cpp:157: software_stop_latches_with_gpio27_low	[PASSED]
-test/test_motor_operation/test_main.cpp:158: sensor_polling_and_compatible_tel	[PASSED]
-test/test_motor_operation/test_main.cpp:158: telemetry_fits_with_maximum_ages_and_inhibit	[PASSED]
-test/test_motor_operation/test_main.cpp:160: all_direction_pwm_and_neutral_intervals	[PASSED]
-test/test_motor_operation/test_main.cpp:160: pwm_is_prepared_with_enable_low_then_enable_asserted	[PASSED]
-test/test_motor_operation/test_main.cpp:161: normal_stop_disarm_and_rearm	[PASSED]
-test/test_motor_operation/test_main.cpp:161: independent_cleaning_and_forward_gating	[PASSED]
-test/test_motor_operation/test_main.cpp:162: estop_disables_wheels_and_cleaning_until_reset_and_arm	[PASSED]
-test/test_motor_operation/test_main.cpp:162: command_silence_disarms_manual_and_clears_cleaning	[PASSED]
-test/test_motor_operation/test_main.cpp:163: invalid_commands_do_not_renew_the_motor_lease	[PASSED]
-test/test_motor_operation/test_main.cpp:163: heartbeat_keeps_auto_live_but_loss_still_disarms	[PASSED]
-test/test_motor_operation/test_main.cpp:164: unchanged_auto_avoidance_reaches_applied_turn	[PASSED]
-test/test_motor_operation/test_main.cpp:164: stale_sensor_disarms_auto	[PASSED]
-test/test_motor_operation/test_main.cpp:165: pwm_failure_cannot_be_ignored_with_gpio27_high	[PASSED]
-test/test_motor_operation/test_main.cpp:165: command_timeout_handles_millis_rollover	[PASSED]
-test/test_motor_operation/test_main.cpp:166: serial_overflow_disarms_applied_outputs	[PASSED]
-test/test_motor_operation/test_main.cpp:168: bench_release_is_ready_with_operator_record	[PASSED]
--- native_motor_bench_release:test_motor_operation [PASSED] Took 0.60 seconds --
+test/test_turning/test_main.cpp:148: left_turn_is_continuous	[PASSED]
+test/test_turning/test_main.cpp:148: right_turn_is_continuous	[PASSED]
+test/test_turning/test_main.cpp:149: dead_time_does_not_consume_turn_duration	[PASSED]
+test/test_turning/test_main.cpp:149: repeated_applied_feedback_does_not_extend_turn	[PASSED]
+test/test_turning/test_main.cpp:150: reassessment_requires_every_new_sensor	[PASSED]
+test/test_turning/test_main.cpp:150: reassessment_minimum_settle_time	[PASSED]
+test/test_turning/test_main.cpp:151: fresh_clear_path_exits_avoidance	[PASSED]
+test/test_turning/test_main.cpp:151: hysteresis_prevents_front_threshold_chatter	[PASSED]
+test/test_turning/test_main.cpp:152: persistent_left_obstacle_is_bounded	[PASSED]
+test/test_turning/test_main.cpp:152: persistent_right_obstacle_is_bounded	[PASSED]
+test/test_turning/test_main.cpp:153: reassessment_selects_updated_direction	[PASSED]
+test/test_turning/test_main.cpp:153: estop_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:154: invalid_sensor_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:154: stale_sensor_preempts_every_phase	[PASSED]
+test/test_turning/test_main.cpp:155: timer_and_reassessment_survive_rollover	[PASSED]
+test/test_turning/test_main.cpp:155: side_clearance_loss_stops_without_immediate_retry	[PASSED]
+test/test_turning/test_main.cpp:156: final_attempt_may_recover_with_fresh_clear_path	[PASSED]
+test/test_turning/test_main.cpp:156: obstacle_cleared_during_initial_settle_needs_no_turn	[PASSED]
+test/test_turning/test_main.cpp:157: pending_turn_safety_clearance_is_checked	[PASSED]
+test/test_turning/test_main.cpp:157: stop_command_cancels_reassessment_and_future_turns	[PASSED]
+---------------- native:test_turning [PASSED] Took 6.44 seconds ----------------
 
 =================================== SUMMARY ===================================
-Environment                  Test                  Status    Duration
----------------------------  --------------------  --------  ------------
-native                       test_io               PASSED    00:00:00.640
-native                       test_turning          PASSED    00:00:00.509
-native                       test_navigation       PASSED    00:00:00.433
-native_bench                 test_bench            PASSED    00:00:00.718
-native_motor_operation       test_motor_operation  PASSED    00:00:00.598
-native_motor_qualified_test  test_motor_operation  PASSED    00:00:00.611
-native_motor_bench_release   test_motor_operation  PASSED    00:00:00.597
-================ 145 test cases: 145 succeeded in 00:00:04.106 ================
+Environment    Test             Status    Duration
+-------------  ---------------  --------  ------------
+native         test_navigation  PASSED    00:00:05.670
+native         test_io          PASSED    00:00:09.416
+native         test_turning     PASSED    00:00:06.443
+================= 84 test cases: 84 succeeded in 00:00:21.529 =================
