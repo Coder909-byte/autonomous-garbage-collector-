@@ -50,3 +50,20 @@ it('separates physical safety feedback from the firmware latch and matches the a
  mount({...connected,simulation:false,port:'/dev/mock'});expect(screen.getByLabelText('Control source')).toHaveValue('hardware');update({armed:false,estop:true,healthy:true,nav:'ESTOP'});
  expect(screen.getByText('HIGH · healthy',{exact:true})).toBeInTheDocument();expect(screen.getByText('LATCHED',{exact:true})).toBeInTheDocument();
 });
+it('diagnostic USB remains connected with real ranges while all motor controls are unavailable',()=>{
+ mount({...connected,simulation:false,port:'USB-BENCH-MOCK',telemetry:{...sample,armed:false,healthy:false,nav:'DISARMED',mode:'USB_BENCH_DIAGNOSTIC',motorCapable:false}});
+ expect(screen.getByRole('status')).toHaveTextContent('USB BENCH DIAGNOSTIC · NO MOTOR POWER');
+ expect(screen.getByText('120')).toBeInTheDocument();expect(screen.getByText('LOW · diagnostic input')).toBeInTheDocument();
+ for(const name of ['ARM','Autonomous','Forward','Backward','Left','Right','CLEAN ON','Brushes ON','Conveyor ON'])expect(screen.getByRole('button',{name,exact:true})).toBeDisabled();
+ fireEvent.keyDown(window,{key:'w',code:'KeyW'});expect(Socket.current.sent.some(m=>m.type==='hold')).toBe(false);
+ expect(screen.getByRole('region',{name:'Navigation visualization'})).toHaveTextContent('ARM and AUTO are unavailable');
+ expect(screen.getByRole('button',{name:/SOFTWARE EMERGENCY STOP/})).toBeEnabled();
+ expect(screen.getByRole('button',{name:'Connect camera',exact:true})).toBeEnabled();
+});
+it('diagnostic software stop can be explicitly reset with LOW feedback and never offers ARM',()=>{
+ mount({...connected,simulation:false,port:'USB-BENCH-MOCK',telemetry:{...sample,armed:false,healthy:false,estop:true,nav:'ESTOP',mode:'USB_BENCH_DIAGNOSTIC',motorCapable:false}});
+ const reset=screen.getByRole('button',{name:'Reset firmware E-stop latch'});expect(reset).toBeEnabled();
+ fireEvent.click(reset);expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'RESET'});
+ expect(screen.getByRole('button',{name:'ARM',exact:true})).toBeDisabled();
+ fireEvent.click(screen.getByRole('button',{name:/SOFTWARE EMERGENCY STOP/}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'ESTOP'});
+});

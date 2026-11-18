@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <ctype.h>
+#include "rover_mode.h"
 
 namespace rover {
 constexpr uint32_t MANUAL_MS = 1200, FRESH_MS = 500;
@@ -27,15 +28,15 @@ class Controller {
     motion = Motion::Stop; phase = NavPhase::Cruise; turnAttempts = 0;
   }
   bool command(const char *cmd, uint32_t now, bool healthy) {
-    if (!healthy) emergency();
+    if (MOTOR_CAPABLE && !healthy) emergency();
     if (!strcmp(cmd,"ESTOP") || !strcmp(cmd,"STOP")) { emergency(); return true; }
     if (!strcmp(cmd,"DISARM")) { disarm(); return true; }
     if (!strcmp(cmd,"RESET")) {
-      if (!healthy || armed) return false;
+      if ((MOTOR_CAPABLE && !healthy) || armed) return false;
       estop = false; disarm(); return true;
     }
     if (!strcmp(cmd,"ARM")) {
-      if (estop || !healthy) return false;
+      if (!MOTOR_CAPABLE || estop || !healthy) return false;
       disarm(); armed = true; return true;
     }
     if (!strcmp(cmd,"S")) {
@@ -48,7 +49,7 @@ class Controller {
     if (!strcmp(cmd,"CLEAN OFF")) { brushes = conveyor = false; return true; }
     if (!strcmp(cmd,"BRUSH OFF")) { brushes = false; return true; }
     if (!strcmp(cmd,"CONVEYOR OFF")) { conveyor = false; return true; }
-    if (!armed || estop) return false;
+    if (!MOTOR_CAPABLE || !armed || estop) return false;
     if (!strcmp(cmd,"CLEAN ON")) { brushes = conveyor = true; return true; }
     if (!strcmp(cmd,"BRUSH ON")) { brushes = true; return true; }
     if (!strcmp(cmd,"CONVEYOR ON")) { conveyor = true; return true; }
@@ -104,7 +105,8 @@ class Controller {
     }
   }
   void tick(uint32_t now, bool healthy) {
-    if (!healthy) emergency();
+    if (MOTOR_CAPABLE && !healthy) emergency();
+    if (!MOTOR_CAPABLE) { disarm(); return; }
     if (!armed || estop) { motion = Motion::Stop; return; }
     if (!automatic) {
       if (motion != Motion::Stop && uint32_t(now-manualAt) >= MANUAL_MS) motion = Motion::Stop;

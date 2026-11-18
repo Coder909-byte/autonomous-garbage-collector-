@@ -9,9 +9,9 @@ inline int telemetry(char *out,unsigned capacity,const Controller &c,uint32_t no
   return snprintf(out,capacity,
     "TEL {\"v\":1,\"fw\":\"%s\",\"ms\":%lu,\"armed\":%s,\"auto\":%s,\"estop\":%s,\"healthy\":%s,"
     "\"requested\":%d,\"applied\":%d,\"en\":%s,\"brushReq\":%s,\"conveyorReq\":%s,\"brush\":%s,\"conveyor\":%s,"
-    "\"nav\":\"%s\",\"cm\":[%d,%d,%d],\"age\":[%lu,%lu,%lu]}",
+    "\"nav\":\"%s\",\"mode\":\"%s\",\"motorCapable\":%s,\"cm\":[%d,%d,%d],\"age\":[%lu,%lu,%lu]}",
     FIRMWARE_ID,static_cast<unsigned long>(now),c.armed?"true":"false",c.automatic?"true":"false",c.estop?"true":"false",healthy?"true":"false",
-    static_cast<int>(c.motion),static_cast<int>(applied),enabled?"true":"false",c.brushes?"true":"false",c.conveyor?"true":"false",brush?"true":"false",conveyor?"true":"false",c.navigationName(),
+    static_cast<int>(c.motion),static_cast<int>(applied),enabled?"true":"false",c.brushes?"true":"false",c.conveyor?"true":"false",brush?"true":"false",conveyor?"true":"false",c.navigationName(),OPERATING_MODE,MOTOR_CAPABLE?"true":"false",
     c.ranges[0].cm,c.ranges[1].cm,c.ranges[2].cm,
     static_cast<unsigned long>(uint32_t(now-c.ranges[0].at)),static_cast<unsigned long>(uint32_t(now-c.ranges[1].at)),static_cast<unsigned long>(uint32_t(now-c.ranges[2].at)));
 }

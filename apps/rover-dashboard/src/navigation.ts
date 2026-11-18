@@ -3,6 +3,7 @@ import type {Telemetry} from '../../../packages/protocol/index';
 // Display-only explanations of include/rover_control.h. Never issues commands.
 export function navigationDetail(t:Telemetry|null,fresh:boolean):string {
  if(!fresh||!t)return 'No fresh firmware decision. Outputs and safety state are unknown.';
+ if(t.mode==='USB_BENCH_DIAGNOSTIC')return t.estop?'USB bench diagnostic: software E-stop latched. RESET clears the latch while disarmed; motor outputs remain disabled.':'USB bench diagnostic: sensor and telemetry testing only. Motor outputs are disabled in this build; ARM and AUTO are unavailable.';
  const details:Record<string,string>={
   DISARMED:'Outputs disabled. Explicit ARM is required; ARM alone does not start motion.',
   MANUAL:'Operator hold control. Sensor avoidance is not active in MANUAL; firmware manual timeout is 1200 ms.',

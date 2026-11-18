@@ -6,6 +6,8 @@ export interface Telemetry {
  v:1; fw:string; ms:number; armed:boolean; auto:boolean; estop:boolean; healthy:boolean;
  requested:number; applied:number; en:boolean; brushReq:boolean; conveyorReq:boolean; brush:boolean; conveyor:boolean;
  nav:string; cm:[number,number,number]; age:[number,number,number];
+ // Optional pair: older protocol-v1 firmware keeps its existing behavior.
+ mode?:'PROTECTED_ROVER'|'USB_BENCH_DIAGNOSTIC'; motorCapable?:boolean;
 }
 export interface Log {at:number;kind:'TX'|'RX'|'ACK'|'ERROR'|'INFO';text:string}
 export interface DiagnosticRecord {
@@ -19,6 +21,7 @@ export interface BridgeState {
 export const NAV = ['DISARMED','MANUAL','CRUISE','SETTLE','TURN_DEAD_TIME','TURNING','REASSESS','TURN_LIMIT','SENSOR_FAULT','ESTOP'];
 export function isCommand(value:unknown):value is Command {return typeof value==='string' && (COMMANDS as readonly string[]).includes(value);}
 export function isDirection(value:unknown):value is Direction {return typeof value==='string' && ['F','B','L','R'].includes(value);}
+export function motorControlAvailable(t:Telemetry|null|undefined):boolean {return !!t&&t.motorCapable!==false;}
 export function telemetry(value:unknown):Telemetry {
  if(!value || typeof value!=='object')throw Error('Invalid telemetry object');
  const t=value as Record<string,unknown>;
@@ -29,6 +32,10 @@ export function telemetry(value:unknown):Telemetry {
  if(!Array.isArray(t.cm)||t.cm.length!==3||!t.cm.every(v=>Number.isInteger(v)&&(v===-1||(v>=2&&v<=400))))throw Error('Invalid ranges');
  if(!Array.isArray(t.age)||t.age.length!==3||!t.age.every(uint))throw Error('Invalid ages');
  if((t.en && (!t.armed||t.estop||!t.healthy||t.applied===0))||(!t.en&&t.applied!==0)||((t.brush||t.conveyor)&&(!t.en||t.applied!==1)))throw Error('Contradictory output telemetry');
+ if(t.mode!==undefined||t.motorCapable!==undefined){
+  if(!['PROTECTED_ROVER','USB_BENCH_DIAGNOSTIC'].includes(String(t.mode))||typeof t.motorCapable!=='boolean'||t.motorCapable!==(t.mode==='PROTECTED_ROVER'))throw Error('Invalid operating mode');
+  if(!t.motorCapable&&(t.armed||t.auto||t.en||t.brushReq||t.conveyorReq||t.brush||t.conveyor||t.requested!==0||t.applied!==0))throw Error('Contradictory diagnostic telemetry');
+ }
  return t as unknown as Telemetry;
 }
 export function parseLine(line:string):{kind:'telemetry';data:Telemetry}|{kind:'ack';ok:boolean;command:string}|{kind:'raw'} {

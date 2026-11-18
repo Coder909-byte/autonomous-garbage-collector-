@@ -1,5 +1,7 @@
 # Autonomous Garbage Collector
 
+**18 November 2026 — USB bench integration:** the user confirms main USB telemetry, three ultrasonic readings and independent camera video in Mission Control on the Dell G15. [Operating configurations and bench wiring](docs/USB_BENCH_DIAGNOSTIC.md) add an explicit no-motor diagnostic build while preserving PROTECTED_ROVER as the default. The older electrical-release records below remain historical; missing motor protection is not bypassed.
+
 **University team handover:** [assembly PDF](artifacts/TEAM_ASSEMBLY_HANDOVER.pdf), [start-here instructions and evidence forms](docs/TEAM_HANDOVER.md), [exact hardware photos needed](docs/hardware_photos/README.md). Unpowered mounting/labeling and identified detached interface work can proceed through the checkpoints; physical power-up HOLD remains. Seven handover regression tests supplement the unchanged 119-test E2 baseline.
 
 An ESP32-based autonomous waste collection rover with four wheel motors, two brushes controlled together, a separately controlled conveyor, and three ultrasonic sensors for obstacle avoidance. This repository contains the firmware, PlatformIO configuration, Wokwi control-signal simulation, automated tests, and the provisional E2 electrical design package.

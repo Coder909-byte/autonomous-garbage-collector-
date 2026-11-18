@@ -115,8 +115,18 @@ void telemetry_sizing_and_rollover() {
  TEST_ASSERT_TRUE(n>0 && n<512); TEST_ASSERT_NOT_NULL(strstr(b,"\"age\":[26,"));
  char small[12]; TEST_ASSERT_TRUE(rover::telemetry(small,sizeof(small),controller,10,rover::Motion::Stop,false,false,false,false)>=12);
 }
+void protected_feedback_low_still_polls_sensors() {
+ mockPins[pins::ESTOP_OK]=LOW; setup();
+ for (unsigned i=1;i<=3;++i) { mockNow=65*i; loop(); }
+ for (unsigned i=0;i<3;++i) TEST_ASSERT_EQUAL(100,controller.ranges[i].cm);
+ mockNow=500; loop(); stopped(); TEST_ASSERT_TRUE(controller.estop);
+ TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"\"cm\":[100,100,100]"));
+ TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"\"mode\":\"PROTECTED_ROVER\""));
+ TEST_ASSERT_NOT_NULL(strstr(Serial.output.c_str(),"\"motorCapable\":true"));
+}
 int main() {
  UNITY_BEGIN();
+ RUN_TEST(protected_feedback_low_still_polls_sensors);
  RUN_TEST(versioned_telemetry_reports_requested_and_applied); RUN_TEST(telemetry_sizing_and_rollover);
  RUN_TEST(physical_estop_during_both_cleaning_channels); RUN_TEST(software_reboot_discards_motion_and_cleaning);
  RUN_TEST(sensor_recovery_requires_explicit_arm_auto);

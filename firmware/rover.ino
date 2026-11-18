@@ -28,7 +28,11 @@ void IRAM_ATTR stopInterrupt() {
 }
 bool healthy() { return digitalRead(pins::ESTOP_OK) == HIGH; }
 void pwmWrite(unsigned channel, unsigned duty) {
-#if ESP_ARDUINO_VERSION_MAJOR >= 3
+#if ROVER_OPERATING_MODE == USB_BENCH_DIAGNOSTIC
+  // No LEDC peripheral is attached in this build; even a nonzero request is LOW.
+  (void)duty;
+  digitalWrite(pins::PWM[channel],LOW);
+#elif ESP_ARDUINO_VERSION_MAJOR >= 3
   ledcWrite(pins::PWM[channel], duty);
 #else
   ledcWrite(channel, duty);
@@ -40,7 +44,7 @@ void zeroOutputs() {
   for (int p : pins::AUX) digitalWrite(p,LOW);
 }
 void applyOutputs(uint32_t now) {
-  rover::Motion request = controller.armed && !controller.estop && pwmReady ? controller.motion : rover::Motion::Stop;
+  rover::Motion request = rover::MOTOR_CAPABLE && controller.armed && !controller.estop && pwmReady ? controller.motion : rover::Motion::Stop;
   rover::Motion actual = gate.update(request,now);
   // Only rewrite direction channels on a change: avoid transient opposite
   // bridge states and unnecessary PWM resets on every loop iteration.
@@ -58,7 +62,7 @@ void applyOutputs(uint32_t now) {
   digitalWrite(pins::BRUSH_IN1,brush); digitalWrite(pins::BRUSH_IN2,LOW);
   digitalWrite(pins::CONVEYOR_IN3,conveyor); digitalWrite(pins::CONVEYOR_IN4,LOW);
   portENTER_CRITICAL(&safetyMux);
-  bool permit = actual != rover::Motion::Stop && !hardwareTrip && healthy() && pwmReady;
+  bool permit = rover::MOTOR_CAPABLE && actual != rover::Motion::Stop && !hardwareTrip && healthy() && pwmReady;
   digitalWrite(pins::ENABLE,permit ? HIGH : LOW);
   portEXIT_CRITICAL(&safetyMux);
   if (!permit) zeroOutputs();
@@ -95,11 +99,15 @@ void setup() {
   for (int p : pins::ECHO) pinMode(p,INPUT);
   // GPIO27 supports an internal pull-down: an open NC contact reads unsafe.
   pinMode(pins::ESTOP_OK,INPUT_PULLDOWN);
+#if ROVER_OPERATING_MODE == PROTECTED_ROVER
   attachInterrupt(digitalPinToInterrupt(pins::ESTOP_OK),stopInterrupt,FALLING);
   if (!healthy()) { hardwareTrip = true; controller.emergency(); }
+#endif
   for (unsigned i=0;i<4;++i) {
     digitalWrite(pins::PWM[i],LOW); pinMode(pins::PWM[i],OUTPUT);
-#if ESP_ARDUINO_VERSION_MAJOR >= 3
+#if ROVER_OPERATING_MODE == USB_BENCH_DIAGNOSTIC
+    // GPIO outputs remain LOW, with no PWM setup or peripheral attachment.
+#elif ESP_ARDUINO_VERSION_MAJOR >= 3
     if (!ledcAttach(pins::PWM[i],1200,8)) pwmReady = false;
 #else
     if (ledcSetup(i,1200,8) == 0) pwmReady = false;
@@ -108,11 +116,16 @@ void setup() {
   }
   zeroOutputs();
   Serial.begin(115200);
+#if ROVER_OPERATING_MODE == USB_BENCH_DIAGNOSTIC
+  Serial.println("READY USB_BENCH_DIAGNOSTIC DISARMED; NO MOTOR POWER; ARM/AUTO/motor commands rejected; software ESTOP/RESET available.");
+#else
   Serial.println("READY DISARMED; RESET after ESTOP, then ARM. Motor power stays disconnected for software tests.");
+#endif
+  Serial.printf("MODE %s; motorCapable=%d\n",rover::OPERATING_MODE,rover::MOTOR_CAPABLE);
   if (!pwmReady) Serial.println("FAULT PWM setup; arming disabled");
 }
 void loop() {
-  if (hardwareTrip || !healthy()) controller.emergency();
+  if (rover::MOTOR_CAPABLE && (hardwareTrip || !healthy())) controller.emergency();
   controller.tick(millis(),healthy());
   applyOutputs(millis());
   // Bounded serial work prevents input flooding from starving the deadman.
@@ -123,7 +136,7 @@ void loop() {
     } else if (result == rover::LineParser::Ready) {
       bool accepted;
       portENTER_CRITICAL(&safetyMux);
-      if (hardwareTrip) controller.emergency();
+      if (rover::MOTOR_CAPABLE && hardwareTrip) controller.emergency();
       accepted = controller.command(parser.line(),millis(),healthy() && pwmReady);
       if (accepted && !strcmp(parser.line(),"RESET")) hardwareTrip = false;
       portEXIT_CRITICAL(&safetyMux);
@@ -140,7 +153,7 @@ void loop() {
     controller.sample(sensorIndex,cm,millis());
     sensorIndex = (sensorIndex+1)%3;
   }
-  if (hardwareTrip) controller.emergency();
+  if (rover::MOTOR_CAPABLE && hardwareTrip) controller.emergency();
   controller.tick(millis(),healthy());
   applyOutputs(millis());
   now = millis();

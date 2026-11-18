@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { isCommand,isDirection,parseLine,type BridgeState,type Command,type Direction,type DiagnosticRecord } from '../../../packages/protocol/index.js';
+import { isCommand,isDirection,motorControlAvailable,parseLine,type BridgeState,type Command,type Direction,type DiagnosticRecord } from '../../../packages/protocol/index.js';
 import type { Transport } from './transports.js';
 import {Diagnostics} from './diagnostics.js';
 export class Bridge extends EventEmitter {
@@ -35,13 +35,14 @@ export class Bridge extends EventEmitter {
   if(['S','STOP','ESTOP','DISARM','MANUAL','AUTO','RESET','ARM'].includes(value))this.stopHold(false);
   if(!['S','STOP','ESTOP','DISARM','MANUAL','CLEAN OFF','BRUSH OFF','CONVEYOR OFF'].includes(value)&&!this.ready())throw Error('Fresh protocol v1 telemetry required');
   const t=this.state.telemetry;
-  if(value==='RESET'&&(!t?.healthy||t.armed))throw Error('RESET requires healthy feedback and disarmed state');
+  if(['ARM','AUTO','BRUSH ON','CONVEYOR ON','CLEAN ON'].includes(value)&&!motorControlAvailable(t))throw Error('USB bench diagnostic: motor control disabled');
+  if(value==='RESET'&&(!t||t.armed||(!t.healthy&&t.mode!=='USB_BENCH_DIAGNOSTIC')))throw Error('RESET requires healthy feedback and disarmed state');
   this.send(value);
  }
  hold(value:unknown){
   if(!isDirection(value))throw Error('Invalid direction');
   const t=this.state.telemetry;
-  if(!this.ready()||!t?.armed||t.auto||t.estop||!t.healthy)throw Error('Manual hold requires fresh armed MANUAL healthy telemetry');
+  if(!this.ready()||!motorControlAvailable(t)||!t?.armed||t.auto||t.estop||!t.healthy)throw Error('Manual hold requires fresh armed MANUAL healthy telemetry');
   this.leaseAt=this.now();
   if(this.state.intent!==value){this.state.intent=value;this.send(value);this.sentAt=this.now();}
  }

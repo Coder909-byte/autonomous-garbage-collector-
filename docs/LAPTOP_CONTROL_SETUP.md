@@ -37,6 +37,8 @@ After versioned telemetry arrives and the initial DISARM handshake completes, cl
 
 ## Main ESP32 / real serial
 
+For sensor/USB integration without the physical cutoff assembly, use the explicit [USB_BENCH_DIAGNOSTIC configuration](USB_BENCH_DIAGNOSTIC.md). It reports real GPIO27 feedback, keeps motor outputs LOW and disables motor controls in Mission Control. The default PROTECTED_ROVER behavior is preserved.
+
 Physical commissioning remains HOLD under `docs/FINAL_GO_NO_GO.md`. As of 16 November 2026, the user reports the latest main firmware was flashed on another laptop and produced `READY DISARMED` and protocol-v1 telemetry. This software session did not observe that board. The earlier `USB_VALIDATION_REPORT.md` is a historical report from this Mac, not a current finding about that later flash. No upload is needed for the laptop integration work. The following build/upload instructions are reference only for a separately approved future installation:
 
 ```sh

@@ -60,7 +60,11 @@ def check():
     assert len(records)==201
     internal=[r['wire_id'] for r in records if r['connection_kind']=='INTERNAL_VERIFY']
     assert internal==['W042','W044','W046','W048'] and len(records)-len(internal)==197
-    software_updates={'firmware/rover.ino','wokwi/sketch.ino'}
+    # The PDF is a frozen E2 record, not the current firmware release. Compare
+    # its software inputs to that snapshot; current protected/bench software is
+    # covered by native, firmware-build and laptop regression suites. Electrical
+    # authorities, GPIO assignments and diagrams still require current bytes.
+    software_updates={'firmware/rover.ino','wokwi/sketch.ino','include/rover_control.h','platformio.ini'}
     for p,digest in manifest['source_sha256'].items():
         data=(ROOT/p).read_bytes()
         if p in software_updates:
@@ -138,12 +142,13 @@ def check():
     return {'result':'PASS - handover consistency only; physical compatibility NOT VERIFIED',
             'baseline_commit':plan['baseline_commit'],'e2_authorities_unchanged':len(AUTHORITIES),
             'baseline_comparison':'Git LF-normalized text; original working-file hashes also recorded',
+            'software_inputs_from_frozen_snapshot':sorted(software_updates),
             'pdf_pages':len(reader.pages),'sections':13,'records':len(records),'external_connections':197,
             'internal_bond_inspections':internal,'detailed_pdf_record_fields':'All 201 complete, exactly once',
             'reused_e2_diagram_pages':diagram_pages,'photo_files_reviewable':photos['count'],
             'actual_photo_terminal_matches':len(photos['actual_terminal_matches']),
             'checkpoint_count':10,'physical_measurements':'PENDING - no results invented',
-            'firmware_changes':'Frozen PDF verified against 2da0b0a; current adapter adds telemetry, tested separately','physical_power_up':'HOLD retained','energized_stages':'F-J NOT RELEASED'}
+            'firmware_changes':'Frozen PDF software inputs verified against 2da0b0a; current protected/USB-bench firmware tested separately','physical_power_up':'HOLD retained','energized_stages':'F-J NOT RELEASED'}
 
 
 if __name__=='__main__':
