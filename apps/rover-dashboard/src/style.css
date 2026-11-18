@@ -12,3 +12,4 @@
 .seek-status{margin:8px 0 0;color:#9fd3b4}
 .seek-status b{color:#4fd88a;letter-spacing:.5px}
 .share-qr{display:block;width:100%;max-width:200px;margin:4px auto 0;background:#fff;border-radius:8px;padding:6px;aspect-ratio:1}.share-url{display:block;margin-top:10px;font-size:9px;color:#9fb3cf;word-break:break-all;user-select:all}.control-busy{align-items:center;gap:16px}.control-busy .button{flex:none}
+@media(max-width:720px){.dashboard-grid>.left-column,.dashboard-grid>.center-column,.dashboard-grid>.right-column{display:contents}.dashboard-grid .panel{order:5}.dashboard-grid .camera-panel{order:0}.dashboard-grid .manual-panel{order:1}.dashboard-grid .left-column>.panel:first-child{order:2}.dashboard-grid .share-panel{order:6}.manual-panel .dpad{grid-template-columns:repeat(3,64px);grid-template-rows:repeat(3,60px);justify-content:center}.control-busy{flex-wrap:wrap}}
