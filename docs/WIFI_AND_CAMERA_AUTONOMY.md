@@ -55,16 +55,20 @@ The camera firmware doesn't change. In `camera/include/secrets.h` (or the `rover
 #define CAMERA_WIFI_PASSWORD "rover-collector"
 #define CAMERA_TRUSTED_NETWORK "192.168.4.0"
 #define CAMERA_TRUSTED_MASK "255.255.255.0"
+#define CAMERA_HOSTNAME "rover-camera"
+#define CAMERA_STATIC_IP "192.168.4.200"
 ```
 
-Flash the camera, and read its address from its serial log (`Camera IP 192.168.4.x`).
+`CAMERA_STATIC_IP` is optional. With it, the camera always uses `192.168.4.200`, so the address in Mission Control never changes. It must be inside the trusted network; `.200` is outside the range the rover hands out (from `.2`). Without it, the camera takes the next free address, which can change between power-ups.
+
+Flash the camera, and check its serial log shows `Camera IP 192.168.4.200; trusted=1`. Remove the GPIO0-to-GND upload jumper and power it from 5 V and GND on a buck output.
 
 ## 3. Connect Mission Control over Wi-Fi
 
 1. Join the laptop to the Wi-Fi network **ROVER-CTRL**. The laptop has no internet while it's on this network.
 2. Start Mission Control: `npm run build` then `npm start`, then open `http://127.0.0.1:8787`.
 3. Under **Control source**, choose **Main ESP32 · Wi-Fi**. The address is `192.168.4.1`. Click **Connect rover**.
-4. Under **Camera IPv4**, enter the camera address and click **Connect camera**.
+4. Under **Camera IPv4**, enter the camera address (`192.168.4.200` with a fixed IP) and click **Connect camera**. Mission Control remembers it.
 
 ## 4. Start the vision service
 
@@ -85,15 +89,29 @@ Then, on ROVER-CTRL with the camera connected in Mission Control:
 .vision\Scripts\python vision\rover_vision.py --show
 ```
 
-Mission Control's camera panel now shows `Garbage detection (yolo): bottle 82%`, with boxes drawn over the video.
+Mission Control's camera panel now shows `Garbage detection (yolo-taco): litter 82%`, with boxes drawn over the video.
+
+### The TACO litter model
+
+`vision/models/taco_litter.pt` is YOLOv8n fine-tuned on [TACO](http://tacodataset.org) (1500 photos of real litter, CC BY 4.0). All 60 TACO categories become one class, `litter`: wrappers, bags, cigarette butts, bottle caps, cans, cartons, paper, straws, and so on. The stock COCO model only knows bottles, cups and food. `rover_vision.py` uses the TACO model automatically when the file is present. To compare with the stock model, use `--model yolov8n.pt`.
+
+The shipped model was trained for 60 epochs at 320 px on CPU (1269 training images, 231 held out). On the held-out images: precision 0.72, recall 0.39, mAP50 0.44, mAP50-95 0.28. It found litter in 209 of the 231 held-out photos, and nothing on synthetic plain and tiled floors. Recall is limited mainly by very small items (cigarette butts, bottle caps) at 320 px. Items close to the rover fill more of the frame and are found more reliably. The model is derived from TACO (annotations CC BY 4.0; images under their individual Flickr and OpenLitterMap licences).
+
+To retrain, for example with more epochs or a GPU:
+
+```bash
+python scripts/train_taco.py --epochs 100        # add --device 0 for a GPU
+```
+
+It downloads TACO into `build/taco`, trains at 320 px (the size `rover_vision.py` uses), and replaces `vision/models/taco_litter.pt`. TACO photos are mostly taken from standing height. If detection is weak from the rover's low camera, add your own floor photos labelled in YOLO format to `build/taco/images/train` and `labels/train`, then retrain.
 
 Useful options:
 
 | Option | Meaning |
 |---|---|
 | `--detector blob` | Force the light colour detector |
-| `--classes bottle,cup` | Which YOLO classes count as garbage (`all` for everything) |
-| `--model my_litter.pt` | A custom-trained YOLO model (for example one trained on the TACO litter dataset) |
+| `--classes bottle,cup` | Which YOLO classes count as garbage (`all` for everything). Default: every class of the litter model |
+| `--model yolov8n.pt` | Use the stock COCO model instead of the TACO litter model |
 | `--conf 0.5` | Minimum confidence |
 | `--fps 5` | Detection rate |
 | `--camera http://192.168.4.2` | Read snapshots straight from the camera instead of through the bridge |
