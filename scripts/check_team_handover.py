@@ -21,6 +21,30 @@ def norm(text):
     return re.sub(r'\s+','',plain(text))
 
 
+def validate_measurements(requirements, records):
+    ids=[r['measurement_id'] for r in records]
+    assert len(ids)==len(set(ids)), 'Duplicate measurement record'
+    parents={m['id']:m for m in requirements}
+    assert set(parents)<=set(ids), 'Missing measurement requirement'
+    statuses=Counter()
+    for r in records:
+        parent=r['measurement_id'].split('.')[0]
+        assert parent in parents, 'Unknown measurement requirement'
+        if r['measurement_id']!=parent:
+            assert re.fullmatch(r'D\d{2}\.U\d{2}',r['measurement_id']), 'Invalid reported-check identifier'
+            assert r['result']=='COMPLETE - USER-REPORTED (observation only)', 'Reported check must remain observation-only'
+        else:
+            m=parents[parent]
+            for key,source in [('item','item'),('when','stage'),('required','required'),('acceptance','acceptance')]:
+                assert r[key]==m[source], 'Measurement requirement changed: '+parent
+            assert r['result'] in ('PENDING','PARTIAL - USER-REPORTED'), 'Unreviewed requirement cannot be marked PASS'
+        if r['result']!='PENDING':
+            assert r['actual_value_unit'].startswith('USER-REPORTED:'), 'Missing reported-evidence attribution'
+            assert r['conditions_instrument'] and r['part_or_wire_ids'], 'Missing observation scope/meter conditions'
+        statuses[r['result']]+=1
+    return dict(statuses)
+
+
 def validate_records(source,records):
     ids=[r['wire_id'] for r in records]
     assert len(ids)==len(set(ids)), 'Duplicate handover record'
@@ -64,7 +88,8 @@ def check():
     # its software inputs to that snapshot; current protected/bench software is
     # covered by native, firmware-build and laptop regression suites. Electrical
     # authorities, GPIO assignments and diagrams still require current bytes.
-    software_updates={'firmware/rover.ino','wokwi/sketch.ino','include/rover_control.h','platformio.ini'}
+    software_updates={'firmware/rover.ino','wokwi/sketch.ino','include/rover_control.h','platformio.ini',
+                      'scripts/generate_team_handover.py'}
     for p,digest in manifest['source_sha256'].items():
         data=(ROOT/p).read_bytes()
         if p in software_updates:
@@ -100,7 +125,7 @@ def check():
     assert all(r['result']=='PENDING' for r in checkpoint_records)
     i_records=[r for r in checkpoint_records if r['checkpoint']=='I']
     assert len(i_records)==2 and {r['motor_free_or_loaded_I'].split(' - ')[0] for r in i_records}=={'MOTOR-FREE PREFLIGHT','LOADED CONFIRMATION'}
-    assert all(r['result']=='PENDING' for r in read_csv(DATA/'TEAM_MEASUREMENT_RECORD.csv'))
+    measurement_statuses=validate_measurements(plan['measurements'],read_csv(DATA/'TEAM_MEASUREMENT_RECORD.csv'))
     photos=json.loads((DATA/'photo_inventory.json').read_text())
     assert photos==manifest['photo_inventory']
     if not photos['files']:
@@ -147,7 +172,8 @@ def check():
             'internal_bond_inspections':internal,'detailed_pdf_record_fields':'All 201 complete, exactly once',
             'reused_e2_diagram_pages':diagram_pages,'photo_files_reviewable':photos['count'],
             'actual_photo_terminal_matches':len(photos['actual_terminal_matches']),
-            'checkpoint_count':10,'physical_measurements':'PENDING - no results invented',
+            'checkpoint_count':10,'physical_measurements':'Unreviewed USER-REPORTED observations retained; full requirements remain incomplete',
+            'measurement_statuses':measurement_statuses,
             'firmware_changes':'Frozen PDF software inputs verified against 2da0b0a; current protected/USB-bench firmware tested separately','physical_power_up':'HOLD retained','energized_stages':'F-J NOT RELEASED'}
 
 

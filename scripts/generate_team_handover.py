@@ -311,8 +311,11 @@ def write_team_files(plan,model,records,photos,purchases):
             checkpoint_rows.append({'checkpoint':cp['id'],'title':cp['title'],'current_permission':cp['state'],
                 'result':'PENDING','motor_free_or_loaded_I':phase,'evidence_batch':'','accepted_scope':'','reviewer':'','date':'','outstanding_items':''})
     write_csv(DATA/'TEAM_CHECKPOINT_RECORD.csv',checkpoint_rows)
-    write_csv(DATA/'TEAM_MEASUREMENT_RECORD.csv',[{'measurement_id':m['id'],'item':m['item'],'when':m['stage'],'required':m['required'],
-              'acceptance':m['acceptance'],'actual_value_unit':'','part_or_wire_ids':'','conditions_instrument':'','manufacturer_or_trace_file':'','result':'PENDING','reviewer_date':''} for m in plan['measurements']])
+    # This is now an active record: regenerating the historical PDF must not
+    # erase retained observations or replace them with blank template rows.
+    if not (DATA/'TEAM_MEASUREMENT_RECORD.csv').exists():
+        write_csv(DATA/'TEAM_MEASUREMENT_RECORD.csv',[{'measurement_id':m['id'],'item':m['item'],'when':m['stage'],'required':m['required'],
+                  'acceptance':m['acceptance'],'actual_value_unit':'','part_or_wire_ids':'','conditions_instrument':'','manufacturer_or_trace_file':'','result':'PENDING','reviewer_date':''} for m in plan['measurements']])
     write_csv(DATA/'TEAM_TERMINAL_MAP.csv',[{'reference':ref,'e2_functional_pin':pin,'function':function,
               'actual_part_revision':'','actual_printed_terminal':'','photo_file':'','datasheet_page':'','unpowered_mapping_method':'','result':'PENDING'}
               for ref,c in model['components'].items() if c['kind'] not in {'resistor','capacitor','fuse','motor'} for pin,function in c['pins'].items()])

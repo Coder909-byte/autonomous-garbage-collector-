@@ -1,16 +1,13 @@
 # Laptop control setup
 
-Intel macOS is supported using Node.js 22.12 or newer, npm, Python 3 and Apple's Command Line Tools (`c++`). Docker is not needed. The native SerialPort dependency provides platform bindings; if no matching prebuild exists, npm may need the normal compiler toolchain. No serial device is opened by build/test commands; no firmware is automatically uploaded.
+Mission Control supports Windows (including the Dell G15) and macOS using Node.js 22.12 or newer and npm. Offline Simulator runs entirely in Node; it needs no C++ executable, Python or firmware compilation. Python and a C++ compiler are needed only for the separate firmware/native regression tools. Docker is not needed. The native SerialPort dependency provides platform bindings; if no matching prebuild exists, npm may need the normal compiler toolchain. No serial device is opened by build/test commands; no firmware is automatically uploaded.
 
 ## Install and run offline
 
 From the repository root:
 
 ```sh
-python3 -m venv .venv
-.venv/bin/pip install -r requirements-dev.txt -r requirements-design.txt
 npm ci
-npm run sim:build
 npm run build
 npm start
 ```
@@ -33,7 +30,7 @@ Open **http://127.0.0.1:5173**. The Vite proxy rewrites Host for the bridge and 
 
 Clear path supplies synthetic front/left/right readings of 120/100/70cm. Obstacle scenario changes front to 25cm at 3s and restores it at 6s. Sensor-fault scenario changes front to invalid at 3s. E-stop scenario opens synthetic healthy feedback at 3s. Scenario time starts at Connect; reconnect to restart the script. No scenario automatically ARM-s or starts AUTO. The onboard three-turn limit can disarm before an obstacle clears; clearing it does not rearm. No simulated camera footage is included.
 
-After versioned telemetry arrives and the initial DISARM handshake completes, click ARM. It must leave STOPPED and EN LOW. W/S/A/D or pointer controls are press-and-hold; release stops. Space sends non-latching S. AUTO requests onboard navigation and requires fresh valid sensors; MANUAL stops/exits AUTO. Cleaning toggles show requested and applied separately. CLEAN ON does not make the outputs run while stopped. Stop/disarm before changing the connection. The red dashboard control is **software ESTOP**, which latches the firmware; it is not a physical motor-power cutoff.
+After versioned telemetry arrives and the initial DISARM handshake completes, click ARM. It must leave STOPPED and EN LOW. W/S/A/D or pointer controls are press-and-hold; release stops. Space sends non-latching S. AUTO requests onboard navigation and requires fresh valid sensors; MANUAL stops/exits AUTO. Cleaning toggles show requested and applied separately. CLEAN ON does not make the outputs run while stopped. Changing Control source releases the drive hold, sends S/DISARM and disconnects the previous transport before Connect becomes available. The new source requires a deliberate Connect and ARM; simulated state and commands never carry over. The red dashboard control is **software ESTOP**, which latches the firmware; it is not a physical motor-power cutoff.
 
 ## Main ESP32 / real serial
 
@@ -63,7 +60,7 @@ The bridge records automatically while running. Every retained event has a lapto
 
 Use **Export CSV** or **Export JSON** to save the bounded 10,000-record buffer. Records survive disconnect and browser reload while the bridge stays running. Oldest records are evicted at capacity, with an eviction count; stopping the bridge loses unsaved data. CSV escapes external text and prevents spreadsheet-formula execution. JSON schema version is 1. Read-only endpoints: `/api/diagnostics`, `/api/diagnostics/export?format=csv`, and `/api/diagnostics/export?format=json`.
 
-The trend chart uses the last 120 telemetry samples and draws only the latest session, never joining hardware to simulation. Invalid or sensor-stale samples create gaps; retained charts are historical, not a live connection indicator. The navigation diagram explains the reported C++ phase; it does not calculate an independent controller, position or heading. AUTO enters avoidance at front ≤35 cm or either side ≤20 cm; recovery needs front >45 cm and both sides >20 cm. See the panel explanations for settling, output dead time, turn limit and new-sample reassessment. Obstacle avoidance is not active in MANUAL.
+The trend chart uses the last 120 telemetry samples and draws only the latest session, never joining hardware to simulation. Invalid or sensor-stale samples create gaps; retained charts are historical, not a live connection indicator. The navigation diagram explains the reported controller phase; it does not calculate an independent controller, position or heading. AUTO enters avoidance at front ≤35 cm or either side ≤20 cm; recovery needs front >45 cm and both sides >20 cm. See the panel explanations for settling, output dead time, turn limit and new-sample reassessment. Obstacle avoidance is not active in MANUAL.
 
 ## Verification
 
@@ -99,6 +96,7 @@ For a fresh monitoring regression that preserves earlier commissioning logs, run
 | Camera unavailable | Verify actual board/power/WLAN/subnet, IP and serial diagnostics; endpoints are fixed at HTTP80 and stream81 |
 | Camera busy/settings rejected | Disconnect stream, wait for bounded send timeout, then apply supported settings; VGA needs detected PSRAM |
 | npm mirror timeout | Use an approved working registry, for example `npm ci --registry=https://registry.npmjs.org`; machine npm settings are not committed |
-| Native simulator missing | Run `npm run sim:build` from repository root with C++ compiler installed |
+| Offline simulator fails to start | Stop the old server, run `npm run build` then `npm start`, and hard-refresh the browser; the portable simulator needs no native binary |
+| ARM disabled | Read the Drive panel reason. Select the source, Connect and wait for fresh telemetry plus DISARM acknowledgement. MOTOR_OPERATION also requires commissioningReady:true and inhibit:NONE from the installed firmware |
 
 If browser/backend fails, manual firmware timeout still operates. AUTO is onboard and can continue without laptop communication. Failed software stop is never proof of physical power removal. No commissioning step in this document is recorded as completed.

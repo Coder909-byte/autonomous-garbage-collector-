@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';
-test('operator drives real C++ simulator, releases, cleans, switches modes and latches stop',async({page})=>{
+test('operator drives portable simulator, releases, cleans, switches modes and latches stop',async({page})=>{
  await page.goto('/');await expect(page.getByRole('button',{name:'Connect rover',exact:false})).toBeEnabled();
  await expect(page.getByText('No camera connected')).toBeVisible();
  await page.getByRole('button',{name:'Connect rover',exact:false}).click();await expect(page.getByText('SIMULATION MODE',{exact:true}).first()).toBeVisible();
@@ -19,3 +19,22 @@ test('browser blur and pointer release stop; reconnect remains disarmed',async({
  await page.getByRole('button',{name:'Disconnect rover',exact:true}).click();await page.getByRole('button',{name:'Connect rover',exact:false}).click();await expect(page.getByRole('button',{name:'ARM',exact:true})).toBeEnabled();await expect(button).toBeDisabled();
 });
 test('responsive disconnected station has no horizontal overflow',async({page})=>{await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByText('No camera connected')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:'artifacts/monitoring-validation/dashboard-mobile.png',fullPage:true});});
+test('switching away from armed simulation disconnects and reconnect never restores movement',async({page})=>{
+ await page.goto('/');await page.getByRole('button',{name:/Connect rover/}).click();
+ await page.getByRole('button',{name:'ARM',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Forward',exact:true})).toBeEnabled();
+ for(const [key,motion] of [['w','FORWARD'],['s','BACKWARD'],['a','LEFT'],['d','RIGHT']]){
+  await page.keyboard.down(key);await expect(page.getByRole('region',{name:'Operational state'}).getByText(motion,{exact:true})).toHaveCount(2);
+  await page.keyboard.up(key);await expect(page.getByRole('region',{name:'Operational state'}).getByText('STOPPED',{exact:true})).toHaveCount(2);
+ }
+ await page.getByLabel('Control source').selectOption('hardware');
+ await expect(page.getByText('NO ROVER CONNECTED',{exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'ARM',exact:true})).toBeDisabled();
+ await expect(page.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();
+ await page.getByLabel('Control source').selectOption('simulation');
+ await page.getByRole('button',{name:/Connect rover/}).click();
+ await expect(page.getByRole('button',{name:'ARM',exact:true})).toBeEnabled();
+ await expect(page.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();
+ await expect(page.getByTestId('drive-availability')).toContainText('Press ARM');
+ await expect(page.getByText('SIMULATED · healthy',{exact:true})).toBeVisible();
+});

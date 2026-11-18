@@ -1,4 +1,4 @@
-import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
+import {useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
 import {isState,MOTIONS,motorControlAvailable,feedbackAllowsControl,motorOutputState,type BridgeState,type Command,type Direction} from '../../../packages/protocol/index';
 import {HoldControl,keyDirection} from './control';
 import {Navigation,DiagnosticsPanel} from './Monitoring';
@@ -13,7 +13,7 @@ export default function App(){
  const [history,setHistory]=useState<{at:number;nav:string;motion:number}[]>([]);
  const [state,setState]=useState<BridgeState>(empty),[online,setOnline]=useState(false),[error,setError]=useState(''),[clock,setClock]=useState(Date.now());
  const [ports,setPorts]=useState<{path:string;label:string}[]>([]),[port,setPort]=useState(''),[simulation,setSimulation]=useState(true),[scenario,setScenario]=useState('clear');
- useEffect(()=>{if(state.connected||state.connecting)setSimulation(state.simulation);},[state.connected,state.connecting,state.simulation]);
+ const [switching,setSwitching]=useState(false),switchTarget=useRef<boolean|null>(null);
  const ws=useRef<WebSocket|null>(null);
  const send=useCallback((m:Record<string,unknown>)=>{if(ws.current?.readyState===WebSocket.OPEN)ws.current.send(JSON.stringify(m));else setError('Bridge disconnected. Stop delivery is unconfirmed.');},[]);
  const hold=useMemo(()=>new HoldControl(send),[send]);
@@ -25,23 +25,35 @@ export default function App(){
    if(disposed)return;
    const socket=new WebSocket(`${location.protocol==='https:'?'wss':'ws'}://${location.host}/api/control`);ws.current=socket;
    socket.onopen=()=>{if(!disposed&&ws.current===socket){setOnline(true);setError('');void refresh();}};
-   socket.onmessage=e=>{if(disposed||ws.current!==socket)return;try{const value=JSON.parse(e.data);if(!isState(value))throw Error('Invalid bridge state');setState(value);}catch{hold.release();socket.close();setState(empty);setOnline(false);setError('Invalid server response. Control disabled; stop delivery unconfirmed.');}};
+   socket.onmessage=e=>{if(disposed||ws.current!==socket)return;try{const value=JSON.parse(e.data);if(!isState(value))throw Error('Invalid bridge state');
+    if(switchTarget.current!==null){if(value.connected||value.connecting||value.disconnecting)return;setSimulation(switchTarget.current);switchTarget.current=null;setSwitching(false);}
+    else if(value.connected||value.connecting)setSimulation(value.simulation);
+    setState(value);
+   }catch{hold.release();socket.close();setState(empty);setOnline(false);setError('Invalid server response. Control disabled; stop delivery unconfirmed.');}};
    socket.onerror=()=>{if(!disposed&&ws.current===socket){hold.release();setError('Cannot reach the local bridge, or another operator owns control.');}};
-   socket.onclose=()=>{if(!disposed&&ws.current===socket){hold.release();setOnline(false);setState(empty);setError('Bridge disconnected. Manual lease expires; STOP delivery is unconfirmed.');retry=setTimeout(open,1000);}};
+   socket.onclose=()=>{if(!disposed&&ws.current===socket){hold.release();switchTarget.current=null;setSwitching(false);setOnline(false);setState(empty);setError('Bridge disconnected. Manual lease expires; STOP delivery is unconfirmed.');retry=setTimeout(open,1000);}};
   };
   retry=setTimeout(open,0);const timer=setInterval(()=>setClock(Date.now()),100);
   return()=>{disposed=true;clearInterval(timer);clearTimeout(retry);hold.release();ws.current?.close();};
  },[hold,refresh]);
- const t=state.telemetry,age=state.receivedAt===null?Infinity:clock-state.receivedAt;
+ const sourceMatches=state.simulation===simulation&&!switching&&!state.disconnecting;
+ const t=sourceMatches?state.telemetry:null,age=state.receivedAt===null?Infinity:clock-state.receivedAt;
  useEffect(()=>{
   if(!t||state.receivedAt===null){setHistory([]);return;}
   setHistory(current=>{const previous=current.at(-1);return previous&&previous.nav===t.nav&&previous.motion===t.applied?current:[...current,{at:state.receivedAt!,nav:t.nav,motion:t.applied}].slice(-7);});
  },[t,state.receivedAt]);
  const diagnostic=t?.mode==='USB_BENCH_DIAGNOSTIC',motorOperation=t?.mode==='MOTOR_OPERATION',motorAvailable=motorControlAvailable(t);
- const fresh=state.connected&&state.protocolReady&&age<1200,canMove=online&&fresh&&motorAvailable&&!!t?.armed&&!t.auto&&!t.estop&&feedbackAllowsControl(t);
+ const fresh=online&&sourceMatches&&state.connected&&state.protocolReady&&age<1200,canMove=fresh&&motorAvailable&&!!t?.armed&&!t.auto&&!t.estop&&feedbackAllowsControl(t);
+ const changeSource=(next:boolean)=>{
+  if(next===simulation)return;hold.release();setError('');setSimulation(next);setHistory([]);
+  if(state.connected||state.connecting){switchTarget.current=next;setSwitching(true);setState({...empty,simulation:next,disconnecting:true});send({type:'disconnect'});}
+ };
+ const driveReason=switching||state.disconnecting?'Stopping and disconnecting the previous source.':!online?'Local bridge is offline.':!state.connected?`Connect ${simulation?'the Offline Simulator':'the selected physical rover'} first, then press ARM.`:!fresh?'Waiting for fresh telemetry and the DISARM acknowledgement.':!motorAvailable?`Drive inhibited: ${t?.inhibit??t?.mode??'firmware permission unavailable'}.`:t?.estop?'Reset the software E-stop latch before arming.':!feedbackAllowsControl(t)?'Physical firmware feedback does not permit arming.':!t?.armed?'Press ARM, then hold W/A/S/D or a direction button.':t.auto?'Select Manual for keyboard and directional control.':'Manual drive ready: hold W/A/S/D; release to stop.';
  const command=useCallback((c:Command)=>{hold.release();send({type:'command',command:c});},[send,hold]);
  useEffect(()=>{if(!canMove)hold.release();},[canMove,hold]);
- useEffect(()=>{
+ // Install the keyboard gate in the same commit as the enabled buttons. A
+ // passive effect can otherwise drop the first key after ARM confirmation.
+ useLayoutEffect(()=>{
   const release=()=>hold.release();const visibility=()=>{if(document.hidden)release();};
   const down=(e:KeyboardEvent)=>{
    if((e.target as HTMLElement)?.closest?.('input,select,textarea')&&e.code!=='Space')return;
@@ -62,20 +74,21 @@ export default function App(){
   <header><div className="brand"><span className="brandmark"><Icon type="rover"/></span><div>ROVER<span className="brand-sub">AUTONOMOUS COLLECTION SYSTEM</span></div></div><div className="header-right"><span className={'session '+(state.simulation&&state.connected?'sim':'')}><i/> {session}</span><span className="clock">{new Date(clock).toLocaleTimeString()}</span></div></header>
   <div className="page-heading"><div><div className="eyebrow">OPERATOR WORKSPACE <span>/ 01</span></div><h1>Mission control<span className="live-dot"/></h1><p>Local control. Onboard authority. Every output accounted for.</p></div><button className="estop" disabled={!state.connected} onClick={()=>command('ESTOP')}><span>■</span> SOFTWARE EMERGENCY STOP<small>Latches firmware E-stop · physical cutoff still required</small></button></div>
   {(error||state.error)&&<div role="alert" className="alert">{error||state.error}<button aria-label="Dismiss error" onClick={()=>{setError('');setState(s=>({...s,error:null}));}}>×</button></div>}
-  {state.connected&&state.simulation&&<div className="simulation-banner">SIMULATION MODE <span>Native controller · synthetic distances · no physical outputs or camera footage</span></div>}
+  {state.connected&&state.simulation&&<div className="simulation-banner">SIMULATION MODE <span>Portable virtual controller · synthetic telemetry · no physical outputs or camera footage</span></div>}
   {fresh&&diagnostic&&<div className="simulation-banner" role="status">USB BENCH DIAGNOSTIC · NO MOTOR POWER <span>Sensor and USB testing only. Motor outputs locked LOW; ARM, manual drive, AUTO and cleaning ON are unavailable. GPIO27 is reported as read, without simulating installed protection.</span></div>}
   {fresh&&motorOperation&&<div className="simulation-banner" role="status">MOTOR OPERATION · {t?.commissioningReady?'COMMISSIONING RECORD ACCEPTED':'OUTPUTS INHIBITED · COMMISSIONING REQUIRED'}<span>GPIO27 is reported as read and is not a physical interlock in this mode. Software stop does not isolate the battery. Independent motor-supply disconnection and qualified electrical hardware are required.</span></div>}
   {fresh&&t&&(t.estop||!feedbackAllowsControl(t)||['SENSOR_FAULT','TURN_LIMIT'].includes(t.nav))&&<div className="alert safety-fault" role="alert">Firmware safety state: {t.nav}. GPIO27 feedback {t.healthy?'HIGH':'LOW'}. {t.estop?'Firmware E-stop latched. ':''}Use the physical cutoff when required; software does not confirm power isolation.</div>}
   <main className="dashboard-grid">
    <aside className="left-column">
     <section className="panel"><div className="panel-title"><Icon type="link"/><h2>Connection</h2><span className={'pill '+(fresh?'good':'')}>{state.connecting?'Opening':fresh?'Protocol ready':state.connected?'Awaiting handshake':'Disconnected'}</span></div>
-     <label>CONTROL SOURCE<select aria-label="Control source" value={simulation?'simulation':'hardware'} disabled={state.connected||state.connecting} onChange={e=>setSimulation(e.target.value==='simulation')}><option value="simulation">Offline simulator</option><option value="hardware">Main ESP32 · USB serial</option></select></label>
+     <label>CONTROL SOURCE<select aria-label="Control source" value={simulation?'simulation':'hardware'} disabled={state.connecting||switching||state.disconnecting} onChange={e=>changeSource(e.target.value==='simulation')}><option value="simulation">Offline simulator</option><option value="hardware">Main ESP32 · USB serial</option></select></label>
      {simulation?<label>SCENARIO<select aria-label="Scenario" value={scenario} disabled={state.connected} onChange={e=>setScenario(e.target.value)}><option value="clear">Clear path</option><option value="obstacle">Obstacle at 3s, clear at 6s</option><option value="sensor-fault">Sensor fault at 3s</option><option value="estop">E-stop feedback opens at 3s</option></select></label>:<label>SERIAL PORT <button className="text-button" onClick={()=>void refresh()}>Refresh</button><select aria-label="Serial port" value={port} disabled={state.connected} onChange={e=>setPort(e.target.value)}><option value="">Select a port</option>{ports.map(p=><option key={p.path} value={p.path}>{p.path} {p.label}</option>)}</select></label>}
-     <button className={state.connected?'button secondary full':'button primary full'} disabled={!online||state.connecting||(!state.connected&&!simulation&&!port)} onClick={()=>{hold.release();send(state.connected?{type:'disconnect'}:{type:'connect',simulation,port,scenario});}}>{state.connected?'Disconnect rover':'Connect rover'} <span aria-hidden="true">↗</span></button>
+     <button className={state.connected?'button secondary full':'button primary full'} disabled={!online||state.connecting||switching||state.disconnecting||(!state.connected&&!simulation&&!port)} onClick={()=>{hold.release();send(state.connected?{type:'disconnect'}:{type:'connect',simulation,port,scenario});}}>{state.connected?'Disconnect rover':'Connect rover'} <span aria-hidden="true">↗</span></button>
      <div className="micro-line"><span>USB protocol</span><span>115200 baud / v{t?.v??'—'}</span></div>
      {!simulation&&<p className="tiny">{ports.length?'Ports refresh every 3 seconds. Verify the main board identity before connecting.':'No serial ports found. Check the USB data cable and close other serial monitors.'} Reconnect is deliberate and always disarms.</p>}
     </section>
     <section className="panel manual-panel"><div className="panel-title"><h2>Drive control</h2><span className={'pill '+(fresh&&t?.armed?'good':'')}>{fresh&&t?(t.armed?'ARMED':'DISARMED'):'UNKNOWN'}</span></div>
+     <p className="tiny" aria-live="polite" data-testid="drive-availability">{driveReason}</p>
      <div className="segmented"><button disabled={!fresh} className={fresh&&!t?.auto?'selected':''} onClick={()=>command('MANUAL')}>Manual</button><button disabled={!fresh||!motorAvailable||!t?.armed} className={fresh&&t?.auto?'selected':''} onClick={()=>command('AUTO')}>Autonomous</button></div>
      <div className="dpad">{direction('Forward','F','↑')}{direction('Left','L','←')}<button className="direction stop" aria-label="Stop movement" disabled={!state.connected} onClick={()=>command('S')}>■<kbd>SPACE</kbd></button>{direction('Right','R','→')}{direction('Backward','B','↓')}</div>
      <p className="control-hint">Hold to move. Release to stop.<br/>W A S D · Space to stop</p>
@@ -101,7 +114,7 @@ export default function App(){
     </section>
    </aside>
   </main>
-  <section className="panel telemetry-strip"><div><span className="eyebrow">LAST UPDATE</span><b>{time(state.receivedAt)}</b></div><div><span className="eyebrow">FIRMWARE</span><b>{t?.fw??'Not identified'}</b></div><div><span className="eyebrow">E-STOP FEEDBACK</span><b className={fresh&&!feedbackAllowsControl(t)?'danger':''}>{fresh?(motorOperation?(t?.healthy?'HIGH · no physical interlock':'LOW · no physical interlock'):diagnostic?(t?.healthy?'HIGH · diagnostic input':'LOW · diagnostic input'):(t?.healthy?'HIGH · healthy':'LOW · unsafe')):'UNKNOWN'}</b></div><div><span className="eyebrow">FIRMWARE E-STOP</span><b className={fresh&&t?.estop?'danger':''}>{fresh?(t?.estop?'LATCHED':'CLEAR'):'UNKNOWN'}</b></div><div><span className="eyebrow">LAST TRANSMITTED</span><b>{lastTX?.text??'—'}</b></div><div><span className="eyebrow">LAST ACKNOWLEDGED</span><b>{lastACK?.text??'—'}</b></div></section>
+  <section className="panel telemetry-strip"><div><span className="eyebrow">LAST UPDATE</span><b>{time(state.receivedAt)}</b></div><div><span className="eyebrow">FIRMWARE</span><b>{t?.fw??'Not identified'}</b></div><div><span className="eyebrow">E-STOP FEEDBACK</span><b className={fresh&&!feedbackAllowsControl(t)?'danger':''}>{fresh?(state.simulation?(t?.healthy?'SIMULATED · healthy':'SIMULATED · tripped'):motorOperation?(t?.healthy?'HIGH · no physical interlock':'LOW · no physical interlock'):diagnostic?(t?.healthy?'HIGH · diagnostic input':'LOW · diagnostic input'):(t?.healthy?'HIGH · healthy':'LOW · unsafe')):'UNKNOWN'}</b></div><div><span className="eyebrow">FIRMWARE E-STOP</span><b className={fresh&&t?.estop?'danger':''}>{fresh?(t?.estop?'LATCHED':'CLEAR'):'UNKNOWN'}</b></div><div><span className="eyebrow">LAST TRANSMITTED</span><b>{lastTX?.text??'—'}</b></div><div><span className="eyebrow">LAST ACKNOWLEDGED</span><b>{lastACK?.text??'—'}</b></div></section>
   <DiagnosticsPanel online={online}/>
   <section className="panel timeline" aria-label="Telemetry timeline"><span className="eyebrow">STATE TIMELINE</span><div>{history.length?history.map((entry,i)=><div key={i}><span className="timeline-point"/><time>{time(entry.at)}</time><b>{MOTIONS[entry.motion]}</b><small>{entry.nav}</small></div>):<p>Waiting for firmware state changes.</p>}</div></section>
   <details className="panel console"><summary><span className="terminal-icon">›_</span> Developer console <span>Commands · acknowledgements · raw serial · parsed telemetry</span><b>{state.logs.length} events</b></summary><div className="console-content"><div className="logs" role="log">{state.logs.length?state.logs.slice().reverse().map((l,i)=><div key={i} className={'log '+l.kind}><time>{time(l.at)}</time><b>{l.kind}</b><code>{l.text}</code></div>):<p>No serial events. Connect a rover or simulator.</p>}</div><pre aria-label="Parsed telemetry">{t?JSON.stringify(t,null,2):'No versioned telemetry received.'}</pre></div></details>

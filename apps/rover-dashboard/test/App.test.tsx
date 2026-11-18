@@ -12,8 +12,10 @@ class Socket {
  send(s:string){this.sent.push(JSON.parse(s));}close(){this.readyState=3;}
 }
 const connected:BridgeState={connected:true,connecting:false,protocolReady:true,simulation:true,port:'SIMULATION',telemetry:{...sample,armed:false,nav:'DISARMED'},receivedAt:Date.now(),intent:null,logs:[],error:null};
-function mount(state=connected){render(<App/>);act(()=>vi.advanceTimersByTime(0));act(()=>Socket.current.onopen());act(()=>Socket.current.onmessage({data:JSON.stringify({...state,receivedAt:Date.now()})}));}
-function update(change:Partial<BridgeState['telemetry']>){act(()=>Socket.current.onmessage({data:JSON.stringify({...connected,receivedAt:Date.now(),telemetry:{...sample,...change}})}));}
+let currentState:BridgeState;
+function receive(state:BridgeState){currentState={...state,receivedAt:Date.now()};act(()=>Socket.current.onmessage({data:JSON.stringify(currentState)}));}
+function mount(state=connected){render(<App/>);act(()=>vi.advanceTimersByTime(0));act(()=>Socket.current.onopen());receive(state);}
+function update(change:Partial<BridgeState['telemetry']>){receive({...currentState,telemetry:{...sample,...currentState.telemetry,...change}});}
 beforeEach(()=>{vi.useFakeTimers();vi.stubGlobal('WebSocket',Socket);vi.stubGlobal('fetch',vi.fn(async(url:string)=>({ok:true,json:async()=>url==='/api/diagnostics'?{count:0,capacity:10000,dropped:0,samples:[],events:[]}:[]})));vi.spyOn(document,'hasFocus').mockReturnValue(true);});
 afterEach(()=>{cleanup();vi.useRealTimers();vi.unstubAllGlobals();});
 it('renders disconnected camera, simulation label, firmware and real readings',()=>{mount();expect(screen.getByText('No camera connected')).toBeInTheDocument();expect(screen.getAllByText('SIMULATION MODE').length).toBeGreaterThan(0);expect(screen.getByText('120')).toBeInTheDocument();expect(screen.getByText('rover-usb-v1')).toBeInTheDocument();expect(screen.getByText('not measured')).toBeInTheDocument();});
@@ -84,4 +86,33 @@ it('released MOTOR_OPERATION supports software arming/movement with raw GPIO27 L
  expect(screen.getByText('COMMANDED ACTIVE')).toBeInTheDocument();expect(screen.getByText('not measured')).toBeInTheDocument();
  update({armed:false,healthy:false,requested:0,applied:0,en:false,nav:'DISARMED',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:true,inhibit:'COMMAND_TIMEOUT'});
  expect(screen.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();expect(Socket.current.sent.at(-1)).toEqual({type:'release'});
+});
+it('switching from an inhibited physical rover to simulation clears the session and enables explicit virtual ARM',()=>{
+ mount({...connected,simulation:false,port:'COM7',telemetry:{...sample,armed:false,healthy:false,nav:'DISARMED',mode:'MOTOR_OPERATION',motorCapable:true,commissioningReady:false,inhibit:'COMMISSIONING_REQUIRED'}});
+ expect(screen.getByTestId('drive-availability')).toHaveTextContent('COMMISSIONING_REQUIRED');
+ fireEvent.change(screen.getByLabelText('Control source'),{target:{value:'simulation'}});
+ expect(Socket.current.sent.at(-1)).toEqual({type:'disconnect'});expect(screen.getByRole('button',{name:'ARM',exact:true})).toBeDisabled();
+ receive(currentState);expect(screen.getByLabelText('Control source')).toHaveValue('simulation');
+ receive({...currentState,connected:false,disconnecting:true,telemetry:null,receivedAt:null});
+ expect(screen.getByRole('button',{name:/Connect rover/})).toBeDisabled();
+ receive({...currentState,disconnecting:false});
+ fireEvent.click(screen.getByRole('button',{name:/Connect rover/}));
+ expect(Socket.current.sent.at(-1)).toMatchObject({type:'connect',simulation:true});
+ receive({...connected,telemetry:{...sample,fw:'rover-sim-v1',mode:'SIMULATION',simulated:true,motorCapable:true,armed:false,nav:'DISARMED'}});
+ expect(screen.getByTestId('drive-availability')).toHaveTextContent('Press ARM');
+ fireEvent.click(screen.getByRole('button',{name:'ARM',exact:true}));expect(Socket.current.sent.at(-1)).toEqual({type:'command',command:'ARM'});
+ update({armed:true,nav:'MANUAL'});
+ for(const [key,direction] of [['w','F'],['s','B'],['a','L'],['d','R']]){
+  fireEvent.keyDown(window,{key});expect(Socket.current.sent.at(-1)).toEqual({type:'hold',direction});
+  fireEvent.keyUp(window,{key});expect(Socket.current.sent.at(-1)).toEqual({type:'release'});
+ }
+ fireEvent.keyDown(window,{key:'w'});const before=Socket.current.sent.length;
+ fireEvent.change(screen.getByLabelText('Control source'),{target:{value:'hardware'}});
+ expect(Socket.current.sent.slice(before)).toEqual([{type:'release'},{type:'disconnect'}]);
+ expect(screen.getByRole('button',{name:'Forward',exact:true})).toBeDisabled();
+ receive(currentState);expect(screen.getByRole('button',{name:'ARM',exact:true})).toBeDisabled();
+ receive({...currentState,connected:false,telemetry:null,protocolReady:false});
+ expect(screen.getByLabelText('Control source')).toHaveValue('hardware');
+ fireEvent.keyDown(window,{key:'d'});expect(Socket.current.sent.at(-1)).toEqual({type:'disconnect'});
+ expect(Socket.current.sent.filter(m=>m.type==='connect')).toHaveLength(1);
 });

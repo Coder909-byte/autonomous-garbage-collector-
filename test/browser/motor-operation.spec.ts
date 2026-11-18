@@ -28,6 +28,7 @@ test('motor commissioning and commanded-output states remain explicit without fa
  await page.screenshot({path:'artifacts/motor-operation/dashboard-inhibited.png',fullPage:true});
  acceptTestRecord();
  await expect(page.getByRole('button',{name:'ARM',exact:true})).toBeEnabled();await page.getByRole('button',{name:'ARM',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Forward',exact:true})).toBeEnabled();
  await page.keyboard.down('w');await expect(page.getByRole('region',{name:'Operational state'})).toContainText('COMMANDED ACTIVE');await page.keyboard.up('w');
  await expect(page.getByText('LOW · no physical interlock',{exact:true})).toBeVisible();
  await page.getByRole('button',{name:/SOFTWARE EMERGENCY STOP/}).click();await expect(page.getByText('LATCHED',{exact:true})).toBeVisible();

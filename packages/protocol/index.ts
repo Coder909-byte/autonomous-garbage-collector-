@@ -7,7 +7,8 @@ export interface Telemetry {
  requested:number; applied:number; en:boolean; brushReq:boolean; conveyorReq:boolean; brush:boolean; conveyor:boolean;
  nav:string; cm:[number,number,number]; age:[number,number,number];
  // Optional pair: older protocol-v1 firmware keeps its existing behavior.
- mode?:'PROTECTED_ROVER'|'USB_BENCH_DIAGNOSTIC'|'MOTOR_OPERATION'; motorCapable?:boolean;
+ mode?:'PROTECTED_ROVER'|'USB_BENCH_DIAGNOSTIC'|'MOTOR_OPERATION'|'SIMULATION'; motorCapable?:boolean;
+ simulated?:boolean;
  commissioningReady?:boolean; inhibit?:'NONE'|'COMMISSIONING_REQUIRED'|'PWM_FAULT'|'COMMAND_TIMEOUT';
 }
 export interface Log {at:number;kind:'TX'|'RX'|'ACK'|'ERROR'|'INFO';text:string}
@@ -18,6 +19,7 @@ export interface DiagnosticRecord {
 export interface BridgeState {
  connected:boolean; connecting:boolean; protocolReady:boolean; simulation:boolean; port:string|null; telemetry:Telemetry|null;
  receivedAt:number|null; intent:Direction|null; logs:Log[]; error:string|null;
+ disconnecting?:boolean;
 }
 export const NAV = ['DISARMED','MANUAL','CRUISE','SETTLE','TURN_DEAD_TIME','TURNING','REASSESS','TURN_LIMIT','SENSOR_FAULT','ESTOP'];
 export function isCommand(value:unknown):value is Command {return typeof value==='string' && (COMMANDS as readonly string[]).includes(value);}
@@ -45,7 +47,7 @@ export function telemetry(value:unknown):Telemetry {
  if(!Array.isArray(t.cm)||t.cm.length!==3||!t.cm.every(v=>Number.isInteger(v)&&(v===-1||(v>=2&&v<=400))))throw Error('Invalid ranges');
  if(!Array.isArray(t.age)||t.age.length!==3||!t.age.every(uint))throw Error('Invalid ages');
  if(t.mode!==undefined||t.motorCapable!==undefined){
-  if(!['PROTECTED_ROVER','USB_BENCH_DIAGNOSTIC','MOTOR_OPERATION'].includes(String(t.mode))||typeof t.motorCapable!=='boolean'||t.motorCapable!==(t.mode!=='USB_BENCH_DIAGNOSTIC'))throw Error('Invalid operating mode');
+  if(!['PROTECTED_ROVER','USB_BENCH_DIAGNOSTIC','MOTOR_OPERATION','SIMULATION'].includes(String(t.mode))||typeof t.motorCapable!=='boolean'||t.motorCapable!==(t.mode!=='USB_BENCH_DIAGNOSTIC'))throw Error('Invalid operating mode');
   if(!t.motorCapable&&(t.armed||t.auto||t.en||t.brushReq||t.conveyorReq||t.brush||t.conveyor||t.requested!==0||t.applied!==0))throw Error('Contradictory diagnostic telemetry');
  }
  const active=t.armed||t.auto||t.en||t.brushReq||t.conveyorReq||t.brush||t.conveyor||t.requested!==0||t.applied!==0;
@@ -53,6 +55,8 @@ export function telemetry(value:unknown):Telemetry {
   if(typeof t.commissioningReady!=='boolean'||!['NONE','COMMISSIONING_REQUIRED','PWM_FAULT','COMMAND_TIMEOUT'].includes(String(t.inhibit)))throw Error('Invalid commissioning telemetry');
   if((!t.commissioningReady&&t.inhibit!=='COMMISSIONING_REQUIRED')||(t.commissioningReady&&t.inhibit==='COMMISSIONING_REQUIRED')||((!t.commissioningReady||t.inhibit!=='NONE')&&active))throw Error('Contradictory commissioning telemetry');
  }else if(t.commissioningReady!==undefined||t.inhibit!==undefined)throw Error('Unexpected commissioning telemetry');
+ if(t.mode==='SIMULATION'){if(t.simulated!==true||t.fw!=='rover-sim-v1')throw Error('Simulation telemetry must be explicitly synthetic');}
+ else if(t.simulated!==undefined)throw Error('Physical telemetry cannot claim simulated outputs');
  const physicalRequired=t.mode===undefined||t.mode==='PROTECTED_ROVER';
  if((t.en && (!t.armed||t.estop||(physicalRequired&&!t.healthy)||t.applied===0))||(!t.en&&t.applied!==0)||((t.brush||t.conveyor)&&(!t.en||t.applied!==1)))throw Error('Contradictory output telemetry');
  return t as unknown as Telemetry;
@@ -66,5 +70,7 @@ export function parseLine(line:string):{kind:'telemetry';data:Telemetry}|{kind:'
 export function isState(value:unknown):value is BridgeState {
  if(!value||typeof value!=='object')return false;const s=value as BridgeState;
  if(typeof s.connected!=='boolean'||typeof s.connecting!=='boolean'||typeof s.protocolReady!=='boolean'||typeof s.simulation!=='boolean'||!(s.port===null||typeof s.port==='string')||!(s.error===null||typeof s.error==='string')||!Array.isArray(s.logs)||s.logs.length>200||!(s.receivedAt===null||Number.isFinite(s.receivedAt))||!(s.intent===null||isDirection(s.intent)))return false;
+ if(s.disconnecting!==undefined&&typeof s.disconnecting!=='boolean')return false;
+ if(s.telemetry&&((!s.simulation&&s.telemetry.mode==='SIMULATION')||(s.simulation&&['MOTOR_OPERATION','USB_BENCH_DIAGNOSTIC'].includes(s.telemetry.mode??''))))return false;
  try{if(s.telemetry!==null)telemetry(s.telemetry);return s.logs.every(l=>l&&Number.isFinite(l.at)&&['TX','RX','ACK','ERROR','INFO'].includes(l.kind)&&typeof l.text==='string');}catch{return false;}
 }

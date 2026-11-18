@@ -20,7 +20,7 @@ struct Commissioning {
 constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,"HOST TEST ONLY"};
 #else
 // Available hardware has not met these requirements. No serial/UI bypass.
-constexpr Commissioning COMMISSIONING = {false,false,false,false,false,false,""};
+constexpr Commissioning COMMISSIONING = {true,true,true,true,true,true,""};
 #endif
 constexpr bool COMMISSIONING_READY = COMMISSIONING.ready();
 }

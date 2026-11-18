@@ -3,6 +3,13 @@
   "baseline_commit": "d6cd4790fc6066ee6c5d9d0f6e0c8d0936a571cb",
   "e2_authorities_unchanged": 11,
   "baseline_comparison": "Git LF-normalized text; original working-file hashes also recorded",
+  "software_inputs_from_frozen_snapshot": [
+    "firmware/rover.ino",
+    "include/rover_control.h",
+    "platformio.ini",
+    "scripts/generate_team_handover.py",
+    "wokwi/sketch.ino"
+  ],
   "pdf_pages": 74,
   "sections": 13,
   "records": 201,
@@ -18,8 +25,13 @@
   "photo_files_reviewable": 0,
   "actual_photo_terminal_matches": 0,
   "checkpoint_count": 10,
-  "physical_measurements": "PENDING - no results invented",
-  "firmware_changes": "Frozen PDF verified against 2da0b0a; current adapter adds telemetry, tested separately",
+  "physical_measurements": "Unreviewed USER-REPORTED observations retained; full requirements remain incomplete",
+  "measurement_statuses": {
+    "PARTIAL - USER-REPORTED": 6,
+    "PENDING": 4,
+    "COMPLETE - USER-REPORTED (observation only)": 12
+  },
+  "firmware_changes": "Frozen PDF software inputs verified against 2da0b0a; current protected/USB-bench firmware tested separately",
   "physical_power_up": "HOLD retained",
   "energized_stages": "F-J NOT RELEASED"
 }

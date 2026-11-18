@@ -28,6 +28,8 @@ The PDF uses all 201 E2 records: 197 external segments, plus W042/W044/W046/W048
 
 Use blank evidence templates: [wire readings](team_handover/TEAM_ASSEMBLY_RECORD.csv), [terminal mapping](team_handover/TEAM_TERMINAL_MAP.csv), [measurements](team_handover/TEAM_MEASUREMENT_RECORD.csv), [checkpoint record](team_handover/TEAM_CHECKPOINT_RECORD.csv). Preserve originals; copy templates to dated team evidence batches rather than overwriting generated masters.
 
+The measurement CSV now retains explicitly USER-REPORTED observations as an active record. Its completed individual observations do not close the six commissioning requirements; see [current commissioning status](team_handover/COMMISSIONING_STATUS.md). The generator preserves this CSV when it already exists. The PDF and its manifest remain historical handover snapshots.
+
 ## What stays disconnected
 
 Battery main and balance, all actual motor loads/high-current branches, unselected P1/OV1/OV2/K1/contact ports, external buck/MCU power and real ECHO-to-MCU plugs. Do not bypass missing protection, hard-enable drivers, parallel buck positives, connect a motor output to ground, or add four internal-bond jumpers. Identified detached signal/protection assemblies may be prepared unpowered; full harness termination waits for its actual pin/rating evidence.

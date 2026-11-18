@@ -22,12 +22,13 @@ export class Bridge extends EventEmitter {
    device.on('fault',(e:Error)=>{if(this.device===device){this.log('ERROR',e.message);void this.disconnect();}});
    device.on('lost',()=>{if(this.device===device){this.log('ERROR','Serial device disconnected; STOP delivery not confirmed');void this.disconnect();}});
    // Best effort, repeated at READY to cover USB-induced board reset. No rearm.
-   this.send('S');this.send('DISARM');this.log('INFO',simulation?'SIMULATION MODE · C++ controller, no hardware':'USB open · waiting for versioned telemetry',null,'connection');
+   this.send('S');this.send('DISARM');this.log('INFO',simulation?'SIMULATION MODE · portable virtual controller, no hardware':'USB open · waiting for versioned telemetry',null,'connection');
   }catch(e){if(generation!==this.generation)return;this.state.connecting=false;this.state.connected=false;this.state.port=null;this.log('ERROR',String(e));await this.disconnect();throw e;}
  }
  private send(command:Command|'HEARTBEAT'){
   if(!this.device)throw Error('No serial connection');
-  this.device.write(command+'\n');if(!this.pending.has(command))this.pending.set(command,this.now());this.log('TX',command);
+  const device=this.device;if(!this.pending.has(command))this.pending.set(command,this.now());this.log('TX',command);
+  try{device.write(command+'\n');}catch(e){this.pending.delete(command);throw e;}
  }
  ready(){const t=this.state.telemetry;return !!(this.device&&this.state.protocolReady&&t&&this.state.receivedAt!==null&&this.now()-this.state.receivedAt<1200);}
  command(value:unknown){
@@ -64,13 +65,17 @@ export class Bridge extends EventEmitter {
  receive(chunk:string){
   // Bound memory even if a serial peer never sends a newline.
   for(const ch of chunk){
-   if(ch==='\n') {if(!this.discard&&this.buffer.trim())this.line(this.buffer.trim());this.buffer='';this.discard=false;}
+   if(ch==='\n') {const line=this.discard?'':this.buffer.trim();this.buffer='';this.discard=false;if(line)this.line(line);}
    else if(!this.discard){if(this.buffer.length>=1024){this.buffer='';this.discard=true;this.log('ERROR','Discarded overlong serial line');this.stopHold();}else this.buffer+=ch;}
   }
  }
  private line(line:string){
   try{
    const p=parseLine(line);
+   if(p.kind==='telemetry'&&((!this.state.simulation&&p.data.mode==='SIMULATION')||(this.state.simulation&&['MOTOR_OPERATION','USB_BENCH_DIAGNOSTIC'].includes(p.data.mode??'')))){
+    this.state.protocolReady=false;this.state.telemetry=null;this.state.receivedAt=null;this.stopHold();this.send('DISARM');
+    throw Error('Telemetry source mismatch: physical and simulated sessions cannot share drive state');
+   }
    if(p.kind==='telemetry'){const previous=this.state.telemetry;if(this.disarmAck&&!p.data.armed&&!p.data.en)this.state.protocolReady=true;this.state.telemetry=p.data;this.state.receivedAt=this.now();this.log('RX',line,p.data);if((!previous&&(p.data.estop||!p.data.healthy))||(previous&&(previous.estop!==p.data.estop||previous.healthy!==p.data.healthy)))this.log('INFO',`Safety feedback: ${p.data.healthy?'HIGH':'LOW'}; firmware E-stop ${p.data.estop?'LATCHED':'clear'}`,p.data,'emergency');if(this.state.intent&&(!p.data.armed||p.data.auto||p.data.estop||!motorControlAvailable(p.data)||!feedbackAllowsControl(p.data)))this.stopHold();this.publish();}
    else if(p.kind==='ack'){if(p.ok&&p.command==='DISARM')this.disarmAck=true;this.pending.delete(p.command);this.log(p.ok?'ACK':'ERROR',line);if(!p.ok&&this.state.intent)this.stopHold();}
    else {this.log('RX',line);if(line.startsWith('READY')){this.disarmAck=false;this.openedAt=this.now();this.state.protocolReady=false;this.stopHold(false);this.send('S');this.send('DISARM');}}
@@ -80,9 +85,9 @@ export class Bridge extends EventEmitter {
   ++this.generation;if(this.closing)return;
   const wasActive=this.device||this.state.connecting;this.closing=true;this.stopHold(false);const device=this.device;
   if(device){try{this.send('S');this.send('DISARM');}catch{this.log('ERROR','STOP write failed; delivery unconfirmed');}}
-  this.device=null;this.pending.clear();this.state.connected=false;this.state.connecting=false;this.state.protocolReady=false;this.state.telemetry=null;this.state.receivedAt=null;this.state.port=null;this.publish();
+  this.device=null;this.pending.clear();this.state.connected=false;this.state.connecting=false;this.state.disconnecting=true;this.state.protocolReady=false;this.state.telemetry=null;this.state.receivedAt=null;this.state.port=null;this.publish();
   if(wasActive)this.log('INFO','Connection closed; no automatic reconnect or rearm',null,'connection');
-  try{if(device)await device.close();}finally{this.closing=false;}
+  try{if(device)await device.close();}finally{this.closing=false;this.state.disconnecting=false;this.publish();}
  }
  async dispose(){clearInterval(this.timer);await this.disconnect();}
 }
