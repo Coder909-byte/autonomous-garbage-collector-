@@ -1,13 +1,16 @@
 import { EventEmitter } from 'node:events';
-import { isCommand,isDirection,motorControlAvailable,feedbackAllowsControl,parseLine,type BridgeState,type Command,type Direction,type DiagnosticRecord } from '../../../packages/protocol/index.js';
+import { isCommand,isDirection,motorControlAvailable,feedbackAllowsControl,parseLine,visionFrame,type BridgeState,type Command,type Direction,type DiagnosticRecord,type VisionState } from '../../../packages/protocol/index.js';
+import { VISION,bestTarget,decide } from './vision.js';
 import type { Transport } from './transports.js';
 import {Diagnostics} from './diagnostics.js';
+const visionIdle=():VisionState=>({enabled:false,phase:'OFF',reason:'Camera seek off',detectedAt:null,detector:null,targets:[]});
 export class Bridge extends EventEmitter {
  readonly diagnostics=new Diagnostics();
- state:BridgeState={connected:false,connecting:false,protocolReady:false,simulation:false,port:null,telemetry:null,receivedAt:null,intent:null,logs:[],error:null};
+ state:BridgeState={connected:false,connecting:false,protocolReady:false,simulation:false,port:null,telemetry:null,receivedAt:null,intent:null,logs:[],error:null,vision:visionIdle()};
  private device:Transport|null=null;private buffer='';private discard=false;private leaseAt=0;private sentAt=0;
  private pending=new Map<string,number>();private timer;private generation=0;private closing=false;private disarmAck=false;private openedAt=0;
  private heartbeatAt=0;
+ private visionAt=0;private turnUntil=0;private turnEndedAt=0;private lastTargetAt:number|null=null;private modeAt=0;
  constructor(private now=()=>Date.now()){super();this.timer=setInterval(()=>{try{this.watchdog();}catch(e){this.log('ERROR',String(e));void this.disconnect();}},25);}
  log(kind:BridgeState['logs'][number]['kind'],text:string,t?:BridgeState['telemetry'],event?:DiagnosticRecord['event']){this.diagnostics.record(this.now(),kind,text,t??undefined,event);this.state.logs.push({at:this.now(),kind,text:text.slice(0,1024)});this.state.logs=this.state.logs.slice(-150);if(kind==='ERROR')this.state.error=text;this.publish();}
  publish(){this.emit('state',this.state);}
@@ -34,6 +37,7 @@ export class Bridge extends EventEmitter {
  command(value:unknown){
   if(!isCommand(value))throw Error('Command rejected by allowlist');
   if(isDirection(value))throw Error('Movement requires a live hold lease');
+  if(['S','STOP','ESTOP','DISARM','MANUAL','AUTO','RESET','ARM'].includes(value))this.visionOff(`Operator command ${value}`);
   if(['S','STOP','ESTOP','DISARM','MANUAL','AUTO','RESET','ARM'].includes(value))this.stopHold(false);
   if(!['S','STOP','ESTOP','DISARM','MANUAL','CLEAN OFF','BRUSH OFF','CONVEYOR OFF'].includes(value)&&!this.ready())throw Error('Fresh protocol v1 telemetry required');
   const t=this.state.telemetry;
@@ -43,6 +47,7 @@ export class Bridge extends EventEmitter {
  }
  hold(value:unknown){
   if(!isDirection(value))throw Error('Invalid direction');
+  this.visionOff('Operator manual drive');
   const t=this.state.telemetry;
   if(!this.ready()||!motorControlAvailable(t)||!t?.armed||t.auto||t.estop||!feedbackAllowsControl(t))throw Error('Manual hold requires fresh armed MANUAL healthy telemetry');
   this.leaseAt=this.now();
@@ -59,6 +64,7 @@ export class Bridge extends EventEmitter {
    if(this.now()-this.leaseAt>300||!this.ready()){this.stopHold();}
    else if(this.now()-this.sentAt>=200){this.send(this.state.intent);this.sentAt=this.now();}
   }
+  this.visionTick();
   if(this.state.receivedAt!==null&&this.now()-this.state.receivedAt>=1500){this.log('ERROR','Telemetry stale; attempting stop and disconnect');void this.disconnect();return;}
   for(const [cmd,at] of this.pending){if(this.now()-at>2000){this.log('ERROR',`No acknowledgement: ${cmd}; stopping, delivery unconfirmed`);void this.disconnect();break;}}
  }
@@ -83,11 +89,61 @@ export class Bridge extends EventEmitter {
  }
  async disconnect(){
   ++this.generation;if(this.closing)return;
-  const wasActive=this.device||this.state.connecting;this.closing=true;this.stopHold(false);const device=this.device;
+  const wasActive=this.device||this.state.connecting;this.closing=true;this.visionOff('Rover disconnected');this.stopHold(false);const device=this.device;
   if(device){try{this.send('S');this.send('DISARM');}catch{this.log('ERROR','STOP write failed; delivery unconfirmed');}}
   this.device=null;this.pending.clear();this.state.connected=false;this.state.connecting=false;this.state.disconnecting=true;this.state.protocolReady=false;this.state.telemetry=null;this.state.receivedAt=null;this.state.port=null;this.publish();
   if(wasActive)this.log('INFO','Connection closed; no automatic reconnect or rearm',null,'connection');
   try{if(device)await device.close();}finally{this.closing=false;this.state.disconnecting=false;this.publish();}
+ }
+ visionFrame(value:unknown){
+  const frame=visionFrame(value),v=this.state.vision!;
+  v.detectedAt=this.now();v.detector=frame.detector;v.targets=frame.targets;
+  if(bestTarget(frame.targets))this.lastTargetAt=this.now();
+  this.publish();
+ }
+ visionEnable(on:boolean){
+  if(!on){const was=this.state.vision!.enabled;this.visionOff('Camera seek off');if(was)this.stopHold();return;}
+  const t=this.state.telemetry;
+  if(!this.ready()||!motorControlAvailable(t)||!t?.armed||t.estop||!feedbackAllowsControl(t))throw Error('Camera seek requires fresh, armed, healthy telemetry');
+  const v=this.state.vision!;if(v.enabled)return;
+  this.stopHold(false);this.turnUntil=0;this.turnEndedAt=0;this.visionAt=0;this.modeAt=0;this.lastTargetAt=null;
+  v.enabled=true;v.phase='WAITING';v.reason='Camera seek starting';
+  if(!t.brushReq||!t.conveyorReq)this.send('CLEAN ON');
+  this.log('INFO','Camera seek ON · brushes and conveyor requested; ultrasonic stops keep priority',t,'command');
+ }
+ private visionOff(reason:string){
+  const v=this.state.vision!;if(!v.enabled)return;
+  v.enabled=false;v.phase='OFF';v.reason=reason;this.turnUntil=0;
+  this.log('INFO',`Camera seek OFF · ${reason}`,null,'command');
+ }
+ private visionTick(){
+  const v=this.state.vision!;if(!v.enabled)return;
+  const t=this.state.telemetry,now=this.now();
+  if(!this.ready()||!t||!t.armed||t.estop||!motorControlAvailable(t)||!feedbackAllowsControl(t)){
+   this.visionOff(t?.estop?'Firmware E-stop latched':t&&!t.armed?'Rover disarmed':'Fresh telemetry lost');if(this.state.intent)this.stopHold();return;
+  }
+  if(this.turnUntil){
+   if(now<this.turnUntil){this.leaseAt=now;return;}
+   this.turnUntil=0;this.turnEndedAt=now;this.stopHold();return;
+  }
+  if(now-this.visionAt<VISION.TICK_MS)return;
+  this.visionAt=now;
+  const d=decide({now,detectedAt:v.detectedAt,lastTargetAt:this.lastTargetAt,targets:v.targets,telemetry:t,receivedAt:this.state.receivedAt!,turnEndedAt:this.turnEndedAt});
+  v.phase=d.phase;v.reason=d.reason;
+  if(d.action==='EXPLORE'){
+   if(this.state.intent)this.stopHold();
+   if(!t.auto&&now-this.modeAt>=1000){this.modeAt=now;this.send('AUTO');}
+  }else if(t.auto){
+   // Leave firmware AUTO first; steer only once telemetry confirms MANUAL.
+   if(now-this.modeAt>=500){this.modeAt=now;this.send('MANUAL');}
+  }else if(d.action==='STOP'){
+   if(this.state.intent)this.stopHold();
+  }else{
+   this.leaseAt=now;
+   if(this.state.intent!==d.action){this.state.intent=d.action;this.send(d.action);this.sentAt=now;}
+   if(d.action!=='F')this.turnUntil=now+VISION.TURN_MS;
+  }
+  this.publish();
  }
  async dispose(){clearInterval(this.timer);await this.disconnect();}
 }

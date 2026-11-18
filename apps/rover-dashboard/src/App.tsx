@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
-import {isState,MOTIONS,motorControlAvailable,feedbackAllowsControl,motorOutputState,type BridgeState,type Command,type Direction} from '../../../packages/protocol/index';
+import {isState,MOTIONS,motorControlAvailable,feedbackAllowsControl,motorOutputState,type BridgeState,type Command,type Direction,type VisionState} from '../../../packages/protocol/index';
 import {HoldControl,keyDirection} from './control';
 import {Navigation,DiagnosticsPanel} from './Monitoring';
 const empty:BridgeState={connected:false,connecting:false,protocolReady:false,simulation:false,port:null,telemetry:null,receivedAt:null,intent:null,logs:[],error:null};
@@ -45,6 +45,7 @@ export default function App(){
   setHistory(current=>{const previous=current.at(-1);return previous&&previous.nav===t.nav&&previous.motion===t.applied?current:[...current,{at:state.receivedAt!,nav:t.nav,motion:t.applied}].slice(-7);});
  },[t,state.receivedAt]);
  const diagnostic=t?.mode==='USB_BENCH_DIAGNOSTIC',motorOperation=t?.mode==='MOTOR_OPERATION',motorAvailable=motorControlAvailable(t);
+ const seeking=!!state.vision?.enabled&&sourceMatches;
  const fresh=online&&sourceMatches&&state.connected&&state.protocolReady&&age<1200,canMove=fresh&&motorAvailable&&!!t?.armed&&!t.auto&&!t.estop&&feedbackAllowsControl(t);
  const changeSource=(next:boolean)=>{
   if(next===simulation)return;hold.release();setError('');setSimulation(next);setHistory([]);
@@ -92,7 +93,8 @@ export default function App(){
     </section>
     <section className="panel manual-panel"><div className="panel-title"><h2>Drive control</h2><span className={'pill '+(fresh&&t?.armed?'good':'')}>{fresh&&t?(t.armed?'ARMED':'DISARMED'):'UNKNOWN'}</span></div>
      <p className="tiny" aria-live="polite" data-testid="drive-availability">{driveReason}</p>
-     <div className="segmented"><button disabled={!fresh} className={fresh&&!t?.auto?'selected':''} onClick={()=>command('MANUAL')}>Manual</button><button disabled={!fresh||!motorAvailable||!t?.armed} className={fresh&&t?.auto?'selected':''} onClick={()=>command('AUTO')}>Autonomous</button></div>
+     <div className="segmented"><button disabled={!fresh} className={fresh&&!t?.auto&&!seeking?'selected':''} onClick={()=>command('MANUAL')}>Manual</button><button disabled={!fresh||!motorAvailable||!t?.armed} className={fresh&&t?.auto&&!seeking?'selected':''} onClick={()=>command('AUTO')}>Autonomous</button><button disabled={!fresh||!motorAvailable||!t?.armed||!!t?.estop} aria-pressed={seeking} className={seeking?'selected':''} onClick={()=>{hold.release();send({type:'vision',enabled:!seeking});}}>Camera seek</button></div>
+     {seeking&&<p className="tiny seek-status" role="status"><b>{state.vision!.phase.replaceAll('_',' ')}</b> · {state.vision!.reason}</p>}
      <div className="dpad">{direction('Forward','F','↑')}{direction('Left','L','←')}<button className="direction stop" aria-label="Stop movement" disabled={!state.connected} onClick={()=>command('S')}>■<kbd>SPACE</kbd></button>{direction('Right','R','→')}{direction('Backward','B','↓')}</div>
      <p className="control-hint">Hold to move. Release to stop.<br/>W A S D · Space to stop</p>
      <div className="two-buttons"><button className="button primary" disabled={!fresh||!motorAvailable||t?.armed||t?.estop||!feedbackAllowsControl(t)} onClick={()=>command('ARM')}>ARM</button><button className="button secondary" disabled={!state.connected} onClick={()=>command('DISARM')}>DISARM</button></div>
@@ -100,7 +102,7 @@ export default function App(){
      <p className="tiny">{diagnostic?'Motor control is disabled by this firmware build.':motorOperation&&!motorAvailable?'Motor control is inhibited; inspect commissioning and firmware status.':'ARM permits control; it does not start motion.'}</p>
     </section>
    </aside>
-   <div className="center-column"><Camera/>
+   <div className="center-column"><Camera vision={state.vision} clock={clock}/>
     <section className="panel operations" aria-label="Operational state"><div className="panel-title"><h2>Operational state</h2><span className={'pill '+(fresh?'good':'warn')}>{t?(fresh?'Fresh telemetry':'STALE TELEMETRY'):'Awaiting telemetry'}</span></div>
      <div className="metric-grid"><div><label>REQUESTED MOVEMENT</label><strong>{fresh&&t?MOTIONS[t.requested]:'—'}</strong></div><div><label>APPLIED FIRMWARE OUTPUT</label><strong className="accent">{fresh&&t?MOTIONS[t.applied]:'—'}</strong></div><div><label>NAVIGATION PHASE</label><strong>{fresh?t?.nav:'—'}</strong></div><div><label>DRIVER ENABLE</label><strong>{fresh?(t?.en?'HIGH':'LOW'):'UNKNOWN'}</strong></div></div>
      <div className="metric-grid"><div><label>OPERATING MODE</label><strong>{fresh?(t?.mode??'LEGACY V1'):'UNKNOWN'}</strong></div><div><label>MOTOR OUTPUT STATE</label><strong>{fresh&&t?motorOutputState(t):'UNKNOWN'}</strong></div></div>
@@ -124,7 +126,8 @@ export default function App(){
   <footer><span><i/> MAIN ESP32 RETAINS FINAL CONTROL AUTHORITY</span><span>Software stop does not confirm motor-power isolation. Use the physical emergency cutoff.</span></footer>
  </div>;
 }
-function Camera(){
+function detectionAge(vision:VisionState|undefined,clock:number){return vision?.detectedAt==null?Infinity:clock-vision.detectedAt;}
+function Camera({vision,clock}:{vision?:VisionState;clock:number}){
  const [ip,setIP]=useState(()=>localStorage.getItem('rover.cameraIP')||''),[active,setActive]=useState(false),[status,setStatus]=useState('DISCONNECTED'),[error,setError]=useState(''),[width,setWidth]=useState(320),[quality,setQuality]=useState(14),[busy,setBusy]=useState(false);
  const imageLoaded=useRef(false);
  const validate=(s:unknown)=>{if(!s||typeof s!=='object')throw Error('Invalid camera status');const v=s as {ready:boolean;streaming:boolean;width:number;quality:number};if(typeof v.ready!=='boolean'||typeof v.streaming!=='boolean'||![320,640].includes(v.width)||!Number.isInteger(v.quality)||v.quality<10||v.quality>40)throw Error('Invalid camera status');return v;};
@@ -135,8 +138,10 @@ function Camera(){
  const snapshot=async()=>{try{const response=await fetch('/api/camera/snapshot',{signal:AbortSignal.timeout(8000)});if(!response.ok||!response.headers.get('content-type')?.startsWith('image/jpeg'))throw Error('Snapshot unavailable');const blob=await response.blob();if(!blob.size)throw Error('Empty snapshot');const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`rover-snapshot-${new Date().toISOString().replaceAll(':','-')}.jpg`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setError('');}catch(e){setError(String(e));}};
  return <section className="panel camera-panel"><div className="panel-title"><Icon type="camera"/><h2>Vision / ESP32-CAM</h2><span className={'pill '+(status==='LIVE CAMERA'?'good':'')}>{status}</span></div><div className={'camera-view '+(active?'active':'')}>
   {active?<img alt="Live ESP32-CAM MJPEG stream" src="/api/camera/stream" onLoad={()=>{imageLoaded.current=true;setStatus('VIDEO RECEIVED');}} onError={()=>{setActive(false);setStatus('STREAM FAILED');setError('MJPEG stream failed. Check camera power, Wi-Fi and address.');}}/>:<div className="camera-placeholder"><div className="camera-reticle"><Icon type="camera"/></div><h3>No camera connected</h3><p>Connect the separate ESP32-CAM on your trusted Wi-Fi network.</p><span>No simulated or prerecorded video</span></div>}
+  {active&&detectionAge(vision,clock)<1000&&<div className="detections" aria-hidden="true">{vision!.targets.map((d,i)=><span key={i} style={{left:`${(d.cx-d.w/2)*100}%`,top:`${(d.cy-d.h/2)*100}%`,width:`${d.w*100}%`,height:`${d.h*100}%`}}><em>{d.label} {Math.round(d.conf*100)}%</em></span>)}</div>}
   <span className="feed-label">CAM 01 <i/> LOCAL WI-FI</span><span className="feed-corner top-left"/><span className="feed-corner bottom-right"/>
  </div><div className="camera-toolbar"><label>CAMERA IPv4 / HTTP URL<input aria-label="Camera address" placeholder="http://192.168.50.20" value={ip} disabled={active} onChange={e=>setIP(e.target.value)}/></label><button className="button secondary" disabled={busy} onClick={()=>active?(setActive(false),setStatus('DISCONNECTED')):void connect()}>{active?'Disconnect camera':'Connect camera'}</button><button className="button icon-button" aria-label="Snapshot" disabled={!active} onClick={()=>void snapshot()}><Icon type="camera"/></button></div>
  <details className="camera-settings"><summary>Camera settings <span>Disconnect stream before applying</span></summary><div><select aria-label="Camera resolution" value={width} disabled={active} onChange={e=>setWidth(Number(e.target.value))}><option value={320}>QVGA / 320 × 240</option><option value={640}>VGA / 640 × 480 · PSRAM required</option></select><label>JPEG quality<input aria-label="JPEG quality" type="number" min="10" max="40" value={quality} disabled={active} onChange={e=>setQuality(Number(e.target.value))}/></label><button className="button secondary" disabled={active||busy||!ip} onClick={()=>{setBusy(true);void api('camera',{ip}).then(()=>api(`camera/settings?width=${width}&quality=${quality}`,{})).then(raw=>{validate(raw);setError('');}).catch(e=>setError(String(e))).finally(()=>setBusy(false));}}>Apply</button></div></details>
+ <p className="tiny detection-status" data-testid="detection-status">{detectionAge(vision,clock)<1500?`Garbage detection (${vision!.detector}): ${vision!.targets.length?vision!.targets.map(d=>`${d.label} ${Math.round(d.conf*100)}%`).join(' · '):'nothing in view'}`:'Garbage detection offline: run python vision/rover_vision.py on this laptop.'}</p>
  {error&&<p role="alert" className="camera-error">{error}</p>}</section>;
 }

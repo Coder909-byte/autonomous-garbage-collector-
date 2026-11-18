@@ -20,6 +20,28 @@ export interface BridgeState {
  connected:boolean; connecting:boolean; protocolReady:boolean; simulation:boolean; port:string|null; telemetry:Telemetry|null;
  receivedAt:number|null; intent:Direction|null; logs:Log[]; error:string|null;
  disconnecting?:boolean;
+ vision?:VisionState;
+}
+// Camera detections in normalized frame coordinates (0..1), box centre and size.
+export interface VisionTarget {label:string; conf:number; cx:number; cy:number; w:number; h:number}
+export const VISION_PHASES = ['OFF','WAITING','APPROACH','ALIGN_LEFT','ALIGN_RIGHT','EXPLORE','BLOCKED'] as const;
+export interface VisionState {
+ enabled:boolean; phase:typeof VISION_PHASES[number]; reason:string;
+ detectedAt:number|null; detector:string|null; targets:VisionTarget[];
+}
+export const MAX_VISION_TARGETS = 6;
+export function visionFrame(value:unknown):{detector:string;targets:VisionTarget[]} {
+ if(!value||typeof value!=='object')throw Error('Invalid vision frame');
+ const v=value as {detector?:unknown;targets?:unknown};
+ if(typeof v.detector!=='string'||!/^[A-Za-z0-9 ._-]{1,32}$/.test(v.detector))throw Error('Invalid vision detector');
+ if(!Array.isArray(v.targets)||v.targets.length>MAX_VISION_TARGETS)throw Error('Invalid vision targets');
+ const unit=(n:unknown)=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=1;
+ const targets=v.targets.map(raw=>{
+  const t=raw as VisionTarget;
+  if(!t||typeof t!=='object'||typeof t.label!=='string'||!/^[A-Za-z0-9 ._-]{1,32}$/.test(t.label)||![t.conf,t.cx,t.cy,t.w,t.h].every(unit))throw Error('Invalid vision target');
+  return {label:t.label,conf:t.conf,cx:t.cx,cy:t.cy,w:t.w,h:t.h};
+ });
+ return {detector:v.detector,targets};
 }
 export const NAV = ['DISARMED','MANUAL','CRUISE','SETTLE','TURN_DEAD_TIME','TURNING','REASSESS','TURN_LIMIT','SENSOR_FAULT','ESTOP'];
 export function isCommand(value:unknown):value is Command {return typeof value==='string' && (COMMANDS as readonly string[]).includes(value);}
@@ -71,6 +93,7 @@ export function isState(value:unknown):value is BridgeState {
  if(!value||typeof value!=='object')return false;const s=value as BridgeState;
  if(typeof s.connected!=='boolean'||typeof s.connecting!=='boolean'||typeof s.protocolReady!=='boolean'||typeof s.simulation!=='boolean'||!(s.port===null||typeof s.port==='string')||!(s.error===null||typeof s.error==='string')||!Array.isArray(s.logs)||s.logs.length>200||!(s.receivedAt===null||Number.isFinite(s.receivedAt))||!(s.intent===null||isDirection(s.intent)))return false;
  if(s.disconnecting!==undefined&&typeof s.disconnecting!=='boolean')return false;
+ if(s.vision!==undefined){const v=s.vision;if(!v||typeof v.enabled!=='boolean'||!(VISION_PHASES as readonly string[]).includes(v.phase)||typeof v.reason!=='string'||!(v.detectedAt===null||Number.isFinite(v.detectedAt))||!(v.detector===null||typeof v.detector==='string'))return false;try{visionFrame({detector:v.detector??'none',targets:v.targets});}catch{return false;}}
  if(s.telemetry&&((!s.simulation&&s.telemetry.mode==='SIMULATION')||(s.simulation&&['MOTOR_OPERATION','USB_BENCH_DIAGNOSTIC'].includes(s.telemetry.mode??''))))return false;
  try{if(s.telemetry!==null)telemetry(s.telemetry);return s.logs.every(l=>l&&Number.isFinite(l.at)&&['TX','RX','ACK','ERROR','INFO'].includes(l.kind)&&typeof l.text==='string');}catch{return false;}
 }

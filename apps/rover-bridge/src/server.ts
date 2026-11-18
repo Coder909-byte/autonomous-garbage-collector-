@@ -26,7 +26,9 @@ export function makeServer(bridge=new Bridge(),testPort?:number){
   res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');
   res.setHeader('Content-Security-Policy',"default-src 'self'; img-src 'self' blob:; connect-src 'self'; style-src 'self'; frame-ancestors 'none'");
   if(req.headers.origin&&!validOrigin(req.headers.origin))return void res.status(403).json({error:'Local operator origin required'});
-  if(req.path.startsWith('/api/')&&req.method!=='GET'&&(!validOrigin(req.headers.origin)||req.headers['x-rover-client']!=='dashboard'))return void res.status(403).json({error:'Local dashboard request required'});
+  // The local vision service is a non-browser loopback client; browsers always send Origin on POST.
+  const visionService=req.path==='/api/vision'&&req.method==='POST'&&!req.headers.origin&&req.headers['x-rover-client']==='vision';
+  if(req.path.startsWith('/api/')&&req.method!=='GET'&&!visionService&&(!validOrigin(req.headers.origin)||req.headers['x-rover-client']!=='dashboard'))return void res.status(403).json({error:'Local dashboard request required'});
   next();
  });
  app.use(express.json({limit:'1kb'}));
@@ -38,6 +40,7 @@ export function makeServer(bridge=new Bridge(),testPort?:number){
   res.set('Cache-Control','no-store').attachment(`rover-diagnostics-${Date.now()}.${format}`);
   if(format==='csv')res.type('text/csv').send(bridge.diagnostics.csv());else res.json(bridge.diagnostics.snapshot());
  });
+ app.post('/api/vision',(req,res)=>{try{bridge.visionFrame(req.body);res.json({ok:true,vision:bridge.state.vision});}catch(e){res.status(400).json({error:String(e)});}});
  app.post('/api/camera',(req,res)=>{try{cameraIP=cameraAddress(req.body.ip);res.json({ip:cameraIP});}catch(e){res.status(400).json({error:String(e)});}});
  app.all('/api/camera/:endpoint',(req,res)=>{
   try{if(!cameraIP)throw Error('Camera disconnected: configure address first');
@@ -70,6 +73,7 @@ export function makeServer(bridge=new Bridge(),testPort?:number){
      case 'command':bridge.command(m.command);break;
      case 'hold':bridge.hold(m.direction);break;
      case 'release':bridge.stopHold();break;
+     case 'vision':bridge.visionEnable(m.enabled===true);break;
      default:throw Error('Invalid control message');
     }
    }catch(e){bridge.log('ERROR',String(e));bridge.stopHold();}
