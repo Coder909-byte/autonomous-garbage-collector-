@@ -80,13 +80,14 @@ def main(argv=None):
     parser.add_argument('--camera', help='Read snapshots directly from the ESP32-CAM, e.g. http://192.168.4.2')
     parser.add_argument('--source', help='Local test source instead of the ESP32-CAM: webcam index or video file')
     parser.add_argument('--detector', choices=('auto', 'yolo', 'blob'), default='auto')
-    parser.add_argument('--model', default='yolov8n.pt', help='YOLO weights (custom litter models supported)')
-    parser.add_argument('--classes', default=','.join(DEFAULT_YOLO_CLASSES), help='Comma-separated YOLO class names, or "all"')
+    parser.add_argument('--model', help='YOLO weights. Default: vision/models/taco_litter.pt if present, else yolov8n.pt (COCO)')
+    parser.add_argument('--classes', help='Comma-separated YOLO class names, or "all". Default: every class of a '
+                        'litter model; with COCO weights: ' + ', '.join(DEFAULT_YOLO_CLASSES))
     parser.add_argument('--conf', type=float, default=0.35)
     parser.add_argument('--fps', type=float, default=5.0)
     parser.add_argument('--show', action='store_true', help='Show a preview window with boxes (q to quit)')
     args = parser.parse_args(argv)
-    classes = tuple(c for c in args.classes.split(',') if c.strip()) or DEFAULT_YOLO_CLASSES
+    classes = tuple(c.strip() for c in (args.classes or '').split(',') if c.strip()) or None
     detector = make_detector(args.detector, args.model, classes, args.conf)
     frames = Frames(args)
     print('Vision: detector=%s -> %s/api/vision at up to %.1f fps. Ctrl+C stops.' % (detector.name, args.bridge, args.fps), flush=True)

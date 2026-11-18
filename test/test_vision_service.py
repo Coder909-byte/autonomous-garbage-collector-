@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'vision'))
-from detectors import MAX_TARGETS, BlobDetector, normalized, payload  # noqa: E402
+from detectors import MAX_TARGETS, BlobDetector, class_ids, normalized, payload  # noqa: E402
 
 HAS_CV = importlib.util.find_spec('cv2') is not None and importlib.util.find_spec('numpy') is not None
 
@@ -25,6 +25,22 @@ class VisionPayload(unittest.TestCase):
         sizes = [t['w'] * t['h'] for t in body['targets']]
         self.assertEqual(sizes, sorted(sizes, reverse=True))
         self.assertLess(len(json.dumps(body)), 1024)
+
+
+class ClassSelection(unittest.TestCase):
+    COCO = {0: 'person', 39: 'bottle', 41: 'cup', 56: 'chair'}
+
+    def test_automatic_selection_keeps_coco_litter_only(self):
+        self.assertEqual(class_ids(self.COCO, None), [39, 41])
+
+    def test_automatic_selection_keeps_every_class_of_a_litter_model(self):
+        self.assertIsNone(class_ids({0: 'litter'}, None))
+
+    def test_explicit_and_all_selections(self):
+        self.assertEqual(class_ids(self.COCO, ('Cup',)), [41])
+        self.assertIsNone(class_ids(self.COCO, ('all',)))
+        with self.assertRaises(ValueError):
+            class_ids({0: 'litter'}, ('bottle',))
 
 
 @unittest.skipUnless(HAS_CV, 'opencv-python and numpy not installed (pip install -r vision/requirements.txt)')

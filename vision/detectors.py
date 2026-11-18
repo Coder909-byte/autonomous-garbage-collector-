@@ -1,13 +1,37 @@
 """Garbage detectors returning normalized boxes. OpenCV/NumPy are imported lazily
 so the payload helpers stay importable (and testable) without them."""
 from dataclasses import dataclass
+from pathlib import Path
 import re
 
-# COCO classes that are plausibly litter on a floor. A custom-trained model
-# (for example on TACO) can pass its own names with --classes.
+# COCO classes that are plausibly litter on a floor, used with the stock COCO model.
 DEFAULT_YOLO_CLASSES = ('bottle', 'cup', 'wine glass', 'bowl', 'fork', 'knife', 'spoon', 'banana',
                         'apple', 'orange', 'sandwich', 'carrot', 'hot dog', 'pizza', 'donut', 'cake')
+# Litter model trained on TACO by scripts/train_taco.py; preferred when present.
+TACO_MODEL = Path(__file__).resolve().parent / 'models' / 'taco_litter.pt'
 MAX_TARGETS = 6
+
+
+def default_model():
+    return str(TACO_MODEL) if TACO_MODEL.exists() else 'yolov8n.pt'
+
+
+def class_ids(names, classes):
+    """Model class ids to keep. None keeps every class.
+
+    classes=None picks automatically: the COCO litter subset when the model has
+    those names, otherwise every class (a litter-only model such as TACO).
+    """
+    if classes is None:
+        ids = [i for i, n in names.items() if n.lower() in DEFAULT_YOLO_CLASSES]
+        return ids or None
+    if tuple(classes) == ('all',):
+        return None
+    wanted = {c.strip().lower() for c in classes}
+    ids = [i for i, n in names.items() if n.lower() in wanted]
+    if not ids:
+        raise ValueError('None of the requested classes exist in this model: ' + ', '.join(sorted(wanted)))
+    return ids
 _LABEL = re.compile(r'[^A-Za-z0-9 ._-]')
 
 
@@ -76,18 +100,15 @@ class BlobDetector:
 
 
 class YoloDetector:
-    """Ultralytics YOLO (default yolov8n.pt, COCO). Weights download on first use,
-    so run once with internet before joining the rover's Wi-Fi."""
-    name = 'yolo'
+    """Ultralytics YOLO: the TACO litter model when present, else stock yolov8n.pt (COCO).
+    Stock weights download on first use, so run once with internet before joining the rover's Wi-Fi."""
 
-    def __init__(self, model='yolov8n.pt', classes=DEFAULT_YOLO_CLASSES, conf=0.35, imgsz=320):
+    def __init__(self, model=None, classes=None, conf=0.35, imgsz=320):
         from ultralytics import YOLO
+        model = model or default_model()
         self.model, self.conf, self.imgsz = YOLO(model), conf, imgsz
-        names = self.model.names
-        wanted = None if classes == ('all',) else {c.strip().lower() for c in classes}
-        self.ids = None if wanted is None else [i for i, n in names.items() if n.lower() in wanted]
-        if self.ids == []:
-            raise ValueError('None of the requested classes exist in this model: ' + ', '.join(sorted(wanted)))
+        self.ids = class_ids(self.model.names, classes)
+        self.name = 'yolo-taco' if 'taco' in Path(model).stem.lower() else 'yolo'
 
     def detect(self, frame):
         height, width = frame.shape[:2]
