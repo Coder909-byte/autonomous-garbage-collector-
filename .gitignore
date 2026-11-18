@@ -100,3 +100,6 @@ playwright-report/
 
 # Stock YOLO weights that Ultralytics downloads into the working directory
 /yolov8n.pt
+
+# Mission Control share-mode access key (scan the QR code instead of copying it)
+/.rover-share-key

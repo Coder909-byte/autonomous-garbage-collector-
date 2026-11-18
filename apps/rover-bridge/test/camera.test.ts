@@ -18,6 +18,17 @@ it('proxies genuine JPEG and multipart streams, closes camera when viewer discon
 it.each([[503,'text/plain'],[200,'text/html']])('rejects camera status/type failure %i %s',async(code,type)=>{
  const {response}=mockCamera(code,type);proxyCamera('192.168.50.20','snapshot',{query:{}} as Request,response as unknown as Response);await Promise.resolve();expect(response.status).toHaveBeenCalledWith(502);expect(response.json).toHaveBeenCalledWith(expect.objectContaining({error:expect.stringContaining('Camera unavailable')}));
 });
+it('a new stream viewer waits for the camera to release the previous stream',async()=>{
+ const busy=new PassThrough() as PassThrough&{statusCode:number;headers:Record<string,string>};busy.statusCode=503;busy.headers={'content-type':'text/plain'};
+ const live=new PassThrough() as PassThrough&{statusCode:number;headers:Record<string,string>};live.statusCode=200;live.headers={'content-type':'multipart/x-mixed-replace; boundary=roverframe'};
+ const answers=[busy,live];const upstream=Object.assign(new EventEmitter(),{destroy:vi.fn(),end:()=>{}});
+ const request=vi.spyOn(http,'request').mockImplementation(((_opts:unknown,cb:(v:unknown)=>void)=>{const next=answers.shift()!;queueMicrotask(()=>cb(next));return upstream;}) as typeof http.request);
+ const response=Object.assign(new PassThrough(),{headersSent:false,status:vi.fn(),json:vi.fn(),setHeader:vi.fn()});response.status.mockReturnValue(response);
+ let data='';response.on('data',b=>data+=b.toString());
+ proxyCamera('192.168.4.200','stream',{query:{}} as Request,response as unknown as Response);
+ await new Promise(r=>setTimeout(r,400));live.write('FRAME');await new Promise(r=>setTimeout(r,5));
+ expect(request).toHaveBeenCalledTimes(2);expect(response.status).not.toHaveBeenCalled();expect(data).toBe('FRAME');
+});
 it('network errors and stalled camera reads fail explicitly',async()=>{
  const {upstream,response}=mockCamera();proxyCamera('192.168.50.20','status',{query:{}} as Request,response as unknown as Response);upstream.emit('error',Error('Wi-Fi disconnected'));expect(response.status).toHaveBeenCalledWith(502);upstream.emit('timeout');expect(upstream.destroy).toHaveBeenCalled();await Promise.resolve();
 });

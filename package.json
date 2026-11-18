@@ -15,7 +15,8 @@
     "build": "npm run build -w apps/rover-bridge && npm run build -w apps/rover-dashboard",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "start": "node apps/rover-bridge/dist/apps/rover-bridge/src/server.js"
+    "start": "node apps/rover-bridge/dist/apps/rover-bridge/src/server.js",
+    "share": "node apps/rover-bridge/dist/apps/rover-bridge/src/server.js --share"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",

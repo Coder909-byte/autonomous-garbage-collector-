@@ -2,6 +2,8 @@ import {useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from 'rea
 import {isState,MOTIONS,motorControlAvailable,feedbackAllowsControl,motorOutputState,type BridgeState,type Command,type Direction,type VisionState} from '../../../packages/protocol/index';
 import {HoldControl,keyDirection} from './control';
 import {Navigation,DiagnosticsPanel} from './Monitoring';
+// WebSocket close code the bridge uses when another device takes control.
+const TAKEN_OVER=4001;
 const empty:BridgeState={connected:false,connecting:false,protocolReady:false,simulation:false,port:null,telemetry:null,receivedAt:null,intent:null,logs:[],error:null};
 async function api(path:string,body?:unknown){
  const response=await fetch('/api/'+path,{signal:AbortSignal.timeout(7000),method:body===undefined?'GET':'POST',headers:body===undefined?{}:{'Content-Type':'application/json','X-Rover-Client':'dashboard'},body:body===undefined?undefined:JSON.stringify(body)});
@@ -15,6 +17,7 @@ export default function App(){
  const [ports,setPorts]=useState<{path:string;label:string}[]>([]),[port,setPort]=useState(''),[simulation,setSimulation]=useState(true),[scenario,setScenario]=useState('clear');
  const [link,setLink]=useState<'usb'|'wifi'>('usb'),[wifiHost,setWifiHost]=useState('192.168.4.1');
  const [switching,setSwitching]=useState(false),switchTarget=useRef<boolean|null>(null);
+ const [busy,setBusy]=useState(false),takeControl=useRef<()=>void>(()=>{});
  const ws=useRef<WebSocket|null>(null);
  const send=useCallback((m:Record<string,unknown>)=>{if(ws.current?.readyState===WebSocket.OPEN)ws.current.send(JSON.stringify(m));else setError('Bridge disconnected. Stop delivery is unconfirmed.');},[]);
  const hold=useMemo(()=>new HoldControl(send),[send]);
@@ -22,19 +25,23 @@ export default function App(){
  useEffect(()=>{if(!online)return;const timer=setInterval(()=>void refresh(),3000);return()=>clearInterval(timer);},[online,refresh]);
  useEffect(()=>{
   let disposed=false,retry:ReturnType<typeof setTimeout>|undefined;
-  const open=()=>{
+  const open=(takeover=false)=>{
    if(disposed)return;
-   const socket=new WebSocket(`${location.protocol==='https:'?'wss':'ws'}://${location.host}/api/control`);ws.current=socket;
-   socket.onopen=()=>{if(!disposed&&ws.current===socket){setOnline(true);setError('');void refresh();}};
+   const socket=new WebSocket(`${location.protocol==='https:'?'wss':'ws'}://${location.host}/api/control${takeover?'?takeover=1':''}`);ws.current=socket;
+   socket.onopen=()=>{if(!disposed&&ws.current===socket){setOnline(true);setBusy(false);setError('');void refresh();}};
    socket.onmessage=e=>{if(disposed||ws.current!==socket)return;try{const value=JSON.parse(e.data);if(!isState(value))throw Error('Invalid bridge state');
     if(switchTarget.current!==null){if(value.connected||value.connecting||value.disconnecting)return;setSimulation(switchTarget.current);switchTarget.current=null;setSwitching(false);}
     else if(value.connected||value.connecting)setSimulation(value.simulation);
     setState(value);
    }catch{hold.release();socket.close();setState(empty);setOnline(false);setError('Invalid server response. Control disabled; stop delivery unconfirmed.');}};
    socket.onerror=()=>{if(!disposed&&ws.current===socket){hold.release();setError('Cannot reach the local bridge, or another operator owns control.');}};
-   socket.onclose=()=>{if(!disposed&&ws.current===socket){hold.release();switchTarget.current=null;setSwitching(false);setOnline(false);setState(empty);setError('Bridge disconnected. Manual lease expires; STOP delivery is unconfirmed.');retry=setTimeout(open,1000);}};
+   socket.onclose=e=>{if(!disposed&&ws.current===socket){hold.release();switchTarget.current=null;setSwitching(false);setOnline(false);setState(empty);
+    setError(e?.code===TAKEN_OVER?'Another device took control. The rover was stopped and disarmed.':'Bridge disconnected. Manual lease expires; STOP delivery is unconfirmed.');
+    void fetch('/api/control/status',{signal:AbortSignal.timeout(3000)}).then(r=>r.ok?r.json():null).then(s=>{if(!disposed&&ws.current===socket)setBusy(s?.busy===true);}).catch(()=>{});
+    retry=setTimeout(()=>open(),1000);}};
   };
-  retry=setTimeout(open,0);const timer=setInterval(()=>setClock(Date.now()),100);
+  takeControl.current=()=>{clearTimeout(retry);const previous=ws.current;ws.current=null;previous?.close();open(true);};
+  retry=setTimeout(()=>open(),0);const timer=setInterval(()=>setClock(Date.now()),100);
   return()=>{disposed=true;clearInterval(timer);clearTimeout(retry);hold.release();ws.current?.close();};
  },[hold,refresh]);
  useEffect(()=>{if(state.connected&&!state.simulation&&state.port)setLink(state.port.startsWith('WIFI ')?'wifi':'usb');},[state.connected,state.simulation,state.port]);
@@ -76,7 +83,8 @@ export default function App(){
  return <div className="station">
   <header><div className="brand"><span className="brandmark"><Icon type="rover"/></span><div>ROVER<span className="brand-sub">AUTONOMOUS COLLECTION SYSTEM</span></div></div><div className="header-right"><span className={'session '+(state.simulation&&state.connected?'sim':'')}><i/> {session}</span><span className="clock">{new Date(clock).toLocaleTimeString()}</span></div></header>
   <div className="page-heading"><div><div className="eyebrow">OPERATOR WORKSPACE <span>/ 01</span></div><h1>Mission control<span className="live-dot"/></h1><p>Local control. Onboard authority. Every output accounted for.</p></div><button className="estop" disabled={!state.connected} onClick={()=>command('ESTOP')}><span>■</span> SOFTWARE EMERGENCY STOP<small>Latches firmware E-stop · physical cutoff still required</small></button></div>
-  {(error||state.error)&&<div role="alert" className="alert">{error||state.error}<button aria-label="Dismiss error" onClick={()=>{setError('');setState(s=>({...s,error:null}));}}>×</button></div>}
+  {busy&&!online&&<div role="alert" className="alert control-busy"><span>Another device is controlling the rover. Taking control stops and disarms it.</span><button className="button primary" onClick={()=>takeControl.current()}>Take control</button></div>}
+  {(error||state.error)&&!(busy&&!online)&&<div role="alert" className="alert">{error||state.error}<button aria-label="Dismiss error" onClick={()=>{setError('');setState(s=>({...s,error:null}));}}>×</button></div>}
   {state.connected&&state.simulation&&<div className="simulation-banner">SIMULATION MODE <span>Portable virtual controller · synthetic telemetry · no physical outputs or camera footage</span></div>}
   {fresh&&diagnostic&&<div className="simulation-banner" role="status">USB BENCH DIAGNOSTIC · NO MOTOR POWER <span>Sensor and USB testing only. Motor outputs locked LOW; ARM, manual drive, AUTO and cleaning ON are unavailable. GPIO27 is reported as read, without simulating installed protection.</span></div>}
   {fresh&&motorOperation&&<div className="simulation-banner" role="status">MOTOR OPERATION · {t?.commissioningReady?'COMMISSIONING RECORD ACCEPTED':'OUTPUTS INHIBITED · COMMISSIONING REQUIRED'}<span>GPIO27 is reported as read and is not a physical interlock in this mode. Software stop does not isolate the battery. Independent motor-supply disconnection and qualified electrical hardware are required.</span></div>}
@@ -117,6 +125,7 @@ export default function App(){
     <section className="panel cleaning"><div className="panel-title"><h2>Collection system</h2><span className="subtle">L298N</span></div>{(['Brushes','Conveyor'] as const).map((name,i)=>{const requested=i===0?t?.brushReq:t?.conveyorReq,applied=i===0?t?.brush:t?.conveyor;return <div className="clean-row" key={name}><div><h3>{name}</h3><small>Requested {fresh?(requested?'ON':'OFF'):'—'} <span>·</span> Applied <b>{fresh?(applied?'ON':'OFF'):'UNKNOWN'}</b></small></div><button aria-label={`${name} ${requested?'OFF':'ON'}`} aria-pressed={!!requested} className={'toggle '+(requested&&fresh?'on':'')} disabled={!fresh||(!motorAvailable&&!requested)||(!t?.armed&&!requested)} onClick={()=>command(`${i===0?'BRUSH':'CONVEYOR'} ${requested?'OFF':'ON'}` as Command)}><i/></button></div>;})}
      <div className="two-buttons"><button className="button secondary" disabled={!fresh||!motorAvailable||!t?.armed} onClick={()=>command('CLEAN ON')}>CLEAN ON</button><button className="button secondary" disabled={!state.connected} onClick={()=>command('CLEAN OFF')}>CLEAN OFF</button></div><p className="tiny">Outputs run only during applied forward motion. Requested ON can remain pending while stopped.</p>
     </section>
+    <SharePanel/>
    </aside>
   </main>
   <section className="panel telemetry-strip"><div><span className="eyebrow">LAST UPDATE</span><b>{time(state.receivedAt)}</b></div><div><span className="eyebrow">FIRMWARE</span><b>{t?.fw??'Not identified'}</b></div><div><span className="eyebrow">E-STOP FEEDBACK</span><b className={fresh&&!feedbackAllowsControl(t)?'danger':''}>{fresh?(state.simulation?(t?.healthy?'SIMULATED · healthy':'SIMULATED · tripped'):motorOperation?(t?.healthy?'HIGH · no physical interlock':'LOW · no physical interlock'):diagnostic?(t?.healthy?'HIGH · diagnostic input':'LOW · diagnostic input'):(t?.healthy?'HIGH · healthy':'LOW · unsafe')):'UNKNOWN'}</b></div><div><span className="eyebrow">FIRMWARE E-STOP</span><b className={fresh&&t?.estop?'danger':''}>{fresh?(t?.estop?'LATCHED':'CLEAR'):'UNKNOWN'}</b></div><div><span className="eyebrow">LAST TRANSMITTED</span><b>{lastTX?.text??'—'}</b></div><div><span className="eyebrow">LAST ACKNOWLEDGED</span><b>{lastACK?.text??'—'}</b></div></section>
@@ -144,4 +153,19 @@ function Camera({vision,clock}:{vision?:VisionState;clock:number}){
  <details className="camera-settings"><summary>Camera settings <span>Disconnect stream before applying</span></summary><div><select aria-label="Camera resolution" value={width} disabled={active} onChange={e=>setWidth(Number(e.target.value))}><option value={320}>QVGA / 320 × 240</option><option value={640}>VGA / 640 × 480 · PSRAM required</option></select><label>JPEG quality<input aria-label="JPEG quality" type="number" min="10" max="40" value={quality} disabled={active} onChange={e=>setQuality(Number(e.target.value))}/></label><button className="button secondary" disabled={active||busy||!ip} onClick={()=>{setBusy(true);void api('camera',{ip}).then(()=>api(`camera/settings?width=${width}&quality=${quality}`,{})).then(raw=>{validate(raw);setError('');}).catch(e=>setError(String(e))).finally(()=>setBusy(false));}}>Apply</button></div></details>
  <p className="tiny detection-status" data-testid="detection-status">{detectionAge(vision,clock)<1500?`Garbage detection (${vision!.detector}): ${vision!.targets.length?vision!.targets.map(d=>`${d.label} ${Math.round(d.conf*100)}%`).join(' · '):'nothing in view'}`:'Garbage detection offline: run python vision/rover_vision.py on this laptop.'}</p>
  {error&&<p role="alert" className="camera-error">{error}</p>}</section>;
+}
+function SharePanel(){
+ const [share,setShare]=useState<{enabled:boolean;urls:string[]}|null>(null);
+ useEffect(()=>{let live=true;
+  const load=()=>void fetch('/api/share',{signal:AbortSignal.timeout(3000)}).then(r=>r.ok?r.json():null).then(s=>{if(live)setShare(s&&typeof s.enabled==='boolean'&&Array.isArray(s.urls)?s:null);}).catch(()=>{if(live)setShare(null);});
+  load();const timer=setInterval(load,5000);return()=>{live=false;clearInterval(timer);};},[]);
+ if(!share)return null;
+ const url=share.urls[0];
+ return <section className="panel share-panel" aria-label="Open on another device"><div className="panel-title"><Icon type="link"/><h2>Open on another device</h2><span className={'pill '+(share.enabled&&url?'good':'')}>{share.enabled?(url?'Sharing':'No network'):'Off'}</span></div>
+  {!share.enabled?<p className="tiny">Only this laptop can open Mission Control. To use phones and tablets, start it with <b>npm run share</b> (or double-click <b>Mission Control.bat</b>).</p>
+  :!url?<p className="tiny">Join this laptop to the ROVER-CTRL Wi-Fi. The QR code appears here once it is connected.</p>
+  :<><img className="share-qr" alt="QR code that opens Mission Control on another device" src={`/api/share/qr.svg?u=${encodeURIComponent(url)}`}/>
+   <p className="tiny">1. Join the phone to the <b>ROVER-CTRL</b> Wi-Fi (password rover-collector). 2. Scan the code with the camera. One device drives at a time; the others can take control.</p>
+   <code className="share-url">{url}</code></>}
+ </section>;
 }

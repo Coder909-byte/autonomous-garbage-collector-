@@ -11,3 +11,4 @@
 .detection-status{margin:10px 0 0}
 .seek-status{margin:8px 0 0;color:#9fd3b4}
 .seek-status b{color:#4fd88a;letter-spacing:.5px}
+.share-qr{display:block;width:100%;max-width:200px;margin:4px auto 0;background:#fff;border-radius:8px;padding:6px;aspect-ratio:1}.share-url{display:block;margin-top:10px;font-size:9px;color:#9fb3cf;word-break:break-all;user-select:all}.control-busy{align-items:center;gap:16px}.control-busy .button{flex:none}

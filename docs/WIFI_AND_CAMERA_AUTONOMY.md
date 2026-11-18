@@ -70,6 +70,25 @@ Flash the camera, and check its serial log shows `Camera IP 192.168.4.200; trust
 3. Under **Control source**, choose **Main ESP32 · Wi-Fi**. The address is `192.168.4.1`. Click **Connect rover**.
 4. Under **Camera IPv4**, enter the camera address (`192.168.4.200` with a fixed IP) and click **Connect camera**. Mission Control remembers it.
 
+### Open Mission Control on phones and other laptops
+
+Share mode lets any phone, tablet or laptop on the `ROVER-CTRL` Wi-Fi open Mission Control by scanning a QR code. The operator laptop still runs Mission Control and the vision service.
+
+1. On the operator laptop, double-click **`Mission Control.bat`** in the project folder. It builds, starts Mission Control with sharing, and opens the browser. Or run `npm run build` then `npm run share`.
+2. The command window and the **Open on another device** panel in Mission Control show a QR code and a link like `http://192.168.4.3:8787/?key=...`.
+3. On the phone: join the `ROVER-CTRL` Wi-Fi, then scan the QR code with the camera. Mission Control opens. The phone remembers access, so next time open `http://192.168.4.3:8787` directly. The laptop's address can change; the QR code always shows the current one.
+
+How access works:
+
+- The link contains a secret key, saved in `.rover-share-key` on the laptop. Devices without it get "scan the QR code" and nothing else. To revoke access for every device, delete `.rover-share-key` and restart. A new key and QR code are created.
+- Only one device controls at a time. Another device sees **Another device is controlling the rover** with a **Take control** button. Taking control **stops, disarms and disconnects** the rover first; the new operator clicks **Connect rover** and **ARM** again.
+- The camera video plays on one device at a time (an ESP32-CAM limit); the newest viewer takes it over. Garbage detection keeps running regardless.
+- Plain `npm start` is unchanged: only the laptop itself can open Mission Control.
+
+On Windows, the first `npm run share` shows a **Windows Defender Firewall** prompt for Node.js. Tick **both Private and Public networks** and click **Allow**, because Windows treats `ROVER-CTRL` (no internet) as a public network. If phones can't connect, open *Windows Security → Firewall → Allow an app through firewall* and tick Public for Node.js.
+
+On Android, if the phone says the Wi-Fi has no internet, choose **Stay connected**. Turn off mobile data if the page still doesn't load.
+
 ## 4. Start the vision service
 
 Do this once, **while the laptop still has internet** (YOLO downloads its weights on the first run):

@@ -16,11 +16,18 @@ export function cameraPath(endpoint:string,query:Request['query']) {
  }
  throw Error('Unknown camera endpoint');
 }
-export function proxyCamera(ip:string,endpoint:string,req:Request,res:Response){
+// A viewer that just took over the stream waits for the camera to release the previous one.
+export const STREAM_RETRIES=5,STREAM_RETRY_MS=300;
+export function proxyCamera(ip:string,endpoint:string,req:Request,res:Response,attempt=0){
  const path=cameraPath(endpoint,req.query);let ended=false;
  const fail=(e:Error)=>{if(ended)return;ended=true;if(!res.headersSent)res.status(502).json({error:`Camera unavailable: ${e.message}`});else res.destroy();};
+ const closed=()=>{ended=true;upstream.destroy();};
  const upstream=http.request({hostname:cameraAddress(ip),port:endpoint==='stream'?81:80,path,method:endpoint==='settings'?'POST':'GET',timeout:5000},source=>{
   if(ended){source.destroy();return;}
+  if(endpoint==='stream'&&source.statusCode===503&&attempt<STREAM_RETRIES){
+   ended=true;source.resume();res.off('close',closed);
+   setTimeout(()=>{if(!res.destroyed&&!res.writableEnded)proxyCamera(ip,endpoint,req,res,attempt+1);},STREAM_RETRY_MS);return;
+  }
   if(source.statusCode!==200){source.resume();fail(Error(`HTTP ${source.statusCode}`));return;}
   const expected=endpoint==='stream'?'multipart/x-mixed-replace':endpoint==='snapshot'?'image/jpeg':'application/json';
   if(!String(source.headers['content-type']).startsWith(expected)){source.resume();fail(Error('Unexpected camera response format'));return;}
@@ -28,5 +35,5 @@ export function proxyCamera(ip:string,endpoint:string,req:Request,res:Response){
   source.on('error',fail);source.on('end',()=>{ended=true;});source.pipe(res);
  });
  upstream.on('timeout',()=>upstream.destroy(Error('Camera timed out')));upstream.on('error',fail);
- res.on('close',()=>{ended=true;upstream.destroy();});upstream.end();
+ res.on('close',closed);upstream.end();
 }
